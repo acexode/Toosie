@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2020 by original authors @ fontello.com</metadata>
+<defs>
+<font id="pass-font" horiz-adv-x="1000" >
+<font-face font-family="pass-font" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="circle-icon" unicode="&#x2022;" d="M222 572c-122 0-222-99-222-222 0-123 100-222 222-222 123 0 222 99 222 222 0 123-99 222-222 222z" horiz-adv-x="1000" />
+
+<glyph glyph-name="circle-icon-1" unicode="&#x25cf;" d="M222 572c-122 0-222-99-222-222 0-123 100-222 222-222 123 0 222 99 222 222 0 123-99 222-222 222z" horiz-adv-x="1000" />
+</font>
+</defs>
+</svg>

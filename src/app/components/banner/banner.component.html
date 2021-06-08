@@ -1,0 +1,15 @@
+<ion-grid   scroll-y="false">
+  <ion-slides  [pager]="pager" [options]="slideOpts" >
+
+    <ion-slide *ngFor="let item of items">
+      <div class="slide mr-8">
+        <img [src]="item.img"/>
+        <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
+    </ion-slide>
+
+    
+    
+
+  </ion-slides>
+</ion-grid>

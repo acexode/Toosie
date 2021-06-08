@@ -1,0 +1,104 @@
+@import '../variables.scss';
+@import './spacing';
+
+@function rem($pixels, $context: $baseFontSizePx) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+@mixin make-row($gutter: $grid-gutter-width) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$gutter / 2;
+  margin-left: -$gutter / 2;
+}
+// For each breakpoint, define the maximum width of the container in a media query
+@mixin make-container-max-widths-important(
+  $max-widths: $container-max-widths,
+  $breakpoints: $grid-breakpoints
+) {
+  @each $breakpoint, $container-max-width in $max-widths {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+    .col#{$infix}-reset-width {
+      @include media-breakpoint-up($breakpoint, $breakpoints) {
+        max-width: $container-max-width !important;
+      }
+    }
+  }
+}
+
+// For each breakpoint, define the maximum width of the container in a media query
+@mixin make-row-grid($breakpoints: $grid-breakpoints) {
+  @each $breakpoint in $breakpoints {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+    .row#{$infix}-enable {
+      @include make-row();
+    }
+  }
+}
+
+// Flexbox.
+@mixin flexbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex-direction($direction: row) {
+  -webkit-box-orient: $direction;
+  -webkit-box-direction: $direction;
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin flex-wrap($wrap: nowrap) {
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+
+@mixin justify-content($justify: flex-start) {
+  -webkit-box-pack: $justify;
+  -webkit-justify-content: $justify;
+  -ms-justify-content: $justify;
+  -ms-flex-pack: $justify;
+  justify-content: $justify;
+}
+
+@mixin align-items($align: stretch) {
+  -webkit-align-items: $align;
+  -ms-align-items: $align;
+  -ms-flex-align: $align;
+  align-items: $align;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin transform($transforms) {
+	-webkit-transform: $transforms;
+	-moz-transform: $transforms;
+	-ms-transform: $transforms;
+	transform: $transforms;
+}

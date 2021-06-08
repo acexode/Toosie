@@ -1,17 +1,60 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" no-shadow no-border>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
+    <ion-buttons slot="start">
+      <ion-menu-button size="32" name="align-left" auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      <img src="/assets/icon/toosie-2.png" alt="">
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content  class="ion-no-padding">
+  <app-banner [items]="bannerList" [pager]="!showButton" preview="1" [button]="!showButton"></app-banner>
+  <ion-grid class="mt-5">
+    <ion-row>
+      <ion-col *ngFor="let icon of iconList">
+        <div class="flex flex-column ion-justify-content-center ion-text-center dark">
+          <div class="icon-bg">
+            <img class="icon-img" [src]="icon.img" alt="">
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+          </div>
+          <span class="text-small text-block">{{icon.title}}</span>
+        </div>
+      </ion-col>
+      
+    </ion-row>
+    <ion-row >
+      <ion-col class="pl-16" size="12" >
+        <h5>New Offers</h5>
+      </ion-col>
+  
+      <ion-col >
+        <app-banner [items]="offers" preview="2" [pager]="showButton" [button]="showButton"></app-banner>
+      </ion-col>
+        
+      
+      
+    </ion-row>  
+    <ion-row >
+      <ion-col class="pl-16" size="12" >
+        <h5>All Categories</h5>
+      </ion-col>
+      <ion-col size="3" *ngFor="let category of categories">
+        <div class="flex flex-column ion-justify-content-center ion-text-center dark">
+          <div class="icon-bg">
+            <img class="icon-img" [src]="category.img" alt="">
+
+          </div>
+          <span class="text-small text-block">{{category.title}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
