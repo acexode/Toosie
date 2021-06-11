@@ -84,15 +84,15 @@ export class Tab1Page {
   ]
   bannerList = [
     {
+      img: 'assets/icon/banner3.jpg',
+      title: ''
+    },
+    {
       img: 'assets/icon/banner1.png',
       title: ''
     },
     {
       img: 'assets/icon/banner2.png',
-      title: ''
-    },
-    {
-      img: 'assets/icon/banner3.jpg',
       title: ''
     }
   ]
