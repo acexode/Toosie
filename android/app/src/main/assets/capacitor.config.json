@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Toosie",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

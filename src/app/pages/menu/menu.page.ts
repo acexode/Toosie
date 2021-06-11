@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,17 +9,29 @@ import { Component, OnInit } from '@angular/core';
 export class MenuPage implements OnInit {
   pages = [
     {
-      title: 'First Page with Tabs',
-      url: '/menu/first'
+      title: 'Settings',
+      url: '/menu/first',
+      icon: 'settings-f'
     },
     {
-      title: 'Second Page blank',
-      url: '/menu/second'
+      title: 'Rate',
+      url: 'rate',
+      icon: 'star-f',
+      
+    },
+    {
+      title: 'Share Toosie',
+      url: 'share',
+      icon: 'share-2',
+
     }
   ];
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+  logout(){
+    this.router.navigateByUrl('login')
   }
 
 }

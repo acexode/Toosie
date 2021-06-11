@@ -1,0 +1,28 @@
+ion-toolbar {
+    --background: #f4f8f5;
+    --ion-color-base: transparent !important;
+ }
+ .header-md::after {
+     background: none !important;
+ }
+ .login{
+     --background: #34C3EC
+ }
+
+ signup-page {
+	.signup-content
+	{
+		.legal-stuff
+		{
+			// color: $white-d;
+			text-align: center;
+			margin: 10px 12px;
+
+			.legal-action
+			{
+				font-weight: 500;
+				// color: $theme-color-2;
+			}
+		}
+	}
+}

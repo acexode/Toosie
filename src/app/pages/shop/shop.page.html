@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Shop</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [value]='tab' scrollable  (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="friends">
+      <ion-label>Friends</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      <ion-label>Enemies</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="winners">
+      <span>Winners</span>
+    </ion-segment-button>
+    <ion-segment-button value="lorem">
+      <ion-label>Lorems</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="ipsum">
+      <ion-label>Ipsum</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-row class="mt-1 bg-white"   (ionChange)="segmentChanged($event)">
+    <ion-col class="ion-text-center border" size="6">
+      <ion-label>
+        <ion-icon name="filter"></ion-icon>
+        Filter
+      </ion-label>
+    </ion-col>
+    <ion-col class="ion-text-center" size="6" >
+      <ion-label>
+        <ion-icon size="10" name="search-outline"></ion-icon>
+        Search
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="favorite-items flex ion-justify-content-between">
+    <ion-col size="6" class="ion-text-left  flex flex-column">
+      <img  src="/assets/icon/product.jpg" />
+      <p>$34.00</p>
+      <h6>Women t-shirt</h6>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </ion-col>
+    <ion-col size="6" class="ion-text-left padding-right0">
+      <img src="/assets/icon/product2.jpg" />
+      <p>$24.00</p>
+      <h6>Mens t-shirt</h6>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </ion-col>
+    <ion-col size="6" class="ion-text-left padding-left0">
+      <img src="/assets/icon/product3.jpg" />
+      <p>$54.00</p>
+      <h6>Women t-shirt</h6>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </ion-col>
+    <ion-col size="6" class="ion-text-left padding-right0">
+      <img src="/assets/icon/product1.jpg" />
+      <p>$44.00</p>
+      <h6>Blezer</h6>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </ion-col>
+    <ion-col size="6" class="ion-text-left padding-left0">
+      <img src="/assets/icon/product.jpg" />
+      <p>$14.00</p>
+      <h6>T-shirt</h6>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </ion-col>
+    <ion-col size="6" class="ion-text-left padding-right0">
+      <img src="/assets/icon/product3.jpg" />
+      <p>$30.00</p>
+      <h6>Shirt</h6>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-content>

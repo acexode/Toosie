@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'shop',
+    loadChildren: () => import('./pages/shop/shop.module').then( m => m.ShopPageModule)
+  },
+  {
+    path: 'wish',
+    loadChildren: () => import('./pages/wish/wish.module').then( m => m.WishPageModule)
   }
   
 ];

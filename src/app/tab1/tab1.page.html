@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" no-shadow no-border>
+<!-- <ion-header [translucent]="true" no-shadow no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button size="32" name="align-left" auto-hide="false"></ion-menu-button>
@@ -13,6 +13,24 @@
       <img src="/assets/icon/toosie-2.png" alt="">
     </ion-title>
   </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon name="align-left" color="dark" ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+      <ion-button routerLink="/menu/home/cart" class="filter">
+        <ion-icon name="cart-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content  class="ion-no-padding">
@@ -20,7 +38,7 @@
   <ion-grid class="mt-5">
     <ion-row>
       <ion-col *ngFor="let icon of iconList">
-        <div class="flex flex-column ion-justify-content-center ion-text-center dark">
+        <div (click)="shop(icon.title)" class="flex flex-column ion-justify-content-center ion-text-center dark">
           <div class="icon-bg">
             <img class="icon-img" [src]="icon.img" alt="">
 
@@ -47,13 +65,21 @@
         <h5>All Categories</h5>
       </ion-col>
       <ion-col size="3" *ngFor="let category of categories">
-        <div class="flex flex-column ion-justify-content-center ion-text-center dark">
+        <div (click)="shop(category.title)" class="flex flex-column ion-justify-content-center ion-text-center dark">
           <div class="icon-bg">
             <img class="icon-img" [src]="category.img" alt="">
 
           </div>
           <span class="text-small text-block">{{category.title}}</span>
         </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="pl-16" size="12" >
+        <h5>Brands</h5>
+      </ion-col>
+      <ion-col >
+        <app-brands preview="2" [pager]="showButton" [button]="showButton"></app-brands>
       </ion-col>
     </ion-row>
   </ion-grid>

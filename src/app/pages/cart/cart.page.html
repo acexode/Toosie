@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cart</ion-title>
+    <ion-title class="ion-text-center flex flex-column mt-5">
+      <span class="flex ion-justify-content-center">Cart</span>
+      <small class="text-x-small small">{{lists.length}} item</small>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
 
+  <div class="cart-items">
+    <ion-row *ngFor="let list of lists" >
+        <ion-col size="4" class="item-img">
+          <div class="pl-8">
+            <a href="/" class=""><img src="assets/icon/product3.jpg" alt=""></a>
+          </div>
+          
+        </ion-col>
+        <ion-col size="8" class="flex flex-column">
+         <div class="desc">
+           <a href="">Toothbrush</a>
+         </div>
+
+          <div class="flex">
+            <div class="grid__item display-table-cell one-half">              
+               <span>-</span> 
+               <span>1</span> 
+               <span>+</span> 
+                
+
+              
+            </div>
+            <div>
+              <small>$ 450</small>
+            </div>
+          </div>
+        </ion-col>
+     
+    </ion-row>
+
+    
+  </div>
+  <ion-row class="my-16">
+    <ion-col size="12">
+      <ion-button expand="block" class="main-button success-btn" routerLink="/checkout" routerDirection="forward">Checkout</ion-button>
+
+    </ion-col>
+
+  </ion-row>
 </ion-content>
+

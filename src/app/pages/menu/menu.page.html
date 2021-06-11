@@ -1,24 +1,35 @@
 <ion-split-pane contentId="content">
   <ion-menu contentId="content">
  
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Menu</ion-title>
+    <ion-header  no-border>
+      <ion-toolbar >
+        <ion-title>Welcome to Toosie</ion-title>
       </ion-toolbar>
     </ion-header>
  
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
-          <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active-item">
+    <ion-content class="">
+      <ion-row>
+        <ion-col size="12">
+          <ion-list-header class="flex" lines="inset">
+            <ion-button class="login w-100"  expand="block">Login</ion-button>
+          </ion-list-header>
+        </ion-col>
+
+      </ion-row>
+      <!-- List Header with Outline Button -->
+     
+        <ion-list>
+      <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+          <ion-item lines="none" [routerLink]="p.url" routerDirection="root" routerLinkActive="active-item">
+            <ion-icon [name]="p.icon" slot="start"></ion-icon>
             <ion-label>
               {{ p.title }}
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
  
-        <ion-item button routerLink="/login" routerDirection="root">
-          <ion-icon name="log-out" slot="start"></ion-icon>
+        <ion-item button lines="none" (click)="logout()" routerDirection="root">
+          <ion-icon name="log-out-f" slot="start"></ion-icon>
           Logout
         </ion-item>
  

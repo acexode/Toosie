@@ -1,8 +1,13 @@
 @import '../../theme/variables.scss';
+@import '../../theme/mixins/mixins';
 
 ion-toolbar {
     --background: #f4f5f8;
     --ion-color-base: transparent !important;
+ }
+ ion-content{
+    --color: #777777;
+    font-family: $pass-font;
  }
  .header-md::after {
      background: none !important;

@@ -8,8 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedModule } from './components/shared/shared.module';
+import { ShopPipe } from './pages/shop.pipe';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ShopPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

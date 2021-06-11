@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -83,32 +84,40 @@ export class Tab1Page {
   ]
   bannerList = [
     {
-      img: 'assets/icon/home-bg.jpg',
+      img: 'assets/icon/banner1.png',
       title: ''
     },
     {
-      img: 'assets/icon/home2-bg2.jpg',
+      img: 'assets/icon/banner2.png',
       title: ''
     },
     {
-      img: 'assets/icon/home-bg3.jpg',
+      img: 'assets/icon/banner3.jpg',
       title: ''
     }
   ]
   offers = [
     {
-      img: 'assets/icon/dental.jpg',
+      img: 'assets/icon/product3.jpg',
       title: ''
     },
     {
-      img: 'assets/icon/med.jpg',
+      img: 'assets/icon/product1.jpg',
       title: ''
     },
     {
-      img: 'assets/icon/home-bg3.jpg',
+      img: 'assets/icon/product.jpg',
+      title: ''
+    },
+    {
+      img: 'assets/icon/product2.jpg',
       title: ''
     }
   ]
-  constructor() {}
+  constructor(private router: Router) {}
+
+  shop(q){
+    this.router.navigate(['menu/home/shop', {category: q}])
+  }
 
 }

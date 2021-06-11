@@ -17,12 +17,12 @@ const routes: Routes = [
         loadChildren: () => import('../../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'shop',
+        loadChildren: () => import('../shop/shop.module').then(m => m.ShopPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'wish',
+        loadChildren: () => import('../wish/wish.module').then(m => m.WishPageModule)
       },
       {
         path: 'cart',

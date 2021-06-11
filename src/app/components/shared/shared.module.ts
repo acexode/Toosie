@@ -4,18 +4,20 @@ import { CommonModule } from '@angular/common';
 import { BannerComponent } from '../banner/banner.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { BrandsComponent } from '../brands/brands.component';
 
 
 
 @NgModule({
-  declarations: [BannerComponent],
+  declarations: [BannerComponent, BrandsComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
   ],
   exports:[
-    BannerComponent
+    BannerComponent,
+    BrandsComponent
   ]
 })
 export class SharedModule { }
