@@ -1,0 +1,102 @@
+<ion-header [translucent]="true" no-shadow no-border>
+  <ion-toolbar>
+   
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon name="cart-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title slot="start">
+      <img src="/assets/icon/logo.png" alt="">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content  class="ion-padding">
+  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" id="refresher">
+    <ion-refresher-content
+    pullingText="Pull to refresh"
+    refreshingSpinner="circles"
+    ></ion-refresher-content>
+  </ion-refresher>
+  <div class="row jumbo">
+    <span class="main">
+      What can we help you with today?
+    </span>
+    <br>
+    <span class="sub">Easily refill and track prescription, find
+      healthcare service and vaccinations</span>
+    </div>
+  <ion-row class="mt-28">
+    <ion-col size="12" class="ion-no-padding">
+      <span class="cat-span dark">
+        Refill Tools
+      </span>
+    </ion-col>
+    <ion-col size="12">
+    <ion-card  class="flex p-8 ion-justify-content-between">
+        <ion-text class="card-text">
+          Refill by scan
+        </ion-text>
+        <ion-button  fill="clear">
+          <ion-icon name="qr-code-scan"></ion-icon>
+        </ion-button>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" class="ion-no-padding mt-16">
+    <ion-card size="12" class="flex p-8 ion-justify-content-between">
+        <ion-text class="card-text">
+          Manage auto refills
+        </ion-text>
+        <ion-button  fill="clear">
+          <ion-icon name="refill"></ion-icon>
+        </ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row class="mt-28">
+    <ion-col size="12">
+      <span class="cat-span dark">
+        More Pharmacy tools
+      </span>
+    </ion-col>
+    <ion-col *ngFor="let tool of pharmacyTool" class="mh" >
+    <ion-card  class="flex flex-column p-16 ion-justify-content-between">
+        <ion-text class="card-text-small">
+          {{tool.text}}
+        </ion-text>
+        <ion-button  fill="clear">
+          <ion-icon class="large-icon" [name]="tool.icon"></ion-icon>
+        </ion-button>
+      </ion-card>
+    </ion-col>
+    
+  </ion-row>
+  <ion-row class="mt-28">
+    <ion-col size="12">
+      <span class="cat-span dark">
+        Prescription
+      </span>
+    </ion-col>
+    <ion-col *ngFor="let tool of prescription" class="mh" >
+    <ion-card  class="flex flex-column p-16 ion-justify-content-between">
+        <ion-text class="card-text-small">
+          {{tool.text}}
+        </ion-text>
+        <ion-button  fill="clear">
+          <ion-icon class="large-icon" [name]="tool.icon"></ion-icon>
+        </ion-button>
+      </ion-card>
+    </ion-col>
+    
+  </ion-row>
+
+  <!-- <app-banner [items]="bannerList" [pager]="!showButton" preview="1" [button]="!showButton"></app-banner> -->
+  
+</ion-content>
+

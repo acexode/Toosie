@@ -1,0 +1,29 @@
+<ion-grid   scroll-y="false">
+  <ion-slides  [pager]="pager" [options]="slideOpts" >
+
+    <ion-slide *ngFor="let item of items" class="width: 140px">
+      <div class="slide mr-8">
+        <div class="img-container">
+          <img [src]="item.img"/>
+
+        </div>
+        <div class="flex flex-column pt-8 ion-text-left">
+          <ion-text class="product-title">
+            {{item.title}}
+          </ion-text>
+          <small class="discount pt-5">
+            {{item.discount}}%  OFF
+          </small>
+          <small class="price pt-5">
+            ₦ {{item.price}}
+          </small>
+        </div>
+        <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
+      </div>
+    </ion-slide>
+
+    
+    
+
+  </ion-slides>
+</ion-grid>

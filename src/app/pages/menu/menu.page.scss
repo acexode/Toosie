@@ -1,6 +1,17 @@
 ion-toolbar {
-    --background: #f4f8f5;
+    --background: rgb(2,129,178);
+    --background: linear-gradient(90deg, rgba(2,129,178,1) 0%, rgba(2,129,178,1) 88%, rgba(0,212,255,1) 100%);
     --ion-color-base: transparent !important;
+    height: 110px;
+    text-align: left;
+    color: #fff;
+    padding: 7px 10px !important;
+ }
+ ion-title {
+     ion-text{
+         font-weight: normal;
+         font-size: 80%;
+     }
  }
  .header-md::after {
      background: none !important;
@@ -10,4 +21,26 @@ ion-toolbar {
      width: 100%;
      color: #f4f8f5;
      margin-bottom: 15px;
+ }
+ .border-b{
+     border-bottom: 1.5px solid #EEE;
+ }
+ ion-list-header{
+    ion-label{
+        font-size: 18px;
+        font-weight: 600;
+    }
+ }
+ .list-items{
+     padding-top: 0 !important;
+ }
+ .item {
+     --min-height: 30px !important;
+     ion-icon{
+         font-size: 22px;
+     }
+
+     ion-label{
+         font-size: 15px;
+     }
  }

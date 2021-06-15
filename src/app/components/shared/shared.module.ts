@@ -1,3 +1,5 @@
+import { SlideItemComponent } from './../slide-item/slide-item.component';
+import { SearchComponent } from './../search/search.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,7 +11,7 @@ import { BrandsComponent } from '../brands/brands.component';
 
 
 @NgModule({
-  declarations: [BannerComponent, BrandsComponent],
+  declarations: [BannerComponent, BrandsComponent, SearchComponent, SlideItemComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -17,7 +19,9 @@ import { BrandsComponent } from '../brands/brands.component';
   ],
   exports:[
     BannerComponent,
-    BrandsComponent
+    BrandsComponent,
+    SearchComponent,
+    SlideItemComponent
   ]
 })
 export class SharedModule { }

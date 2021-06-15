@@ -1,0 +1,120 @@
+@import '../../../theme/variables.scss';
+@import '../../../theme/mixins/mixins';
+
+ion-toolbar {
+    --background: #f4f5f8;
+    --ion-color-base: transparent !important;
+ }
+ ion-content{
+    --color: #777777;
+    --padding: 10px 15px;
+    font-family: $pass-font;
+ }
+ ion-card-title{
+    font-size: 16px; 
+ }
+ ion-card{
+    // padding: 25px;
+    height: 100%;
+    align-items: center;
+    margin-bottom: 16px;
+    margin-inline: 0px;
+ }
+ .header-md::after {
+     background: none !important;
+ }
+
+.jumbo{
+    background: #0281B2;
+    border-radius: 8px;
+    height: 186px;
+    padding: 12px 14px 0px 16px;
+    .main{
+        font-size: 28px;
+        color: #fff;
+        text-align: left;
+        display: block;
+    }
+    .sub{
+        font-size: 16px;
+        color: #fff;
+        text-align: left;
+        padding-bottom: 11px;
+    }
+    ion-searchbar{
+        --border-radius: 20px;
+    }
+}
+.card-text{
+    color: #000;
+    font-size: 20px;
+}
+.card-text-small{
+    color: #000;
+    font-size: 16px;
+}
+.mh{
+    box-sizing: border-box;
+    --height: 130 !important;
+    padding: 10px;
+}
+
+.see-all{
+    color: #2F6F89;
+    font-size: 14px;
+    font-weight: 500;
+}
+.cat-span{
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+}
+ .img{
+     border-radius: 50%;
+     width: 70%;
+ }
+ .cat-name{
+     color: #000;
+     font-size: 16px;
+     margin-top: 8px;
+ }
+ .bg-white{
+     background: #fff;
+}
+.shadow{
+    border-radius: 8px;
+    padding: 12px 0px 0px 16px;
+     box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+ }
+ .knowMore{
+    width: 63px;
+    height: 23 !important;
+    font-size: x-small;
+     color: #fff;
+     text-align: center;
+     --background: #0281B2;
+     text-transform: none;
+ }
+ .earn{
+     color: #2F6F89;
+     font-size: 25px;
+ }
+ .text-small{
+    color: var(--color);
+    font-family: 'Source Sans Pro';
+    font-size: 12px;
+    text-align: center;
+     margin-top: 5px;
+ }
+ .large-icon{
+     font-size: 40px;
+ }
+ .icon-bg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #bacec8;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+ }

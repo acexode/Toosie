@@ -38,6 +38,19 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'categories',
+    loadChildren: () => import('./pages/categories/categories.module').then( m => m.CategoriesPageModule)
+  },
+ 
+  {
+    path: 'prescription',
+    loadChildren: () => import('./pages/prescription/prescription.module').then( m => m.PrescriptionPageModule)
+  },
+  {
+    path: 'upload',
+    loadChildren: () => import('./pages/upload/upload.module').then( m => m.UploadPageModule)
   }
   
 ];

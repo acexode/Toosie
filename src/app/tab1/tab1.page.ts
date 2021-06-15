@@ -1,5 +1,7 @@
+import { SearchComponent } from './../components/search/search.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -33,7 +35,7 @@ export class Tab1Page {
   categories =  [
     {
       img: 'assets/icon/baby.png',
-      title: 'Baby Care',
+      title: 'Baby & Child',
       path: ''
     },
     {
@@ -44,6 +46,11 @@ export class Tab1Page {
     {
       img: 'assets/icon/man.png',
       title: 'Men Care',
+      path: ''
+    },
+    {
+      img: 'assets/icon/man.png',
+      title: 'Vitamins',
       path: ''
     },
     {
@@ -82,18 +89,74 @@ export class Tab1Page {
     //   path: ''
     // },
   ]
+  explore =  [
+    {
+      img: 'assets/icon/tablet.png',
+      title: 'Men Shaving Stick',
+      price: 2500,
+      discount: 20
+    },
+    {
+      img: 'assets/icon/beauty.png',
+      title: 'Beauty',
+      price: 2500,
+      discount: 20
+    },
+    {
+      img: 'assets/icon/vitamin.png',
+      title: 'Vitamins',
+      price: 2500,
+      discount: 20
+    },
+    {
+      img: 'assets/icon/grocery.png',
+      title: 'Grocery',
+      price: 2500,
+      discount: 20
+    },
+    {
+      img: 'assets/icon/household.png',
+      title: 'Household',
+      price: 2500,
+      discount: 20
+    },
+    {
+      img: 'assets/icon/personalCare.png',
+      title: 'Personal Care',
+      price: 2500,
+      discount: 20
+    }
+  ]
   bannerList = [
     {
       img: 'assets/icon/banner3.jpg',
-      title: ''
+      title: 'Men Shaving Stick',
+      price: 2500,
+      discount: 20
     },
     {
       img: 'assets/icon/banner1.png',
-      title: ''
+      title: 'Adel 18 glucorect drop',
+      price: 900,
+      discount: 10
     },
     {
       img: 'assets/icon/banner2.png',
-      title: ''
+      title: 'Cough syrup',
+      price: 3000,
+      discount: 5
+    },
+    {
+      img: 'assets/icon/home-bg3.jpg',
+      title: 'Neuroton 6 AMP',
+      price: 4000,
+      discount: 8
+    },
+    {
+      img: 'assets/icon/home-bg.jpg',
+      title: 'Sparkle Shampoo And Conditioner',
+      price: 4000,
+      discount: 8
     }
   ]
   offers = [
@@ -114,10 +177,24 @@ export class Tab1Page {
       title: ''
     }
   ]
-  constructor(private router: Router) {}
+  constructor(private router: Router, public modalController: ModalController) {}
 
   shop(q){
     this.router.navigate(['menu/home/shop', {category: q}])
   }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SearchComponent,
+      cssClass: 'fullscreen'
+    });
+    await modal.present();
+  }
+  doRefresh(event) {
+    console.log('Begin async operation');
 
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 1000);
+  }
 }

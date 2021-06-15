@@ -9,21 +9,64 @@ import { Component, OnInit } from '@angular/core';
 export class MenuPage implements OnInit {
   pages = [
     {
-      title: 'Settings',
+      title: 'Search & Buy Medicine',
       url: '/menu/first',
-      icon: 'settings-f'
+      icon: 'search-f'
     },
     {
-      title: 'Rate',
+      title: 'Upload Prescription',
       url: 'rate',
-      icon: 'star-f',
+      icon: 'file-plus',
       
     },
     {
-      title: 'Share Toosie',
+      title: 'Categories',
       url: 'share',
-      icon: 'share-2',
+      icon: 'package',
 
+    }
+  ];
+  manage = [
+    {
+      title: 'My Orders',
+      url: '/menu/first',
+      icon: 'shopping-cart'
+    },
+    {
+      title: 'My Prescription',
+      url: 'rate',
+      icon: 'file-plus',
+      
+    },
+    {
+      title: 'Profile',
+      url: 'share',
+      icon: 'user',
+
+    }
+  ];
+  support = [
+    {
+      title: 'Contact Us',
+      url: '/menu/first',
+      icon: 'users'
+    },
+    {
+      title: 'Send Feedback',
+      url: 'rate',
+      icon: 'thumbs-up-f',
+      
+    },
+    {
+      title: 'FAQs',
+      url: 'share',
+      icon: 'help-circle-f',
+
+    },
+    {
+      title: 'About Us',
+      url: 'share',
+      icon: 'info',
     }
   ];
   constructor(private router: Router) { }

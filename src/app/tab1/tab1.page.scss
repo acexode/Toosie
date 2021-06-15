@@ -7,19 +7,97 @@ ion-toolbar {
  }
  ion-content{
     --color: #777777;
+    --padding: 10px 15px;
     font-family: $pass-font;
+ }
+ ion-card-title{
+    font-size: 16px; 
  }
  .header-md::after {
      background: none !important;
  }
- img{
-     width: 80px;
-
+ 
+.jumbo{
+    background: #0281B2;
+    border-radius: 8px;
+    height: 186px;
+    padding: 12px 14px 0px 16px;
+    span{
+        font-size: 28px;
+        color: #fff;
+        text-align: left;
+        padding-bottom: 22px;
+    }
+    ion-searchbar{
+        --border-radius: 20px;
+    }
+}
+.jumbo2{
+    margin-top: 18px;
+    background: #C7F5FF;
+    border-radius: 8px;
+    padding: 12px 0px 0px 16px;
+    h2{
+        font-size: 25px;
+        color: #000;
+        text-align: left;
+    }
+    span{
+        font-size: 17px;
+        color: #000;
+        text-align: left;
+        padding-bottom: 10px;
+    }
+    ion-button{
+        height: 30px;
+        color: #fff;
+        align-self: center;
+        --background: #0281B2;
+        margin-top: 21px;
+        margin-bottom: 15px;
+        margin-left: 30%;
+    }
+    
+}
+.see-all{
+    color: #2F6F89;
+    font-size: 14px;
+    font-weight: 500;
+}
+.cat-span{
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+}
+ .img{
+     border-radius: 50%;
+     width: 70%;
  }
-
- .icon-img{
-     width: 25px;
-     align-self: center;
+ .cat-name{
+     color: #000;
+     font-size: 16px;
+     margin-top: 8px;
+ }
+ .bg-white{
+     background: #fff;
+}
+.shadow{
+    border-radius: 8px;
+    padding: 12px 0px 0px 16px;
+     box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+ }
+ .knowMore{
+    width: 63px;
+    height: 23 !important;
+    font-size: x-small;
+     color: #fff;
+     text-align: center;
+     --background: #0281B2;
+     text-transform: none;
+ }
+ .earn{
+     color: #2F6F89;
+     font-size: 25px;
  }
  .text-small{
     color: var(--color);

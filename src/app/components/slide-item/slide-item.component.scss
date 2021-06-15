@@ -1,0 +1,49 @@
+.slide-container{
+    width: 50% !important;
+
+}
+ion-slides{
+    --background: #000;
+}
+ion-slide{
+    // height: 270px;
+}
+.slide{
+    position: relative;
+    height: 180px;
+    border: 1px solid #dbe1e2;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+}
+ion-slide{
+    width: 145px !important;
+}
+.discount{
+    color: #2ed373;
+}
+.price{
+    color: #000;
+}
+
+.img-container{
+    height: 80px;
+    border-bottom: 1px solid #dbe1e2;
+}
+.product-title{
+    color: #000;
+    font-size: 14px;
+
+}
+.swiper-slide img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-bottom: 10px;
+
+}
+.round-btn{
+    --border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    right: 5%;
+}
