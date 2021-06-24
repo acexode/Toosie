@@ -1,0 +1,16 @@
+<ion-row *ngIf="items.length" class="favorite-items flex ion-justify-content-between">
+  <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let p of items" class="ion-text-left">
+    <div class="c-card">
+      <img  [src]="p?.resourceImages[0]" />
+      <div class="title-container">
+        <h6>{{p.title | slice:0:60}}</h6>
+        <p class="text-weight-bold"> ₦{{p.currentPrice}}</p>
+      </div>
+      <ion-button (click)="addToCart(p)" class="addToCart">
+        Add to Cart
+      </ion-button>
+      <ion-icon name="heart-f" class="heart"></ion-icon>
+    </div>
+  </ion-col>
+
+</ion-row>

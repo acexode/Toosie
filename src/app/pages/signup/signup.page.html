@@ -12,27 +12,39 @@
   <div class="ion-padding container mt-32">
     <img src="assets/icon/logo-big.png" alt="" class="logo">
     <h6>Fill the following instructions to Sign Up</h6>
-    <div class="form-container pt-16">
+    <form (ngSubmit)="signup()" [formGroup]="credentials" class="form-container pt-16">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="name" formControlName="name"></ion-input>
       </ion-item>
+      <div *ngIf="(name.dirty || name.touched) && name.errors" class="errors">
+        <span *ngIf="name.errors?.required">Name is required</span>
+        <span *ngIf="name.errors?.email">Name is invalid</span>
+      </div>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email is required</span>
+        <span *ngIf="email.errors?.email">Email is invalid</span>
+      </div>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" formControlName="password"></ion-input>
         <ion-icon name="eye" slot="end"></ion-icon>
       </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Password is required</span>
+        <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+      </div>
       <ion-item>
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input type="password"></ion-input>
         <ion-icon name="eye" slot="end"></ion-icon>
       </ion-item>
 
-      <ion-button expand="block" class="login mt-32" (click)="signup()">Sign up</ion-button>
+      <ion-button class="login mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Sign up</ion-button>
 
       <div class="flex sign-up">
         <ion-label class="pt-11">
@@ -40,7 +52,7 @@
         </ion-label> 
         <ion-button color="dark" fill="clear" routerLink="/login" routerDirection="forward">Login</ion-button>
       </div>
-    </div>
+    </form>
   </div>
 </ion-content>
 

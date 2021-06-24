@@ -1,23 +1,8 @@
-<ion-header [translucent]="true" no-shadow no-border>
-  <ion-toolbar>
-   
-    <ion-buttons slot="primary">
-      <ion-button>
-        <ion-icon name="cart-outline"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon name="person-add-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-title slot="start">
-      <img src="/assets/icon/logo.png" alt="">
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [search]="false" title="Prescription"></app-header>
 
 
 <ion-content  class="ion-padding">
+  
   <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" id="refresher">
     <ion-refresher-content
     pullingText="Pull to refresh"
@@ -39,7 +24,7 @@
       </span>
     </ion-col>
     <ion-col size="12">
-    <ion-card  class="flex p-8 ion-justify-content-between">
+    <ion-card (click)="selectImageSource()"  class="flex p-8 ion-justify-content-between">
         <ion-text class="card-text">
           Refill by scan
         </ion-text>

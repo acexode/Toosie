@@ -1,3 +1,4 @@
+import { SharedModule } from 'src/app/components/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { ShopPage } from './shop.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ShopPageRoutingModule
+    ShopPageRoutingModule,
+    SharedModule
   ],
   declarations: [ShopPage]
 })

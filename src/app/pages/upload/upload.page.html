@@ -1,9 +1,58 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>upload</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Upload Prescription"></app-header>
 
 <ion-content>
+  <form  [formGroup] = "uploadForm" (ngSubmit)="onSubmit()" >
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-content class="p-8">
+            <div class="card upload-btn-wrapper">
+              <div class="btn flex p-20">
+                <div class="icon-container">
+                  <ion-icon name="file-plus"></ion-icon>
+                </div>
+                <ion-text class="pl-16 pt-6">
+                  {{file_text}}
+                </ion-text>
+              </div>
+              <input type="file" (change)="onFileSelect($event)" formcontrolName="prescriptionImage" />
+            </div>
+            
+          </ion-card-content>
 
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="5"  class="border-b"></ion-col>
+      <ion-col size="2" class="pt-10 ion-text-center" >
+        <ion-text class="">OR</ion-text>
+      </ion-col>
+      <ion-col size="5" class="border-b"></ion-col>
+    </ion-row>
+    <ion-row class="mt-10 flex ion-justify-content-center">
+      <ion-col size="2" class="ion-text-center" >
+        <div class="icon-container ">
+          <ion-icon name="file-plus"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center" >
+        <ion-text class="text-weight-bold s14-h16 mb-8">
+          Type your order
+        </ion-text> <br>
+        <ion-text>
+          Type here the medicine name or the product name you wish to order
+        </ion-text>
+      </ion-col>
+      <ion-col size="12" class=" mt-8" >       
+          <ion-textarea rows="4" formcontrolName="description"  placeholder="Ex: Paracetamol"></ion-textarea>
+       
+      </ion-col>
+      <ion-col size="12" class=" mt-8" >       
+          <ion-button type="submit" expand="block" class="success-btn">Submit</ion-button>
+       
+      </ion-col>
+     
+    </ion-row>
+  </form>
 </ion-content>

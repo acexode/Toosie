@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { IonSlides } from '@ionic/angular';
+import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
+import { INTRO_KEY } from 'src/app/core/guards/intro.guard';
 @Component({
   selector: 'app-intro',
   templateUrl: './intro.page.html',
@@ -9,7 +12,7 @@ export class IntroPage implements OnInit {
 
   slideOpts = {}
   
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.slideOpts = {
@@ -25,5 +28,8 @@ export class IntroPage implements OnInit {
     },
     };
   }
-
+  async start() {
+    await Storage.set({key: INTRO_KEY, value: 'true'});
+    this.router.navigateByUrl('/login', { replaceUrl:true });
+  }
 }

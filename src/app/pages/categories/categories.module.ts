@@ -1,3 +1,4 @@
+import { SharedModule } from './../../components/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { CategoriesPage } from './categories.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CategoriesPageRoutingModule
+    CategoriesPageRoutingModule,
+    SharedModule
   ],
   declarations: [CategoriesPage]
 })

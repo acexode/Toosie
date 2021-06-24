@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-brands',
@@ -7,31 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BrandsComponent implements OnInit {
 
-  @Input() preview
-  @Input() button
-  @Input() pager 
-  slideOpts = {}
-  
+  @Input() preview;
+  @Input() button;
+  @Input() pager;
+  @Input() brands: Observable<any>;
+  slideOpts = {};
   constructor() { }
-  items = [
-    {
-      img: 'assets/icon/pampers.png',
-      title: ''
-    },
-    {
-      img: 'assets/icon/emzor.png',
-      title: ''
-    },
-    {
-      img: 'assets/icon/johnson.png',
-      title: ''
-    },
-    {
-      img: 'assets/icon/banner3.jpg',
-      title: ''
-    }
-  ]
   ngOnInit() {
+    this.brands.subscribe(e => console.log(e));
     this.slideOpts = {
       initialSlide: 0,
       speed: 400,

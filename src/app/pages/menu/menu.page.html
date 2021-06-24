@@ -2,14 +2,14 @@
   <ion-menu contentId="content">
  
     <ion-header   no-border>
-      <ion-toolbar *ngIf="false" class="flex flex-column">
+      <ion-toolbar *ngIf="true" class="flex flex-column">
         <ion-title>Abubakar</ion-title>
-        <ion-title><ion-text>abudawud92@gmail.com</ion-text></ion-title>
+        <ion-title><ion-text>{{user?.email}}</ion-text></ion-title>
         <ion-title> <ion-text>+2347066565263</ion-text></ion-title>
         
        
       </ion-toolbar>
-      <ion-toolbar *ngIf="true" class="flex flex-column">
+      <ion-toolbar *ngIf="false" class="flex flex-column">
         <ion-title class="ion-text-center mb-8">Welcome to Toosie</ion-title>
         <ion-button class="login w-100 mt-8"  expand="block">Login</ion-button>
       </ion-toolbar>
@@ -29,6 +29,15 @@
       <!-- List Header with Outline Button -->
      
       <ion-list class="border-b list-items">
+      <ion-menu-toggle auto-hide="false" >
+        <ion-item class="item" lines="none" (click)="presentModal()"  >
+          <ion-icon name="search-f" slot="start"></ion-icon>
+          <ion-label>
+            Search
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
       <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
           <ion-item class="item" lines="none" [routerLink]="p.url" routerDirection="root" routerLinkActive="active-item">
             <ion-icon [name]="p.icon" slot="start"></ion-icon>
@@ -50,6 +59,11 @@
   
         </ion-row>
       <ion-menu-toggle auto-hide="false" *ngFor="let p of manage">
+        <!-- {
+          title: 'Search & Buy Medicine',
+          url: '/menu/home/upload',
+          icon: 'search-f'
+        }, -->
           <ion-item class="item" lines="none" [routerLink]="p.url" routerDirection="root" routerLinkActive="active-item">
             <ion-icon [name]="p.icon" slot="start"></ion-icon>
             <ion-label>

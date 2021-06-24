@@ -1,26 +1,52 @@
-<ion-header>
-  <ion-toolbar class="ion-text-center">
-    <ion-title class="ion-text-center">Me</ion-title>
-    <ion-buttons slot="end">
-      <ion-button class="notification">
-        <ion-icon name="notifications-outline" color="dark"></ion-icon>
-        <span>&nbsp;</span>
-      </ion-button>
-      <ion-button routerLink="/menu/home/cart" class="filter">
-        <ion-icon name="cart-outline" color="dark"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Profile"></app-header>
 
-<ion-content>
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <span>
-        
-      </span>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<ion-content class="ion-padding">
+  <ion-grid class="ion-padding container">
+    <ion-row class="img-container">
+      <ion-col  size="12">
+        <img src="assets/icon/update-profile.jpg" alt="" class="logo">
+      </ion-col>
+    </ion-row>
+    <ion-row class="mt-16">
+      <ion-col size="12">
+        <form (ngSubmit)="updateUser()" [formGroup]="credentials" class="form-container pt-16">
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input type="text" formControlName="fullName"></ion-input>
+          </ion-item>
+          <div *ngIf="(fullName.dirty || fullName.touched) && fullName.errors" class="errors">
+            <span *ngIf="fullName.errors?.required">Name is required</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+            <span *ngIf="email.errors?.required">Email is required</span>
+            <span *ngIf="email.errors?.email">Email is invalid</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Phone</ion-label>
+            <ion-input type="text" formControlName="phone"></ion-input>
+          </ion-item>
+          <div *ngIf="(phone.dirty || phone.touched) && phone.errors" class="errors">
+            <span *ngIf="phone.errors?.required">phone is required</span>
+            <span *ngIf="phone.errors?.minlength">phone needs to be 6 characters</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Address</ion-label>
+            <ion-input type="text" formControlName="address"></ion-input>
+          </ion-item>
+          <div *ngIf="(address.dirty || address.touched) && address.errors" class="errors">
+            <span *ngIf="address.errors?.required">address is required</span>
+          </div>
+          <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Update</ion-button>
+    
+         
+        </form>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,4 +1,31 @@
-ion-title{
-    font-weight: normal;
-    padding-left: 3em
+ion-toolbar {
+    --background: #f4f8f5;
+    --ion-color-base: transparent !important;
+ }
+ .header-md::after {
+     background: none !important;
+ }
+ .login{
+     --background: #34C3EC
+ }
+ .primary-text{
+	 color: #0281B2;
+ }
+
+
+.login{
+	--background: #0281B2;
 }
+
+.img-container{
+    width: 150px;
+    display: flex;
+    justify-content: center;
+}
+.logo{
+	width: 100%;
+	align-self: center;
+	z-index: 10;
+    margin-left: 35%;
+}
+ 

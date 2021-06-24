@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PrescriptionPageRoutingModule } from './prescription-routing.module';
 
 import { PrescriptionPage } from './prescription.page';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrescriptionPageRoutingModule
+    PrescriptionPageRoutingModule,
+    SharedModule
   ],
   declarations: [PrescriptionPage]
 })

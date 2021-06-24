@@ -1,37 +1,18 @@
+import { InventoryService } from './../core/service/inventory/inventory.service';
 import { SearchComponent } from './../components/search/search.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
-  showButton = false
-  iconList =  [
-    {
-      img: 'assets/icon/prescription.png',
-      title: 'Prescription',
-      path: ''
-    },
-    {
-      img: 'assets/icon/medicine.png',
-      title: 'Medicine',
-      path: ''
-    },
-    {
-      img: 'assets/icon/online-shopping.png',
-      title: 'Shop',
-      path: ''
-    },
-    {
-      img: 'assets/icon/surprise.png',
-      title: 'Toosie Box',
-      path: ''
-    },
-  ]
+export class Tab1Page implements OnInit {
+  showButton = false;
+  brand$: Observable<any>;
   categories =  [
     {
       img: 'assets/icon/baby.png',
@@ -63,21 +44,21 @@ export class Tab1Page {
       title: 'Skin Care',
       path: ''
     },
-    {
-      img: 'assets/icon/toothbrush.png',
-      title: 'Oral Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/natural.png',
-      title: 'Organic Products',
-      path: ''
-    },
-    {
-      img: 'assets/icon/medical-assistance.png',
-      title: 'Medical Supplies',
-      path: ''
-    },
+    // {
+    //   img: 'assets/icon/toothbrush.png',
+    //   title: 'Oral Care',
+    //   path: ''
+    // },
+    // {
+    //   img: 'assets/icon/natural.png',
+    //   title: 'Organic Products',
+    //   path: ''
+    // },
+    // {
+    //   img: 'assets/icon/medical-assistance.png',
+    //   title: 'Medical Supplies',
+    //   path: ''
+    // },
     // {
     //   img: 'assets/icon/mask.png',
     //   title: 'Protection 101',
@@ -88,7 +69,7 @@ export class Tab1Page {
     //   title: 'Sexual Health1',
     //   path: ''
     // },
-  ]
+  ];
   explore =  [
     {
       img: 'assets/icon/tablet.png',
@@ -120,13 +101,7 @@ export class Tab1Page {
       price: 2500,
       discount: 20
     },
-    {
-      img: 'assets/icon/personalCare.png',
-      title: 'Personal Care',
-      price: 2500,
-      discount: 20
-    }
-  ]
+  ];
   bannerList = [
     {
       img: 'assets/icon/banner3.jpg',
@@ -158,7 +133,7 @@ export class Tab1Page {
       price: 4000,
       discount: 8
     }
-  ]
+  ];
   offers = [
     {
       img: 'assets/icon/product3.jpg',
@@ -176,11 +151,14 @@ export class Tab1Page {
       img: 'assets/icon/product2.jpg',
       title: ''
     }
-  ]
-  constructor(private router: Router, public modalController: ModalController) {}
+  ];
 
+  constructor(private router: Router, public modalController: ModalController, private invS: InventoryService) {}
+  ngOnInit() {
+    this.brand$ = this.invS.allBrands();
+  }
   shop(q){
-    this.router.navigate(['menu/home/shop', {category: q}])
+    this.router.navigate(['menu/home/shop', {category: q}]);
   }
   async presentModal() {
     const modal = await this.modalController.create({
@@ -196,5 +174,8 @@ export class Tab1Page {
       console.log('Async operation has ended');
       event.target.complete();
     }, 1000);
+  }
+  navigate(end){
+    this.router.navigate(['menu/home/'+end]);
   }
 }

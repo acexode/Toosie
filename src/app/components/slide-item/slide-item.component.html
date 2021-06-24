@@ -7,7 +7,7 @@
           <img [src]="item.img"/>
 
         </div>
-        <div class="flex flex-column pt-8 ion-text-left">
+        <div style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
           <ion-text class="product-title">
             {{item.title}}
           </ion-text>
@@ -18,6 +18,9 @@
             ₦ {{item.price}}
           </small>
         </div>
+        <ion-button class="knowMore">
+          Add to Cart
+        </ion-button>
         <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
       </div>
     </ion-slide>

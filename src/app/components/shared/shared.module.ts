@@ -1,3 +1,4 @@
+import { ItemsComponent } from './../items/items.component';
 import { SlideItemComponent } from './../slide-item/slide-item.component';
 import { SearchComponent } from './../search/search.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -7,11 +8,13 @@ import { BannerComponent } from '../banner/banner.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BrandsComponent } from '../brands/brands.component';
+import { HeaderComponent } from '../header/header.component';
 
 
 
 @NgModule({
-  declarations: [BannerComponent, BrandsComponent, SearchComponent, SlideItemComponent],
+  declarations: [BannerComponent, BrandsComponent,
+    ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,7 +24,7 @@ import { BrandsComponent } from '../brands/brands.component';
     BannerComponent,
     BrandsComponent,
     SearchComponent,
-    SlideItemComponent
+    SlideItemComponent, HeaderComponent, ItemsComponent
   ]
 })
 export class SharedModule { }

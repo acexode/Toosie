@@ -3,7 +3,7 @@ export const serverBaseUrl = 'https://pharmacy-ecommerce.herokuapp.com/api';
 export const baseEndpoints = {
     auth: serverBaseUrl + '/users',
     inventory: serverBaseUrl + '/inventory',
-   
+
   };
 export const authEndpoints = {
     login: baseEndpoints.auth + '/login',
@@ -28,4 +28,12 @@ export const wishListEndpoints = {
     addWish: baseEndpoints.auth + '/wishlist/new',
     removeWish: baseEndpoints.auth + '/wishlist/remove',
     allWish: baseEndpoints.auth + '/wishlist/mine/all'
+};
+export const inventoryEndpoints = {
+    allCategories: baseEndpoints.inventory + '/category/all',
+    allTags: baseEndpoints.inventory + '/tags/all',
+    brands: baseEndpoints.inventory + '/brands/all',
+    inventoryByCategory: baseEndpoints.inventory + '/product/all/',
+    searchInventory: baseEndpoints.inventory + '/product/search',
+    saveOrder: baseEndpoints.inventory + '/order/save'
 };

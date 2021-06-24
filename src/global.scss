@@ -56,3 +56,10 @@ ion-content, ion-tabs, ion-segment, ion-header{
 .tab-selected {
     color: #34C3EC !important;
 }
+.toastCss{
+    color: #fff;
+    --background: #0281B2 !important;
+    // background: #0281B2 ;
+    --border-color: #0281B2;
+    text-align: center;
+}

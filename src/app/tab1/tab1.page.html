@@ -1,24 +1,4 @@
-<ion-header [translucent]="true" no-shadow no-border>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button>
-        <ion-icon name="align-left" color="dark" ></ion-icon>
-      </ion-menu-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button>
-        <ion-icon name="cart-outline"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon name="person-add-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-title >
-      <img src="/assets/icon/logo.png" alt="">
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="home" [search]="false"></app-header>
 <!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -58,7 +38,7 @@
     <span>
       Upload Prescription and we do the rest
     </span>
-    <ion-button>
+    <ion-button (click)="navigate('upload')">
       Upload
       <ion-icon class="ml-8" name="upload"></ion-icon>
     </ion-button>
@@ -70,10 +50,10 @@
         Shop By Category
       </span>
     </ion-col>
-    <ion-col class="flex ion-justify-content-end">
-      <span class="see-all">
+    <ion-col class="flex ion-justify-content-end p-0">
+      <ion-button (click)="navigate('categories')" fill="clear" class="see-all p-0">
         See All
-      </span>
+      </ion-button>
     </ion-col>
   </ion-row>
 
@@ -106,7 +86,7 @@
         </ion-text>
       </ion-col>
       <ion-col class="flex ion-justify-content-end">
-        <span class="see-all">
+        <span (click)="navigate('shop')" class="see-all">
           See All
         </span>
       </ion-col>
@@ -139,11 +119,14 @@
         </ion-text>
       </ion-col>
       <ion-col class="flex ion-justify-content-end">
-        <span class="see-all">
+        <span (click)="navigate('shop')" class="see-all">
           See All
         </span>
       </ion-col>
-      <app-slide-item [items]="explore" [pager]="showButton" preview="1" [button]="!showButton"></app-slide-item>
+      <ion-col size="12">
+        <app-slide-item [items]="explore" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+
+      </ion-col>
  
     </ion-row> 
    
@@ -155,7 +138,7 @@
         </ion-text>
       </ion-col>
       <ion-col >
-        <app-brands preview="2" [pager]="showButton" [button]="showButton"></app-brands>
+        <app-brands [brands]="brand$" preview="2" [pager]="showButton" [button]="showButton"></app-brands>
       </ion-col>
     </ion-row>
     <ion-row class="mb-32">
