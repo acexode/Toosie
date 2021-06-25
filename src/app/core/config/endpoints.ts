@@ -12,6 +12,10 @@ export const authEndpoints = {
     updateProfile: baseEndpoints.auth + '/update/profile',
     updateProfileImage: baseEndpoints.auth + '/update/profile/image',
 };
+export const blogEndpoints = {
+    blogListing: serverBaseUrl + '/blog/all/1',
+    singlePost: serverBaseUrl + '/blog/open/',
+};
 
 export const roleEndpoints = {
     getRoles: baseEndpoints.auth + '/role/all',

@@ -35,7 +35,11 @@ const routes: Routes = [
   {
     path: 'pill-reminder',
     loadChildren: () => import('./pages/pill-reminder/pill-reminder.module').then( m => m.PillReminderPageModule)
+  },  {
+    path: 'blog',
+    loadChildren: () => import('./pages/blog/blog.module').then( m => m.BlogPageModule)
   }
+
 
 ];
 @NgModule({
