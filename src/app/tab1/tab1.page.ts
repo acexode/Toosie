@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 export class Tab1Page implements OnInit {
   showButton = false;
   brand$: Observable<any>;
+  popular$: Observable<any>;
+  latest$: Observable<any>;
   categories =  [
     {
       img: 'assets/icon/baby.png',
@@ -156,6 +158,8 @@ export class Tab1Page implements OnInit {
   constructor(private router: Router, public modalController: ModalController, private invS: InventoryService) {}
   ngOnInit() {
     this.brand$ = this.invS.allBrands();
+    this.popular$ = this.invS.popularStore;
+    this.latest$ = this.invS.latestStore;
   }
   shop(q){
     this.router.navigate(['menu/home/shop', {category: q}]);

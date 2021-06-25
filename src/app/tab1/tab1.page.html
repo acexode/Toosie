@@ -91,7 +91,7 @@
         </span>
       </ion-col>
       <ion-col size="12">
-        <app-slide-item [items]="bannerList" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+        <app-slide-item [items]="popular$ | async" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
 
       </ion-col>
  
@@ -124,7 +124,7 @@
         </span>
       </ion-col>
       <ion-col size="12">
-        <app-slide-item [items]="explore" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+        <app-slide-item [items]="latest$ | async" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
 
       </ion-col>
  
