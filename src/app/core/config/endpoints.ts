@@ -35,5 +35,7 @@ export const inventoryEndpoints = {
     brands: baseEndpoints.inventory + '/brands/all',
     inventoryByCategory: baseEndpoints.inventory + '/product/all/',
     searchInventory: baseEndpoints.inventory + '/product/search',
+    popular: baseEndpoints.inventory + '/product/popular',
+    latest: baseEndpoints.inventory + '/product/latest',
     saveOrder: baseEndpoints.inventory + '/order/save'
 };

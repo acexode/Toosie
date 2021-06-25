@@ -4,21 +4,21 @@
     <ion-slide *ngFor="let item of items" class="width: 140px">
       <div class="slide mr-8">
         <div class="img-container">
-          <img [src]="item.img"/>
+          <img [src]="item.resourceImages[0]"/>
 
         </div>
         <div style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
           <ion-text class="product-title">
-            {{item.title}}
+            {{item.title | slice:0:20}}
           </ion-text>
           <small class="discount pt-5">
-            {{item.discount}}%  OFF
+            {{item.discountPercent}}%  OFF
           </small>
           <small class="price pt-5">
-            ₦ {{item.price}}
+            ₦ {{item.currentPrice}}
           </small>
         </div>
-        <ion-button class="knowMore">
+        <ion-button (click)="addToCart(item)" class="knowMore">
           Add to Cart
         </ion-button>
         <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
