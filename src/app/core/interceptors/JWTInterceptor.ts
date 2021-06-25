@@ -26,10 +26,10 @@ export class JwtInterceptor implements HttpInterceptor {
               .pipe(
                 switchMap(token => {
                    const headers = request.headers
-                            .set('Authorization', 'Bearer ' + token)
-                            
+                            .set('Authorization', 'Bearer ' + token);
+
                    const requestClone = request.clone({
-                     headers 
+                     headers
                     });
                   return next.handle(requestClone);
                 })

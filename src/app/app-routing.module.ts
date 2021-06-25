@@ -27,6 +27,14 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'prescription-history',
+    loadChildren: () => import('./pages/prescription-history/prescription-history.module').then( m => m.PrescriptionHistoryPageModule)
+  },
+  {
+    path: 'pill-reminder',
+    loadChildren: () => import('./pages/pill-reminder/pill-reminder.module').then( m => m.PillReminderPageModule)
   }
 
 ];

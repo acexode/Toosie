@@ -1,0 +1,57 @@
+.card {
+    box-shadow: 0 2px 8px 0 #ddd;
+    background: #fff;
+    margin: 0 8px 8px 8px;
+    padding: 10px;
+    color: #000 !important;
+    .img-col{
+        .block-center {
+            display: block!important;
+            margin: 0 auto;
+        }
+    }
+    .details-col{
+        .ellipsis-2 {
+            color: #000;
+            overflow: hidden;
+            text-overflow: -o-ellipsis-lastline;
+            text-overflow: ellipsis;
+            display: block;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            max-height: 2.824em;
+            span{
+                color: #434343;
+                font-size: 90%;
+            }
+        } 
+    }
+    .border-top{
+        border-top: 1px solid #ebe1e1;
+    }
+    .title{
+        font-weight: 600;
+        font-weight: 120%;
+    }
+    .price{
+        font-size: 110%;
+        font-weight: 600;
+    }
+    .strike{
+        text-decoration: line-through;
+        color: #999;
+    }
+    .ps{
+        --padding-start: 0px !important ;
+    }
+    ion-spinner{
+        --color: #0281B2;
+        font-size: larger;
+    }
+    ion-button{
+        margin-top: 10px;
+        width: 80px;
+        --background: #0281B2;
+    }
+}

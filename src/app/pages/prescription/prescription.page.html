@@ -51,7 +51,7 @@
       </span>
     </ion-col>
     <ion-col *ngFor="let tool of pharmacyTool" class="mh" >
-    <ion-card  class="flex flex-column p-16 ion-justify-content-between">
+    <ion-card (click)="navigate(tool.path)" class="flex flex-column p-16 ion-justify-content-between">
         <ion-text class="card-text-small">
           {{tool.text}}
         </ion-text>

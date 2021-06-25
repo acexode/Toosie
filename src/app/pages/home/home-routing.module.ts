@@ -21,6 +21,14 @@ const routes: Routes = [
         loadChildren: () => import('../prescription/prescription.module').then(m => m.PrescriptionPageModule)
       },
       {
+        path: 'prescription/history',
+        loadChildren: () => import('../prescription-history/prescription-history.module').then(m => m.PrescriptionHistoryPageModule)
+      },
+      {
+        path: 'prescription/reminder',
+        loadChildren: () => import('../pill-reminder/pill-reminder.module').then(m => m.PillReminderPageModule)
+      },
+      {
         path: 'shop',
         loadChildren: () => import('../shop/shop.module').then(m => m.ShopPageModule)
       },
@@ -44,7 +52,7 @@ const routes: Routes = [
         path: 'categories',
         loadChildren: () => import('../categories/categories.module').then(m => m.CategoriesPageModule)
       },
-      
+
     ],
   },
     {
@@ -52,7 +60,7 @@ const routes: Routes = [
       redirectTo: '/tabs/tab1',
       pathMatch: 'full'
     }
-  
+
 ];
 
 @NgModule({

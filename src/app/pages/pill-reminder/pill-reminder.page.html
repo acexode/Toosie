@@ -1,0 +1,24 @@
+<app-header title="Pill Reminder"></app-header>
+
+<ion-content>
+  <ng-template #openModal>
+    <ion-row style="height: 100%;">
+      <ion-col  class="flex flex-column ion-justify-content-center ion-align-items-center">
+        <ion-icon class="cal" name="calendar-f"></ion-icon>
+        <ion-text class="mb-10">
+          You haven't set any reminder
+        </ion-text>
+        <ion-button (click)="presentModal()" fill="outline" class="add-reminder">
+          Add Reminder
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  <ion-grid *ngIf="reminderList.length; else openModal">
+    <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

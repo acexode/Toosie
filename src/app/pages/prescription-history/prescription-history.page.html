@@ -1,0 +1,32 @@
+<app-header title="Prescription History"></app-header>
+
+<ion-content>
+  <ng-template #loading>
+    <ion-row class="mt-64">
+      <ion-col class="text-center">
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  <ion-grid *ngIf="(prescriptionList$ | async); else loading">
+    <ion-row class="card" *ngFor="let presc of prescriptionList$ |async">
+      <ion-col class="flex ion-align-items-center" size="3">
+        <img [src]="presc.prescriptionImage" alt="">
+      </ion-col>
+      <ion-col class="flex flex-column" size="9">
+        <ion-text *ngIf="presc.description" class="h2">
+          {{presc.description | slice:0:40}}
+        </ion-text>
+        <ion-text *ngIf="!presc.description" class="h6">
+          Description: <b>Not Available</b>
+        </ion-text>
+        <ion-text>
+          {{presc.createdAt | date}}
+        </ion-text>
+        <ion-button>
+          Refill
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

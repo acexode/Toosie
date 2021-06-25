@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { PrescriptionService } from './../../core/service/prescription/prescription.service';
 import { Component, OnInit } from '@angular/core';
 import { Platform, ActionSheetController, ToastController } from '@ionic/angular';
@@ -12,11 +13,13 @@ export class PrescriptionPage implements OnInit {
   pharmacyTool = [
     {
       text: 'Pill Reminder',
-      icon: 'pill-reminder'
+      icon: 'pill-reminder',
+      path: '/reminder'
   },
   {
     text: 'Prescription History',
-    icon: 'prescription-history'
+    icon: 'prescription-history',
+    path: '/history'
   },
   ];
   prescription = [
@@ -41,7 +44,8 @@ constructor(
   private plt: Platform,
   private actionSheetCtrl: ActionSheetController,
   private prescriptionS: PrescriptionService,
-  public toastController: ToastController
+  public toastController: ToastController,
+  public router: Router,
 ) { }
   ngOnInit() {
 
@@ -137,6 +141,9 @@ constructor(
 
     const blob = new Blob(byteArrays, { type: contentType });
     return blob;
+  }
+  navigate(path){
+    this.router.navigate(['menu/home/prescription/'+path]);
   }
 
 
