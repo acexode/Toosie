@@ -1,0 +1,90 @@
+ion-content{
+    --background: #f2f2f2
+}
+.c-card{
+    box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+    background: #fff;
+    height: 300px;
+    max-height: 300px;
+    padding: 5px 10px;
+}
+.title-container{
+    height: 90px;
+    text-overflow: ellipsis;
+    p{
+        color: #000;
+    }
+}
+.img-wrapper {
+    // min-height: 200px;
+    width: 90%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.border{
+    border-right: 1.5px solid #f2f2f2;
+}
+ion-segment{
+    --background: #fff;
+    --text-transform:none
+}
+.spinner{
+    color: #34C3EC;
+}
+.bg-white{
+    background: #fff;
+    padding: 8px;
+}
+.addToCart {
+    width: 100%;
+    height: 53 !important;
+    font-size: small;
+    color: #fff;
+    text-align: center;
+    --background: #0281B2;
+    text-transform: none;
+}
+.favorite-items {
+    margin: 20px 5px;
+    padding: 0 5px;
+    
+    ion-col {
+        
+
+        
+        img {
+            width: 100%;
+            height: 120px;
+            margin-top: 10px;
+        }
+
+        p {
+            margin-top: 5px;
+            margin-bottom: 0;
+            padding-left: 10px;
+            color: #000;
+        }
+
+        h6 {
+            margin-top: 5px;
+            margin-bottom: 0;
+            height: 60px;
+            color: #000;
+            padding-left: 10px;
+        }
+        .heart{
+            position: absolute;
+            font-size: 18px;
+            top: 10px;
+            right: 10px;
+        }
+    }
+}
+
+.padding-left0 {
+    padding-left: 0 !important;
+}
+
+// .padding-right0 {
+//     padding-right: 0 !important;
+// }

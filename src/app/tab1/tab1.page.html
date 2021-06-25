@@ -1,0 +1,171 @@
+<app-header title="home" [search]="false"></app-header>
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon name="align-left" color="dark" ></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+      <ion-button routerLink="/menu/home/cart" class="filter">
+        <ion-icon name="cart-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content  class="ion-padding">
+  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" id="refresher">
+    <ion-refresher-content
+    pullingText="Pull to refresh"
+    refreshingSpinner="circles"
+    ></ion-refresher-content>
+  </ion-refresher>
+  <div class="row jumbo">
+    <span>
+      What can we help you with today?
+    </span>
+    <ion-searchbar (ionFocus)="presentModal()" placeholder="Find products, coupons & services" ></ion-searchbar>
+  </div>
+  <div class="row jumbo2">
+    <h2>
+      Upload Prescription
+    </h2>
+    <span>
+      Upload Prescription and we do the rest
+    </span>
+    <ion-button (click)="navigate('upload')">
+      Upload
+      <ion-icon class="ml-8" name="upload"></ion-icon>
+    </ion-button>
+    
+  </div>
+  <ion-row class="mt-28">
+    <ion-col>
+      <span class="cat-span">
+        Shop By Category
+      </span>
+    </ion-col>
+    <ion-col class="flex ion-justify-content-end p-0">
+      <ion-button (click)="navigate('categories')" fill="clear" class="see-all p-0">
+        See All
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid class="mt-5">
+    <ion-row>
+      <ion-col size="4" *ngFor="let icon of categories">
+        <div (click)="shop(icon.title)" class="flex flex-column ion-justify-content-center ion-text-center dark">
+          <div >
+            <img class="img" [src]="icon.img" alt="">
+          </div>
+          <h5 class="cat-name">{{icon.title}}</h5>
+        </div>
+      </ion-col>
+      
+    </ion-row>
+    <ion-row >
+      <ion-col size="12" class="row jumbo2 pb-16">
+        <h2>
+          New same day delivery
+        </h2>
+        <span>
+          In under 2 hours
+        </span>
+      </ion-col>
+    </ion-row>  
+    <ion-row class="mt-32" >
+      <ion-col>
+        <ion-text color="dark" class="cat-span dark">
+          Popular Products
+        </ion-text>
+      </ion-col>
+      <ion-col class="flex ion-justify-content-end">
+        <span (click)="navigate('shop')" class="see-all">
+          See All
+        </span>
+      </ion-col>
+      <ion-col size="12">
+        <app-slide-item [items]="bannerList" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+
+      </ion-col>
+ 
+    </ion-row>  
+    <ion-row class="shadow mt-32" >
+      <ion-col size="9" class="   pb-16">
+        <h6 class="earn">
+          Refer & Earn
+        </h6>
+        <small>
+          Invite friends to increase wallet balance.
+        </small>
+      </ion-col>
+      <ion-col class="flex ion-align-items-center" size="3">
+        <ion-button class="knowMore mt-8">
+          Know More
+         
+        </ion-button>
+      </ion-col>
+    </ion-row>  
+    <ion-row class="mt-32" >
+      <ion-col>
+        <ion-text color="dark" class="cat-span dark">
+          Explore
+        </ion-text>
+      </ion-col>
+      <ion-col class="flex ion-justify-content-end">
+        <span (click)="navigate('shop')" class="see-all">
+          See All
+        </span>
+      </ion-col>
+      <ion-col size="12">
+        <app-slide-item [items]="explore" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+
+      </ion-col>
+ 
+    </ion-row> 
+   
+    
+    <ion-row >
+      <ion-col class="pl-16" size="12" >
+        <ion-text color="dark" class="cat-span dark">
+          Brands
+        </ion-text>
+      </ion-col>
+      <ion-col >
+        <app-brands [brands]="brand$" preview="2" [pager]="showButton" [button]="showButton"></app-brands>
+      </ion-col>
+    </ion-row>
+    <ion-row class="mb-32">
+      <ion-col class="pl-16" size="12" >
+        <ion-text color="dark" class="cat-span dark">
+          Health Expert
+        </ion-text>
+        
+      </ion-col>
+      <ion-col class="ion-no-padding" size="6">
+        <ion-card>
+          <img src="assets/icon/covid1.png" />
+          <ion-card-header>
+            <ion-card-title>What to while covid</ion-card-title>
+          </ion-card-header>
+         
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-no-padding" size="6">
+        <ion-card>
+          <img src="assets/icon/covid2.png" />
+          <ion-card-header>
+            <ion-card-title>What to while COVID?</ion-card-title>
+          </ion-card-header>
+         
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

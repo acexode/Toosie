@@ -1,0 +1,65 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+/* App custom theme scss */
+@import './theme/theme';
+
+ion-toolbar {
+    --background: #f4f5f8;
+    text-align: center;
+    text-transform: none;
+    // --ion-color-base: transparent !important;
+ }
+ .header-md::after {
+     background: #f2f2f2 !important;
+     height: 1px;
+ }
+ion-content, ion-tabs, ion-segment, ion-header{
+    --color: #777777;
+    font-family: $alt-font;
+    text-transform: none !important;
+ }
+ ion-segment-button {
+    text-transform:none;
+  }
+ .success-btn{
+    --background: #34C3EC
+}
+.segment-button-checked {
+    --background: #34C3EC !important;
+    --indicator-color: #34C3EC;
+   color: #777777
+}
+.tab-selected {
+    color: #34C3EC !important;
+}
+.toastCss{
+    color: #fff;
+    --background: #0281B2 !important;
+    // background: #0281B2 ;
+    --border-color: #0281B2;
+    text-align: center;
+}

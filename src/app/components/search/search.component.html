@@ -1,0 +1,28 @@
+<ion-header [translucent]="true" no-shadow no-border>
+  <ion-toolbar>
+    <ion-buttons (click)="dismiss()" class="ml-8" slot="start">
+      <ion-icon name="arrow-left"></ion-icon>
+    </ion-buttons>
+   
+
+  </ion-toolbar>
+</ion-header>
+<ion-content  class="ion-no-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="text-center" size="12">
+        <ion-searchbar class="mb-16 ion-text-justify" (keyup)="onChange($event)" #searchProduct placeholder="Find products, coupons & services" ></ion-searchbar>
+        <ion-spinner *ngIf="showSpinner"  name="crescent"></ion-spinner>
+
+      </ion-col>
+    </ion-row>
+    <app-items [items]="items"></app-items>
+    <ion-row class="mt-64  text-center" *ngIf="searchResult?.length === 0">
+      <ion-col>
+        <ion-text>
+          Sorry, No result found (~ ~)
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,64 @@
+<app-header title="Cart"></app-header>
+
+<ion-content fullscreen="true">
+  <ion-row *ngFor="let list of lists" class="card">
+   <ion-col class="img-col" size="4">
+    <a style="min-height: 150px" class="block-center flex pt-20">
+      <img class="block-center" width="220" height="100" [src]="list?.resourceImages[0]" >  
+    </a>
+   </ion-col>
+   <ion-col size="8" class="details-col pl-10">
+    <a  class="title mb-4 ellipsis-2">{{list.title}} </a>
+    <a  class="text-display-4 mb-4 ellipsis-2">Type: <span>{{list.type ? list.type : 'Not available'}}</span> </a>
+    <a  class="text-display-4 mb-4 ellipsis-2">Brand: <span>{{list.brand ? list.brand : 'Not available'}}</span> </a>
+    <div class="pt-16 mb-4">
+      <span class="price">
+        ₦ {{list.currentPrice}}
+      </span>
+      <span class="price strike">
+        ₦ {{list.actualPrice}}
+      </span>
+    </div>
+   </ion-col>
+   <ion-col size="12" class="flex ion-justify-content-between pl-10 border-top">
+    <div class="left">
+      <ion-button class="ps" fill="clear">
+        <ion-icon name="heart-f"></ion-icon>
+      </ion-button>
+      <ion-button (click)="removeItem(list)" class="ps" fill="clear">
+        <ion-icon class="pr-8" name="trash"></ion-icon>
+        Remove
+      </ion-button>
+    </div>
+    <div class="right">
+        <ion-button (click)="incrementDecrement(list, 'decrement')" class="ps" fill="clear">
+          <ion-icon name="minus-circle"></ion-icon>
+        </ion-button>       
+        <ion-button class="ps" fill="clear">
+          <ion-label>{{list.quantity}}</ion-label>
+        </ion-button>
+        <ion-button (click)="incrementDecrement(list, 'increment')" class="ps" fill="clear">
+          <ion-icon name="plus-circle"></ion-icon>
+        </ion-button>
+        
+       
+    </div>
+   </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="lists.length" class="my-16">
+    <ion-col size="12">
+      <ion-button expand="block" class="main-button success-btn" routerLink="/checkout" routerDirection="forward">
+        Checkout</ion-button>
+
+    </ion-col>
+
+  </ion-row>
+  <ion-row style="min-height: 100%;" *ngIf="lists.length === 0" class="flex ion-align-items-center">
+    <ion-col class="text-center" size="12">
+      <h1>OOPS !!</h1>
+      <ion-text>No Item in cart</ion-text>
+    </ion-col>
+
+  </ion-row>
+</ion-content>

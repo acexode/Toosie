@@ -1,0 +1,43 @@
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .btn {
+    border: 1px dashed rgb(103, 233, 183);
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  .icon-container{
+      background: rgb(230, 250, 242);
+      padding: 10px;
+      border-radius: 50%;
+      ion-icon{
+          font-size: 28px;
+          color: rgb(103, 233, 183);
+      }
+  }
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  .border-b{
+      border-bottom: 1px solid rgb(214, 209, 209);
+      margin-bottom: 15px;
+  }
+  ion-textarea{
+      background: #E2E3E5;
+      color: #000;
+      border-radius: 3px;
+  }
+  .alert-title{
+      text-align: center;
+  }

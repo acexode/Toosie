@@ -1,0 +1,51 @@
+<ion-header [translucent]="true" no-shadow no-border>
+  <ion-toolbar>
+    <ion-buttons (click)="dismiss()" class="ml-8" slot="start">
+      <ion-icon name="arrow-left"></ion-icon>
+    </ion-buttons>
+   
+
+  </ion-toolbar>
+</ion-header>
+<ion-content  class="ion-no-padding">
+  <ion-grid>    
+    <ion-row>
+      <ion-col size="12">
+        <form (ngSubmit)="saveReminder()" [formGroup]="reminderForm" class="form-container pt-16">
+          <ion-item>
+            <ion-label position="floating">Remind me to</ion-label>
+            <ion-input type="text" formControlName="remindTo"></ion-input>
+          </ion-item>
+          <div *ngIf="(remindTo.dirty || remindTo.touched) && remindTo.errors" class="errors">
+            <span *ngIf="remindTo.errors?.required">This field is required</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-input type="text" formControlName="description"></ion-input>
+          </ion-item>
+          <div *ngIf="(description.dirty || description.touched) && description.errors" class="errors">
+            <span *ngIf="description.errors?.required">Description is required</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Time</ion-label>
+            <ion-input type="time" formControlName="time"></ion-input>
+          </ion-item>
+          <div *ngIf="(time.dirty || time.touched) && time.errors" class="errors">
+            <span *ngIf="time.errors?.required">time is required</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Date</ion-label>
+            <ion-input type="date" formControlName="date"></ion-input>
+          </ion-item>
+          <div *ngIf="(date.dirty || date.touched) && date.errors" class="errors">
+            <span *ngIf="date.errors?.required">Date is required</span>
+          </div>
+          <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!reminderForm.valid">Update</ion-button>
+    
+         
+        </form>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,16 @@
+:root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+  ion-header{
+      --border-bottom: 1px solid #f2f2f2;
+  }
+  img{
+      width: 80px;
+      height: 80px;
+  }
+  ion-button{
+      --box-shadow: none;
+      text-transform: none;
+
+  }

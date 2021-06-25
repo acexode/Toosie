@@ -1,0 +1,16 @@
+<ion-grid   scroll-y="false">
+  <ion-slides  [pager]="pager" [options]="slideOpts" >
+
+    <ion-slide class="slide-container flex ion-align-items-center" *ngFor="let item of brands | async">
+      <div class="slide mr-8 pt-32">
+        <img  [src]="item.brandImage"/>
+        
+      </div>
+    </ion-slide>
+
+    
+    
+
+  </ion-slides>
+</ion-grid>
+

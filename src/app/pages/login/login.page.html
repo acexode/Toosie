@@ -1,0 +1,46 @@
+<!-- <ion-header no-border>
+  <ion-toolbar>
+    <ion-title>
+      <ion-button fill="clear" color="dark" type="back">
+        <ion-icon  transparent name="arrow-left"></ion-icon>
+      </ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container mt-32">
+    <img src="assets/icon/logo-big.png" alt="" class="logo">
+    <h6>Fill the following instructions to login</h6>
+    <form (ngSubmit)="login()" [formGroup]="credentials" class="form-container pt-16">
+      <h1 class="ion-text-center primary-text">Login</h1>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email"  formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email is required</span>
+        <span *ngIf="email.errors?.email">Email is invalid</span>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Password is required</span>
+        <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+      </div>
+
+      <ion-button expand="block" class="login mt-32" type="submit" [disabled]="!credentials.valid">Log in</ion-button>
+
+      <div class="flex sign-up">
+        <ion-label class="pt-11">
+          Don't have an account?
+        </ion-label> 
+        <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<!-- <ion-button expand="block" routerLink="/menu/home">Login</ion-button> -->

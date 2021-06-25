@@ -1,0 +1,80 @@
+ion-toolbar {
+    --background: #f4f8f5;
+    --ion-color-base: transparent !important;
+ }
+ .header-md::after {
+     background: none !important;
+ }
+ .login{
+     --background: #34C3EC
+ }
+ .primary-text{
+	 color: #0281B2;
+ }
+.container::after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 85%;
+	background-image: url(../../../assets/icon/path.png);
+	background-position: top center;
+	background-repeat: no-repeat;
+	border-bottom-left-radius: 40%;
+	border-bottom-right-radius: 40%;
+}
+.form-container{
+	width: 311px;
+	height: 431px;
+	background: #fff;
+	box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+	position: absolute;
+	z-index: 10;
+	padding: 20px 16px;
+	top: 25%;
+	left: 8%;
+}
+.login{
+	--background: #0281B2;
+}
+h6{
+	text-align: center;
+	color: #fff;
+	margin: 20px 0px;
+	position: absolute;
+    z-index: 10;
+	top: 15%;
+}
+
+.logo{
+	width: 40%;
+	position: absolute;
+	top: 6%;
+	z-index: 10;
+	margin: 0 20%;
+}
+ signup-page {
+	.signup-content
+	{
+		.legal-stuff
+		{
+			// color: $white-d;
+			text-align: center;
+			margin: 10px 12px;
+
+			.legal-action
+			{
+				font-weight: 500;
+				// color: $theme-color-2;
+			}
+		}
+	}
+}
+.errors {
+    font-size: small;
+    color: rgb(223, 65, 65);
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

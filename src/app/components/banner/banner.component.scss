@@ -1,0 +1,15 @@
+ion-slides{
+    --background: #000;
+}
+ion-slide{
+    // height: 270px;
+}
+.slide{
+    position: relative;
+}
+.round-btn{
+    --border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    right: 5%;
+}
