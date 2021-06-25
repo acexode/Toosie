@@ -8,6 +8,7 @@ import { RequestService } from '../../request/request.service';
 })
 export class BlogService {
   blogStore: BehaviorSubject<any> = new BehaviorSubject([]);
+  singleBlog: BehaviorSubject<any> = new BehaviorSubject({});
   constructor(private reqS: RequestService) {
     this.blogListing();
   }

@@ -148,7 +148,7 @@
         </ion-text>
         
       </ion-col>
-      <ion-col *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
+      <ion-col (click)="navigate('blog')" *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
         <ion-card>
           <img [src]="blog.blogImage" />
           <ion-card-header>
