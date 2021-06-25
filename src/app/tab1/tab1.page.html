@@ -148,24 +148,16 @@
         </ion-text>
         
       </ion-col>
-      <ion-col class="ion-no-padding" size="6">
+      <ion-col *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
         <ion-card>
-          <img src="assets/icon/covid1.png" />
+          <img [src]="blog.blogImage" />
           <ion-card-header>
-            <ion-card-title>What to while covid</ion-card-title>
+            <ion-card-title>{{blog.blogTitle}}</ion-card-title>
           </ion-card-header>
          
         </ion-card>
       </ion-col>
-      <ion-col class="ion-no-padding" size="6">
-        <ion-card>
-          <img src="assets/icon/covid2.png" />
-          <ion-card-header>
-            <ion-card-title>What to while COVID?</ion-card-title>
-          </ion-card-header>
-         
-        </ion-card>
-      </ion-col>
+     
     </ion-row>
   </ion-grid>
 </ion-content>

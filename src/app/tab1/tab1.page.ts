@@ -1,3 +1,4 @@
+import { BlogService } from './../core/service/blog/blog.service';
 import { InventoryService } from './../core/service/inventory/inventory.service';
 import { SearchComponent } from './../components/search/search.component';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +16,7 @@ export class Tab1Page implements OnInit {
   brand$: Observable<any>;
   popular$: Observable<any>;
   latest$: Observable<any>;
+  blogs$: Observable<any>;
   categories =  [
     {
       img: 'assets/icon/baby.png',
@@ -72,94 +74,17 @@ export class Tab1Page implements OnInit {
     //   path: ''
     // },
   ];
-  explore =  [
-    {
-      img: 'assets/icon/tablet.png',
-      title: 'Men Shaving Stick',
-      price: 2500,
-      discount: 20
-    },
-    {
-      img: 'assets/icon/beauty.png',
-      title: 'Beauty',
-      price: 2500,
-      discount: 20
-    },
-    {
-      img: 'assets/icon/vitamin.png',
-      title: 'Vitamins',
-      price: 2500,
-      discount: 20
-    },
-    {
-      img: 'assets/icon/grocery.png',
-      title: 'Grocery',
-      price: 2500,
-      discount: 20
-    },
-    {
-      img: 'assets/icon/household.png',
-      title: 'Household',
-      price: 2500,
-      discount: 20
-    },
-  ];
-  bannerList = [
-    {
-      img: 'assets/icon/banner3.jpg',
-      title: 'Men Shaving Stick',
-      price: 2500,
-      discount: 20
-    },
-    {
-      img: 'assets/icon/banner1.png',
-      title: 'Adel 18 glucorect drop',
-      price: 900,
-      discount: 10
-    },
-    {
-      img: 'assets/icon/banner2.png',
-      title: 'Cough syrup',
-      price: 3000,
-      discount: 5
-    },
-    {
-      img: 'assets/icon/home-bg3.jpg',
-      title: 'Neuroton 6 AMP',
-      price: 4000,
-      discount: 8
-    },
-    {
-      img: 'assets/icon/home-bg.jpg',
-      title: 'Sparkle Shampoo And Conditioner',
-      price: 4000,
-      discount: 8
-    }
-  ];
-  offers = [
-    {
-      img: 'assets/icon/product3.jpg',
-      title: ''
-    },
-    {
-      img: 'assets/icon/product1.jpg',
-      title: ''
-    },
-    {
-      img: 'assets/icon/product.jpg',
-      title: ''
-    },
-    {
-      img: 'assets/icon/product2.jpg',
-      title: ''
-    }
-  ];
 
-  constructor(private router: Router, public modalController: ModalController, private invS: InventoryService) {}
+
+
+  constructor(private router: Router, public modalController: ModalController,
+    private invS: InventoryService, private blogS: BlogService) {}
   ngOnInit() {
     this.brand$ = this.invS.allBrands();
     this.popular$ = this.invS.popularStore;
     this.latest$ = this.invS.latestStore;
+    this.blogs$ = this.blogS.blogStore;
+    console.log(this.blogs$);
   }
   shop(q){
     this.router.navigate(['menu/home/shop', {category: q}]);
