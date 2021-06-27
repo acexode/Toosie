@@ -1,8 +1,12 @@
+import { ToastController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LocalNotification, LocalNotificationActionPerformed, LocalNotifications } from '@capacitor/local-notifications';
+import { Storage } from '@capacitor/storage';
+import { AddRefillService } from 'src/app/core/service/add-refill/add-refill.service';
+const PILL_REMINDER = 'pill-reminder';
 @Component({
   selector: 'app-pill-reminder-modal',
   templateUrl: './pill-reminder-modal.component.html',
@@ -10,7 +14,11 @@ import { LocalNotification, LocalNotificationActionPerformed, LocalNotifications
 })
 export class PillReminderModalComponent implements OnInit {
   reminderForm: FormGroup;
-  constructor(private fb: FormBuilder, public modalController: ModalController,private alertCtrl: AlertController) { }
+  constructor(private fb: FormBuilder,
+    public modalController: ModalController,
+    public toastController: ToastController,
+    public refillS: AddRefillService,
+    private alertCtrl: AlertController) { }
 
   async ngOnInit() {
     this.reminderForm = this.fb.group({
@@ -23,29 +31,14 @@ export class PillReminderModalComponent implements OnInit {
     LocalNotifications.registerActionTypes({
       types: [
         {
-          id: 'CHAT_MSG',
-          actions: [
-            {
-              id: 'view',
-              title: 'Open Chat'
-            },
-            {
-              id: 'remove',
-              title: 'Dismiss',
-              destructive: true
-            },
-            {
-              id: 'respond',
-              title: 'Respond',
-              input: true
-            }
-          ]
+          id: 'PILL_REMINDER',
+
         }
       ]
     });
      // Received when notification is executed at the scheduled time
      LocalNotifications.addListener('localNotificationReceived', (notification: LocalNotification) => {
-      this.presentAlert(`Received: ${notification.title}`, `Custom Data: ${JSON.stringify(notification.extra)}`);
+      this.presentAlert(`Received: ${notification.title}`, `${notification.extra}`);
     });
 
     // Received when a special action button is clicked or notification is tapped
@@ -68,7 +61,7 @@ export class PillReminderModalComponent implements OnInit {
           schedule: { at: new Date(scheduleTime) },
           sound: 'fanfare.wav',
           smallIcon: 'ic_stat_ionic_logo', // Android only, overrides capacitor.config setting!
-          actionTypeId: 'CHAT_MSG',
+          actionTypeId: 'PILL_REMINDER',
           extra: {
             custom: 'My custom data object'
           },
@@ -78,7 +71,18 @@ export class PillReminderModalComponent implements OnInit {
         }
       ]
     });
-
+    this.presentToast('Reminder set successfully');
+    this.storeReminder(values);
+    this.modalController.dismiss();
+  }
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      cssClass: 'toastCss',
+      position: 'top'
+    });
+    toast.present();
   }
   async presentAlert(header, message) {
     const alert = await this.alertCtrl.create({
@@ -90,7 +94,19 @@ export class PillReminderModalComponent implements OnInit {
     await alert.present();
   }
 
+  async storeReminder(item) {
+    const reminder = await Storage.get({ key: PILL_REMINDER });
+    if (reminder && reminder.value) {
+      const parseReminder = JSON.parse(reminder.value);
+      this.refillS.reminderStore.next(parseReminder);
+      Storage.set({key: PILL_REMINDER, value: JSON.stringify(parseReminder)});
 
+    } else {
+      Storage.set({key: PILL_REMINDER, value: JSON.stringify([item])});
+      this.refillS.reminderStore.next([item]);
+      return true;
+    }
+  }
   // Easy access for form fields
   get remindTo() {
     return this.reminderForm.get('remindTo');

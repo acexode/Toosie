@@ -46,14 +46,7 @@
    </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="lists.length" class="my-16">
-    <ion-col size="12">
-      <ion-button expand="block" class="main-button success-btn" routerLink="/checkout" routerDirection="forward">
-        Checkout</ion-button>
-
-    </ion-col>
-
-  </ion-row>
+  
   <ion-row style="min-height: 100%;" *ngIf="lists.length === 0" class="flex ion-align-items-center">
     <ion-col class="text-center" size="12">
       <h1>OOPS !!</h1>
@@ -62,3 +55,30 @@
 
   </ion-row>
 </ion-content>
+<ion-footer *ngIf="lists.length">
+  <ion-row  class="my-16">
+    <ion-col size="9">
+      <ion-text>Total</ion-text>
+    </ion-col>
+    <ion-col size="3">
+      <ion-text>₦ {{total}}</ion-text>
+    </ion-col>
+    <ion-col size="9">
+      <ion-text>Discount</ion-text>
+    </ion-col>
+    <ion-col size="3">
+      <ion-text>₦ {{discount}}</ion-text>
+    </ion-col>
+    <ion-col class="border-t" size="9">
+      <ion-text><b>Grand Total</b></ion-text>
+    </ion-col>
+    <ion-col class="border-t" size="3">
+      <ion-text><b>₦ {{total - discount}}</b></ion-text>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button expand="block" class="main-button success-btn" routerLink="/checkout" routerDirection="forward">
+        Checkout</ion-button>
+    </ion-col>
+
+  </ion-row>
+</ion-footer>

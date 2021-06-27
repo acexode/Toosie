@@ -3,7 +3,9 @@ import { PrescriptionService } from './../../core/service/prescription/prescript
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
-
+import { Storage } from '@capacitor/storage';
+import { AddRefillService } from 'src/app/core/service/add-refill/add-refill.service';
+const PILL_REMINDER = 'pill-reminder';
 @Component({
   selector: 'app-pill-reminder',
   templateUrl: './pill-reminder.page.html',
@@ -20,6 +22,7 @@ export class PillReminderPage implements OnInit {
 
   ngOnInit() {
     this.prescS.getReminderList().then(e =>{
+      this.reminderList = JSON.parse(e);
       console.log(e);
     });
   }

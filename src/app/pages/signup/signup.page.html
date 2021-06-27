@@ -15,11 +15,11 @@
     <form (ngSubmit)="signup()" [formGroup]="credentials" class="form-container pt-16">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input type="name" formControlName="name"></ion-input>
+        <ion-input type="text" formControlName="fullName"></ion-input>
       </ion-item>
-      <div *ngIf="(name.dirty || name.touched) && name.errors" class="errors">
-        <span *ngIf="name.errors?.required">Name is required</span>
-        <span *ngIf="name.errors?.email">Name is invalid</span>
+      <div *ngIf="(fullName.dirty || fullName.touched) && fullName.errors" class="errors">
+        <span *ngIf="fullName.errors?.required">Full Name is required</span>
+        <span *ngIf="fullName.errors?.email">Full Name is invalid</span>
       </div>
       <ion-item>
         <ion-label position="floating">Email</ion-label>

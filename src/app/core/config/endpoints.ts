@@ -28,6 +28,11 @@ export const prescriptionEndpoints = {
     newPrecription: baseEndpoints.auth + '/prescription/new',
     usersPrescription: baseEndpoints.auth + '/prescription/mine/all'
 };
+export const refillEndpoints = {
+    addRefill: baseEndpoints.auth + '/refill/new',
+    removeRefill: baseEndpoints.auth + '/refill/close',
+    allRefill: baseEndpoints.auth + '/refill/mine/'
+};
 export const wishListEndpoints = {
     addWish: baseEndpoints.auth + '/wishlist/new',
     removeWish: baseEndpoints.auth + '/wishlist/remove',
@@ -41,5 +46,6 @@ export const inventoryEndpoints = {
     searchInventory: baseEndpoints.inventory + '/product/search',
     popular: baseEndpoints.inventory + '/product/popular',
     latest: baseEndpoints.inventory + '/product/latest',
-    saveOrder: baseEndpoints.inventory + '/order/save'
+    saveOrder: baseEndpoints.inventory + '/order/save',
+    myOrders: baseEndpoints.inventory + '/order/mine/'
 };

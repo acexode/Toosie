@@ -38,6 +38,10 @@ const routes: Routes = [
   },  {
     path: 'blog',
     loadChildren: () => import('./pages/blog/blog.module').then( m => m.BlogPageModule)
+  },
+  {
+    path: 'manage-refill',
+    loadChildren: () => import('./pages/manage-refill/manage-refill.module').then( m => m.ManageRefillPageModule)
   }
 
 

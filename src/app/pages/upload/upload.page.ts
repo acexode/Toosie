@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { PrescriptionService } from './../../core/service/prescription/prescription.service';
@@ -10,8 +11,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class UploadPage implements OnInit {
   uploadForm: FormGroup;
-  file_text = 'Upload a photo of your prescription or product'
-  constructor(private formBuilder: FormBuilder, 
+  file_text = 'Upload a photo of your prescription or product';
+  constructor(private formBuilder: FormBuilder,
     private pService: PrescriptionService,
     private loadingController: LoadingController,
     private alertController: AlertController,
@@ -27,8 +28,8 @@ export class UploadPage implements OnInit {
   onFileSelect(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file)
-      this.file_text = file.name
+      console.log(file);
+      this.file_text = file.name;
       this.uploadForm.get('prescriptionImage').setValue(file);
     }
   }
@@ -41,26 +42,25 @@ export class UploadPage implements OnInit {
     this.pService.uploadPrescription(formData).subscribe(
       async (res) =>{
         await loading.dismiss();
-       this.displayAlert('Prescription Uploaded', 'Your order has been received, we will get back to you shortly', true)
+       this.displayAlert('Prescription Uploaded', 'Your order has been received, we will get back to you shortly', true);
       },
       (err) => {
-        this.displayAlert('Upload Failed', 'unable to upload to prescription, try again', false)
+        this.displayAlert('Upload Failed', 'unable to upload to prescription, try again', false);
       }
     );
   }
 
   async displayAlert(header, msg, uploaded){
-    console.log(header)
+    console.log(header);
     const alert = await this.alertController.create({
-      header: header,
+      header,
       message: msg,
       buttons: [{
         text: 'OK',
         cssClass: 'success-btn',
         handler: (blah) => {
           if(uploaded){
-            
-            this.router.navigate(['menu/home'])
+            this.router.navigate(['menu/home']);
           }
         }
       },],

@@ -5,7 +5,7 @@
     <ion-row>
       <ion-col *ngFor="let blog of blogs$ | async" class="12">
         <ion-card>
-          <img [src]="blog.blogImage" alt="">
+          <img [src]="blog.blogImage" style="width: 100%;" alt="">
           <ion-card-header class="ion-inherit-color ios hydrated">
             <ion-card-subtitle role="heading" aria-level="3" class="ion-inherit-color ios hydrated">Author: {{blog.blogAuthor.email }}</ion-card-subtitle>
             <ion-card-title role="heading" aria-level="2" class="ion-inherit-color ios hydrated">{{blog.blogaTitle}}</ion-card-title>

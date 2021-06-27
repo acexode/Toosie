@@ -1,0 +1,74 @@
+<app-header title="My Orders"></app-header>
+
+<ion-content>
+  <ng-template #openModal>
+    <ion-row style="height: 100%;">
+      <ion-col  class="flex flex-column ion-justify-content-center ion-align-items-center">
+        <ion-icon class="cal" name="cart"></ion-icon>
+        <ion-text class="mb-10">
+          No orders found
+        </ion-text>
+        <!-- <ion-button (click)="presentModal()" fill="outline" class="add-reminder">
+          Add New
+        </ion-button> -->
+      </ion-col>
+    </ion-row>
+  </ng-template>
+  <ion-grid>
+    <ion-row *ngIf="refillList.length" class="favorite-items flex flex-column ion-justify-content-between">
+      <ion-col size="12" *ngFor="let p of refillList" class="ion-text-left">
+        <div class="c-card">
+          <ion-row>
+            <ion-col size="10">
+              <div class="title-container">
+                <h5>Order Status</h5>
+                <span class="success">{{p.isActive ? 'Active': ''}}</span>
+                <span >Order No: {{p.id | slice:0:16}}</span>
+                <span >Pat Name: {{p.user.fullName}}</span>
+                <span >Start Date: {{p.startDate | date}}</span>
+                <span >Refill Date: {{p.nextRefillDate | date}}</span>
+              </div>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button (click) ="removeRefill(p.id)" fill="clear" >
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          
+          
+          
+        </div>
+      </ion-col>
+    
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="orderList.length; else openModal" >
+   
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Orders</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let list of orderList" class="flex mt-16 px-8">     
+          
+       
+        <ion-label class="ml-5">
+          <h6>{{list.itemName}}</h6>
+          <small>
+           Price:  {{list.cost}}
+          </small>
+          <small>
+           Quantity:  {{list.quantity}}
+          </small>
+        </ion-label>
+        <ion-button (click)="presentModal(list)" class="success-btn">Refill</ion-button>
+        
+      </ion-item>
+  
+      
+    </ion-list>
+   
+  </ion-grid>
+</ion-content>
+

@@ -9,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartPage implements OnInit {
   lists = [];
-
+  total = 0;
+  grandTotal = 0;
+  discount= 0;
   constructor( private modalController: ModalController, private orderS: OrdersService) { }
 
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
       this.lists = e;
+      this.lists.forEach(i =>{
+        this.total += i.actualPrice;
+        this.discount += (i.discountPercent/100) * i.actualPrice;
+      });
     });
   }
   removeItem(item){

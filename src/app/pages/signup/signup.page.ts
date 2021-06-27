@@ -20,7 +20,7 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      name: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -33,30 +33,30 @@ export class SignupPage implements OnInit {
     this.authService.signup(this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
-        this.router.navigate(['menu/home'])
+        this.router.navigate(['menu/home']);
       },
       async (res) => {
-        console.log(res)
+        console.log(res);
         await loading.dismiss();
         const alert = await this.alertController.create({
           header: res.error.message,
           message: res.error.error,
           buttons: ['OK'],
         });
- 
+
         await alert.present();
       }
     );
   }
 
   // Easy access for form fields
-  get name() {
-    return this.credentials.get('name');
+  get fullName() {
+    return this.credentials.get('fullName');
   }
   get email() {
     return this.credentials.get('email');
   }
-  
+
   get password() {
     return this.credentials.get('password');
   }
