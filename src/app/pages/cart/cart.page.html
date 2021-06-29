@@ -1,6 +1,6 @@
-<app-header title="Cart"></app-header>
+<app-header [search]="true" [cart]="false" title="Cart"></app-header>
 
-<ion-content fullscreen="true">
+<ion-content>
   <ion-row *ngFor="let list of lists" class="card">
    <ion-col class="img-col" size="4">
     <a style="min-height: 150px" class="block-center flex pt-20">
