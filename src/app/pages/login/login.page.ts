@@ -11,6 +11,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   credentials: FormGroup;
+  hide = true;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
@@ -31,17 +32,17 @@ export class LoginPage implements OnInit {
     this.authService.login(this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
-        this.router.navigate(['menu/home'])
+        this.router.navigate(['menu/home']);
       },
       async (res) => {
-        console.log(res)
+        console.log(res);
         await loading.dismiss();
         const alert = await this.alertController.create({
           header: 'Login failed',
           message: res.error.error,
           buttons: ['OK'],
         });
- 
+
         await alert.present();
       }
     );
@@ -51,7 +52,7 @@ export class LoginPage implements OnInit {
   get email() {
     return this.credentials.get('email');
   }
-  
+
   get password() {
     return this.credentials.get('password');
   }

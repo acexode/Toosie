@@ -71,11 +71,19 @@ ion-row{
     margin-bottom: 1px;
     // background: #fff;
 }
-ion-content {
+ion-content, ion-footer {
     --padding-top: 16px;
     --padding-bottom: 16px;
     --background: #f2f2f2;
     
+}
+ion-footer{
+    margin-top: 9px;
+    background: #fff;
+    color: #000;
+}
+.border-t{
+    border-top: 1px solid #999;
 }
 
 

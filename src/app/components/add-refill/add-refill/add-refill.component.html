@@ -1,0 +1,75 @@
+<ion-header [translucent]="true" no-shadow no-border>
+  <ion-toolbar>
+    <ion-buttons (click)="dismiss()" class="ml-8" slot="start">
+      <ion-icon name="arrow-left"></ion-icon>
+    </ion-buttons>
+   <ion-title>
+     {{itemName}}
+   </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content  class="ion-no-padding">
+  <ion-grid>    
+    <ion-row>
+      <ion-col size="12">
+        <form (ngSubmit)="saveRefill()" [formGroup]="refillForm" class="form-container pt-16">
+          <ion-item>
+            <ion-label position="stacked">Item</ion-label>
+            <ion-input [disabled]="true" type="text" formControlName="inventoryId"></ion-input>
+          </ion-item>
+          <div *ngIf="(inventoryId.dirty || inventoryId.touched) && inventoryId.errors" class="errors">
+            <span *ngIf="inventoryId.errors?.required">This field is required</span>
+          </div>
+          <ion-item>
+            <ion-label class="mb-10" position="stacked">Attach more medical precriptions</ion-label>
+            <div class="card upload-btn-wrapper mb-10">
+              <div class="btn flex ion-justify-content-center p-5">
+                <div class="icon-container text-center">
+                  <ion-icon name="file-plus"></ion-icon>
+                </div>
+                <ion-text class="pl-16 pt-6">
+                  {{fileText}}
+                </ion-text>
+              </div>
+              <!-- <input type="file" (change)="onFileSelect($event)" formcontrolName="prescriptionImage" /> -->
+              <input type="file" (change)="onFileSelect($event)">
+            </div>
+          </ion-item>
+          <div *ngIf="(prescriptionImage.dirty || prescriptionImage.touched) && prescriptionImage.errors" class="errors">
+            <span *ngIf="prescriptionImage.errors?.required">prescription is required</span>
+          </div>
+          <ion-radio-group allow-empty-selection formControlName="frequency" value="7">
+            <ion-list-header>
+              <ion-label>Frequency</ion-label>
+            </ion-list-header>
+            <ion-item class="border-n" *ngFor="let list of frequencyList">
+              <ion-radio  color="primary" [value]="list.value"></ion-radio>
+              <ion-label class="ml-10">{{list.text}}</ion-label>
+            </ion-item>
+  
+          </ion-radio-group>
+          <ion-item class="mt-7">
+            <ion-label position="stacked">Start date for refill</ion-label>
+            <ion-input placeholder="Start Date" type="date" formControlName="startDate"></ion-input>
+          </ion-item>
+          <div *ngIf="(startDate.dirty || startDate.touched) && startDate.errors" class="errors">
+            <span *ngIf="startDate.errors?.required">Date is required</span>
+          </div>
+          <ion-item class="mt-7">
+            <ion-label position="stacked">Other Information</ion-label>
+            <ion-textarea rows="4" formControlName="otherInformation"  placeholder="Ex: delivery address"></ion-textarea>
+       
+          </ion-item>
+          <div *ngIf="(otherInformation.dirty || otherInformation.touched) && otherInformation.errors" class="errors">
+            <span *ngIf="otherInformation.errors?.required">Date is required</span>
+          </div>
+          <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!refillForm.valid">Schedule Refill</ion-button>
+    
+         
+        </form>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

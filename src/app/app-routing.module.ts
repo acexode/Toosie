@@ -38,6 +38,22 @@ const routes: Routes = [
   },  {
     path: 'blog',
     loadChildren: () => import('./pages/blog/blog.module').then( m => m.BlogPageModule)
+  },
+  {
+    path: 'manage-refill',
+    loadChildren: () => import('./pages/manage-refill/manage-refill.module').then( m => m.ManageRefillPageModule)
+  },
+  {
+    path: 'contact-us',
+    loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
+  },
+  {
+    path: 'faqs',
+    loadChildren: () => import('./pages/faqs/faqs.module').then( m => m.FaqsPageModule)
+  },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./pages/about-us/about-us.module').then( m => m.AboutUsPageModule)
   }
 
 

@@ -1,4 +1,4 @@
-<app-header title="Shop"></app-header>
+<app-header [cart]="true" [search]="true" title="Shop"></app-header>
 
 <ion-content>
   <ion-segment [value]='tab' scrollable  (ionChange)="segmentChanged($event)">

@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 import { PrescriptionService } from './../../core/service/prescription/prescription.service';
 import { Component, OnInit } from '@angular/core';
 import { Platform, ActionSheetController, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+declare const window: any;
+
 @Component({
   selector: 'app-prescription',
   templateUrl: './prescription.page.html',
   styleUrls: ['./prescription.page.scss'],
 })
 export class PrescriptionPage implements OnInit {
+  id = '60d8e98f65b7290ac6383064';
 
   pharmacyTool = [
     {
@@ -25,11 +29,13 @@ export class PrescriptionPage implements OnInit {
   prescription = [
     {
       text: 'Submit Rx Insurance card',
-      icon: 'insurance-card'
+      icon: 'insurance-card',
+      action: ''
   },
     {
       text: 'Talk to an expert',
-      icon: 'comment-bubble'
+      icon: 'comment-bubble',
+      action: 'tawkto'
   },
   //   {
   //     text: 'Manage family prescription',
@@ -37,7 +43,8 @@ export class PrescriptionPage implements OnInit {
   // },
     {
       text: 'Prescription Savings club',
-      icon: 'save-prescription'
+      icon: 'save-prescription',
+      action: ''
   },
 ];
 constructor(
@@ -146,5 +153,9 @@ constructor(
     this.router.navigate(['menu/home/prescription/'+path]);
   }
 
-
+  prescriptionAction(action){
+    if(action === 'tawkto'){
+      window.Tawk_API.maximize();
+    }
+  }
 }

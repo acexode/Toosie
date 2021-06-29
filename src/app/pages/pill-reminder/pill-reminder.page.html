@@ -17,7 +17,24 @@
   <ion-grid *ngIf="reminderList.length; else openModal">
     <ion-row>
       <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let list of reminderList" >
+            <ion-row class="w-100">
+              <ion-col class="flex flex-column" size="9">
+                <ion-text class="d-block h5">{{list.remindTo}}</ion-text>
+                <ion-text class="d-block">{{list.description}}</ion-text>
+                <small class="d-block">{{list.time}} - {{list.date}}</small>
 
+              </ion-col>
+              <ion-col class="flex flex-column" size="3">
+               <ion-button fill="clear" >
+                <ion-icon size="32" name="trash"></ion-icon>
+               </ion-button>
+
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>

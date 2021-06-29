@@ -34,6 +34,9 @@ export class InventoryService {
   inventoryByCategory(id){
     return this.reqS.get(inventoryEndpoints.inventoryByCategory + id + '/1');
   }
+  myOrders(){
+    return this.reqS.get(inventoryEndpoints.myOrders + '1');
+  }
   searchInventory(term){
     this.loading.next(true);
     return this.reqS.post(inventoryEndpoints.searchInventory, {searchText: term });

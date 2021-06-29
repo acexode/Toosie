@@ -24,7 +24,8 @@
       </div>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-input  [type]="hide ? 'password' : 'text'" formControlName="password"></ion-input>        
+        <ion-icon class="mt-15" (click)="hide = !hide" name="eye" slot="end"></ion-icon>
       </ion-item>
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
         <span *ngIf="password.errors?.required">Password is required</span>

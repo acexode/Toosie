@@ -15,11 +15,11 @@
     <form (ngSubmit)="signup()" [formGroup]="credentials" class="form-container pt-16">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input type="name" formControlName="name"></ion-input>
+        <ion-input type="text" formControlName="fullName"></ion-input>
       </ion-item>
-      <div *ngIf="(name.dirty || name.touched) && name.errors" class="errors">
-        <span *ngIf="name.errors?.required">Name is required</span>
-        <span *ngIf="name.errors?.email">Name is invalid</span>
+      <div *ngIf="(fullName.dirty || fullName.touched) && fullName.errors" class="errors">
+        <span *ngIf="fullName.errors?.required">Full Name is required</span>
+        <span *ngIf="fullName.errors?.email">Full Name is invalid</span>
       </div>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
@@ -31,8 +31,9 @@
       </div>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
-        <ion-icon name="eye" slot="end"></ion-icon>
+        <ion-input  [type]="hide ? 'password' : 'text'" formControlName="password"></ion-input>
+        
+        <ion-icon class="mt-15" (click)="hide = !hide" name="eye" slot="end"></ion-icon>
       </ion-item>
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
         <span *ngIf="password.errors?.required">Password is required</span>
@@ -40,8 +41,8 @@
       </div>
       <ion-item>
         <ion-label position="floating">Confirm Password</ion-label>
-        <ion-input type="password"></ion-input>
-        <ion-icon name="eye" slot="end"></ion-icon>
+        <ion-input [type]="hideConfirm ? 'password' : 'text'"></ion-input>
+        <ion-icon class="mt-15" (click)="hideConfirm = !hideConfirm" name="eye" slot="end"></ion-icon>
       </ion-item>
 
       <ion-button class="login mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Sign up</ion-button>

@@ -1,4 +1,4 @@
-<app-header [search]="false" title="Prescription"></app-header>
+<app-header [search]="false" [cart]="true" title="Prescription"></app-header>
 
 
 <ion-content  class="ion-padding">
@@ -34,7 +34,7 @@
       </ion-card>
     </ion-col>
     <ion-col size="12" class="ion-no-padding mt-16">
-    <ion-card size="12" class="flex p-8 ion-justify-content-between">
+    <ion-card (click)="navigate('manage-refill')" size="12" class="flex p-8 ion-justify-content-between">
         <ion-text class="card-text">
           Manage auto refills
         </ion-text>
@@ -69,7 +69,7 @@
       </span>
     </ion-col>
     <ion-col *ngFor="let tool of prescription" class="mh" >
-    <ion-card  class="flex flex-column p-16 ion-justify-content-between">
+    <ion-card (click)="prescriptionAction(tool.action)"  class="flex flex-column p-16 ion-justify-content-between">
         <ion-text class="card-text-small">
           {{tool.text}}
         </ion-text>
@@ -78,7 +78,7 @@
         </ion-button>
       </ion-card>
     </ion-col>
-    
+   
   </ion-row>
 
   <!-- <app-banner [items]="bannerList" [pager]="!showButton" preview="1" [button]="!showButton"></app-banner> -->

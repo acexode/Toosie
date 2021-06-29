@@ -3,9 +3,9 @@
  
     <ion-header   no-border>
       <ion-toolbar *ngIf="true" class="flex flex-column">
-        <ion-title>Abubakar</ion-title>
+        <ion-title>{{user?.fullName}}</ion-title>
         <ion-title><ion-text>{{user?.email}}</ion-text></ion-title>
-        <ion-title> <ion-text>+2347066565263</ion-text></ion-title>
+        <ion-title> <ion-text>{{user?.phone}}</ion-text></ion-title>
         
        
       </ion-toolbar>
@@ -107,5 +107,4 @@
   </ion-menu>
  
   <ion-router-outlet id="content"></ion-router-outlet>
- 
 </ion-split-pane>
