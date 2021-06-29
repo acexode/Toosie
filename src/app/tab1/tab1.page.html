@@ -1,4 +1,4 @@
-<app-header title="home" [search]="false"></app-header>
+<app-header title="home" [cart]="true"></app-header>
 <!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -25,6 +25,12 @@
     refreshingSpinner="circles"
     ></ion-refresher-content>
   </ion-refresher>
+  <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="tawkto()" class="success-btn">
+      <ion-icon name="message-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <div class="row jumbo">
     <span>
       What can we help you with today?
@@ -159,5 +165,6 @@
       </ion-col>
      
     </ion-row>
+    
   </ion-grid>
 </ion-content>

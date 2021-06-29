@@ -13,7 +13,8 @@ import { SearchComponent } from '../search/search.component';
 })
 export class HeaderComponent implements OnInit {
   @Input() title;
-  @Input() search = true;
+  @Input() search;
+  @Input() cart;
   cartTotal;
   constructor(private _location: Location,
     private modalController: ModalController,

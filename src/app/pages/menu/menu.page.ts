@@ -1,9 +1,11 @@
+import { OrdersService } from './../../core/service/orders/orders.service';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from './../../core/service/auth/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@capacitor/storage';
 import { SearchComponent } from 'src/app/components/search/search.component';
+const MY_CART = 'my_cart';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
@@ -47,7 +49,7 @@ export class MenuPage implements OnInit {
   support = [
     {
       title: 'Contact Us',
-      url: '/menu/home/contact',
+      url: '/menu/home/contact-us',
       icon: 'users'
     },
     {
@@ -58,15 +60,20 @@ export class MenuPage implements OnInit {
     },
     {
       title: 'About Us',
-      url: '/menu/home/about',
+      url: '/menu/home/about-us',
       icon: 'info',
     }
   ];
-  constructor(private router: Router, private authS: AuthService, private modalController: ModalController) { }
+  constructor(private router: Router, private authS: AuthService,
+    private orderS: OrdersService,
+     private modalController: ModalController) { }
 
   async ngOnInit() {
    await Storage.get({key: 'current-user'}).then((user: any) =>{
       this.user = JSON.parse(user.value);
+    });
+    Storage.get({ key: MY_CART }).then(cart =>{
+      this.orderS.cartStore.next(JSON.parse(cart.value));
     });
   }
   logout(){

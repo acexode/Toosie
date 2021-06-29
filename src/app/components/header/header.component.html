@@ -16,7 +16,7 @@
      {{title}}
     </ion-title>
     <ion-buttons slot="primary">
-      <ion-button (click)="goToCart()" style="width: 40px;">
+      <ion-button *ngIf="cart"  (click)="goToCart()" style="width: 40px;">
         <ion-badge class="badge-one" *ngIf="cartTotal > 0" >{{ cartTotal }}</ion-badge>
         <ion-icon name="cart-outline"></ion-icon>
       </ion-button>

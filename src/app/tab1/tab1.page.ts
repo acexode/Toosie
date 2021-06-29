@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-
+declare const window: any;
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -106,5 +106,9 @@ export class Tab1Page implements OnInit {
   }
   navigate(end){
     this.router.navigate(['menu/home/'+end]);
+  }
+  tawkto(){
+    console.log(window.tawk_API);
+    window.Tawk_API.maximize();
   }
 }

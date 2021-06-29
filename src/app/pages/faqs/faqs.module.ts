@@ -1,22 +1,22 @@
+import { SharedModule } from 'src/app/components/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MenuPageRoutingModule } from './menu-routing.module';
+import { FaqsPageRoutingModule } from './faqs-routing.module';
 
-import { MenuPage } from './menu.page';
-import { SharedModule } from 'src/app/components/shared/shared.module';
+import { FaqsPage } from './faqs.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuPageRoutingModule,
+    FaqsPageRoutingModule,
     SharedModule
   ],
-  declarations: [MenuPage]
+  declarations: [FaqsPage]
 })
-export class MenuPageModule {}
+export class FaqsPageModule {}

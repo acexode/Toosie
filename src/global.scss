@@ -42,11 +42,14 @@ ion-content, ion-tabs, ion-segment, ion-header{
     font-family: $alt-font;
     text-transform: none !important;
  }
+ .dark{
+     color: #000;
+ }
  ion-segment-button {
     text-transform:none;
   }
  .success-btn{
-    --background: #0281B2
+    --background: #0281B2;
 }
 .segment-button-checked {
     --background: #34C3EC !important;
@@ -63,3 +66,4 @@ ion-content, ion-tabs, ion-segment, ion-header{
     --border-color: #0281B2;
     text-align: center;
 }
+

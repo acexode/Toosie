@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/compiler_facade_interface';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
@@ -10,12 +11,16 @@ import { AuthService } from 'src/app/core/service/auth/auth.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-
+  pwd = 'password';
+  hide = true;
+  hideConfirm = true;
+  confirmP = 'password';
   credentials: FormGroup;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
     private router: Router,
+    private cdref: ChangeDetectorRef,
     private loadingController: LoadingController) { }
 
   ngOnInit() {

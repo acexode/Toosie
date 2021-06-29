@@ -11,6 +11,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { ShopPipe } from './pages/shop.pipe';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/JWTInterceptor';
+
 @NgModule({
   declarations: [AppComponent, ShopPipe],
   entryComponents: [],

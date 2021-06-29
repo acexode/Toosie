@@ -60,6 +60,18 @@ const routes: Routes = [
         path: 'categories',
         loadChildren: () => import('../categories/categories.module').then(m => m.CategoriesPageModule)
       },
+      {
+        path: 'contact-us',
+        loadChildren: () => import('../contact-us/contact-us.module').then(m => m.ContactUsPageModule)
+      },
+      {
+        path: 'about-us',
+        loadChildren: () => import('../about-us/about-us.module').then(m => m.AboutUsPageModule)
+      },
+      {
+        path: 'faq',
+        loadChildren: () => import('../faqs/faqs.module').then(m => m.FaqsPageModule)
+      },
 
     ],
   },
