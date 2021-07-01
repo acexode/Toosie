@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 /* eslint-disable no-underscore-dangle */
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
@@ -24,14 +25,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
-      this.cartTotal = e.length;
+      this.cartTotal = isEmpty(e) ? 0 : e.length;
     });
   }
   back(){
     this._location.back();
   }
   goToCart(){
-    this.router.navigate(['menu/home/cart']);
+    this.router.navigate(['menu/home/cart-orders']);
   }
   async presentModal() {
     const modal = await this.modalController.create({

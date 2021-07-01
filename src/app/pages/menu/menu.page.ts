@@ -30,7 +30,7 @@ export class MenuPage implements OnInit {
   manage = [
     {
       title: 'My Orders',
-      url: '/menu/home/cart',
+      url: '/menu/home/cart-orders',
       icon: 'shopping-cart'
     },
     {
@@ -73,6 +73,7 @@ export class MenuPage implements OnInit {
       this.user = JSON.parse(user.value);
     });
     Storage.get({ key: MY_CART }).then(cart =>{
+      console.log(cart);
       this.orderS.cartStore.next(JSON.parse(cart.value));
     });
   }
