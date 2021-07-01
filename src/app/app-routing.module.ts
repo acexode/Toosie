@@ -27,36 +27,7 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
-  },
-  {
-    path: 'prescription-history',
-    loadChildren: () => import('./pages/prescription-history/prescription-history.module').then( m => m.PrescriptionHistoryPageModule)
-  },
-  {
-    path: 'pill-reminder',
-    loadChildren: () => import('./pages/pill-reminder/pill-reminder.module').then( m => m.PillReminderPageModule)
-  },  {
-    path: 'blog',
-    loadChildren: () => import('./pages/blog/blog.module').then( m => m.BlogPageModule)
-  },
-  {
-    path: 'manage-refill',
-    loadChildren: () => import('./pages/manage-refill/manage-refill.module').then( m => m.ManageRefillPageModule)
-  },
-  {
-    path: 'contact-us',
-    loadChildren: () => import('./pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
-  },
-  {
-    path: 'faqs',
-    loadChildren: () => import('./pages/faqs/faqs.module').then( m => m.FaqsPageModule)
-  },
-  {
-    path: 'about-us',
-    loadChildren: () => import('./pages/about-us/about-us.module').then( m => m.AboutUsPageModule)
   }
-
-
 ];
 @NgModule({
   imports: [

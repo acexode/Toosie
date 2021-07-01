@@ -51,7 +51,7 @@ export class AddRefillComponent implements OnInit {
       prescriptionImage: [''],
       // frequencyInterval: ['', [Validators.required]],
       startDate: ['', [Validators.required]],
-      inventoryId: [this.itemName, [Validators.required]],
+      inventoryId: [this.item.title, [Validators.required]],
       otherInformation: ['',[Validators.required]],
     });
   }

@@ -1,5 +1,6 @@
+import { SearchComponent } from './../../components/search/search.component';
 /* eslint-disable no-underscore-dangle */
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { InventoryService } from './../../core/service/inventory/inventory.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -54,7 +55,8 @@ export class ShopPage implements OnInit {
  loading = false;
   tab = this.categories[0].id;
   constructor(private _location: Location, private inventoryS: InventoryService,
-    private orderS: OrdersService, public toastController: ToastController) { }
+    private orderS: OrdersService,public modalController: ModalController,
+     public toastController: ToastController) { }
 
   ngOnInit() {
     this.loadCategory();
@@ -101,5 +103,12 @@ export class ShopPage implements OnInit {
   }
   back(){
     this._location.back();
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SearchComponent,
+      cssClass: 'fullscreen'
+    });
+    await modal.present();
   }
 }

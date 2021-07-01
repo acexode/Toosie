@@ -21,13 +21,13 @@
     </div>
    </ion-col>
    <ion-col size="12" class="flex ion-justify-content-between pl-10 border-top">
-    <div class="left">
-      <ion-button class="ps" fill="clear">
-        <ion-icon name="heart-f"></ion-icon>
-      </ion-button>
+    <div class="left">      
       <ion-button (click)="removeItem(list)" class="ps" fill="clear">
-        <ion-icon class="pr-8" name="trash"></ion-icon>
-        Remove
+        <ion-icon class="pr-4" name="trash"></ion-icon>        
+      </ion-button>
+      <ion-button (click)="presentModal(list)" class="ps" fill="clear">
+        <ion-icon class="pr-4" name="refresh-f"></ion-icon>
+        Refill
       </ion-button>
     </div>
     <div class="right">
@@ -55,7 +55,7 @@
 
   </ion-row>
 </ion-content>
-<ion-footer *ngIf="lists.length">
+<ion-footer *ngIf="lists.length !== 0">
   <ion-row  class="my-16">
     <ion-col size="9">
       <ion-text>Total</ion-text>
