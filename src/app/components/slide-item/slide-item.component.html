@@ -1,6 +1,5 @@
 <ion-grid   scroll-y="false">
-  <ion-slides  [pager]="pager" [options]="slideOpts" >
-
+  <ion-slides *ngIf="items.length > 0"  [pager]="pager" [options]="slideOpts" >
     <ion-slide *ngFor="let item of items" class="width: 140px">
       <div class="slide mr-8">
         <div class="img-container">
@@ -21,8 +20,23 @@
         <ion-button (click)="addToCart(item)" class="knowMore">
           Add to Cart
         </ion-button>
-        <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
-      </div>
+         </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-slides *ngIf="items.length === 0"  [pager]="pager" [options]="slideOpts" >
+    <ion-slide *ngFor="let item of skeleton" class="width: 140px">
+      <div class="slide mr-8">
+        <div class="ion-padding custom-skeleton">
+          <ion-thumbnail class="img-container" style="width: 100%;" slot="start">
+            <ion-skeleton-text></ion-skeleton-text>
+          </ion-thumbnail>
+          <div  class="flex flex-column pt-8 ion-text-left">
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+          </div>
+          <ion-skeleton-text animated style="width: 100%; padding:10px"></ion-skeleton-text>
+        </div>
+         </div>
     </ion-slide>
 
     
