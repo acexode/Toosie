@@ -6,6 +6,10 @@ ion-toolbar {
     text-align: left;
     color: #fff;
     padding: 7px 10px !important;
+    div{
+        width: 100%;
+        height: 30px;
+    }
  }
  ion-title {
      ion-text{

@@ -1,10 +1,11 @@
 import { SearchComponent } from './../../components/search/search.component';
 /* eslint-disable no-underscore-dangle */
-import { ToastController, ModalController } from '@ionic/angular';
+import { ToastController, ModalController, IonSlides } from '@ionic/angular';
 import { InventoryService } from './../../core/service/inventory/inventory.service';
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -13,6 +14,7 @@ import { OrdersService } from 'src/app/core/service/orders/orders.service';
 })
 
 export class ShopPage implements OnInit {
+  @ViewChild('slides', {static: true}) slides: IonSlides;
   categories =  [
     {
       category: 'Baby & Child',
@@ -51,22 +53,38 @@ export class ShopPage implements OnInit {
       id: 9
     }
   ];
+
   products =  [];
  loading = false;
   tab = this.categories[0].id;
+  opts = {
+    freeMode: true,
+    slidesPerView: 3,
+    slidesOffsetBefore: 30,
+    slidesOffsetAfter: 100
+  };
+  activeCategory = 0;
+  categorySlidesVisible = true;
   constructor(private _location: Location, private inventoryS: InventoryService,
     private orderS: OrdersService,public modalController: ModalController,
-     public toastController: ToastController) { }
+     public toastController: ToastController, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadCategory();
   }
   loadCategory(){
-    this.inventoryS.allCategories().subscribe((e: any) =>{
-      console.log(e);
-      this.categories = e.inventoryCategory;
-      this.tab = this.categories[0].id;
-      this.loadInventory(this.tab);
+    this.route.params.subscribe(params => {
+      // const cat = params.get('category');
+      console.log(params.category);
+      this.inventoryS.allCategories().subscribe((e: any) =>{
+        console.log(e);
+        this.categories = e.inventoryCategory;
+        const index = this.categories.findIndex(c => c.category === params.category);
+        this.tab = this.categories[index].id;
+        this.slides.slideTo(index);
+        console.log(this.tab);
+        this.loadInventory(this.tab);
+      });
     });
   }
   loadInventory(id){
@@ -96,10 +114,11 @@ export class ShopPage implements OnInit {
     });
     toast.present();
   }
-  segmentChanged($event){
-    this.tab = $event.detail.value;
+  segmentChanged(id){
+    this.tab = id;
     this.loadInventory(this.tab);
-    console.log($event.detail.value);
+    console.log(this.tab);
+    console.log(id);
   }
   back(){
     this._location.back();

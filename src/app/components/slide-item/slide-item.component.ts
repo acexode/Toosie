@@ -14,10 +14,16 @@ export class SlideItemComponent implements OnInit {
   @Input() items;
   @Input() pager;
   slideOpts = {};
-
+  opts = {
+    freeMode: true,
+    slidesPerView: 2,
+    slidesOffsetBefore: 0,
+    slidesOffsetAfter: 50
+  };
   constructor(private orderS: OrdersService, private toastController: ToastController) { }
 
   ngOnInit() {
+
     this.slideOpts = {
       initialSlide: 0,
       speed: 400,

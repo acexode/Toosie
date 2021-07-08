@@ -30,9 +30,13 @@ ion-toolbar {
     }
     ion-searchbar{
         --border-radius: 20px;
+        --background: #fff
     }
 }
 .jumbo2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 18px;
     background: #C7F5FF;
     border-radius: 8px;
@@ -42,20 +46,22 @@ ion-toolbar {
         color: #000;
         text-align: left;
     }
-    span{
+    ion-text{
         font-size: 17px;
         color: #000;
-        text-align: left;
+        text-align: center;
         padding-bottom: 10px;
     }
     ion-button{
         height: 30px;
+        width: 40%;
+        // display: block;
         color: #fff;
         align-self: center;
         --background: #0281B2;
-        margin-top: 21px;
+        margin-top: 32px;
         margin-bottom: 15px;
-        margin-left: 30%;
+        // margin-left: 30%;
     }
     
 }

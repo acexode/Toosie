@@ -1,11 +1,18 @@
 <app-header [cart]="true" [search]="true" title="Shop"></app-header>
 
 <ion-content>
-  <ion-segment [value]='tab' scrollable  (ionChange)="segmentChanged($event)">
+  <!-- <ion-segment [value]='tab' scrollable  (ionChange)="segmentChanged($event)">
     <ion-segment-button *ngFor="let cat of categories" [value]="cat.id">
       <ion-label>{{cat?.category}}</ion-label>
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> --> 
+    <ion-slides [options]="opts" #slides>
+      <ion-slide *ngFor="let cat of categories; let i = index;">
+        <ion-button fill="clear" class="text-dark" [class.active-category]="tab === cat.id" (click)="segmentChanged(cat.id)">
+          {{ cat.category }}
+        </ion-button>
+      </ion-slide>
+    </ion-slides>
   <ion-row class="mt-1 bg-white"   (ionChange)="segmentChanged($event)">
     <ion-col class="ion-text-center border" size="6">
       <ion-label>

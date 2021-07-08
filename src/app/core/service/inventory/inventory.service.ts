@@ -38,11 +38,13 @@ export class InventoryService {
     return this.reqS.get(inventoryEndpoints.myOrders + '1');
   }
   searchInventory(term){
+    console.log(term.length);
     this.loading.next(true);
     return this.reqS.post(inventoryEndpoints.searchInventory, {searchText: term });
   }
   search(terms: Observable<string>){
-    return terms.pipe(debounceTime(400),distinctUntilChanged(),
+    console.log(terms);
+    return terms.pipe(debounceTime(1000),distinctUntilChanged(),
     switchMap(term => this.searchInventory(term)));
   }
 

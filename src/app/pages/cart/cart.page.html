@@ -15,7 +15,7 @@
       <span class="price">
         ₦ {{list.currentPrice}}
       </span>
-      <span class="price strike">
+      <span *ngIf="list.discountPercent !== 0" class="price strike">
         ₦ {{list.actualPrice}}
       </span>
     </div>
