@@ -87,6 +87,7 @@ export class Tab1Page implements OnInit {
     console.log(this.blogs$);
   }
   shop(q){
+    console.log(q);
     this.router.navigate(['menu/home/shop', {category: q}]);
   }
   async presentModal() {

@@ -71,6 +71,7 @@ export class MenuPage implements OnInit {
   async ngOnInit() {
    await Storage.get({key: 'current-user'}).then((user: any) =>{
       this.user = JSON.parse(user.value);
+      console.log(this.user);
     });
     Storage.get({ key: MY_CART }).then(cart =>{
       console.log(cart);

@@ -19,13 +19,6 @@ export class SearchComponent implements AfterViewInit {
       console.log(e);
       this.showSpinner = e;
     });
-    this.invS.search(this.searchTerm$).subscribe((e: any) =>{
-      console.log(e);
-      this.items = e.searchResult;
-      this.searchResult = e.searchResult;
-      this.invS.loading.next(false);
-      this.showSpinner = false;
-    });
   }
 
   ngAfterViewInit() {
@@ -41,6 +34,17 @@ export class SearchComponent implements AfterViewInit {
     });
   }
   onChange($event){
-    this.searchTerm$.next($event.target.value);
+    console.log($event.target.value);
+    const value = $event.target.value;
+    if(value.length){
+      this.searchTerm$.next($event.target.value);
+      this.invS.search(this.searchTerm$).subscribe((e: any) =>{
+        console.log(e);
+        this.items = e.searchResult;
+        this.searchResult = e.searchResult;
+        this.invS.loading.next(false);
+        this.showSpinner = false;
+      });
+    }
   }
 }
