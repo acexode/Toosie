@@ -96,8 +96,10 @@ export class PillReminderModalComponent implements OnInit {
 
   async storeReminder(item) {
     const reminder = await Storage.get({ key: PILL_REMINDER });
+    item.id = new Date().getTime();
     if (reminder && reminder.value) {
       const parseReminder = JSON.parse(reminder.value);
+      parseReminder.push(item);
       this.refillS.reminderStore.next(parseReminder);
       Storage.set({key: PILL_REMINDER, value: JSON.stringify(parseReminder)});
 
@@ -107,6 +109,7 @@ export class PillReminderModalComponent implements OnInit {
       return true;
     }
   }
+
   // Easy access for form fields
   get remindTo() {
     return this.reminderForm.get('remindTo');
