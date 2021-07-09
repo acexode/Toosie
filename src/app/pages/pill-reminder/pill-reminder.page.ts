@@ -16,12 +16,18 @@ export class PillReminderPage implements OnInit {
 
   constructor(
     private prescS: PrescriptionService,
+    private refillS: AddRefillService,
     private modalController: ModalController,
     private router: Router,
     private loadingController: LoadingController) { }
 
   ngOnInit() {
-    this.prescS.getReminderList().then(e =>{
+    this.refillS.reminderStore.subscribe(e =>{
+      console.log(e);
+      this.reminderList = e;
+    });
+    this.prescS.getReminderList().then((e: any) =>{
+      console.log(e);
       this.reminderList = JSON.parse(e);
       console.log(e);
     });
@@ -32,5 +38,15 @@ export class PillReminderPage implements OnInit {
       cssClass: 'fullscreen'
     });
     await modal.present();
+  }
+  async removeReminder(item) {
+    const reminder = await Storage.get({ key: PILL_REMINDER });
+    if (reminder && reminder.value) {
+      const parseReminder = JSON.parse(reminder.value);
+      const filt = parseReminder.filter(f => f.id !== item.id);
+      this.refillS.reminderStore.next(filt);
+      Storage.set({key: PILL_REMINDER, value: JSON.stringify(filt)});
+
+    }
   }
 }

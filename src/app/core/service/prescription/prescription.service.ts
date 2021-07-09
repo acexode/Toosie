@@ -15,7 +15,7 @@ export class PrescriptionService {
   }
   async getReminderList() {
     const list = await Storage.get({ key: REMINDER_KEY });
-    return (list && list.value) ? list.value : null;
+    return (list && list.value) ? list.value : '[]';
   }
   uploadPrescription(formData): Observable<any> {
     return this.reqS.post(prescriptionEndpoints.newPrecription, formData);
