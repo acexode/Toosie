@@ -76,7 +76,7 @@
       <ion-text><b>₦ {{total - discount}}</b></ion-text>
     </ion-col>
     <ion-col size="12">
-      <ion-button expand="block" class="main-button success-btn" routerLink="/checkout" routerDirection="forward">
+      <ion-button expand="block" class="main-button success-btn" (click)="checkoutModal()" >
         Checkout</ion-button>
     </ion-col>
 

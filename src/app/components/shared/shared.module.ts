@@ -1,3 +1,4 @@
+import { BillingComponent } from './../billing/billing.component';
 import { AddRefillComponent } from './../add-refill/add-refill/add-refill.component';
 import { PillReminderModalComponent } from './../pill-reminder-modal/pill-reminder-modal.component';
 import { ItemsComponent } from './../items/items.component';
@@ -10,25 +11,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BrandsComponent } from '../brands/brands.component';
 import { HeaderComponent } from '../header/header.component';
+import { FlutterwaveModule } from 'flutterwave-angular-v3';
 
 
 
 @NgModule({
   declarations: [BannerComponent, BrandsComponent,
     ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent,
-    PillReminderModalComponent, AddRefillComponent],
+    PillReminderModalComponent, AddRefillComponent, BillingComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    FlutterwaveModule,
   ],
   exports:[
     BannerComponent,
     BrandsComponent,
     SearchComponent,
     SlideItemComponent, HeaderComponent, ItemsComponent,
-    PillReminderModalComponent, AddRefillComponent
+    PillReminderModalComponent, AddRefillComponent, BillingComponent
   ]
 })
 export class SharedModule { }
