@@ -1,0 +1,92 @@
+<app-header [dismiss]="true" title="Billing Info"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-grid class="container">
+   
+    <form (ngSubmit)="placeOrder()" [formGroup]="billingInfo" class="form-container pt-16">
+      <ion-radio-group allow-empty-selection formControlName="paymentType" value="card">
+        <ion-list-header>
+          <ion-text>Payment Method</ion-text>
+        </ion-list-header>
+        <ion-slides  [pager]="false" [options]="opts" >
+
+          <ion-slide (click)="setPayment(item.value)" *ngFor="let item of paymentMethods" class="width: 140px">
+            <div [ngStyle]="{'border': (item.value === paymentType.value) ? '1.6px solid #0281B2' : '' }" class="slide card mr-8">
+              <ion-radio mode="md"   [value]="item.value"></ion-radio>
+              <div class="img-container ">
+                <!-- <img [src]="item.resourceImages[0]"/> -->
+                <ion-icon [name]="item.icon"></ion-icon>
+              </div>
+              <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
+                <!-- <ion-item lines="none" class="border-n " > -->
+                  <ion-text class="card-text">{{item.text}}</ion-text>
+                <!-- </ion-item> -->
+               
+              </div>
+             
+              </div>
+          </ion-slide>
+        </ion-slides>
+        
+      </ion-radio-group>
+          <ion-row class="mt-8">
+            <ion-list-header>
+              <ion-text>Billing Address</ion-text>
+            </ion-list-header>
+            <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+            <div *ngIf="(name.dirty || name.touched) && name.errors" class="errors">
+              <span *ngIf="name.errors?.required">Name is required</span>
+            </div>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+              </ion-item>
+              <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+                <span *ngIf="email.errors?.required">Email is required</span>
+                <span *ngIf="email.errors?.email">Email is invalid</span>
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Phone number</ion-label>
+                <ion-input type="text" formControlName="phone_number"></ion-input>
+              </ion-item>
+              <div *ngIf="(phone_number.dirty || phone_number.touched) && phone_number.errors" class="errors">
+                <span *ngIf="phone_number.errors?.required">phone number is required</span>
+                <span *ngIf="phone_number.errors?.minlength">phone number needs to be 8 characters</span>
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Address</ion-label>
+                <ion-input type="text" formControlName="address"></ion-input>
+              </ion-item>
+              <div *ngIf="(address.dirty || address.touched) && address.errors" class="errors">
+                <span *ngIf="address.errors?.required">address is required</span>
+              </div>
+
+            </ion-col>
+
+           
+  
+      </ion-row>
+        </form>
+
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="12">
+      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
+      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
+      
+ 
+</ion-col>
+  </ion-row>
+</ion-footer>

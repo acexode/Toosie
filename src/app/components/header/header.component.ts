@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   @Input() title;
   @Input() search;
   @Input() cart;
+  @Input() dismiss = false;
   cartTotal;
   constructor(private _location: Location,
     private modalController: ModalController,
@@ -29,7 +30,11 @@ export class HeaderComponent implements OnInit {
     });
   }
   back(){
-    this._location.back();
+    if(this.dismiss){
+      this.modalController.dismiss();
+    }else{
+      this._location.back();
+    }
   }
   goToCart(){
     this.router.navigate(['menu/home/cart-orders']);

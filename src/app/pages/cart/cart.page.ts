@@ -1,3 +1,4 @@
+import { BillingComponent } from './../../components/billing/billing.component';
 import { AddRefillComponent } from './../../components/add-refill/add-refill/add-refill.component';
 import { AddRefillService } from './../../core/service/add-refill/add-refill.service';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
@@ -55,6 +56,17 @@ export class CartPage implements OnInit {
       componentProps: {
         itemName: list.itemName,
         item: list
+      }
+    });
+    await modal.present();
+  }
+  async checkoutModal() {
+    const modal = await this.modalController.create({
+      component: BillingComponent,
+      cssClass: 'fullscreen',
+      componentProps: {
+        grandTotal: this.total - this.discount,
+        items: this.lists
       }
     });
     await modal.present();

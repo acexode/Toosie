@@ -1,10 +1,10 @@
-import { BlogService } from './../core/service/blog/blog.service';
 import { InventoryService } from './../core/service/inventory/inventory.service';
 import { SearchComponent } from './../components/search/search.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { BlogService } from '../core/service/blog/blog.service';
 declare const window: any;
 @Component({
   selector: 'app-tab1',
