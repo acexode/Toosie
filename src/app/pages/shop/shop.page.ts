@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
 import { ActivatedRoute } from '@angular/router';
+import { SingleComponent } from 'src/app/components/single/single.component';
 
 @Component({
   selector: 'app-shop',
@@ -130,4 +131,5 @@ export class ShopPage implements OnInit {
     });
     await modal.present();
   }
+
 }

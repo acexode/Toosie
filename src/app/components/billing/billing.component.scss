@@ -1,5 +1,5 @@
 .card{
-    margin: 24px 16px;
+    height: 185px;
     padding: 24px;
     border-radius: 8px;
     transform: translateZ(0px);
@@ -22,4 +22,7 @@ ion-radio{
     font-size: 16px;
     text-align: center;
     font-weight: 500;
+}
+ion-slide{
+    width: 150px !important;
 }

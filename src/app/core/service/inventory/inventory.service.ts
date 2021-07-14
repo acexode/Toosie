@@ -47,5 +47,14 @@ export class InventoryService {
     return terms.pipe(debounceTime(1000),distinctUntilChanged(),
     switchMap(term => this.searchInventory(term)));
   }
+  savePODCashOrder(obj){
+    return this.reqS.post(inventoryEndpoints.savePODOrder, obj);
+  }
+  saveCardOrder(obj){
+    return this.reqS.post(inventoryEndpoints.saveCardOrder, obj);
+  }
+  saveTokenOrder(obj){
+    return this.reqS.post(inventoryEndpoints.saveTokenOrder, obj);
+  }
 
 }

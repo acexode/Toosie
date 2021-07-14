@@ -46,6 +46,8 @@ export const inventoryEndpoints = {
     searchInventory: baseEndpoints.inventory + '/product/search',
     popular: baseEndpoints.inventory + '/product/popular',
     latest: baseEndpoints.inventory + '/product/latest',
-    saveOrder: baseEndpoints.inventory + '/order/save',
+    savePODOrder: baseEndpoints.inventory + '/order/save',
+    saveCardOrder: baseEndpoints.inventory + '/order/card/save',
+    saveTokenOrder: baseEndpoints.inventory + '/order/token/card/save',
     myOrders: baseEndpoints.inventory + '/order/mine/'
 };

@@ -1,5 +1,6 @@
+import { SingleComponent } from './../single/single.component';
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
 
 @Component({
@@ -11,8 +12,9 @@ export class SlideItemComponent implements OnInit {
 
   @Input() preview;
   @Input() button;
-  @Input() items;
   @Input() pager;
+  @Input() items = [];
+  fakeitems = [1,2,3,4,5,6];
   slideOpts = {};
   opts = {
     freeMode: true,
@@ -20,7 +22,9 @@ export class SlideItemComponent implements OnInit {
     slidesOffsetBefore: 0,
     slidesOffsetAfter: 50
   };
-  constructor(private orderS: OrdersService, private toastController: ToastController) { }
+  constructor(private orderS: OrdersService,
+    private modalController: ModalController,
+    private toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -55,5 +59,15 @@ export class SlideItemComponent implements OnInit {
       position: 'top'
     });
     toast.present();
+  }
+  async productModal(item) {
+    const modal = await this.modalController.create({
+      component: SingleComponent,
+      cssClass: 'fullscreen',
+      componentProps: {
+        item
+      }
+    });
+    await modal.present();
   }
 }

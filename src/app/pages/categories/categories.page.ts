@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
@@ -63,7 +64,7 @@ export class CategoriesPage implements OnInit {
     //   title: 'Sexual Health1',
     //   path: ''
     // },
-  ]
+  ];
   constructor(private _location: Location, private router: Router) { }
 
   ngOnInit() {
@@ -72,6 +73,6 @@ export class CategoriesPage implements OnInit {
     this._location.back();
   }
   navigate(q){
-    this.router.navigate(['menu/home/shop', {category: q}])
+    this.router.navigate(['menu/home/shop', {category: q}]);
   }
 }
