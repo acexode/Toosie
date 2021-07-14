@@ -1,6 +1,7 @@
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { SingleComponent } from '../single/single.component';
 
 @Component({
   selector: 'app-items',
@@ -9,7 +10,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ItemsComponent implements OnInit {
   @Input() items;
-  constructor(private orderS: OrdersService, private toastController: ToastController) { }
+  constructor(private orderS: OrdersService,
+    private modalController: ModalController,
+    private toastController: ToastController
+    ) { }
 
   ngOnInit() {}
   addToCart(id){
@@ -30,5 +34,15 @@ export class ItemsComponent implements OnInit {
       position: 'top'
     });
     toast.present();
+  }
+  async productModal(item) {
+    const modal = await this.modalController.create({
+      component: SingleComponent,
+      cssClass: 'fullscreen',
+      componentProps: {
+        item
+      }
+    });
+    await modal.present();
   }
 }

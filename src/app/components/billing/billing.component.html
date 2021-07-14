@@ -1,4 +1,4 @@
-<app-header [dismiss]="true" title="Billing Info"></app-header>
+<app-header [dismiss]="true" title="Billing & Payment"></app-header>
 
 <ion-content class="ion-padding">
   <ion-grid class="container">
@@ -8,30 +8,37 @@
         <ion-list-header>
           <ion-text>Payment Method</ion-text>
         </ion-list-header>
-        <ion-slides  [pager]="false" [options]="opts" >
+        <ion-slides  [pager]="false"   >
 
-          <ion-slide (click)="setPayment(item.value)" *ngFor="let item of paymentMethods" class="width: 140px">
+          <ion-slide (click)="setPayment('savedCard')" *ngIf="cardSaved" style="width:150px" >
+            <div [ngStyle]="{'border': ('savedCard' === paymentType.value) ? '1.6px solid #0281B2' : '' }" class="slide card mr-8">
+              <ion-radio mode="md"   value="savedCard"></ion-radio>
+              <small>{{cardObj.brand | slice:0:20}}</small>
+              <div class="img-container ">
+                <ion-icon *ngIf="cardObj.type === 'MASTERCARD'" name="master"></ion-icon>
+              </div>
+              <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
+                  <ion-text class="card-text">**** ****  {{cardObj.last4digits}}</ion-text>
+              </div>
+              </div>
+          </ion-slide>
+          <ion-slide (click)="setPayment(item.value)" *ngFor="let item of paymentMethods" style="width:15" >
             <div [ngStyle]="{'border': (item.value === paymentType.value) ? '1.6px solid #0281B2' : '' }" class="slide card mr-8">
               <ion-radio mode="md"   [value]="item.value"></ion-radio>
               <div class="img-container ">
-                <!-- <img [src]="item.resourceImages[0]"/> -->
                 <ion-icon [name]="item.icon"></ion-icon>
               </div>
               <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
-                <!-- <ion-item lines="none" class="border-n " > -->
+                  <!-- <ion-text class="card-text">**** **** 4567</ion-text> -->
                   <ion-text class="card-text">{{item.text}}</ion-text>
-                <!-- </ion-item> -->
-               
               </div>
-             
               </div>
           </ion-slide>
         </ion-slides>
-        
       </ion-radio-group>
           <ion-row class="mt-8">
             <ion-list-header>
-              <ion-text>Billing Address</ion-text>
+              <ion-text>Billing Info</ion-text>
             </ion-list-header>
             <ion-col size="12">
             <ion-item>
@@ -85,6 +92,7 @@
     <ion-col size="12">
       <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
       <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
+      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
       
  
 </ion-col>

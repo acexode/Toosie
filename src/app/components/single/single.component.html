@@ -1,0 +1,50 @@
+<app-header [dismiss]="true" [title]="item.title"></app-header>
+<ion-content>
+<ion-row>
+  <ion-col size="12">
+    <ion-slides  [pager]="true"  >
+
+      <ion-slide *ngFor="let img of item.resourceImages" class="width: 100%">
+        <div  class="slide">
+          <div style="height: 350px;" class="img-container">
+            <img style="width:70%" [src]="img"/>
+  
+          </div>
+         
+          
+          <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
+        </div>
+      </ion-slide>
+  
+      
+      
+  
+    </ion-slides>
+  </ion-col>
+ 
+  <ion-col style="height: 200px;" size="12">
+    <div style="height: 80px;" class="flex flex-column pt-8 px-8 ion-text-left">
+      <h2 class="product-title">
+        {{item.title}}
+      </h2>
+      <span class="discount p-0 ">
+        {{item.discountPercent}}%  OFF
+      </span>
+      <span class="price p-0">
+        ₦ {{item.currentPrice}}
+      </span>
+      <span>
+        {{item.description}}
+      </span>
+    </div>
+  </ion-col>
+  <ion-col size="12" class="px-8 mt-64">
+   <ion-button (click)="addToCart(item)" class="knowMore">
+    <ion-icon slot="start" name="cart"></ion-icon>
+     Add to Cart
+   </ion-button>
+  </ion-col>
+
+</ion-row>
+
+</ion-content>

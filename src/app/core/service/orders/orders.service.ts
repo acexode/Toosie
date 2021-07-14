@@ -16,7 +16,10 @@ export class OrdersService {
       this.cartStore.next(JSON.parse(cart.value));
     });
   }
-
+  async removeCart() {
+    await Storage.remove({ key: MY_CART });
+    this.cartStore.next([]);
+  };
   async addItemToCart(item) {
     item.quantity = 1;
     const cart = await Storage.get({ key: MY_CART });
