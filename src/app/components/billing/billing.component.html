@@ -41,6 +41,13 @@
               <ion-text>Billing Info</ion-text>
             </ion-list-header>
             <ion-col size="12">
+              <ion-item>
+                <ion-label>Location</ion-label>
+                <ion-select id="customAlertSelect" (ionChange)="locationChange($event)" interface="alert" multiple="false" placeholder="Select One">
+                  <ion-select-option *ngFor="let opt of allLocations" [value]="opt.value">{{opt.label}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
             <ion-item>
               <ion-label position="floating">Name</ion-label>
               <ion-input type="text" formControlName="name"></ion-input>
@@ -90,9 +97,9 @@
 <ion-footer>
   <ion-row>
     <ion-col size="12">
-      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
-      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
-      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order</ion-button>
+      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order  ₦{{grandTotal}}</ion-button>
+      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
       
  
 </ion-col>
