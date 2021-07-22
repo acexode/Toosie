@@ -58,17 +58,17 @@ export class OrdersService {
       if(type === 'increment'){
         item.quantity = item.quantity + 1;
         const parseCart = JSON.parse(cart.value);
-        const filt = parseCart.filter(e => e._id !== item._id);
-        filt.push(item);
-        this.cartStore.next(filt);
-        Storage.set({key: MY_CART, value: JSON.stringify(filt)});
+        const index = parseCart.findIndex((e) => e._id === item._id);
+        parseCart[index] = item;
+        this.cartStore.next(parseCart);
+        Storage.set({key: MY_CART, value: JSON.stringify([...parseCart])});
       }else{
         item.quantity = item.quantity < 1 ? 0 : item.quantity - 1;
         const parseCart = JSON.parse(cart.value);
-        const filt = parseCart.filter(e => e._id !== item._id);
-        filt.push(item);
-        this.cartStore.next(filt);
-        Storage.set({key: MY_CART, value: JSON.stringify(filt)});
+        const index = parseCart.findIndex((e) => e._id === item._id);
+        parseCart[index] = item;
+        this.cartStore.next(parseCart);
+        Storage.set({key: MY_CART, value: JSON.stringify([...parseCart])});
       }
     }
   }

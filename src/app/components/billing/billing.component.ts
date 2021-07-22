@@ -1,3 +1,4 @@
+import { locationList } from './locations';
 import { OrdersService } from './../../core/service/orders/orders.service';
 import { InventoryService } from './../../core/service/inventory/inventory.service';
 /* eslint-disable no-underscore-dangle */
@@ -20,6 +21,7 @@ declare const getpaidSetup: any;
 export class BillingComponent implements OnInit {
   @Input() grandTotal: any;
   @Input() items: any;
+  allLocations = locationList;
   cardSaved = false;
   cardObj: any;
   publicKey = 'FLWPUBK-e2f49a592820916c1f1c939c171b645a-X';
@@ -277,7 +279,11 @@ export class BillingComponent implements OnInit {
   closedPaymentModal(): void {
     console.log('payment is closed');
   }
-
+  locationChange(e){
+    console.log(e.detail.value);
+    this.grandTotal += e.detail.value;
+    console.log(this.grandTotal);
+  }
   // Easy access for form fields
   get name() {
     return this.billingInfo.get('name');

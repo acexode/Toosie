@@ -22,10 +22,13 @@ export class CartPage implements OnInit {
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
       this.lists = isEmpty(e) ? [] : e;
-      this.lists.forEach(i =>{
-        this.total += i.actualPrice;
-        this.discount += (i.discountPercent/100) * i.actualPrice;
-      });
+      this.total = this.lists.reduce((a, b) => a + (b.actualPrice * b.quantity),0);
+      this.discount = this.lists.reduce((a, b) => {
+        console.log(a + ((b.actualPrice - b.currentPrice)));
+        // return a + ((b.actualPrice - b.currentPrice));
+        return a + ( b.currentPrice * b.quantity);
+      },0);
+      console.log(this.discount);
     });
   }
   removeItem(item){
