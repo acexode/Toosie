@@ -21,24 +21,41 @@
   
     </ion-slides>
   </ion-col>
- 
-  <ion-col style="height: 200px;" size="12">
-    <div style="height: 80px;" class="flex flex-column pt-8 px-8 ion-text-left">
-      <h2 class="product-title">
+  <ion-col size="12">
+    <div style="height: 120px;" class="flex flex-column py-8 pl-30 ion-text-left">
+      <h4 class="product-title">
         {{item.title}}
-      </h2>
-      <span class="discount p-0 ">
-        {{item.discountPercent}}%  OFF
-      </span>
-      <span class="price p-0">
+      </h4>      
+      <h5 class="price p-0">
         ₦ {{item.currentPrice}}
-      </span>
-      <span>
-        {{item.description}}
-      </span>
+      </h5>
+      <div class=" p-0 ">
+        <span dir="ltr" class="strike">₦ {{item.actualPrice}}</span>
+        <span class="discount">
+          {{item.discountPercent}}%  OFF
+
+        </span>
+      </div>
     </div>
   </ion-col>
-  <ion-col size="12" class="px-8 mt-64">
+<ion-card style="width: 100%;" class="px-8 w-100 mt-12">
+  <button class="accordion">Description</button>
+<div class="panel">
+  <p>{{item.description}}</p>
+</div>
+
+<button class="accordion">Ingredients</button>
+<div class="panel">
+  <p>{{item.ingredients}}</p>
+</div>
+
+<button class="accordion">Warning</button>
+<div class="panel">
+  <p>{{item.warning}}</p>
+</div>
+</ion-card>
+
+  <ion-col size="12" class="px-8 mt-32">
    <ion-button (click)="addToCart(item)" class="knowMore">
     <ion-icon slot="start" name="cart"></ion-icon>
      Add to Cart
@@ -46,5 +63,8 @@
   </ion-col>
 
 </ion-row>
-
+<ion-row class="mt-16 mx-16">
+  <h1>Similar items</h1>
+  <app-slide-item [items]="sameCategory$ | async" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+</ion-row>
 </ion-content>

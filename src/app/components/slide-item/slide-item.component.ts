@@ -19,8 +19,6 @@ export class SlideItemComponent implements OnInit {
   opts = {
     freeMode: true,
     slidesPerView: 2,
-    slidesOffsetBefore: 0,
-    slidesOffsetAfter: 50
   };
   constructor(private orderS: OrdersService,
     private modalController: ModalController,
