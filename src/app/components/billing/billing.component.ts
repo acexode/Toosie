@@ -79,6 +79,7 @@ export class BillingComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         phone_number: ['', [Validators.required, Validators.minLength(8)]],
         address: ['', [Validators.required]],
+        location: ['', [Validators.required]],
         paymentType: ['card', [Validators.required]],
       });
 

@@ -1,5 +1,5 @@
 <ion-grid   scroll-y="false">
-  <ion-slides *ngIf="items.length"  [pager]="pager" [options]="opts" >
+  <ion-slides *ngIf="items?.length; else empty"  [pager]="pager" [options]="opts" >
 
     <ion-slide *ngFor="let item of items" class="width: 140px">
       <div  class="slide mr-8">
@@ -9,7 +9,8 @@
         </div>
         <div (click)="productModal(item)" style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
           <ion-text class="product-title">
-            {{item.title | slice:0:20}}
+            <!-- {{item.title.length > 20 ? item.title | slice:0:20 : item.title}} -->
+            {{ (item.title.length > 20)? (item.title | slice:0:20)+'..':(item.title) }}
           </ion-text>
           <small class="discount pt-5">
             {{item.discountPercent}}%  OFF
@@ -25,29 +26,32 @@
       </div>
     </ion-slide>  
   </ion-slides>
-  <ion-slides *ngIf="items.length === 0"  [pager]="pager" [options]="opts" >
-
-    <ion-slide *ngFor="let item of fakeitems" class="width: 140px">
-      <div  class="slide mr-8">
-        <div class="img-container text-center">
-          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-
+  <ng-template #empty>
+    <ion-slides   [pager]="pager" [options]="opts" >
+  
+      <ion-slide *ngFor="let item of fakeitems" class="width: 140px">
+        <div  class="slide mr-8">
+          <div class="img-container text-center">
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+  
+          </div>
+          <div  style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
+            <ion-text class="product-title">
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </ion-text>
+            <small class="discount pt-5">
+              <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+            </small>
+            <small class="price pt-5">
+              <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+            </small>
+          </div>
+            <ion-skeleton-text animated style="width: 90%; height: 30px"></ion-skeleton-text>
+          
+          <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
         </div>
-        <div  style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
-          <ion-text class="product-title">
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </ion-text>
-          <small class="discount pt-5">
-            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-          </small>
-          <small class="price pt-5">
-            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-          </small>
-        </div>
-          <ion-skeleton-text animated style="width: 90%; height: 30px"></ion-skeleton-text>
-        
-        <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
-      </div>
-    </ion-slide>
-  </ion-slides>
+      </ion-slide>
+    </ion-slides>
+
+  </ng-template>
 </ion-grid>

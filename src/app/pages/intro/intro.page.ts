@@ -10,23 +10,17 @@ import { INTRO_KEY } from 'src/app/core/guards/intro.guard';
 })
 export class IntroPage implements OnInit {
 
-  slideOpts = {}
-  
+  slideOpts = {
+    freeMode: true,
+    slidesPerView: 1,
+    slidesOffsetBefore: 0,
+    slidesOffsetAfter: 50
+  };
+
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.slideOpts = {
-      initialSlide: 0,
-      speed: 400,
-      slidesPerView: 1,
-    coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
-    },
-    };
+
   }
   async start() {
     await Storage.set({key: INTRO_KEY, value: 'true'});
