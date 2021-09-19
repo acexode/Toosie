@@ -72,6 +72,14 @@ const routes: Routes = [
         path: 'faq',
         loadChildren: () => import('../faqs/faqs.module').then(m => m.FaqsPageModule)
       },
+      {
+        path: 'my-orders',
+        loadChildren: () => import('../my-orders/my-orders.module').then( m => m.MyOrdersPageModule)
+      },
+      {
+        path: 'see-all/:id',
+        loadChildren: () => import('../see-all/see-all.module').then( m => m.SeeAllPageModule)
+      },
 
     ],
   },

@@ -43,8 +43,8 @@
             <ion-col size="12">
               <ion-item>
                 <ion-label>Location <span class="required">*</span></ion-label>
-                <ion-select id="customAlertSelect" formControlName="location" (ionChange)="locationChange($event)" interface="alert" multiple="false" placeholder="Select One">
-                  <ion-select-option *ngFor="let opt of allLocations" [value]="opt.value">{{opt.label}}</ion-select-option>
+                <ion-select id="customAlertSelect" formControlName="location" (ionChange)="locationChange($event)" interface="alert"  placeholder="Select One">
+                  <ion-select-option *ngFor="let opt of allLocations" >{{opt.label}}</ion-select-option>
                 </ion-select>
               </ion-item>
 

@@ -1,3 +1,4 @@
+import { ReceiptComponent } from './../receipt/receipt.component';
 import { SingleComponent } from './../single/single.component';
 import { BillingComponent } from './../billing/billing.component';
 import { AddRefillComponent } from './../add-refill/add-refill/add-refill.component';
@@ -18,7 +19,7 @@ import { FlutterwaveModule } from 'flutterwave-angular-v3';
 
 @NgModule({
   declarations: [BannerComponent, BrandsComponent,
-    ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent,
+    ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent, ReceiptComponent,
     PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent],
   imports: [
     CommonModule,
@@ -31,7 +32,7 @@ import { FlutterwaveModule } from 'flutterwave-angular-v3';
     BannerComponent,
     BrandsComponent,
     SearchComponent,
-    SlideItemComponent, HeaderComponent, ItemsComponent,
+    SlideItemComponent, HeaderComponent, ItemsComponent,ReceiptComponent,
     PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent
   ]
 })

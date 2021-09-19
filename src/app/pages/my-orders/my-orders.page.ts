@@ -1,29 +1,35 @@
-import { BillingComponent } from './../../components/billing/billing.component';
-import { AddRefillComponent } from './../../components/add-refill/add-refill/add-refill.component';
-import { AddRefillService } from './../../core/service/add-refill/add-refill.service';
-import { OrdersService } from 'src/app/core/service/orders/orders.service';
+import { InventoryService } from './../../core/service/inventory/inventory.service';
+import { ReceiptComponent } from './../../components/receipt/receipt.component';
 import { Component, OnInit } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
 import { isEmpty } from 'lodash';
-import { ToastController, ModalController } from '@ionic/angular';
+import { AddRefillComponent } from 'src/app/components/add-refill/add-refill/add-refill.component';
+import { BillingComponent } from 'src/app/components/billing/billing.component';
+import { AddRefillService } from 'src/app/core/service/add-refill/add-refill.service';
+import { OrdersService } from 'src/app/core/service/orders/orders.service';
+
+
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.page.html',
-  styleUrls: ['./cart.page.scss'],
+  selector: 'app-my-orders',
+  templateUrl: './my-orders.page.html',
+  styleUrls: ['./my-orders.page.scss'],
 })
-export class CartPage implements OnInit {
+export class MyOrdersPage implements OnInit {
   lists = [];
   total = 0;
   grandTotal = 0;
   discount= 0;
-  constructor(private orderS: OrdersService, private modalController: ModalController,
+  orderHistory = [];
+  constructor(private orderS: OrdersService,private invS: InventoryService, private modalController: ModalController,
     private refillS: AddRefillService, private toastController: ToastController) { }
 
   ngOnInit() {
+    this.invS.myOrders().subscribe((e:  any) =>{
+      console.log(e);
+      this.orderHistory = e.receipts;
+    });
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
-      if(e.length === 0){
-        this.presentToast('No item in cart');
-      }
       this.lists = isEmpty(e) ? [] : e;
       this.total = this.lists.reduce((a, b) => a + (b.actualPrice * b.quantity),0);
       this.discount = this.lists.reduce((a, b) => {
@@ -57,7 +63,7 @@ export class CartPage implements OnInit {
   }
   async presentModal(list) {
     const modal = await this.modalController.create({
-      component: AddRefillComponent,
+      component: ReceiptComponent,
       cssClass: 'fullscreen',
       componentProps: {
         itemName: list.itemName,
@@ -77,5 +83,11 @@ export class CartPage implements OnInit {
     });
     await modal.present();
   }
-
+  totalAmount(arr){
+    let total = 0;
+    arr.forEach(element => {
+      total += element.cost * element.quantity;
+    });
+    return total;
+  }
 }

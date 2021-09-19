@@ -21,6 +21,7 @@ declare const getpaidSetup: any;
 export class BillingComponent implements OnInit {
   @Input() grandTotal: any;
   @Input() items: any;
+  savedTotal = 0;
   allLocations = locationList;
   cardSaved = false;
   cardObj: any;
@@ -54,16 +55,17 @@ export class BillingComponent implements OnInit {
       disabled: false,
       checked: false,
       color: 'primary'
-    }, {
-      id: '2',
-      name: 'payment',
-      text: 'Cash Payment',
-      value: 'cash',
-      icon: 'cash',
-      disabled: false,
-      checked: true,
-      color: 'secondary'
-    }
+    },
+    // {
+    //   id: '2',
+    //   name: 'payment',
+    //   text: 'Cash Payment',
+    //   value: 'cash',
+    //   icon: 'cash',
+    //   disabled: false,
+    //   checked: true,
+    //   color: 'secondary'
+    // }
   ];
   constructor(private fb: FormBuilder,
     private authService: AuthService,
@@ -82,10 +84,11 @@ export class BillingComponent implements OnInit {
         location: ['', [Validators.required]],
         paymentType: ['card', [Validators.required]],
       });
-
     }
 
-   async ngOnInit() {
+    async ngOnInit() {
+      this.savedTotal = this.grandTotal;
+      console.log(this.savedTotal);
     const card = await Storage.get({ key: SAVED_CARD });
     this.cardObj = JSON.parse(card.value);
     if(this.cardObj !== null){
@@ -143,6 +146,7 @@ export class BillingComponent implements OnInit {
     );
   }
   setPayment(value: any){
+    console.log(value);
     this.billingInfo.patchValue({
       paymentType: value
     });
@@ -282,7 +286,10 @@ export class BillingComponent implements OnInit {
   }
   locationChange(e){
     console.log(e.detail.value);
-    this.grandTotal += e.detail.value;
+    console.log(e);
+    const value = this.allLocations.filter(loc => loc.label === e.detail.value)[0].value;
+    console.log(value);
+    this.grandTotal = value + this.savedTotal;
     console.log(this.grandTotal);
   }
   // Easy access for form fields

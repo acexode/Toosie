@@ -4,19 +4,19 @@
     <ion-slide *ngFor="let item of items" class="width: 140px">
       <div  class="slide mr-8">
         <div (click)="productModal(item)" class="img-container">
-          <img [src]="item.resourceImages[0]"/>
-
+          <img [src]="item.resourceImages ? item?.resourceImages[0]: 'assets/icon/not-available.png'" />
+          <!-- [src]="item?.resourceImages[0]" -->
         </div>
         <div (click)="productModal(item)" style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
           <ion-text class="product-title">
             <!-- {{item.title.length > 20 ? item.title | slice:0:20 : item.title}} -->
-            {{ (item.title.length > 20)? (item.title | slice:0:20)+'..':(item.title) }}
+            {{ (item?.title.length > 20)? (item?.title | slice:0:20)+'..':(item?.title) }}
           </ion-text>
           <small class="discount pt-5">
-            {{item.discountPercent}}%  OFF
+            {{item?.discountPercent}}%  OFF
           </small>
           <small class="price pt-5">
-            ₦ {{item.currentPrice}}
+            ₦ {{item?.currentPrice}}
           </small>
         </div>
         <ion-button (click)="addToCart(item)" class="knowMore">

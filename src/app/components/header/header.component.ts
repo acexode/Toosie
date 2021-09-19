@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
-      console.log(e);
       this.cartTotal = isEmpty(e) ? 0 : e.length;
     });
   }

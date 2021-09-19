@@ -30,7 +30,7 @@ export class MenuPage implements OnInit {
   manage = [
     {
       title: 'My Orders',
-      url: '/menu/home/cart-orders',
+      url: '/menu/home/my-orders',
       icon: 'shopping-cart'
     },
     {

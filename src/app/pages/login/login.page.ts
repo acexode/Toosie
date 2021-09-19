@@ -19,6 +19,13 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController) { }
 
   ngOnInit() {
+    this.authService.isAuthenticated.subscribe(isAuth =>{
+      console.log(isAuth);
+      if (isAuth) {
+        // Directly open inside area
+        this.router.navigate(['menu/home']);;
+      }
+    });
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],

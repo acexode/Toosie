@@ -1,8 +1,13 @@
+ion-header{
+    background: rgb(2,129,178);
+    background: linear-gradient(90deg, rgba(2,129,178,1) 0%, rgba(2,129,178,1) 88%, rgba(0,212,255,1) 100%);
+    --ion-color-base: transparent !important;
+}
 ion-toolbar {
     --background: rgb(2,129,178);
     --background: linear-gradient(90deg, rgba(2,129,178,1) 0%, rgba(2,129,178,1) 88%, rgba(0,212,255,1) 100%);
     --ion-color-base: transparent !important;
-    height: 110px;
+    height: 135px;
     text-align: left;
     color: #fff;
     padding: 7px 10px !important;

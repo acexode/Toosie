@@ -33,6 +33,7 @@ export const refillEndpoints = {
     removeRefill: baseEndpoints.auth + '/refill/close',
     allRefill: baseEndpoints.auth + '/refill/mine/'
 };
+
 export const wishListEndpoints = {
     addWish: baseEndpoints.auth + '/wishlist/new',
     removeWish: baseEndpoints.auth + '/wishlist/remove',

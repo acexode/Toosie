@@ -25,7 +25,7 @@ export class SlideItemComponent implements OnInit {
     private toastController: ToastController) { }
 
   ngOnInit() {
-
+    console.log(this.items);
     this.slideOpts = {
       initialSlide: 0,
       speed: 400,

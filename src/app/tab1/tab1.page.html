@@ -94,7 +94,7 @@
         </ion-text>
       </ion-col>
       <ion-col class="flex ion-justify-content-end">
-        <span (click)="navigate('shop')" class="see-all">
+        <span (click)="seeAll('see-all', 'popular')" class="see-all">
           See All
         </span>
       </ion-col>
@@ -127,7 +127,7 @@
         </ion-text>
       </ion-col>
       <ion-col class="flex ion-justify-content-end">
-        <span (click)="navigate('shop')" class="see-all">
+        <span (click)="seeAll('see-all', 'latest')" class="see-all">
           See All
         </span>
       </ion-col>
@@ -158,10 +158,12 @@
       </ion-col>
       <ion-col (click)="navigate('blog')" *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
         <ion-card>
-          <img [src]="blog.blogImage" />
-          <ion-card-header>
-            <ion-card-title>{{blog.blogTitle}}</ion-card-title>
-          </ion-card-header>
+          <ion-row class="h-100">
+            <img [src]="blog.blogImage" />
+          </ion-row>
+          <ion-card-content>
+            <ion-card-title> {{ (blog.blogTitle.length>15)? (blog.blogTitle | slice:0:13)+'..':(blog.blogTitle) }} </ion-card-title>
+          </ion-card-content>
          
         </ion-card>
       </ion-col>

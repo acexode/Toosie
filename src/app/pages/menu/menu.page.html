@@ -1,18 +1,17 @@
 <ion-split-pane contentId="content">
   <ion-menu contentId="content">
  
-    <ion-header   no-border>
-      <ion-toolbar *ngIf="true" class="flex flex-column pt-8">
-        <div class="pt-15">{{user?.fullName}}</div>
-        <div class="pt-8"><ion-text>{{user?.email}}</ion-text></div>
-        <div> <ion-text>{{user?.phone}}</ion-text></div>
-        
-       
+    <ion-header class="pt-16"   no-border>
+      <ion-toolbar class="flex flex-column">
+        <div class="pl-5 pt-15">{{user?.fullName}}</div>
+        <div class="pl-5 pt-8"><ion-text>{{user?.email}}</ion-text></div>
+        <div class="pl-5 pt-8"> <ion-text>{{user?.phone}}</ion-text></div>
+
       </ion-toolbar>
-      <ion-toolbar *ngIf="false" class="flex flex-column">
+      <!-- <ion-toolbar *ngIf="false" class="flex flex-column">
         <ion-title class="ion-text-center mb-8">Welcome to Toosie</ion-title>
         <ion-button class="login w-100 mt-8"  expand="block">Login</ion-button>
-      </ion-toolbar>
+      </ion-toolbar> -->
     </ion-header>
  
     <ion-content class="ion-no-padding">

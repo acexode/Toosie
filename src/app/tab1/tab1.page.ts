@@ -85,9 +85,9 @@ export class Tab1Page implements OnInit {
     this.latest$ = this.invS.latestStore;
     this.blogs$ = this.blogS.blogStore;
     console.log(this.blogs$);
+    console.log(this.popular$);
   }
   shop(q){
-    console.log(q);
     this.router.navigate(['menu/home/shop', {category: q}]);
   }
   async presentModal() {
@@ -98,18 +98,22 @@ export class Tab1Page implements OnInit {
     await modal.present();
   }
   doRefresh(event) {
-    console.log('Begin async operation');
+
 
     setTimeout(() => {
-      console.log('Async operation has ended');
+
       event.target.complete();
     }, 1000);
   }
   navigate(end){
     this.router.navigate(['menu/home/'+end]);
   }
+  seeAll(path, params){
+    this.router.navigate(['menu/home/'+path, params]);
+
+  }
   tawkto(){
-    console.log(window.tawk_API);
+
     window.Tawk_API.maximize();
   }
 }

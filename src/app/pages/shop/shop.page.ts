@@ -60,7 +60,7 @@ export class ShopPage implements OnInit {
   tab = this.categories[0].id;
   opts = {
     freeMode: true,
-    slidesPerView: 3,
+    slidesPerView: 2.5,
     slidesOffsetBefore: 30,
     slidesOffsetAfter: 100
   };

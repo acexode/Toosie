@@ -63,12 +63,16 @@ export class OrdersService {
         this.cartStore.next(parseCart);
         Storage.set({key: MY_CART, value: JSON.stringify([...parseCart])});
       }else{
-        item.quantity = item.quantity < 1 ? 0 : item.quantity - 1;
-        const parseCart = JSON.parse(cart.value);
-        const index = parseCart.findIndex((e) => e._id === item._id);
-        parseCart[index] = item;
-        this.cartStore.next(parseCart);
-        Storage.set({key: MY_CART, value: JSON.stringify([...parseCart])});
+        item.quantity = item.quantity - 1;
+        if(item.quantity < 1){
+          this.removeItemFromCart(item);
+        }else{
+          const parseCart = JSON.parse(cart.value);
+          const index = parseCart.findIndex((e) => e._id === item._id);
+          parseCart[index] = item;
+          this.cartStore.next(parseCart);
+          Storage.set({key: MY_CART, value: JSON.stringify([...parseCart])});
+        }
       }
     }
   }
