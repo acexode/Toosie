@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/JWTInterceptor';
 import { FlutterwaveModule } from 'flutterwave-angular-v3';
 
+
 @NgModule({
   declarations: [AppComponent, ShopPipe],
   entryComponents: [],

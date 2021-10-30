@@ -1,6 +1,15 @@
 ion-toolbar {
-    --background: #f4f8f5;
+    --background: #0281b2;
+    background: linear-gradient(
+90deg, #0281b2 0%, #0281b2 88%, #00d4ff 100%);
     --ion-color-base: transparent !important;
+}
+.p-board {
+    background: #0281b2;
+    background: linear-gradient(
+90deg, #0281b2 0%, #0281b2 88%, #00d4ff 100%);
+    --ion-color-base: transparent !important;
+    height: 170px;
  }
  .header-md::after {
      background: none !important;
@@ -12,7 +21,11 @@ ion-toolbar {
 	 color: #0281B2;
  }
 
-
+.edit{
+    background: rgb(75, 69, 69);
+    color: #fff;
+    border-radius: 8px;
+}
 .login{
 	--background: #0281B2;
 }
@@ -28,4 +41,20 @@ ion-toolbar {
 	z-index: 10;
     margin-left: 35%;
 }
- 
+ .desc{
+     padding-left: 10px;
+
+ }
+ ion-avatar{
+     width: 80px;
+     height: 80px;
+     background: rgb(146, 141, 141);
+     border-radius: 50%;
+     border: 1px solid #fff;
+ }
+ .user-label{
+     padding-left: 19px;
+ }
+ .item ion-icon{
+     padding-right: 20px;
+ }

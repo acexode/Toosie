@@ -9,6 +9,7 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
 })
 export class InventoryService {
   cartStore: BehaviorSubject<any> = new BehaviorSubject([]);
+  categoryStore: BehaviorSubject<any> = new BehaviorSubject([]);
   popularStore: BehaviorSubject<any> = new BehaviorSubject([]);
   latestStore: BehaviorSubject<any> = new BehaviorSubject([]);
   loading: BehaviorSubject<any> = new BehaviorSubject(false);
@@ -16,19 +17,18 @@ export class InventoryService {
     this.multipleRequest();
    }
 
-  allCategories(){
-    return this.reqS.get(inventoryEndpoints.allCategories);
-  }
   allBrands(){
     return this.reqS.get(inventoryEndpoints.brands).pipe(map((data: any) => data.inventoryBrands));
   }
   multipleRequest(){
     const popular = this.reqS.get(inventoryEndpoints.popular +'/1');
     const latest = this.reqS.get(inventoryEndpoints.latest +'/1');
-    forkJoin([popular, latest]).subscribe((results: any) =>{
+    const categories = this.reqS.get(inventoryEndpoints.allCategories);
+    forkJoin([popular, latest, categories]).subscribe((results: any) =>{
       console.log(results);
       this.popularStore.next(results[0].inventory);
       this.latestStore.next(results[1].inventory);
+      this.categoryStore.next(results[2].inventoryCategory);
     });
   }
   inventoryByCategory(id){

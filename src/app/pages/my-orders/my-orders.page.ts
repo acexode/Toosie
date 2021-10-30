@@ -1,7 +1,7 @@
 import { InventoryService } from './../../core/service/inventory/inventory.service';
 import { ReceiptComponent } from './../../components/receipt/receipt.component';
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { isEmpty } from 'lodash';
 import { AddRefillComponent } from 'src/app/components/add-refill/add-refill/add-refill.component';
 import { BillingComponent } from 'src/app/components/billing/billing.component';
@@ -21,24 +21,27 @@ export class MyOrdersPage implements OnInit {
   discount= 0;
   orderHistory = [];
   constructor(private orderS: OrdersService,private invS: InventoryService, private modalController: ModalController,
-    private refillS: AddRefillService, private toastController: ToastController) { }
+    private refillS: AddRefillService, private toastController: ToastController, private loadCtrl: LoadingController) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loading = await this.loadCtrl.create();
+    await loading.present();
     this.invS.myOrders().subscribe((e:  any) =>{
       console.log(e);
+      loading.dismiss();
       this.orderHistory = e.receipts;
     });
-    this.orderS.cartStore.subscribe(e =>{
-      console.log(e);
-      this.lists = isEmpty(e) ? [] : e;
-      this.total = this.lists.reduce((a, b) => a + (b.actualPrice * b.quantity),0);
-      this.discount = this.lists.reduce((a, b) => {
-        console.log(a + ((b.actualPrice - b.currentPrice)));
-        // return a + ((b.actualPrice - b.currentPrice));
-        return a + ( b.currentPrice * b.quantity);
-      },0);
-      console.log(this.discount);
-    });
+    // this.orderS.cartStore.subscribe(e =>{
+    //   console.log(e);
+    //   this.lists = isEmpty(e) ? [] : e;
+    //   this.total = this.lists.reduce((a, b) => a + (b.actualPrice * b.quantity),0);
+    //   this.discount = this.lists.reduce((a, b) => {
+    //     console.log(a + ((b.actualPrice - b.currentPrice)));
+    //     // return a + ((b.actualPrice - b.currentPrice));
+    //     return a + ( b.currentPrice * b.quantity);
+    //   },0);
+    //   console.log(this.discount);
+    // });
   }
   removeItem(item){
     this.orderS.removeItemFromCart(item);

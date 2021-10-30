@@ -8,7 +8,9 @@ export const baseEndpoints = {
 export const authEndpoints = {
     login: baseEndpoints.auth + '/login',
     signup: baseEndpoints.auth + '/register',
-    updateAddress: baseEndpoints.auth + '/add/address',
+    addAddress: baseEndpoints.auth + '/add/address',
+    deleteAddress: baseEndpoints.auth + '/address/remove',
+    allAddress: baseEndpoints.auth + '/address/all',
     updateProfile: baseEndpoints.auth + '/update/profile',
     updateProfileImage: baseEndpoints.auth + '/update/profile/image',
 };

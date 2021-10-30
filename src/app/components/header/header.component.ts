@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   async presentModal() {
     const modal = await this.modalController.create({
       component: SearchComponent,
-      cssClass: 'fullscreen'
+      cssClass: 'fullscreen',
     });
     await modal.present();
   }

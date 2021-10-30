@@ -69,6 +69,15 @@ export class AuthService {
       })
     );
   }
+  newAddress(credentials): Observable<any> {
+    return this.reqS.post(authEndpoints.addAddress, credentials);
+  }
+  deleteAddress(id): Observable<any> {
+    return this.reqS.delete(authEndpoints.deleteAddress+'/'+ id);
+  }
+  allAddress(): Observable<any> {
+    return this.reqS.get(authEndpoints.allAddress);
+  }
   currentUser(): Observable<any> {
     return from(Storage.get({key: CURRENT_USER}));
 

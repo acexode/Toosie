@@ -18,11 +18,10 @@ export class SingleComponent implements OnInit  {
   @Input('expandHeight') expandHeight = '150px';
   sameCategory$: Observable<any>;
   showButton = false;
-  opts = {
-    freeMode: true,
-    slidesPerView: 1,
-    slidesOffsetBefore: 0,
-    slidesOffsetAfter: 0
+  opts  = {
+    slidesPerView: 1.6,
+    spaceBetween: 10,
+    centeredSlides: true
   };
   infoPanel = [];
   constructor(private orderS: OrdersService,
@@ -31,6 +30,9 @@ export class SingleComponent implements OnInit  {
     private toastController: ToastController) { }
 
   ngOnInit() {
+    // this.opts = {
+    //   freeMode: false,
+    // };
     console.log(this.item);
     this.inventoryS.inventoryByCategory(this.item.category._id).subscribe((e: any) =>{
       console.log(e);

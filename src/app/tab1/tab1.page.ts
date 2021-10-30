@@ -17,63 +17,7 @@ export class Tab1Page implements OnInit {
   popular$: Observable<any>;
   latest$: Observable<any>;
   blogs$: Observable<any>;
-  categories =  [
-    {
-      img: 'assets/icon/baby.png',
-      title: 'Baby & Child',
-      path: ''
-    },
-    {
-      img: 'assets/icon/woman.png',
-      title: 'Women Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/man.png',
-      title: 'Men Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/man.png',
-      title: 'Vitamins',
-      path: ''
-    },
-    {
-      img: 'assets/icon/hair-care.png',
-      title: 'Hair Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/skincare.png',
-      title: 'Skin Care',
-      path: ''
-    },
-    // {
-    //   img: 'assets/icon/toothbrush.png',
-    //   title: 'Oral Care',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/natural.png',
-    //   title: 'Organic Products',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/medical-assistance.png',
-    //   title: 'Medical Supplies',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/mask.png',
-    //   title: 'Protection 101',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/sex.png',
-    //   title: 'Sexual Health1',
-    //   path: ''
-    // },
-  ];
+  categories =  [];
 
 
 
@@ -84,6 +28,14 @@ export class Tab1Page implements OnInit {
     this.popular$ = this.invS.popularStore;
     this.latest$ = this.invS.latestStore;
     this.blogs$ = this.blogS.blogStore;
+    this.invS.categoryStore.subscribe((res: any) =>{
+      console.log(res);
+      this.categories = res.map(cat =>({
+        img: cat.categoryImage,
+        title: cat.category,
+        id: cat.id
+      }));
+    });
     console.log(this.blogs$);
     console.log(this.popular$);
   }

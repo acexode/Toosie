@@ -2,12 +2,12 @@
 <ion-content>
 <ion-row>
   <ion-col size="12">
-    <ion-slides  [pager]="true"  >
+    <ion-slides [options]="opts" >
 
       <ion-slide *ngFor="let img of item.resourceImages" class="width: 100%">
         <div  class="slide">
           <div style="height: 350px;" class="img-container">
-            <img style="width:70%" [src]="img"/>
+            <img [src]="img"/>
           </div>
           <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
         </div>

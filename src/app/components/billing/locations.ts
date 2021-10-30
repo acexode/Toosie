@@ -1,30 +1,46 @@
 export const locationList = [
   {
     label: 'Asokoro',
-    value: 500,
+    value: 700,
   },
   {
-    label: 'Apo',
-    value: 500,
+    label: 'Apo District',
+    value: 700,
   },
   {
     label: 'Durumi',
-    value: 500,
+    value: 700,
   },
   {
-    label: 'Garki',
+    label: 'Dei Dei',
+    value: 1000,
+  },
+  {
+    label: 'Dutse Alhaji',
+    value: 800,
+  },
+  {
+    label: 'Garki I',
     value: 500,
   },
   {
     label: 'Garki II',
-    value: 500,
+    value: 700,
+  },
+  {
+    label: 'Gudu',
+    value: 700,
+  },
+  {
+    label: 'Guzape',
+    value: 700,
   },
   {
     label: 'Jabi',
     value: 500,
   },
   {
-    label: 'Jikwoyi',
+    label: 'Jahi',
     value: 500,
   },
   {
@@ -33,35 +49,15 @@ export const locationList = [
   },
   {
     label: 'Karu',
-    value: 500,
-  },
-  {
-    label: 'Kpeyegi',
-    value: 500,
-  },
-  {
-    label: 'Kuchigoro',
-    value: 500,
-  },
-  {
-    label: 'Katampe',
-    value: 500,
-  },
-  {
-    label: 'Kwari',
-    value: 500,
-  },
-  {
-    label: 'Kurudu',
-    value: 500,
-  },
-  {
-    label: 'Kwali',
-    value: 500,
+    value: 1000,
   },
   {
     label: 'Lokogoma',
-    value: 500,
+    value: 700,
+  },
+  {
+    label: 'Lugbe',
+    value: 1000,
   },
   {
     label: 'Lugbe',
@@ -73,7 +69,7 @@ export const locationList = [
   },
   {
     label: 'Kubwa',
-    value: 1000,
+    value: 800,
   },
   {
     label: 'Galadima',
@@ -84,12 +80,16 @@ export const locationList = [
     value: 1000,
   },
   {
+    label: 'Gwarimpa',
+    value: 700,
+  },
+  {
     label: 'Gwagwalada',
     value: 1000,
   },
   {
     label: 'Idu',
-    value: 500,
+    value: 700,
   },
   {
     label: 'Jabi',
@@ -105,54 +105,35 @@ export const locationList = [
   },
   {
     label: 'Maitama',
-    value: 500,
+    value: 700,
   },
   {
     label: 'Mabushi',
-    value: 500,
+    value: 700,
   },
   {
     label: 'Mpape',
     value: 1000,
   },
   {
-    label: 'Nyanya',
+    label: 'Mbora',
     value: 1000,
   },
-  {
-    label: 'Okanje',
-    value: 500,
-  },
-  {
-    label: 'Orozo',
-    value: 500,
-  },
-  {
-    label: 'Pyakasa',
-    value: 500,
-  },
-  {
-    label: 'Sabo Gida',
-    value: 500,
-  },
-  {
-    label: 'Utako',
-    value: 500,
-  },
+
   {
     label: 'Wuse',
     value: 500,
   },
   {
-    label: 'Wumba',
-    value: 500,
-  },
-  {
-    label: 'Wuye',
-    value: 500,
-  },
-  {
     label: 'Wuse II',
     value: 500,
+  },
+  {
+    label: 'Others (Abuja)',
+    value: 2500,
+  },
+  {
+    label: 'Others (Nigeria)',
+    value: 4000,
   },
 ];

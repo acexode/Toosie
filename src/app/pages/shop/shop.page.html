@@ -5,7 +5,8 @@
     <ion-segment-button *ngFor="let cat of categories" [value]="cat.id">
       <ion-label>{{cat?.category}}</ion-label>
     </ion-segment-button>
-  </ion-segment> --> 
+  </ion-segment>  -->
+
     <ion-slides [options]="opts" #slides>
       <ion-slide *ngFor="let cat of categories; let i = index;">
         <ion-button fill="clear" class="text-dark" [class.active-category]="tab === cat.id" (click)="segmentChanged(cat.id)">

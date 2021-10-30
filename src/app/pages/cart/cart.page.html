@@ -4,19 +4,19 @@
   <ion-row *ngFor="let list of lists" class="card">
    <ion-col class="img-col" size="4">
     <a style="min-height: 150px" class="block-center flex pt-20">
-      <img class="block-center" width="220" height="100" [src]="list?.resourceImages[0]" >  
+      <img class="block-center" width="220" height="100" [src]="list.resourceImages ? list?.resourceImages[0]: 'assets/icon/not-available.png'" >  
     </a>
    </ion-col>
    <ion-col size="8" class="details-col pl-10">
-    <a  class="title mb-4 ellipsis-2">{{list.title}} </a>
-    <a  class="text-display-4 mb-4 ellipsis-2">Type: <span>{{list.type ? list.type : 'Not available'}}</span> </a>
-    <a  class="text-display-4 mb-4 ellipsis-2">Brand: <span>{{list.brand ? list.brand : 'Not available'}}</span> </a>
+    <a  class="title mb-4 ellipsis-2">{{list?.title}} </a>
+    <a  class="text-display-4 mb-4 ellipsis-2">Type: <span>{{list?.type ? list.type : 'Not available'}}</span> </a>
+    <a  class="text-display-4 mb-4 ellipsis-2">Brand: <span>{{list?.brand ? list.brand : 'Not available'}}</span> </a>
     <div class="pt-16 mb-4">
       <span class="price">
-        ₦ {{list.actualPrice - list.currentPrice}}
+        ₦ {{list?.currentPrice}}
       </span>
       <span *ngIf="list.discountPercent !== 0" class="price strike">
-        ₦ {{list.actualPrice}}
+        ₦ {{list?.actualPrice}}
       </span>
     </div>
    </ion-col>
@@ -35,7 +35,7 @@
           <ion-icon name="minus-circle"></ion-icon>
         </ion-button>       
         <ion-button class="ps" fill="clear">
-          <ion-label>{{list.quantity}}</ion-label>
+          <ion-label>{{list?.quantity}}</ion-label>
         </ion-button>
         <ion-button (click)="incrementDecrement(list, 'increment')" class="ps" fill="clear">
           <ion-icon name="plus-circle"></ion-icon>

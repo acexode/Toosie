@@ -28,6 +28,7 @@ export class SlideItemComponent implements OnInit {
     console.log(this.items);
     this.slideOpts = {
       initialSlide: 0,
+      freeMode: false,
       speed: 400,
       slidesPerView: this.preview,
     // coverflowEffect: {

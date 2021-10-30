@@ -21,7 +21,7 @@ export class CartPage implements OnInit {
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
-      if(e.length === 0){
+      if(e !== null || e.length === 0){
         this.presentToast('No item in cart');
       }
       this.lists = isEmpty(e) ? [] : e;
@@ -29,7 +29,7 @@ export class CartPage implements OnInit {
       this.discount = this.lists.reduce((a, b) => {
         console.log(a + ((b.actualPrice - b.currentPrice)));
         // return a + ((b.actualPrice - b.currentPrice));
-        return a + ( b.currentPrice * b.quantity);
+        return a + ( b.actualPrice - b.currentPrice);
       },0);
       console.log(this.discount);
     });
