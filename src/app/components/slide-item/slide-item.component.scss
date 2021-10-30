@@ -1,58 +1,79 @@
-.slide-container{
-    width: 50% !important;
+.slide-container {
+  width: 50%;
+}
+ion-slides {
+  --background: #000;
+}
+ion-slide {
+  height: 270px;
+}
+.slide {
+  position: relative;
+  height: 230px;
+  border: 1px solid #dbe1e2;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+}
+ion-slide {
+  width: 145px !important;
+}
+.actual-price {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #666;
+  text-decoration: line-through;
+}
+.discount {
+  margin-left: 8px;
+  font-size: 13px;
+  line-height: 19px;
+  font-style: normal;
+  background: #2ed373;
+  padding: 0 6px;
+  text-align: center;
+  border-radius: 4px;
+  color: #fff;
+}
+.price {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19px;
+  color: #000;
+  padding-top: 10px;
+}
 
+.img-container {
+  height: 80px;
+  border-bottom: 1px solid #dbe1e2;
 }
-ion-slides{
-    --background: #000;
-}
-ion-slide{
-    // height: 270px;
-}
-.slide{
-    position: relative;
-    height: 230px;
-    border: 1px solid #dbe1e2;
-    border-radius: 8px;
-    padding: 8px;
-    width: 100%;
-}
-ion-slide{
-    width: 145px !important;
-}
-.discount{
-    color: #2ed373;
-}
-.price{
-    color: #000;
-}
-
-.img-container{
-    height: 80px;
-    border-bottom: 1px solid #dbe1e2;
-}
-.product-title{
-    color: #000;
-    font-size: 14px;
-
+.product-title {
+  color: #000;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  height: 1.25rem;
+  margin: 0.3125rem 0 0.625rem;
+  white-space: normal;
 }
 .swiper-slide img {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    padding-bottom: 10px;
-
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-bottom: 10px;
 }
-.round-btn{
-    --border-radius: 50%;
-    position: absolute;
-    bottom: 4px;
-    right: 5%;
+.round-btn {
+  --border-radius: 50%;
+  position: absolute;
+  bottom: 4px;
+  right: 5%;
 }
 .knowMore {
-    width: 100%;
-    height: 53 !important;
-    font-size: small;
-    color: #fff;
-    text-align: center;
-    --background: #0281B2;
-    text-transform: none;
+  width: 100%;
+  height: 53 !important;
+  font-size: small;
+  color: #fff;
+  text-align: center;
+  --background: #0281b2;
+  text-transform: none;
+  margin-top: 12px;
 }

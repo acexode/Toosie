@@ -17,8 +17,8 @@ export class SlideItemComponent implements OnInit {
   fakeitems = [1,2,3,4,5,6];
   slideOpts = {};
   opts = {
-    freeMode: true,
-    slidesPerView: 2,
+    freeMode: false,
+    slidesPerView: 3,
   };
   constructor(private orderS: OrdersService,
     private modalController: ModalController,
@@ -28,16 +28,15 @@ export class SlideItemComponent implements OnInit {
     console.log(this.items);
     this.slideOpts = {
       initialSlide: 0,
-      freeMode: false,
       speed: 400,
       slidesPerView: this.preview,
-    // coverflowEffect: {
-    //   rotate: 50,
-    //   stretch: 0,
-    //   depth: 100,
-    //   modifier: 1,
-    //   slideShadows: true,
-    // },
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
     };
   }
   addToCart(item){

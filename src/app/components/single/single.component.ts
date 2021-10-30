@@ -19,9 +19,16 @@ export class SingleComponent implements OnInit  {
   sameCategory$: Observable<any>;
   showButton = false;
   opts  = {
-    slidesPerView: 1.6,
-    spaceBetween: 10,
-    centeredSlides: true
+    initialSlide: 0,
+    speed: 400,
+    slidesPerView: 1,
+  coverflowEffect: {
+    rotate: 50,
+    stretch: 0,
+    depth: 100,
+    modifier: 1,
+    slideShadows: true,
+  },
   };
   infoPanel = [];
   constructor(private orderS: OrdersService,
