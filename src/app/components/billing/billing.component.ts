@@ -46,16 +46,16 @@ export class BillingComponent implements OnInit {
     },
   };
   paymentMethods = [
-    {
-      id: '1',
-      name: 'payment',
-      text: 'Card Payment',
-      value: 'card',
-      icon: 'credit-card',
-      disabled: false,
-      checked: false,
-      color: 'primary'
-    },
+    // {
+    //   id: '1',
+    //   name: 'payment',
+    //   text: 'Card Payment',
+    //   value: 'card',
+    //   icon: 'credit-card',
+    //   disabled: true,
+    //   checked: false,
+    //   color: 'primary'
+    // },
     {
       id: '2',
       name: 'payment',

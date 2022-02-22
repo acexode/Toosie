@@ -69,9 +69,9 @@ export class MenuPage implements OnInit {
      private modalController: ModalController) { }
 
   async ngOnInit() {
-   await Storage.get({key: 'current-user'}).then((user: any) =>{
-      this.user = JSON.parse(user.value);
-      console.log(this.user);
+    this.authS.currentUser$.subscribe(user =>{
+      this.user = user;
+
     });
     Storage.get({ key: MY_CART }).then(cart =>{
       console.log(cart);

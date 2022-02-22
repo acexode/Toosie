@@ -5,7 +5,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
 import { ToastController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
-
+import SwiperCore, { SwiperOptions } from 'swiper';
 @Component({
   selector: 'app-single',
   templateUrl: './single.component.html',
@@ -18,18 +18,15 @@ export class SingleComponent implements OnInit  {
   @Input('expandHeight') expandHeight = '150px';
   sameCategory$: Observable<any>;
   showButton = false;
-  opts  = {
-    initialSlide: 0,
-    speed: 400,
+  config: SwiperOptions = {
     slidesPerView: 1,
-  coverflowEffect: {
-    rotate: 50,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true,
-  },
+    spaceBetween: 5,
+    navigation: false,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
   };
+
+
   infoPanel = [];
   constructor(private orderS: OrdersService,
     public renderer: Renderer2,
@@ -37,13 +34,12 @@ export class SingleComponent implements OnInit  {
     private toastController: ToastController) { }
 
   ngOnInit() {
-    // this.opts = {
-    //   freeMode: false,
-    // };
     console.log(this.item);
     this.inventoryS.inventoryByCategory(this.item.category._id).subscribe((e: any) =>{
       console.log(e);
       this.sameCategory$ = of(e.inventory);
+      this.inventoryS.similarStore.next(e.inventory);
+      console.log(e.inventory);
     });
     const acc = document.getElementsByClassName('accordion');
     let i;

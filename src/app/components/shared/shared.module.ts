@@ -15,11 +15,12 @@ import { IonicModule } from '@ionic/angular';
 import { BrandsComponent } from '../brands/brands.component';
 import { HeaderComponent } from '../header/header.component';
 import { FlutterwaveModule } from 'flutterwave-angular-v3';
-
+import { SwiperModule } from 'swiper/angular';
+import { PasscodeComponent } from '../passcode/passcode.component';
 
 
 @NgModule({
-  declarations: [BannerComponent, BrandsComponent,
+  declarations: [BannerComponent, BrandsComponent,PasscodeComponent,
     ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent, ReceiptComponent,
     PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent, ProfileComponentsComponent],
   imports: [
@@ -28,13 +29,14 @@ import { FlutterwaveModule } from 'flutterwave-angular-v3';
     ReactiveFormsModule,
     IonicModule,
     FlutterwaveModule,
+    SwiperModule
   ],
   exports:[
     BannerComponent,
     BrandsComponent,
     SearchComponent,
     SlideItemComponent, HeaderComponent, ItemsComponent,ReceiptComponent, ProfileComponentsComponent,
-    PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent
+    PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent, PasscodeComponent
   ]
 })
 export class SharedModule { }

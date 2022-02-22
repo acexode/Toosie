@@ -1,4 +1,4 @@
-import { authEndpoints } from './../../config/endpoints';
+import { authEndpoints, miscEndpoint } from './../../config/endpoints';
 import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';
 import { map, tap, switchMap } from 'rxjs/operators';
@@ -14,10 +14,15 @@ const CURRENT_USER = 'current-user';
 })
 export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+  currentUser$: BehaviorSubject<any> = new BehaviorSubject<boolean>(null);
   token = '';
 
   constructor(private reqS: RequestService) {
     this.loadToken();
+    this.currentUser().subscribe(e =>{
+      console.log(e);
+      this.currentUser$.next(JSON.parse(e.value));
+    });
   }
 
   async loadToken() {
@@ -39,6 +44,7 @@ export class AuthService {
 
       switchMap((data: any) => {
         console.log(data.token);
+        this.currentUser$.next(data.user);
         from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.user)}));
         return from(Storage.set({key: TOKEN_KEY, value: data.token}));
       }),
@@ -48,7 +54,16 @@ export class AuthService {
     );
   }
   signup(credentials: {name; email; password}): Observable<any> {
-    return this.reqS.post(authEndpoints.signup, credentials).pipe(
+    return this.reqS.post(authEndpoints.signup, credentials)
+    .pipe(
+      switchMap((data: any) => from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.user)}))),
+      tap(_ => {
+        console.log('authenticated');
+      })
+    );
+  }
+  activateAccount(credentials: {email; verificationCode}): Observable<any> {
+    return this.reqS.post(authEndpoints.activate, credentials).pipe(
       switchMap((data: any) => {
         from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.user)}));
         return from(Storage.set({key: TOKEN_KEY, value: data.token}));
@@ -58,14 +73,21 @@ export class AuthService {
       })
     );
   }
-  updateUser(credentials: {fullname; phone; address}): Observable<any> {
+  forgotPasswordInitiate(credentials: {email}): Observable<any> {
+    return this.reqS.post(authEndpoints.forgotPasswordInitiate, credentials);
+  }
+  forgotPasswordComplete(credentials: {email; verificationCode; password}): Observable<any> {
+    return this.reqS.post(authEndpoints.forgotPasswordComplete, credentials);
+  }
+  changePassword(credentials: {oldPassword; newPassword}): Observable<any> {
+    return this.reqS.post(authEndpoints.changePassword, credentials);
+  }
+  updateUser(credentials): Observable<any> {
     return this.reqS.patch(authEndpoints.updateProfile, credentials).pipe(
       switchMap((data: any) => {
         console.log(data);
+        this.currentUser$.next(data.userInfo);
         return from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.userInfo)}));
-      }),
-      tap(_ => {
-        this.isAuthenticated.next(true);
       })
     );
   }
@@ -78,13 +100,17 @@ export class AuthService {
   allAddress(): Observable<any> {
     return this.reqS.get(authEndpoints.allAddress);
   }
+  uploadProfileImage(formData): Observable<any> {
+    return this.reqS.post(miscEndpoint.mediaUpload,formData);
+  }
   currentUser(): Observable<any> {
     return from(Storage.get({key: CURRENT_USER}));
-
   }
 
   logout(): Promise<void> {
     this.isAuthenticated.next(false);
+    Storage.remove({key: CURRENT_USER});
+    Storage.remove({key: 'my_cart'});
     return Storage.remove({key: TOKEN_KEY});
   }
 }

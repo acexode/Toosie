@@ -17,7 +17,7 @@
       <!-- [ngStyle]="{'border': ('savedCard' === paymentType.value) ? '1.6px solid #0281B2' : '' }" -->
        
         <ion-list-header>
-          <ion-text><b class="ion-text-dark">DELIVERY ADDRESS</b></ion-text>
+          <ion-text><b class="ion-text-dark">Select Delivery Location</b></ion-text>
         </ion-list-header>
         <ion-row class="mt-8">
           <ion-col size="12">
@@ -30,16 +30,21 @@
           </ion-col>
     </ion-row>
     <ion-radio-group allow-empty-selection formControlName="address" value="">
+      <ion-list-header *ngIf="allAddress.length > 0">
+        <ion-text><b class="ion-text-dark">Select Delivery Addresss</b></ion-text>
+      </ion-list-header>
         <ion-row>
-          <ion-col size="12" (click)="setAddress(item.address)" *ngFor="let item of allAddress; let i = index">
-                 <ion-row [ngStyle]="{'border': (item.address === address.value) ? '1.6px solid #0281B2' : '' }"  class="slide card mr-8">
-                   <ion-radio mode="md"   [value]="item.address"></ion-radio>
+          <ion-col size="12" (click)="setAddress(item.id)" *ngFor="let item of allAddress; let i = index">
+                 <ion-row [ngStyle]="{'border': (item.id === address.value) ? '1.6px solid #0281B2' : '' }"  class="slide card mr-8">
+                   <ion-radio mode="md"   [value]="item.id"></ion-radio>
                    <ion-col size="3">
                      <ion-icon name="locate-outline"></ion-icon>
                    </ion-col>
                    <ion-col>
                      <h6>Address {{i + 1 }}</h6>
-                     <ion-text class="card-text">{{item.state}} {{item.localGov}} {{item.address}} </ion-text>
+                     <ion-text class="card-text">{{item.state}} </ion-text>
+                     <ion-text class="card-text"> {{item.localGov}} </ion-text>
+                     <ion-text class="card-text"> {{item.address}} </ion-text>
                      
 
                    </ion-col>
@@ -57,7 +62,7 @@
           <!--  -->
           <ion-col  size="12" (click)="setPayment(item.value)" *ngFor="let item of paymentMethods">
                  <ion-row [ngStyle]="{'border': (item.value === paymentType.value) ? '1.6px solid #0281B2' : '' }" class="slide card mr-8">
-                   <ion-radio mode="md"   [value]="item.value"></ion-radio>
+                   <ion-radio mode="md"  [value]="item.value"></ion-radio>
                    <ion-col size="3">
                      <ion-icon [name]="item.icon"></ion-icon>
                    </ion-col >

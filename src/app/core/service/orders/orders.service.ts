@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { wishListEndpoints } from './../../config/endpoints';
 import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';

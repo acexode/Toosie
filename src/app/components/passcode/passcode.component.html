@@ -1,0 +1,145 @@
+<div class="mb-12">
+  <ion-icon
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength < 1"
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse-outline"
+  ></ion-icon>
+  <ion-icon
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse"
+    *ngIf="digitsLength > 0"
+    class="mr-4 password-hide s18-h24"
+  ></ion-icon>
+  <ion-icon
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength < 2"
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse-outline"
+  ></ion-icon>
+  <ion-icon
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse"
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength > 1"
+  ></ion-icon>
+  <ion-icon
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength < 3"
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse-outline"
+  ></ion-icon>
+  <ion-icon
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse"
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength > 2"
+  ></ion-icon>
+  <ion-icon
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength < 4"
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse-outline"
+  ></ion-icon>
+  <ion-icon
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse"
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength > 3"
+  ></ion-icon>
+  <ion-icon
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength < 5"
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse-outline"
+  ></ion-icon>
+  <ion-icon
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse"
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength > 4"
+  ></ion-icon>
+  <ion-icon
+    class="s18-h24 password-hide"
+    *ngIf="digitsLength < 6"
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse-outline"
+  ></ion-icon>
+  <ion-icon
+    [ngClass]="{ 'color-red': errorLogin }"
+    name="ellipse"
+    class="mr-4 password-hide s18-h24"
+    *ngIf="digitsLength > 5"
+  ></ion-icon>
+</div>
+<ion-grid fixed class="ion-no-padding">
+  <ion-row class="ion-align-items-center ion-no-padding ion-justify-content-center">
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(1)"
+      >1</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(2)"
+      >2</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(3)"
+      >3</ion-col
+    >
+  </ion-row>
+  <ion-row class="ion-align-items-center ion-no-padding ion-justify-content-center">
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(4)"
+      >4</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(5)"
+      >5</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(6)"
+      >6</ion-col
+    >
+  </ion-row>
+  <ion-row class="ion-align-items-center ion-no-padding ion-justify-content-center">
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(7)"
+      >7</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(8)"
+      >8</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(9)"
+      >9</ion-col
+    >
+  </ion-row>
+  <ion-row class="ion-align-items-center ion-no-padding ion-justify-content-center">
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+    >
+    </ion-col>
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput(0)"
+      >0</ion-col
+    >
+    <ion-col
+      class="flex ion-align-items-center ion-no-padding ion-justify-content-center s32-h38 alt-font ls-05 h-96 w-104 color-green"
+      (click)="clickingInput('backIcon')"
+    >
+    <ion-icon name="arrow-back-outline"></ion-icon>
+      <!-- <ion-icon name="back-arrow" class="color-green s17-h16"></ion-icon> -->
+    </ion-col>
+  </ion-row>
+</ion-grid>

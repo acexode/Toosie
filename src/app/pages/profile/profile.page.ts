@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/service/auth/auth.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  file: File = null;
   credentials: FormGroup;
   addressForm: FormGroup;
   user;
@@ -59,6 +59,49 @@ export class ProfilePage implements OnInit {
       });
     });
   }
+  onChange(event) {
+    this.file = event.target.files[0];
+    this.onUpload();
+}
+async onUpload() {
+  const data = new FormData();
+  data.append('images', this.file);
+  console.log(this.file);
+  const loading = await this.loadingController.create();
+    await loading.present();
+  this.authService.uploadProfileImage(data).subscribe(
+      async (event: any) => {
+        console.log(event);
+        const update = {
+          profileImage: event.images
+        };
+        this.authService.updateUser(update).subscribe(async e =>{
+         // this.user = e.userInfo;
+          console.log(e);
+          this.authService.currentUser().subscribe(user => {
+            this.user = JSON.parse(user.value);
+          });
+          //console.log(e?.userInfo);
+          await loading.dismiss();
+        });
+      },
+      async (res) => {
+        console.log(res);
+        await loading.dismiss();
+        this.reqFailed(res?.error?.error, 'Request failed');
+      }
+  );
+}
+async reqFailed(res, msg){
+  const alert = await this.alertController.create({
+    header: msg,
+    message: res,
+    buttons: ['OK'],
+  });
+
+  await alert.present();
+
+}
   async presentModal(show) {
     const modal = await this.modalController.create({
       component: ProfileComponentsComponent,

@@ -8,6 +8,10 @@ export const baseEndpoints = {
 export const authEndpoints = {
     login: baseEndpoints.auth + '/login',
     signup: baseEndpoints.auth + '/register',
+    activate: baseEndpoints.auth + '/register/activate',
+    forgotPasswordInitiate: baseEndpoints.auth + '/forgot-password/initiate',
+    forgotPasswordComplete: baseEndpoints.auth + '/forgot-password/complete',
+    changePassword: baseEndpoints.auth + '/change-password',
     addAddress: baseEndpoints.auth + '/add/address',
     deleteAddress: baseEndpoints.auth + '/address/remove',
     allAddress: baseEndpoints.auth + '/address/all',
@@ -40,6 +44,9 @@ export const wishListEndpoints = {
     addWish: baseEndpoints.auth + '/wishlist/new',
     removeWish: baseEndpoints.auth + '/wishlist/remove',
     allWish: baseEndpoints.auth + '/wishlist/mine/all'
+};
+export const miscEndpoint = {
+    mediaUpload: baseEndpoints.inventory + '/media/upload',
 };
 export const inventoryEndpoints = {
     allCategories: baseEndpoints.inventory + '/category/all',

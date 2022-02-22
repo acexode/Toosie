@@ -7,7 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { SharedModule } from '../components/shared/shared.module';
-
+import { SwiperModule } from 'swiper/angular';
 @NgModule({
   imports: [
     IonicModule,
@@ -15,7 +15,8 @@ import { SharedModule } from '../components/shared/shared.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    SharedModule
+    SharedModule,
+    SwiperModule
   ],
   declarations: [Tab1Page,]
 })

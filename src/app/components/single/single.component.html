@@ -2,14 +2,15 @@
 <ion-content>
 <ion-row>
   <ion-col size="12">
-    <ion-slides>
-      <ion-slide *ngFor="let img of item.resourceImages">
-        <div class="slide">
-          <img [src]="img"/>
-         </div>
-      </ion-slide>
+   
+      <swiper
+      [config]="config"
+    >
+      <ng-template  *ngFor="let img of item.resourceImages" swiperSlide>
+        <img src={{img}}/>
+      </ng-template>
+    </swiper>
 
-    </ion-slides>
   </ion-col>
   <ion-col size="12">
     <div style="height: 120px;" class="flex flex-column py-8 pl-30 ion-text-left">

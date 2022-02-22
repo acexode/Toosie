@@ -12,6 +12,7 @@ export class InventoryService {
   categoryStore: BehaviorSubject<any> = new BehaviorSubject([]);
   popularStore: BehaviorSubject<any> = new BehaviorSubject([]);
   latestStore: BehaviorSubject<any> = new BehaviorSubject([]);
+  similarStore: BehaviorSubject<any> = new BehaviorSubject([]);
   loading: BehaviorSubject<any> = new BehaviorSubject(false);
   constructor(private reqS: RequestService) {
     this.multipleRequest();

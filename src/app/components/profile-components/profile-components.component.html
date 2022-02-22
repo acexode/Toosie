@@ -56,6 +56,26 @@
     </ion-col>
   
   </ion-row>
+  <ion-row *ngIf="show === 'password'" class="mt-16">
+    <ion-col size="12">
+      <form (ngSubmit)="updatePassword()" [formGroup]="changePasswordForm" class="form-container pt-16">
+        <ion-item>
+          <ion-label position="floating">Old Password</ion-label>
+          <ion-input type="password" formControlName="oldPassword"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="floating">New Password</ion-label>
+          <ion-input type="password" formControlName="newPassword"></ion-input>
+        </ion-item>
+        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!changePasswordForm.valid">Update</ion-button>
+  
+       
+      </form>
+  
+    </ion-col>
+  
+  </ion-row>
   <ion-row *ngIf="showAddressForm" class="mt-16">
     <ion-col size="12">
       <form (ngSubmit)="submitAddress()" [formGroup]="addressForm" class="form-container pt-16">

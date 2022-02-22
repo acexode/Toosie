@@ -1,4 +1,4 @@
-import { prescriptionEndpoints } from './../../config/endpoints';
+import { prescriptionEndpoints, miscEndpoint } from './../../config/endpoints';
 import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -19,6 +19,9 @@ export class PrescriptionService {
   }
   uploadPrescription(formData): Observable<any> {
     return this.reqS.post(prescriptionEndpoints.newPrecription, formData);
+  }
+  uploadMedia(formData): Observable<any> {
+    return this.reqS.post(miscEndpoint.mediaUpload,formData);
   }
   allPrescriptions(): Observable<any> {
     return this.reqS.get(prescriptionEndpoints.usersPrescription + '/1').pipe(

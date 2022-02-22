@@ -11,7 +11,10 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   credentials: FormGroup;
+  forgotPassword: FormGroup;
   hide = true;
+  showForgotPasswordPage = false;
+  showForgotPasswordPageComplete = false;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
@@ -29,6 +32,11 @@ export class LoginPage implements OnInit {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+    this.forgotPassword = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: [''],
+      verificationCode: [''],
     });
   }
 
@@ -54,10 +62,60 @@ export class LoginPage implements OnInit {
       }
     );
   }
+  async submitForgotPassword() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    if(!this.showForgotPasswordPageComplete){
+      this.authService.forgotPasswordInitiate({email: this.femail.value}).subscribe(
+        async (res) => {
+          await loading.dismiss();
+          this.showForgotPasswordPageComplete = true;
+          this.reqFailed('Success', 'A verification token has been sent to your email');
+        },
+        async (res) => {
+          console.log(res);
+          await loading.dismiss();
+          this.reqFailed(res?.error?.error, 'Request failed');
+        }
+      );
 
+    }else{
+
+      this.authService.forgotPasswordComplete(this.forgotPassword.value).subscribe(
+        async (res) => {
+          await loading.dismiss();
+          this.reqFailed('Success', 'Password changed successfully');
+          this.showForgotPasswordPage = false;
+          
+        },
+        async (res) => {
+          console.log(res);
+          await loading.dismiss();
+          this.reqFailed(res?.error?.error, 'Request failed');
+        }
+      );
+    }
+  }
+
+  async reqFailed(res, msg){
+    const alert = await this.alertController.create({
+      header: msg,
+      message: res,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+
+  }
   // Easy access for form fields
   get email() {
     return this.credentials.get('email');
+  }
+  get femail() {
+    return this.forgotPassword.get('email');
+  }
+  get fpwd() {
+    return this.forgotPassword.get('password');
   }
 
   get password() {

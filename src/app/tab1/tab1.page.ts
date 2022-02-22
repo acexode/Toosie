@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { BlogService } from '../core/service/blog/blog.service';
+import SwiperCore, { SwiperOptions } from 'swiper';
 declare const window: any;
 @Component({
   selector: 'app-tab1',
@@ -18,6 +19,13 @@ export class Tab1Page implements OnInit {
   latest$: Observable<any>;
   blogs$: Observable<any>;
   categories =  [];
+  config: SwiperOptions = {
+    slidesPerView: 3,
+    spaceBetween: 50,
+    navigation: false,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  };
 
 
 
@@ -38,6 +46,12 @@ export class Tab1Page implements OnInit {
     });
     console.log(this.blogs$);
     console.log(this.popular$);
+  }
+  onSwiper([swiper]) {
+    console.log(swiper);
+  }
+  onSlideChange() {
+    console.log('slide change');
   }
   shop(q){
     this.router.navigate(['menu/home/shop', {category: q}]);

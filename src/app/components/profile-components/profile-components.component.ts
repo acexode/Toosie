@@ -14,9 +14,10 @@ export class ProfileComponentsComponent implements OnInit {
   @Input() show = 'Profile';
   credentials: FormGroup;
   addressForm: FormGroup;
+  changePasswordForm: FormGroup;
   showAddressForm = false;
   loadingAddress = false;
-  title = this.show === 'profile' ? 'Profile' : 'Address';
+  title = this.show === 'profile' ? 'Profile' : this.show === 'profile' ? 'address' : 'Change Password';
   allAddress: any;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
@@ -29,6 +30,10 @@ export class ProfileComponentsComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
       address: ['', [Validators.required]],
+    });
+    this.changePasswordForm = this.fb.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required]],
     });
     this.addressForm = this.fb.group({
       state: ['', [Validators.required]],
@@ -72,6 +77,33 @@ export class ProfileComponentsComponent implements OnInit {
     this.authService.updateUser(this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
+        this.router.navigate(['menu/home']);
+      },
+      async (res) => {
+        console.log(res);
+        await loading.dismiss();
+        const alert = await this.alertController.create({
+          header: res.error.message,
+          message: res.error.error,
+          buttons: ['OK'],
+        });
+
+        await alert.present();
+      }
+    );
+  }
+  async updatePassword() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    this.authService.changePassword(this.credentials.value).subscribe(
+      async (res) => {
+        await loading.dismiss();
+        const alert = await this.alertController.create({
+          header: 'Success',
+          message: 'Password changed successfully',
+          buttons: ['OK'],
+        });
         this.router.navigate(['menu/home']);
       },
       async (res) => {

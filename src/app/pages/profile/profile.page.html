@@ -13,7 +13,11 @@
     <div class="flex flex-column desc">
       <div class="flex desc">
         <ion-avatar  slot="start">
-          <!-- <img src="./avatar-finn.png"> -->
+          <img [src]="user?.profileImage">
+          <label for="profile-image" class="camera">
+           <ion-icon name="camera"></ion-icon>
+           <input  (change)="onChange($event)" type="file" id="profile-image" hidden/>
+          </label>
         </ion-avatar>
         <div  class="flex user-label flex-column ">
           <ion-text class="pb-5">{{user?.fullName}}</ion-text>
@@ -44,6 +48,12 @@
       </ion-item>
     </ion-list>
     <ion-list  class="border-b list-items">
+      <ion-item (click)="presentModal('password')" class="item"  >
+        <ion-icon name="key" ></ion-icon>
+        <ion-label>
+          Change Password
+        </ion-label>
+      </ion-item>
       <ion-item (click)="presentModal('address')" class="item"  >
         <ion-icon name="planet-outline" ></ion-icon>
         <ion-label>
