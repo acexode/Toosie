@@ -2,24 +2,15 @@
 <ion-content>
 <ion-row>
   <ion-col size="12">
-    <ion-slides  [pager]="true"  >
+   
+      <swiper
+      [config]="config"
+    >
+      <ng-template  *ngFor="let img of item.resourceImages" swiperSlide>
+        <img src={{img}}/>
+      </ng-template>
+    </swiper>
 
-      <ion-slide *ngFor="let img of item.resourceImages" class="width: 100%">
-        <div  class="slide">
-          <div style="height: 350px;" class="img-container">
-            <img style="width:70%" [src]="img"/>
-  
-          </div>
-         
-          
-          <!-- <ion-button *ngIf="button"  color="dark" class="round-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button> -->
-        </div>
-      </ion-slide>
-  
-      
-      
-  
-    </ion-slides>
   </ion-col>
   <ion-col size="12">
     <div style="height: 120px;" class="flex flex-column py-8 pl-30 ion-text-left">

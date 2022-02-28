@@ -49,6 +49,10 @@ const routes: Routes = [
         loadChildren: () => import('../cart/cart.module').then(m => m.CartPageModule)
       },
       {
+        path: 'payment-details',
+        loadChildren: () => import('../payment/payment.module').then(m => m.PaymentPageModule)
+      },
+      {
         path: 'profile',
         loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
       },
@@ -71,6 +75,14 @@ const routes: Routes = [
       {
         path: 'faq',
         loadChildren: () => import('../faqs/faqs.module').then(m => m.FaqsPageModule)
+      },
+      {
+        path: 'my-orders',
+        loadChildren: () => import('../my-orders/my-orders.module').then( m => m.MyOrdersPageModule)
+      },
+      {
+        path: 'see-all/:id',
+        loadChildren: () => import('../see-all/see-all.module').then( m => m.SeeAllPageModule)
       },
 
     ],

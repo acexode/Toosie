@@ -25,15 +25,14 @@ ion-toolbar {
 	border-bottom-right-radius: 40%;
 }
 .form-container{
-	width: 311px;
-	height: 431px;
+	width: 80%;
 	background: #fff;
 	box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
 	position: absolute;
 	z-index: 10;
 	padding: 20px 16px;
-	top: 25%;
-	left: 8%;
+	top: 20%;
+	left: 10%;
 }
 .login{
 	--background: #0281B2;
@@ -44,13 +43,13 @@ h6{
 	margin: 20px 0px;
 	position: absolute;
     z-index: 10;
-	top: 15%;
+	top: 12%;
 }
 
 .logo{
-	width: 40%;
+	width: 35%;
 	position: absolute;
-	top: 6%;
+	top: 2%;
 	z-index: 10;
 	margin: 0 20%;
 }

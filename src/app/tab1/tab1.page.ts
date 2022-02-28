@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { BlogService } from '../core/service/blog/blog.service';
+import SwiperCore, { SwiperOptions } from 'swiper';
 declare const window: any;
 @Component({
   selector: 'app-tab1',
@@ -17,63 +18,14 @@ export class Tab1Page implements OnInit {
   popular$: Observable<any>;
   latest$: Observable<any>;
   blogs$: Observable<any>;
-  categories =  [
-    {
-      img: 'assets/icon/baby.png',
-      title: 'Baby & Child',
-      path: ''
-    },
-    {
-      img: 'assets/icon/woman.png',
-      title: 'Women Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/man.png',
-      title: 'Men Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/man.png',
-      title: 'Vitamins',
-      path: ''
-    },
-    {
-      img: 'assets/icon/hair-care.png',
-      title: 'Hair Care',
-      path: ''
-    },
-    {
-      img: 'assets/icon/skincare.png',
-      title: 'Skin Care',
-      path: ''
-    },
-    // {
-    //   img: 'assets/icon/toothbrush.png',
-    //   title: 'Oral Care',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/natural.png',
-    //   title: 'Organic Products',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/medical-assistance.png',
-    //   title: 'Medical Supplies',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/mask.png',
-    //   title: 'Protection 101',
-    //   path: ''
-    // },
-    // {
-    //   img: 'assets/icon/sex.png',
-    //   title: 'Sexual Health1',
-    //   path: ''
-    // },
-  ];
+  categories =  [];
+  config: SwiperOptions = {
+    slidesPerView: 3,
+    spaceBetween: 50,
+    navigation: false,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  };
 
 
 
@@ -84,10 +36,19 @@ export class Tab1Page implements OnInit {
     this.popular$ = this.invS.popularStore;
     this.latest$ = this.invS.latestStore;
     this.blogs$ = this.blogS.blogStore;
-    console.log(this.blogs$);
+    this.invS.categoryStore.subscribe((res: any) =>{
+      this.categories = res.map(cat =>({
+        img: cat.categoryImage,
+        title: cat.category,
+        id: cat.id
+      }));
+    });
+  }
+  onSwiper([swiper]) {
+  }
+  onSlideChange() {
   }
   shop(q){
-    console.log(q);
     this.router.navigate(['menu/home/shop', {category: q}]);
   }
   async presentModal() {
@@ -98,18 +59,22 @@ export class Tab1Page implements OnInit {
     await modal.present();
   }
   doRefresh(event) {
-    console.log('Begin async operation');
+
 
     setTimeout(() => {
-      console.log('Async operation has ended');
+
       event.target.complete();
     }, 1000);
   }
   navigate(end){
     this.router.navigate(['menu/home/'+end]);
   }
+  seeAll(path, params){
+    this.router.navigate(['menu/home/'+path, params]);
+
+  }
   tawkto(){
-    console.log(window.tawk_API);
+
     window.Tawk_API.maximize();
   }
 }

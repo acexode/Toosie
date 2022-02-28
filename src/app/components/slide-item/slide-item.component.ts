@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-labels */
 import { SingleComponent } from './../single/single.component';
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastController, ModalController } from '@ionic/angular';
 import { OrdersService } from 'src/app/core/service/orders/orders.service';
+import SwiperCore, { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-slide-item',
@@ -14,30 +16,22 @@ export class SlideItemComponent implements OnInit {
   @Input() button;
   @Input() pager;
   @Input() items = [];
+
   fakeitems = [1,2,3,4,5,6];
-  slideOpts = {};
-  opts = {
-    freeMode: true,
-    slidesPerView: 2,
+  config: SwiperOptions = {
+    slidesPerView: 1.5,
+    spaceBetween: 5,
+    navigation: false,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
   };
+
   constructor(private orderS: OrdersService,
     private modalController: ModalController,
     private toastController: ToastController) { }
 
   ngOnInit() {
-
-    this.slideOpts = {
-      initialSlide: 0,
-      speed: 400,
-      slidesPerView: this.preview,
-    // coverflowEffect: {
-    //   rotate: 50,
-    //   stretch: 0,
-    //   depth: 100,
-    //   modifier: 1,
-    //   slideShadows: true,
-    // },
-    };
+    console.log(this.items);
   }
   addToCart(item){
     this.orderS.addItemToCart(item).then(e =>{

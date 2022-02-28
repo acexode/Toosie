@@ -88,3 +88,40 @@ ion-segment{
 // .padding-right0 {
 //     padding-right: 0 !important;
 // }
+.discount{
+    color: #2ed373;
+}
+.price{
+    color: #000;
+}
+
+.img-container{
+    height: 80px;
+    border-bottom: 1px solid #dbe1e2;
+}
+.product-title{
+    color: #000;
+    // font-size: 14px;
+
+}
+.swiper-slide img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-bottom: 10px;
+
+}
+.round-btn{
+    --border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    right: 5%;
+}
+.knowMore {
+    width: 100%;
+    height: 53 !important;
+    font-size: small;
+    color: #fff;
+    text-align: center;
+    --background: #0281B2;
+    text-transform: none;
+}

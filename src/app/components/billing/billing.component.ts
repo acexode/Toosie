@@ -21,6 +21,7 @@ declare const getpaidSetup: any;
 export class BillingComponent implements OnInit {
   @Input() grandTotal: any;
   @Input() items: any;
+  savedTotal = 0;
   allLocations = locationList;
   cardSaved = false;
   cardObj: any;
@@ -30,7 +31,7 @@ export class BillingComponent implements OnInit {
     description: '',
     logo: '/assets/icon/logo-big.png'
   };
-
+  allAddress = [];
   meta = {counsumer_id: '7898', consumer_mac: 'kjs9s8ss7dd'};
   billingInfo: FormGroup;
   opts = {
@@ -45,16 +46,17 @@ export class BillingComponent implements OnInit {
     },
   };
   paymentMethods = [
+    // {
+    //   id: '1',
+    //   name: 'payment',
+    //   text: 'Card Payment',
+    //   value: 'card',
+    //   icon: 'credit-card',
+    //   disabled: true,
+    //   checked: false,
+    //   color: 'primary'
+    // },
     {
-      id: '1',
-      name: 'payment',
-      text: 'Card Payment',
-      value: 'card',
-      icon: 'credit-card',
-      disabled: false,
-      checked: false,
-      color: 'primary'
-    }, {
       id: '2',
       name: 'payment',
       text: 'Cash Payment',
@@ -75,17 +77,19 @@ export class BillingComponent implements OnInit {
     private flutterwave: Flutterwave,
     private loadingController: LoadingController) {
       this.billingInfo = this.fb.group({
-        name: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        phone_number: ['', [Validators.required, Validators.minLength(8)]],
+        name: [''],
+        email: [''],
+        phone_number: [''],
         address: ['', [Validators.required]],
         location: ['', [Validators.required]],
         paymentType: ['card', [Validators.required]],
       });
-
     }
 
-   async ngOnInit() {
+    async ngOnInit() {
+      this.savedTotal = this.grandTotal;
+      console.log(this.savedTotal, this.items);
+      this.getAllAddress();
     const card = await Storage.get({ key: SAVED_CARD });
     this.cardObj = JSON.parse(card.value);
     if(this.cardObj !== null){
@@ -106,7 +110,63 @@ export class BillingComponent implements OnInit {
       });
     });
   }
+  async getAllAddress(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+    this.authService.allAddress().subscribe(res =>{
+      console.log(res);
+      loading.dismiss();
+      if(res.address.length > 0){
+        this.allAddress = res.address;
+      }else{
+        this.presentAlertPrompt();
+      }
+    });
+  }
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Add delivery address to proceed!',
+      inputs: [
+        {
+          name: 'state',
+          type: 'text',
+          placeholder: 'State'
+        },
+        {
+          name: 'localGov',
+          type: 'text',
+          placeholder: 'City / Town'
+        },
+        // multiline input.
+        {
+          name: 'address',
+          id: 'paragraph',
+          type: 'textarea',
+          placeholder: 'Full Address'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            this.authService.newAddress(data).subscribe(e =>{
+              this.getAllAddress();
+            });
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
   async placeOrder() {
     const records = this.items.map(e => ({
         inventoryId: e._id,
@@ -143,8 +203,15 @@ export class BillingComponent implements OnInit {
     );
   }
   setPayment(value: any){
+    console.log(value);
     this.billingInfo.patchValue({
       paymentType: value
+    });
+  }
+  setAddress(value: any){
+    console.log(value);
+    this.billingInfo.patchValue({
+      address: value
     });
   }
 
@@ -282,7 +349,10 @@ export class BillingComponent implements OnInit {
   }
   locationChange(e){
     console.log(e.detail.value);
-    this.grandTotal += e.detail.value;
+    console.log(e);
+    const value = this.allLocations.filter(loc => loc.label === e.detail.value)[0].value;
+    console.log(value);
+    this.grandTotal = value + this.savedTotal;
     console.log(this.grandTotal);
   }
   // Easy access for form fields

@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class UploadPage implements OnInit {
   uploadForm: FormGroup;
   file_text = 'Upload a photo of your prescription or product';
+  file;
   constructor(private formBuilder: FormBuilder,
     private pService: PrescriptionService,
     private loadingController: LoadingController,
@@ -27,27 +28,45 @@ export class UploadPage implements OnInit {
   }
   onFileSelect(event) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      console.log(file);
-      this.file_text = file.name;
-      this.uploadForm.get('prescriptionImage').setValue(file);
+      this.file = event.target.files[0];
+      console.log(this.file);
+      this.file_text = this.file.name;
+
+      // this.uploadForm.get('prescriptionImage').setValue(this.file);
     }
   }
   async onSubmit() {
     const formData = new FormData();
-    formData.append('prescriptionImage', this.uploadForm.get('prescriptionImage').value);
-    formData.append('description', this.uploadForm.get('description').value);
     const loading = await this.loadingController.create();
     await loading.present();
-    this.pService.uploadPrescription(formData).subscribe(
-      async (res) =>{
-        await loading.dismiss();
-       this.displayAlert('Prescription Uploaded', 'Your order has been received, we will get back to you shortly', true);
-      },
-      (err) => {
-        this.displayAlert('Upload Failed', 'unable to upload to prescription, try again', false);
+    try {
+      if(this.file){
+        formData.append('images', this.file);
+        const upload = await this.pService.uploadMedia(formData).toPromise();
+        const data = {
+          description: this.uploadForm.get('description').value,
+          prescriptionImage: upload.images,
+        };
+        this.pService.uploadPrescription(data).subscribe(async d =>{
+          await loading.dismiss();
+
+          this.displayAlert('Prescription Uploaded', 'Your order has been received, we will get back to you shortly', true);
+        });
+      }else{
+        const data = {
+          description: this.uploadForm.get('description').value,
+        };
+        this.pService.uploadPrescription(data).subscribe(async d =>{
+          await loading.dismiss();
+
+          this.displayAlert('Prescription Uploaded', 'Your order has been received, we will get back to you shortly', true);
+        });
       }
-    );
+
+    } catch (error) {
+      await loading.dismiss();
+      this.displayAlert('Upload Failed', 'unable to upload to prescription, try again', false);
+    }
   }
 
   async displayAlert(header, msg, uploaded){

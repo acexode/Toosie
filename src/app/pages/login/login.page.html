@@ -9,11 +9,11 @@
 </ion-header> -->
 
 <ion-content class="ion-padding">
-  <div class="ion-padding container mt-32">
+  <div *ngIf="!showForgotPasswordPage" class="ion-padding container mt-32">
     <img src="assets/icon/logo-big.png" alt="" class="logo">
     <h6>Fill the following instructions to login</h6>
     <form (ngSubmit)="login()" [formGroup]="credentials" class="form-container pt-16">
-      <h1 class="ion-text-center primary-text">Login</h1>
+      <h1 class="ion-text-center primary-text mb-32">Login</h1>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email"  formControlName="email"></ion-input>
@@ -25,23 +25,79 @@
       <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input  [type]="hide ? 'password' : 'text'" formControlName="password"></ion-input>        
-        <ion-icon class="mt-15" (click)="hide = !hide" name="eye" slot="end"></ion-icon>
+        <ion-icon class="mt-32" (click)="hide = !hide" size="small" name="eye" slot="end"></ion-icon>
       </ion-item>
+      <div class="flex ion-justify-content-between sign-up">
+        <ion-button class="color-tertiary-grey" fill="clear">
+          <span>Forgot Password?</span>
+        </ion-button>
+        <ion-button color="dark" fill="clear" (click)="showForgotPasswordPage= !showForgotPasswordPage" routerDirection="forward">Reset</ion-button>
+      </div>
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
         <span *ngIf="password.errors?.required">Password is required</span>
         <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
       </div>
 
-      <ion-button expand="block" class="login mt-32" type="submit" [disabled]="!credentials.valid">Log in</ion-button>
-
-      <div class="flex sign-up">
-        <ion-label class="pt-11">
-          Don't have an account?
-        </ion-label> 
+      <ion-button expand="block" class="login mt-16" type="submit" [disabled]="!credentials.valid">Log in</ion-button>
+      
+      <div class="flex ion-justify-content-between sign-up pt-11">
+        
+        <ion-button class="color-tertiary-grey" fill="clear">
+          <span>Don't have an account?</span>
+        </ion-button>
         <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
       </div>
+     
     </form>
   </div>
+
+  <div *ngIf="showForgotPasswordPage" class="ion-padding container mt-32">
+   
+      <img src="assets/icon/logo-big.png" alt="" class="logo">
+      <h6>Fill the following instructions to reset password</h6>
+      <form (ngSubmit)="submitForgotPassword()" [formGroup]="forgotPassword" class="form-container pt-16">
+        
+        <h1 class="ion-text-center primary-text my-32">Reset Password</h1>
+        <div *ngIf="!showForgotPasswordPageComplete">
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email"  formControlName="email"></ion-input>
+            </ion-item>
+            <div *ngIf="(femail.dirty || femail.touched) && femail.errors" class="errors">
+              <span *ngIf="femail.errors?.required">Email is required</span>
+              <span *ngIf="femail.errors?.femail">Email is invalid</span>
+            </div>
+
+        </div>
+        <div *ngIf="showForgotPasswordPageComplete">
+          
+          <ion-item>
+            <ion-label position="floating">Verification Code</ion-label>
+            <ion-input type="text"  formControlName="verificationCode"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Enter New Password</ion-label>
+            <ion-input type="password"  formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngIf="(fpwd.dirty || fpwd.touched) && fpwd.errors" class="errors">
+            <span *ngIf="fpwd.errors?.required">Email is required</span>
+            <span *ngIf="fpwd.errors?.fpwd">Email is invalid</span>
+          </div>
+        </div>
+    
+  
+        <ion-button expand="block" class="login mt-32" type="submit" [disabled]="!forgotPassword.valid">Submit</ion-button>
+        <div class="flex ion-justify-content-between sign-up">
+  
+          <ion-button color="dark" fill="clear" (click)="showForgotPasswordPage= !showForgotPasswordPage">
+            <ion-icon  color="dark" name="arrow-left"></ion-icon>Back
+          </ion-button>
+        </div>
+       
+       
+      </form>
+  </div>
+
 </ion-content>
 
 <!-- <ion-button expand="block" routerLink="/menu/home">Login</ion-button> -->

@@ -85,7 +85,7 @@ constructor(
         }
       },
       {
-        text: 'Choose From Photos Photo',
+        text: 'Choose From Image Photo',
         icon: 'image',
         handler: () => {
           this.addImage(CameraSource.Photos);
@@ -121,9 +121,16 @@ constructor(
     const blobData = this.b64toBlob(image.base64String, `image/${image.format}`);
     const imageName = 'Give me a name';
     const formData = new FormData();
-    formData.append('prescriptionImage', blobData);
-    this.prescriptionS.uploadPrescription(formData).subscribe(e =>{
+    formData.append('images', blobData);
+    this.prescriptionS.uploadMedia(formData).subscribe(e =>{
       console.log(e);
+      const data = {
+        prescriptionImage: e.images
+      };
+      this.prescriptionS.uploadPrescription(data).subscribe(res =>{
+        console.log(res);
+        this.presentToast();
+      });
       this.presentToast();
     });
     // this.api.uploadImage(blobData, imageName, image.format).subscribe((newImage: ApiImage) => {

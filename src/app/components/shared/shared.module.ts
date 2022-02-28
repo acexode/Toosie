@@ -1,3 +1,5 @@
+import { ProfileComponentsComponent } from './../profile-components/profile-components.component';
+import { ReceiptComponent } from './../receipt/receipt.component';
 import { SingleComponent } from './../single/single.component';
 import { BillingComponent } from './../billing/billing.component';
 import { AddRefillComponent } from './../add-refill/add-refill/add-refill.component';
@@ -13,26 +15,28 @@ import { IonicModule } from '@ionic/angular';
 import { BrandsComponent } from '../brands/brands.component';
 import { HeaderComponent } from '../header/header.component';
 import { FlutterwaveModule } from 'flutterwave-angular-v3';
-
+import { SwiperModule } from 'swiper/angular';
+import { PasscodeComponent } from '../passcode/passcode.component';
 
 
 @NgModule({
-  declarations: [BannerComponent, BrandsComponent,
-    ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent,
-    PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent],
+  declarations: [BannerComponent, BrandsComponent,PasscodeComponent,
+    ItemsComponent,SearchComponent, SlideItemComponent, HeaderComponent, ReceiptComponent,
+    PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent, ProfileComponentsComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
     FlutterwaveModule,
+    SwiperModule
   ],
   exports:[
     BannerComponent,
     BrandsComponent,
     SearchComponent,
-    SlideItemComponent, HeaderComponent, ItemsComponent,
-    PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent
+    SlideItemComponent, HeaderComponent, ItemsComponent,ReceiptComponent, ProfileComponentsComponent,
+    PillReminderModalComponent, AddRefillComponent, BillingComponent, SingleComponent, PasscodeComponent
   ]
 })
 export class SharedModule { }

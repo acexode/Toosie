@@ -2,8 +2,8 @@
 
 <ion-content>
   <form  [formGroup] = "uploadForm" (ngSubmit)="onSubmit()" >
-    <ion-row>
-      <ion-col size="12">
+    <ion-row class=" flex ion-justify-content-center">
+      <ion-col size="11">
         <ion-card>
           <ion-card-content class="p-8">
             <div class="card upload-btn-wrapper">
@@ -15,7 +15,7 @@
                   {{file_text}}
                 </ion-text>
               </div>
-              <input type="file" (change)="onFileSelect($event)" formcontrolName="prescriptionImage" />
+              <input type="file" (change)="onFileSelect($event)" formControlName="prescriptionImage" />
             </div>
             
           </ion-card-content>
@@ -44,11 +44,11 @@
           Type here the medicine name or the product name you wish to order
         </ion-text>
       </ion-col>
-      <ion-col size="12" class=" mt-8" >       
-          <ion-textarea rows="4" formcontrolName="description"  placeholder="Ex: Paracetamol"></ion-textarea>
+      <ion-col size="11" class=" ion-justify-content-center mx-52 mt-8" >       
+          <ion-textarea rows="4" formControlName="description"  placeholder="Ex: Paracetamol"></ion-textarea>
        
       </ion-col>
-      <ion-col size="12" class=" mt-8" >       
+      <ion-col size="11" class=" mt-8" >       
           <ion-button type="submit" expand="block" class="success-btn">Submit</ion-button>
        
       </ion-col>

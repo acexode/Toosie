@@ -21,12 +21,15 @@ export class CartPage implements OnInit {
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
+      if(e !== null || e.length === 0){
+        this.presentToast('No item in cart');
+      }
       this.lists = isEmpty(e) ? [] : e;
       this.total = this.lists.reduce((a, b) => a + (b.actualPrice * b.quantity),0);
       this.discount = this.lists.reduce((a, b) => {
         console.log(a + ((b.actualPrice - b.currentPrice)));
         // return a + ((b.actualPrice - b.currentPrice));
-        return a + ( b.currentPrice * b.quantity);
+        return a + ( b.actualPrice - b.currentPrice);
       },0);
       console.log(this.discount);
     });

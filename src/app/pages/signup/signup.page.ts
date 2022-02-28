@@ -14,6 +14,10 @@ export class SignupPage implements OnInit {
   pwd = 'password';
   hide = true;
   hideConfirm = true;
+  showVerify = false;
+  errorLogin= false;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  InvalidCode = false;
   confirmP = 'password';
   credentials: FormGroup;
   constructor(private fb: FormBuilder,
@@ -27,6 +31,7 @@ export class SignupPage implements OnInit {
     this.credentials = this.fb.group({
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.min(11),Validators.maxLength(11) ]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -38,7 +43,7 @@ export class SignupPage implements OnInit {
     this.authService.signup(this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
-        this.router.navigate(['menu/home']);
+        this.showVerify = true;
       },
       async (res) => {
         console.log(res);
@@ -61,9 +66,39 @@ export class SignupPage implements OnInit {
   get email() {
     return this.credentials.get('email');
   }
+  get phone() {
+    return this.credentials.get('phone');
+  }
 
   get password() {
     return this.credentials.get('password');
+  }
+  async continue(passForm: FormGroup) {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    const value = passForm.get('passcode').value;
+    const obj = {
+      verificationCode: value,
+      email: this.email.value
+    };
+    console.log(value);
+    this.authService.activateAccount(obj).subscribe(
+      async (res) => {
+        await loading.dismiss();
+        this.router.navigate(['menu/home']);
+      },
+      async (res) => {
+        console.log(res);
+        await loading.dismiss();
+        const alert = await this.alertController.create({
+          header: res.error.message,
+          message: res.error.error,
+          buttons: ['OK'],
+        });
+
+        await alert.present();
+      }
+    );
   }
 
 }

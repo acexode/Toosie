@@ -1,14 +1,15 @@
-.slide{
-    position: relative;
-    height: 230px;
-    border: 1px solid #dbe1e2;
-    border-radius: 8px;
-    padding: 8px;
-    width: 100%;
+ion-slides {
+  height: 150px;
 }
-ion-slide{
-    width: 100% !important;
+
+.swiper-slide {
+  display: block;
 }
+img{
+  width: 100%;
+}
+
+
 .discount{
     color: #2ed373;
 }

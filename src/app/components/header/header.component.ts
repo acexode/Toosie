@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
-      console.log(e);
       this.cartTotal = isEmpty(e) ? 0 : e.length;
     });
   }
@@ -42,7 +41,7 @@ export class HeaderComponent implements OnInit {
   async presentModal() {
     const modal = await this.modalController.create({
       component: SearchComponent,
-      cssClass: 'fullscreen'
+      cssClass: 'fullscreen',
     });
     await modal.present();
   }

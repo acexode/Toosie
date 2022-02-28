@@ -9,9 +9,10 @@
 </ion-header> -->
 
 <ion-content class="ion-padding">
-  <div class="ion-padding container mt-32">
+
+  <div *ngIf="!showVerify" class="ion-padding container pb-32">
     <img src="assets/icon/logo-big.png" alt="" class="logo">
-    <h6>Fill the following instructions to Sign Up</h6>
+    <h6 >Fill the following instructions to Sign Up</h6>
     <form (ngSubmit)="signup()" [formGroup]="credentials" class="form-container pt-16">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
@@ -30,10 +31,18 @@
         <span *ngIf="email.errors?.email">Email is invalid</span>
       </div>
       <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input type="tel-country-code" formControlName="phone"></ion-input>
+      </ion-item>
+      <div *ngIf="(phone.dirty || phone.touched) && phone.errors" class="errors">
+        <span *ngIf="phone.errors?.required">Phone is required</span>
+        <span *ngIf="phone.errors?.phone">Phone is invalid</span>
+      </div>
+      <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input  [type]="hide ? 'password' : 'text'" formControlName="password"></ion-input>
         
-        <ion-icon class="mt-15" (click)="hide = !hide" name="eye" slot="end"></ion-icon>
+        <ion-icon class="mt-32" (click)="hide = !hide" name="eye" size="small" slot="end"></ion-icon>
       </ion-item>
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
         <span *ngIf="password.errors?.required">Password is required</span>
@@ -42,7 +51,7 @@
       <ion-item>
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input [type]="hideConfirm ? 'password' : 'text'"></ion-input>
-        <ion-icon class="mt-15" (click)="hideConfirm = !hideConfirm" name="eye" slot="end"></ion-icon>
+        <ion-icon class="mt-32" (click)="hideConfirm = !hideConfirm" name="eye" size="small" slot="end"></ion-icon>
       </ion-item>
 
       <ion-button class="login mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Sign up</ion-button>
@@ -50,11 +59,33 @@
       <div class="flex sign-up">
         <ion-label class="pt-11">
           Already have an account?
+          <ion-button color="dark" class="pb-8" fill="clear" routerLink="/login" routerDirection="forward">Login</ion-button>
         </ion-label> 
-        <ion-button color="dark" fill="clear" routerLink="/login" routerDirection="forward">Login</ion-button>
       </div>
     </form>
   </div>
+  <ion-row *ngIf="showVerify" class="px-32 h-100 pt-16 pb-24">
+    <ion-col>
+        <div class="text-center mb-8 ion-text-center">
+            <ion-text class="alt-font color-dark-green x-large mb-17 text-center">
+              Verification code
+            </ion-text>
+        </div>
+        <div class="ion-text-center pb-42">
+            <ion-text class="text-small">
+               Enter the 6 digit code sent to your phone.
+            </ion-text>
+        </div>
+        <div class="ion-text-center pt-40">
+            <app-passcode [errorLogin]="InvalidCode" (doPassForm)="continue($event)"></app-passcode>
+        </div>
+        <div class="ion-text-center">
+            <ion-text *ngIf="errorLogin" class="text-small color-red">
+                {{ errorLogin }}
+            </ion-text>
+        </div>
+    </ion-col>
+</ion-row>
 </ion-content>
 
 <!-- <ion-button expand="block" routerLink="/menu/home">Login</ion-button> -->

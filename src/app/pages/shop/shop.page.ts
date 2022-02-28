@@ -16,53 +16,15 @@ import { SingleComponent } from 'src/app/components/single/single.component';
 
 export class ShopPage implements OnInit {
   @ViewChild('slides', {static: true}) slides: IonSlides;
-  categories =  [
-    {
-      category: 'Baby & Child',
-      id: 1
-    },
-    {
-      category: 'Women Care',
-      id: 2
-    },
-    {
-      category: 'Men Care',
-      id: 3
-    },
-    {
-      category: 'Vitamins',
-      id: 4
-    },
-    {
-      category: 'Hair Care',
-      id: 5
-    },
-    {
-      category: 'Skin Care',
-      id: 6
-    },
-    {
-      category: 'Oral Care',
-      id: 7
-    },
-    {
-      category: 'Organic Products',
-      id: 8
-    },
-    {
-      category: 'Medical Supplies',
-      id: 9
-    }
-  ];
-
+  categories =  [];
   products =  [];
- loading = false;
-  tab = this.categories[0].id;
+  loading = false;
+  tab = 0;
   opts = {
-    freeMode: true,
-    slidesPerView: 3,
-    slidesOffsetBefore: 30,
-    slidesOffsetAfter: 100
+    freeMode: false,
+    slidesPerView: 2.5,
+    slidesOffsetBefore: 40,
+    slidesOffsetAfter: 40
   };
   activeCategory = 0;
   categorySlidesVisible = true;
@@ -77,13 +39,14 @@ export class ShopPage implements OnInit {
     this.route.params.subscribe(params => {
       // const cat = params.get('category');
       console.log(params.category);
-      this.inventoryS.allCategories().subscribe((e: any) =>{
-        console.log(e);
-        this.categories = e.inventoryCategory;
-        const index = this.categories.findIndex(c => c.category === params.category);
+      this.inventoryS.categoryStore.subscribe((e: any) =>{
+        this.categories = e;
+        console.log(this.categories);
+        const index = this.categories.findIndex(c => c.id === params.category);
         this.tab = this.categories[index].id;
         this.slides.slideTo(index);
         console.log(this.tab);
+        console.log(index);
         this.loadInventory(this.tab);
       });
     });

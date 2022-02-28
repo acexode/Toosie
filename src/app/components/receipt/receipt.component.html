@@ -1,0 +1,67 @@
+<ion-header [translucent]="true" no-shadow no-border>
+  <ion-toolbar>
+    <ion-buttons (click)="dismiss()" class="ml-8" slot="start">
+      <ion-icon name="arrow-left"></ion-icon>
+    </ion-buttons>
+   <ion-title>
+     <!-- {{itemName}} -->
+     Receipt
+   </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content  class="">
+  <ion-grid id="invoice-POS">
+    
+    <ion-row id="top" class="ion-justify-content-center">
+      <ion-col offset="2" size="6" class="ion-text-center d-flex ion-justify-content-center">
+        <img class="ml-10" width="100px" src="assets/icon/toosie.png" alt="">
+      </ion-col>
+    
+    </ion-row><!--End InvoiceTop-->
+    
+    <div id="mid">
+      <div class="info">
+        <h2>Order Info</h2>
+        <p>
+            Address : {{item.address}}<br>
+            Ordered On   : {{item.createdAt | date}}<br>
+            Payment Type   : {{item.paymentType}}<br>
+            Payment Ref   : {{item.txRef}}<br>
+        </p>
+      </div>
+    </div><!--End Invoice Mid-->
+    
+    <div id="bot">
+
+					<div id="table">
+						<table>
+							<tr class="tabletitle">
+								<td class="item">Item</td>
+								<td class="Hours">Qty</td>
+								<td class="Rate">Sub Total</td>
+							</tr>
+ 
+							<tr *ngFor="let ord of item.details" class="service">
+								<td class="tableitem"><p class="itemtext">{{ord.itemName}}</p></td>
+								<td class="tableitem"><p class="itemtext">{{ord.quantity}}</p></td>
+								<td class="tableitem"><p class="itemtext">₦{{ord.cost * ord.quantity}}.00</p></td>
+							</tr>
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate">Total</td>
+								<td class="payment">₦ {{total}}</td>
+							</tr>
+
+						</table>
+					</div><!--End Table-->
+
+					<div id="legalcopy">
+						<p class="legal"><strong>Thank you for doing business with us</strong> 
+						</p>
+					</div>
+
+				</div><!--End InvoiceBot-->
+  </ion-grid><!--End Invoice-->
+
+</ion-content>

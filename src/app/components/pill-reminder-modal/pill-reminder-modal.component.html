@@ -35,7 +35,16 @@
           </div>
           <ion-item>
             <ion-label position="floating">Date</ion-label>
-            <ion-input type="date" formControlName="date"></ion-input>
+            <ion-input type="date" min="2021-09-02" formControlName="date"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Frequency</ion-label>
+            <ion-select formControlName="frequency" value="day" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value="day">Every day</ion-select-option>
+              <ion-select-option value="week">Every week</ion-select-option>
+              <ion-select-option value="two-weeks">Every two weeks</ion-select-option>
+              <ion-select-option value="month">Month</ion-select-option>
+            </ion-select>
           </ion-item>
           <div *ngIf="(date.dirty || date.touched) && date.errors" class="errors">
             <span *ngIf="date.errors?.required">Date is required</span>

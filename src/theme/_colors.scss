@@ -1,0 +1,357 @@
+@import './variables.scss';
+.ion-color-disabled {
+  --ion-color-base: var(--ion-color-disabled);
+  --ion-color-base-rgb: var(--ion-color-disabled-rgb);
+  --ion-color-contrast: var(--ion-color-disabled-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-disabled-contrast-rgb);
+  --ion-color-shade: var(--ion-color-disabled-shade);
+  --ion-color-tint: var(--ion-color-disabled-tint);
+  --ion-color: var(--ion-color-disabled);
+  color: $grey3;
+}
+
+.ion-color-green-gradient {
+  --ion-color-base: var(--ion-color-green-gradient);
+  --ion-color-base-rgb: var(--ion-color-green-gradient-rgb);
+  --ion-color-contrast: var(--ion-color-green-gradient-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-green-gradient-contrast-rgb);
+  --ion-color-shade: var(--ion-color-green-gradient-shade);
+  --ion-color-tint: var(--ion-color-green-gradient-tint);
+}
+
+.ion-color-omn-green {
+  --ion-color-base: var(--app-green-color);
+  --ion-color-base-rgb: rgba(var(--app-green-color), 1);
+  --ion-color-contrast: var(--ion-color-green-gradient-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-green-gradient-contrast-rgb);
+  --ion-color-shade: var(--ion-color-green-gradient-shade);
+  --ion-color-tint: var(--ion-color-green-gradient-tint);
+}
+
+.ion-color-omn-transparent-white {
+  --ion-color-base: transparent;
+  --ion-color-base-rgb: transparent;
+  --ion-color-contrast: var(--ion-color-primary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb);
+  --ion-color-shade: transparent;
+  --ion-color-tint: transparent;
+}
+
+.ion-color-omn-transparent-green {
+  --ion-color-base: transparent;
+  --ion-color-base-rgb: transparent;
+  --ion-color-contrast: var(--app-green-color);
+  --ion-color-contrast-rgb: var(--app-green-color);
+  --ion-color-shade: transparent;
+  --ion-color-tint: transparent;
+}
+
+.omn-background-green-gradient {
+  --ion-color-base: transparent;
+  --ion-color-base-rgb: transparent;
+  background: $green-gradient;
+  --background: $green-gradient;
+}
+
+.ion-color-white-page {
+  --background: var(--app-white-color, #ffffff);
+  --ion-background-color: var(--background, #ffffff);
+  --ion-background-color-rgb: 255, 255, 255;
+  background: $white;
+}
+
+.ion-color-omn-light-green {
+  --ion-color-base: var(--ion-color-omn-light-green);
+  --ion-color-base-rgb: var(--ion-color-omn-light-green-rgb);
+  --ion-color-contrast: var(--ion-color-omn-light-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-omn-light-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-omn-light-green-shade);
+  --ion-color-tint: var(--ion-color-omn-light-green-tint);
+}
+
+.ion-color-omn-radio-chip {
+  --ion-color-base: var(--app-chip-label-color);
+  background: var(--ion-color-omn-grey-medium-2);
+  border-color: var(--app-chip-border-color);
+  --background: var(--ion-color-omn-grey-medium-2);
+  --color: var(--ion-color-base);
+  --ion-color-base-rgb: var(--app-chip-label-color-rgb);
+  --ion-color-shade: var(--ion-color-omn-light-green-shade);
+  --ion-color-tint: var(--ion-color-omn-light-green-tint);
+}
+
+.ion-color-omn-radio-chip-active {
+  --ion-color-base: var(--app-white-color);
+  background: var(--app-green-color);
+  border-color: var(--app-green-colo);
+  --background: var(--app-green-color);
+  --color: var(--ion-color-base);
+  --ion-color-base-rgb: 255, 255, 255;
+  --ion-color-contrast: var(--app-white-color);
+  --ion-color-contrast-rgb: 255, 255, 255;
+  --ion-color-shade: var(--ion-color-omn-light-green-shade);
+  --ion-color-tint: var(--ion-color-omn-light-green-tint);
+}
+
+.ion-color-omn-medium {
+  --ion-color-base: var(--ion-color-omn-medium);
+  --ion-color-base-rgb: var(--ion-color-omn-medium-rgb);
+  --ion-color-contrast: var(--ion-color-omn-medium-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-omn-medium-contrast-rgb);
+  --ion-color-shade: var(--ion-color-omn-medium-shade);
+  --ion-color-tint: var(--ion-color-omn-medium-tint);
+}
+
+.ion-color-omn-disabled-icon {
+  --ion-color-base: var(--ion-color-omn-grey-5);
+  --ion-color-base-rgb: var(--ion-color-omn-medium-rgb);
+  --ion-color-contrast: var(--ion-color-omn-medium-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-omn-medium-contrast-rgb);
+  --ion-color-shade: var(--ion-color-omn-grey-5);
+  --ion-color-tint: var(--ion-color-omn-medium-tint);
+  --background: var(--ion-color-omn-grey-medium-2);
+  --ion-item-background: var(--ion-color-omn-grey-medium-2);
+  --ion-background-color: var(--ion-color-omn-grey-medium-2);
+  background-color: $light-grey-2;
+}
+
+.ion-color-dark-green-b {
+  --ion-color-base: var(--ion-color-dark-green-b);
+  --ion-color-base-rgb: var(--ion-color-dark-green-b-rgb);
+  --ion-color-contrast: var(--ion-color-dark-green-b-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-dark-green-b-contrast-rgb);
+  --ion-color-shade: var(--ion-color-dark-green-b-shade);
+  --ion-color-tint: var(--ion-color-dark-green-b-tint);
+}
+
+.ion-color-white-dark-green-b-bg {
+  --ion-color-base: var(--app-color-white);
+  --ion-color-contrast: var(--app-color-white);
+  --ion-color-contrast-rgb: var(--app-color-white);
+  --ion-color-shade: var(--ion-color-dark-green-b-shade);
+  --ion-color-tint: var(--ion-color-dark-green-b-tint);
+  background: $dark-green-b;
+}
+
+.ion-color-white-danger-bg {
+  --ion-color-base: var(--app-color-white);
+  --ion-color-contrast: var(--app-color-white);
+  --ion-color-contrast-rgb: var(--app-color-white);
+  background: $danger;
+}
+
+.ion-color-white-red-bg {
+  --ion-color-base: var(--app-color-white);
+  --ion-color-contrast: var(--app-color-white);
+  --ion-color-contrast-rgb: var(--app-color-white);
+  background: $red;
+}
+
+.ion-color-white-light-green-2-bg {
+  --ion-color-base: var(--app-color-white);
+  --ion-color-contrast: var(--app-color-white);
+  --ion-color-contrast-rgb: var(--app-color-white);
+  background: $light-green-2;
+}
+.ion-color-medium-green-page {
+  --background: var(--ion-color-omn-light-green, #e5f2ec);
+  --ion-background-color: var(--ion-color-omn-light-green, #e5f2ec);
+  --ion-background-color-rgb: 229, 242, 236;
+  background: #e5f2ec;
+}
+
+.color-dark-green {
+  color: $dark-green !important;
+}
+
+.color-green {
+  color: $green !important;
+  --color: $green !important;
+}
+
+.ion-color-secondary-grey {
+  --color: $secondary-grey !important;
+}
+
+.color-secondary-grey {
+  color: $secondary-grey;
+}
+
+.color-tertiary-grey {
+  color: $grey3 !important;
+}
+
+.color-white {
+  color: $white;
+  --color: var(--app-color-white);
+}
+
+.text-color {
+  color: var(--app-text-color);
+  --color: var(--app-text-color);
+}
+
+.color-light-red {
+  color: $light-red;
+}
+
+.color-red {
+  --color: var(--app-red-color);
+  color: $red !important;
+}
+
+.color-disabled {
+  color: $grey3;
+}
+
+.disabled-bg {
+  background-color: $medium-grey-2;
+  --background: $medium-grey-2;
+}
+
+.color-grey-6 {
+  color: $grey-6;
+}
+
+.bg-danger {
+  background-color: $danger;
+}
+
+.bg-warning {
+  background-color: $warning;
+}
+
+.bg-white {
+  background-color: $white;
+}
+
+.color-secondary-blue {
+  color: $secondary-blue;
+}
+
+.bg-red {
+  background-color: $light-red;
+}
+
+.bg-green {
+  background-color: $green;
+  --background: $green;
+}
+
+.bg-dark-green {
+  background-color: $dark-green;
+  --background: $dark-green;
+}
+
+.bg-green-08 {
+  background-color: rgba($green, 0.8);
+}
+
+.bg-white {
+  background-color: $white;
+  --background: #fff;
+}
+
+.bg-grey-medium {
+  --background: var(--ion-color-omn-grey-medium-2);
+  --ion-item-background: var(--ion-color-omn-grey-medium-2);
+  --ion-background-color: var(--ion-color-omn-grey-medium-2);
+  background-color: $light-grey-2 !important;
+}
+
+.bg-light-green-2 {
+  background-color: $light-green-2;
+  --background: $light-green-2;
+}
+
+.bg-light-green {
+  background-color: $light-green;
+  --background: var(--app-light-green-color);
+}
+.bg-dark-green-b {
+  background-color: $dark-green-b;
+  --background: var(--app-dark-green-b-color);
+}
+
+.bg-white-layer-gradient {
+  background: $white-layer-gradient;
+}
+
+.alt-bg {
+  background: $alt-bg;
+  --background: $alt-bg;
+}
+
+.bg-deep-blue {
+  background-color: $deep-blue;
+}
+
+.bg-light-blue {
+  background-color: $light-blue;
+}
+.bg-secondary-blue {
+  background: $secondary-blue;
+}
+.bg-yellow {
+  background-color: $yellow;
+}
+
+.bg-dark {
+  background-color: $bg-dark;
+}
+
+.bg-light-gray {
+  background-color: $light-grey-2;
+  --background: $light-grey-2;
+}
+
+.bg-light-green-5 {
+  background-color: $light-green-5;
+  --background: var(--light-green-5);
+}
+
+.bg-light-green-faded {
+  background-color: $light-green-5;
+  --background: var(--light-green-5);
+}
+
+.bg-ultra-light-green {
+  background: $ultra-light-green;
+}
+
+.bg-dark-green {
+  background: $dark-green;
+  --background: var(--app-dark-green);
+}
+.bg-yellow-2 {
+  background: $yellow-2;
+}
+
+.text-color {
+  color: var(--app-text-color);
+  --color: var(--app-text-color);
+}
+.bg-default {
+  background-color: $alt-bg;
+  --background: $alt-bg;
+}
+
+.bg-inherit {
+  --background: inherit;
+  background-color: inherit;
+}
+
+.bg-grey-2 {
+  background-color: $light-grey-2;
+  --background: $light-grey-2;
+}
+
+.bg-red {
+  background-color: $red;
+  --background: $red;
+}
+
+.color-grey-3 {
+  color: $grey3;
+  --color: var(--app-grey-3);
+}

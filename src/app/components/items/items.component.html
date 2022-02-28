@@ -1,11 +1,18 @@
 <ion-row *ngIf="items.length" class="favorite-items flex ion-justify-content-between">
   <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let p of items" class="ion-text-left">
     <div class="c-card">
-      <img (click)="productModal(p)"  [src]="p?.resourceImages[0]" />
-      <div (click)="productModal(p)" class="title-container">
-        <!-- <h6>{{p.title. length > 40 ? p.title | slice:0:40 : p.title}}</h6> -->
-        <h6>{{(p.title.length > 40)? (p.title | slice:0:40)+'..':(p.title)}}</h6>
-        <p class="text-weight-bold"> ₦{{p.currentPrice}}</p>
+      <img (click)="productModal(p)"  [src]="p?.resourceImages ? p?.resourceImages[0] : 'assets/icon/not-available.png'" />
+      <div (click)="productModal(p)" style="height: 100px;" class="flex flex-column pt-8 ion-text-left">
+        <h6 class="product-title">
+          <!-- {{item.title.length > 20 ? item.title | slice:0:20 : item.title}} -->
+          {{ (p?.title.length > 20)? (p?.title | slice:0:20)+'..':(p?.title) }}
+        </h6>
+        <small class="discount pl-8 pt-5">
+          {{p?.discountPercent}}%  OFF
+        </small>
+        <small class="price pl-8 pt-5">
+          ₦ {{p?.currentPrice}}
+        </small>
       </div>
       <ion-button (click)="addToCart(p)" class="addToCart">
         Add to Cart

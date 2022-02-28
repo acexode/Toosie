@@ -1,0 +1,10 @@
+.color-green {
+    color: #0281B2;
+    transition: transform .5s;
+  }
+.color-green:hover {
+    background-color: #0281B2;
+    border-radius: 50%;
+    color: #fff;
+    transform: scale(0.5);
+  }
