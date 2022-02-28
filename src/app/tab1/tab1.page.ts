@@ -37,21 +37,16 @@ export class Tab1Page implements OnInit {
     this.latest$ = this.invS.latestStore;
     this.blogs$ = this.blogS.blogStore;
     this.invS.categoryStore.subscribe((res: any) =>{
-      console.log(res);
       this.categories = res.map(cat =>({
         img: cat.categoryImage,
         title: cat.category,
         id: cat.id
       }));
     });
-    console.log(this.blogs$);
-    console.log(this.popular$);
   }
   onSwiper([swiper]) {
-    console.log(swiper);
   }
   onSlideChange() {
-    console.log('slide change');
   }
   shop(q){
     this.router.navigate(['menu/home/shop', {category: q}]);
