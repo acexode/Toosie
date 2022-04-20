@@ -43,7 +43,8 @@ export class SignupPage implements OnInit {
     this.authService.signup(this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
-        this.showVerify = true;
+        // this.showVerify = true;
+        this.router.navigate(['menu/home']);
       },
       async (res) => {
         console.log(res);

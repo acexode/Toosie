@@ -13,7 +13,7 @@ export const baseEndpoints = {
   };
 export const authEndpoints = {
     login: baseEndpoints.auth + '/login',
-    signup: baseEndpoints.auth + '/register',
+    signup: baseEndpoints.auth + '/signup',
     activate: baseEndpoints.auth + '/register/activate',
     forgotPasswordInitiate: baseEndpoints.auth + '/forgot-password/initiate',
     forgotPasswordComplete: baseEndpoints.auth + '/forgot-password/complete',
