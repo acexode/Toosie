@@ -66,15 +66,16 @@ export class ProfilePage implements OnInit {
 }
 async onUpload() {
   const data = new FormData();
-  data.append('images', this.file);
+  data.append('upload', this.file);
   console.log(this.file);
   const loading = await this.loadingController.create();
     await loading.present();
   this.authService.uploadProfileImage(data).subscribe(
       async (event: any) => {
         console.log(event);
+        this.user.avater = event.images[0];
         const update = {
-          profileImage: event.images
+          avater: event.images[0]
         };
         this.authService.updateUser(this.user._id, update).subscribe(async e =>{
          // this.user = e.userInfo;

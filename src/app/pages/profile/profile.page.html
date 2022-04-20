@@ -13,7 +13,7 @@
     <div class="flex flex-column desc">
       <div class="flex desc">
         <ion-avatar  slot="start">
-          <img [src]="user?.profileImage">
+          <img [src]="user?.avater">
           <label for="profile-image" class="camera">
            <ion-icon name="camera"></ion-icon>
            <input  (change)="onChange($event)" type="file" id="profile-image" hidden/>
@@ -54,12 +54,12 @@
           Change Password
         </ion-label>
       </ion-item>
-      <ion-item (click)="presentModal('address')" class="item"  >
+      <!-- <ion-item (click)="presentModal('address')" class="item"  >
         <ion-icon name="planet-outline" ></ion-icon>
         <ion-label>
           Addresses
         </ion-label>
-      </ion-item>
+      </ion-item> -->
 
     </ion-list>
 

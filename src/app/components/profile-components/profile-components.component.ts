@@ -3,7 +3,11 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ModalController,
+} from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
@@ -18,19 +22,23 @@ export class ProfileComponentsComponent implements OnInit {
   changePasswordForm: FormGroup;
   showAddressForm = false;
   loadingAddress = false;
-  title = this.show === 'profile' ? 'Profile' : this.show === 'profile' ? 'address' : 'Change Password';
+  title = 'Edit Profile';
   allAddress: any;
   user: any;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
     private modalC: ModalController,
     private router: Router,
-    private loadingController: LoadingController) {
+    private loadingController: LoadingController
+  ) {
     this.credentials = this.fb.group({
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
+      state: ['', [Validators.required]],
+      localGov: ['', [Validators.required]],
       address: ['', [Validators.required]],
     });
     this.changePasswordForm = this.fb.group({
@@ -42,57 +50,77 @@ export class ProfileComponentsComponent implements OnInit {
       localGov: ['', [Validators.required]],
       address: ['', [Validators.required]],
     });
-   }
-
-   ngOnInit() {
-     console.log(this.show);
-     if(this.show === 'profile'){
-       this.authService.currentUser().subscribe(str =>{
-         this.user = JSON.parse(str.value);
-
-         this.credentials.patchValue({
-           email: this.user.email,
-           phone: this.user.phone,
-           fullName: this.user.fullName,
-           address: this.user.address,
-         });
-       });
-
-     }else{
-       this.getAllAddress();
-     }
   }
-  async getAllAddress(){
+
+  ngOnInit() {
+    this.title = this.show === 'profile' ? 'Edit Profile' : 'Change Password';
+    console.log(this.show);
+    if (this.show === 'profile') {
+      this.authService.currentUser().subscribe((str) => {
+        this.user = JSON.parse(str.value);
+
+        this.credentials.patchValue({
+          email: this.user.email,
+          phone: this.user.phone,
+          fullName: this.user.fullName,
+          state: this.user.address.state,
+          localGov: this.user.address.localGov,
+          address: this.user.address.address,
+        });
+      });
+    } else {
+      //  this.getAllAddress();
+    }
+  }
+  async getAllAddress() {
     const loading = await this.loadingController.create();
     await loading.present();
-    this.authService.allAddress().subscribe(res =>{
-      console.log(res);
-      loading.dismiss();
-      this.allAddress = res.address;
-    });
+    // this.authService.allAddress().subscribe(res =>{
+    //   console.log(res);
+    //   loading.dismiss();
+    //   this.allAddress = res.address;
+    // }, err => {
+    //   console.log(err);
+    //   loading.dismiss();
+    // });
   }
 
   async updateUser() {
     const loading = await this.loadingController.create();
     await loading.present();
-
-    this.authService.updateUser(this.user._id, this.credentials.value).subscribe(
+    const { localGov, state, address, ...slice } = this.credentials.value;
+    console.log(slice);
+    const fValue = {
+      ...slice,
+      address: {
+        localGov,
+        state,
+        address
+      }
+    };
+    console.log(fValue);
+    this.authService.updateUser(this.user._id, fValue).subscribe(
       async (res) => {
         await loading.dismiss();
+        this.displayAlert('Success', 'Your profile has been updated');
         this.router.navigate(['menu/home']);
       },
       async (res) => {
         console.log(res);
         await loading.dismiss();
-        const alert = await this.alertController.create({
-          header: res.error.message,
-          message: res.error.error,
-          buttons: ['OK'],
-        });
-
-        await alert.present();
+        this.displayAlert('Updated Failed', res.error.message);
       }
     );
+  }
+
+  async displayAlert(title, msg) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
   async updatePassword() {
     const loading = await this.loadingController.create();
@@ -121,38 +149,38 @@ export class ProfileComponentsComponent implements OnInit {
       }
     );
   }
-  submitAddress(){
+  submitAddress() {
     const value = this.addressForm.value;
     console.log(value);
-    this.authService.newAddress(value).subscribe(e =>{
+    this.authService.newAddress(value).subscribe((e) => {
       this.getAllAddress();
       this.showAddressForm = false;
     });
   }
-  deleteAddress(id){
-    this.authService.deleteAddress(id).subscribe(e =>{
+  deleteAddress(id) {
+    this.authService.deleteAddress(id).subscribe((e) => {
       this.getAllAddress();
     });
     console.log('delete', id);
   }
-  back(){
+  back() {
     this.modalC.dismiss();
   }
-  navigate(path){
-    this.router.navigate(['menu/home/'+ path]);
+  navigate(path) {
+    this.router.navigate(['menu/home/' + path]);
   }
   // Easy access for form fields
   get fullName() {
     return this.credentials.get('fullName');
   }
   get state() {
-    return this.addressForm.get('state');
+    return this.credentials.get('state');
   }
   get localGov() {
-    return this.addressForm.get('localGov');
+    return this.credentials.get('localGov');
   }
   get addressF() {
-    return this.addressForm.get('address');
+    return this.credentials.get('address');
   }
   get email() {
     return this.credentials.get('email');
@@ -164,5 +192,4 @@ export class ProfileComponentsComponent implements OnInit {
   get address() {
     return this.credentials.get('address');
   }
-
 }
