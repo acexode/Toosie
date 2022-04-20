@@ -8,8 +8,8 @@
       </ion-col>
     </ion-row>
   </ng-template>
-  <ion-grid *ngIf="(prescriptionList$ | async); else loading">
-    <ion-row class="card" *ngFor="let presc of prescriptionList$ |async">
+  <ion-grid *ngIf="prescriptionList.length; else loading">
+    <ion-row class="card" *ngFor="let presc of prescriptionList">
       <ion-col class="flex ion-align-items-center" size="3">
         <img [src]="presc.prescriptionImage" alt="">
       </ion-col>

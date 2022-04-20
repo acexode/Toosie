@@ -13,7 +13,7 @@
     <a  class="text-display-4 mb-4 ellipsis-2">Brand: <span>{{list?.brand ? list.brand : 'Not available'}}</span> </a>
     <div class="pt-16 mb-4">
       <span class="price">
-        ₦ {{list?.currentPrice}}
+        ₦ {{list?.actualPrice - (list.actualPrice  * (list.discountPercent / 100))}}
       </span>
       <span *ngIf="list.discountPercent !== 0" class="price strike">
         ₦ {{list?.actualPrice}}

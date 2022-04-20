@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { blogEndpoints } from './../../config/endpoints';
+import { blogEndpoints, baseEndpoints } from './../../config/endpoints';
 import { Injectable } from '@angular/core';
 import { RequestService } from '../../request/request.service';
 
@@ -14,9 +14,9 @@ export class BlogService {
   }
 
   blogListing(){
-    this.reqS.get(blogEndpoints.blogListing).subscribe((e: any) =>{
+    this.reqS.get(baseEndpoints.blog).subscribe((e: any) =>{
       console.log(e);
-      this.blogStore.next(e.blogs);
+      this.blogStore.next(e.data);
     });
   }
 }

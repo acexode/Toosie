@@ -27,9 +27,9 @@ export class CartPage implements OnInit {
       this.lists = isEmpty(e) ? [] : e;
       this.total = this.lists.reduce((a, b) => a + (b.actualPrice * b.quantity),0);
       this.discount = this.lists.reduce((a, b) => {
-        console.log(a + ((b.actualPrice - b.currentPrice)));
+        console.log((b.actualPrice  * (b.discountPercent / 100))* b.quantity);
         // return a + ((b.actualPrice - b.currentPrice));
-        return a + ( b.actualPrice - b.currentPrice);
+        return a + (b.actualPrice  * (b.discountPercent / 100))* b.quantity;
       },0);
       console.log(this.discount);
     });

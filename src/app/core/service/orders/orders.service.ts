@@ -1,6 +1,7 @@
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 /* eslint-disable no-underscore-dangle */
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { wishListEndpoints } from './../../config/endpoints';
+import { baseEndpoints, wishListEndpoints } from './../../config/endpoints';
 import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';
 import { Storage } from '@capacitor/storage';
@@ -11,10 +12,19 @@ const MY_CART = 'my_cart';
 })
 export class OrdersService {
   cartStore: BehaviorSubject<any> = new BehaviorSubject([]);
-  constructor(private reqS: RequestService) {
+  user: any;
+  constructor(private reqS: RequestService, private authS: AuthService) {
+    this.authS.currentUser$.subscribe(user =>{
+      console.log(user._id);
+      this.user = user;
+    });
     Storage.get({ key: MY_CART }).then(cart =>{
       this.cartStore.next(JSON.parse(cart.value));
     });
+  }
+
+  myOrders(){
+    return this.reqS.get(baseEndpoints.order + '?customerId=' + this.user._id );
   }
   async removeCart() {
     await Storage.remove({ key: MY_CART });

@@ -20,16 +20,16 @@ export class MyOrdersPage implements OnInit {
   grandTotal = 0;
   discount= 0;
   orderHistory = [];
-  constructor(private orderS: OrdersService,private invS: InventoryService, private modalController: ModalController,
+  constructor(private orderS: OrdersService, private modalController: ModalController,
     private refillS: AddRefillService, private toastController: ToastController, private loadCtrl: LoadingController) { }
 
   async ngOnInit() {
     const loading = await this.loadCtrl.create();
     await loading.present();
-    this.invS.myOrders().subscribe((e:  any) =>{
+    this.orderS.myOrders().subscribe((e:  any) =>{
       console.log(e);
       loading.dismiss();
-      this.orderHistory = e.receipts;
+      this.orderHistory = e.data;
     });
     // this.orderS.cartStore.subscribe(e =>{
     //   console.log(e);

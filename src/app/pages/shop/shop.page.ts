@@ -38,12 +38,12 @@ export class ShopPage implements OnInit {
   loadCategory(){
     this.route.params.subscribe(params => {
       // const cat = params.get('category');
-      console.log(params.category);
+      console.log(params);
       this.inventoryS.categoryStore.subscribe((e: any) =>{
         this.categories = e;
-        console.log(this.categories);
-        const index = this.categories.findIndex(c => c.id === params.category);
-        this.tab = this.categories[index].id;
+        console.log(e);
+        const index = this.categories.findIndex(c => c?._id === params.category);
+        this.tab = this.categories[index]._id;
         this.slides.slideTo(index);
         console.log(this.tab);
         console.log(index);
@@ -56,7 +56,7 @@ export class ShopPage implements OnInit {
     this.inventoryS.inventoryByCategory(id).subscribe((e: any) =>{
       console.log(e);
       this.loading = false;
-      this.products = e.inventory;
+      this.products = e.data;
     });
   }
   addToCart(id){

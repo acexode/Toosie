@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { InventoryService } from './../core/service/inventory/inventory.service';
 import { SearchComponent } from './../components/search/search.component';
 import { Component, OnInit } from '@angular/core';
@@ -40,7 +41,7 @@ export class Tab1Page implements OnInit {
       this.categories = res.map(cat =>({
         img: cat.categoryImage,
         title: cat.category,
-        id: cat.id
+        id: cat._id
       }));
     });
   }

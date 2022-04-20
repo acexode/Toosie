@@ -2,8 +2,13 @@
 import { Router } from '@angular/router';
 import { PrescriptionService } from './../../core/service/prescription/prescription.service';
 import { Component, OnInit } from '@angular/core';
-import { Platform, ActionSheetController, ToastController } from '@ionic/angular';
+import {
+  Platform,
+  ActionSheetController,
+  ToastController,
+} from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 declare const window: any;
 
 @Component({
@@ -13,57 +18,61 @@ declare const window: any;
 })
 export class PrescriptionPage implements OnInit {
   id = '60d8e98f65b7290ac6383064';
-
+  user = null;
   pharmacyTool = [
     {
       text: 'Pill Reminder',
       icon: 'pill-reminder',
-      path: '/reminder'
-  },
-  {
-    text: 'Prescription History',
-    icon: 'prescription-history',
-    path: '/history'
-  },
+      path: '/reminder',
+    },
+    {
+      text: 'Prescription History',
+      icon: 'prescription-history',
+      path: '/history',
+    },
   ];
   prescription = [
     {
       text: 'Submit Rx Insurance card',
       icon: 'insurance-card',
-      action: ''
-  },
+      action: '',
+    },
     {
       text: 'Talk to an expert',
       icon: 'comment-bubble',
-      action: 'tawkto'
-  },
-  //   {
-  //     text: 'Manage family prescription',
-  //     icon: 'family-prescription'
-  // },
+      action: 'tawkto',
+    },
+    //   {
+    //     text: 'Manage family prescription',
+    //     icon: 'family-prescription'
+    // },
     {
       text: 'Prescription Savings club',
       icon: 'save-prescription',
-      action: ''
-  },
-];
-constructor(
-  private plt: Platform,
-  private actionSheetCtrl: ActionSheetController,
-  private prescriptionS: PrescriptionService,
-  public toastController: ToastController,
-  public router: Router,
-) { }
-  ngOnInit() {
-
+      action: '',
+    },
+  ];
+  constructor(
+    private plt: Platform,
+    private actionSheetCtrl: ActionSheetController,
+    private prescriptionS: PrescriptionService,
+    public toastController: ToastController,
+    public router: Router,
+    private authS: AuthService
+  ) {
+    this.authS.currentUser$.subscribe(user =>{
+      this.user = user;
+      console.log(this.user);
+    });
   }
+  ngOnInit() {}
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Your prescription have been sent.',
       duration: 2000,
       position: 'top',
       cssClass: 'toastCss',
-      animated: true
+      animated: true,
     });
     toast.present();
   }
@@ -82,15 +91,15 @@ constructor(
         icon: 'camera',
         handler: () => {
           this.addImage(CameraSource.Camera);
-        }
+        },
       },
       {
         text: 'Choose From Image Photo',
         icon: 'image',
         handler: () => {
           this.addImage(CameraSource.Photos);
-        }
-      }
+        },
+      },
     ];
 
     // Only allow file selection inside a browser
@@ -106,7 +115,7 @@ constructor(
 
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Select Image Source',
-      buttons
+      buttons,
     });
     await actionSheet.present();
   }
@@ -115,19 +124,24 @@ constructor(
       quality: 60,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source
+      source,
     });
-
-    const blobData = this.b64toBlob(image.base64String, `image/${image.format}`);
+    const blobData = this.b64toBlob(
+      image.base64String,
+      `image/${image.format}`
+    );
     const imageName = 'Give me a name';
     const formData = new FormData();
-    formData.append('images', blobData);
-    this.prescriptionS.uploadMedia(formData).subscribe(e =>{
+    formData.append('upload', blobData);
+    this.prescriptionS.uploadMedia(formData).subscribe((e) => {
       console.log(e);
       const data = {
-        prescriptionImage: e.images
+        description: 'prescription refill',
+        prescriptionImage: e.images,
+        // eslint-disable-next-line no-underscore-dangle
+        customerId: this.user?._id
       };
-      this.prescriptionS.uploadPrescription(data).subscribe(res =>{
+      this.prescriptionS.uploadPrescription(data).subscribe((res) => {
         console.log(res);
         this.presentToast();
       });
@@ -156,12 +170,12 @@ constructor(
     const blob = new Blob(byteArrays, { type: contentType });
     return blob;
   }
-  navigate(path){
-    this.router.navigate(['menu/home/prescription/'+path]);
+  navigate(path) {
+    this.router.navigate(['menu/home/prescription/' + path]);
   }
 
-  prescriptionAction(action){
-    if(action === 'tawkto'){
+  prescriptionAction(action) {
+    if (action === 'tawkto') {
       window.Tawk_API.maximize();
     }
   }

@@ -22,28 +22,27 @@
             <ion-col size="10">
               <div class="title-container">
                 <h5>Order Status</h5>
-                <span class="success">{{p.isActive ? 'Active': ''}}</span>
-                <span >Order No: {{p.id | slice:0:16}}</span>
-                <span >Pat Name: {{p.user.fullName}}</span>
-                <span >Start Date: {{p.startDate | date}}</span>
-                <span >Refill Date: {{p.nextRefillDate | date}}</span>
+                <!-- <span class="success">{{p.isActive ? 'Active': ''}}</span> -->
+                <!-- <span >Order No: {{p?.id | slice:0:16}}</span> -->
+                <span >Product: &nbsp; <span *ngFor="let i of p?.orderId.products">{{i.title}} &nbsp; </span> </span>
+                <span >Start Date:  {{p.startDate | date}}</span>
+                <span >Refill:  {{p.frequencyInterval}}</span>
+                <span >Refill Date: {{p?.nextRefillDate | date}}</span>
               </div>
             </ion-col>
             <ion-col size="2">
-              <ion-button (click) ="removeRefill(p.id)" fill="clear" >
+              <ion-button (click) ="removeRefill(p._id)" fill="clear" >
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
             </ion-col>
           </ion-row>
-          
-          
-          
+
         </div>
       </ion-col>
     
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="orderList.length; else openModal" >
+  <ion-grid *ngIf="orderList; else openModal" >
    
     <ion-list>
       <ion-list-header>
@@ -54,9 +53,9 @@
           
        
         <ion-label class="ml-5">
-          <h6>{{list.itemName}}</h6>
+          <h6>{{list.title}}</h6>
           <small>
-           Price:  {{list.cost}}
+           Price:  ₦ {{list?.actualPrice - (list?.actualPrice * (list?.discountPercent /100) )}}
           </small>
           <small>
            Quantity:  {{list.quantity}}

@@ -6,7 +6,7 @@ import { InventoryService } from './../../core/service/inventory/inventory.servi
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, Params } from '@angular/router';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from 'flutterwave-angular-v3';
@@ -32,6 +32,7 @@ export class BillingComponent implements OnInit {
     logo: '/assets/icon/logo-big.png'
   };
   allAddress = [];
+  user: any;
   meta = {counsumer_id: '7898', consumer_mac: 'kjs9s8ss7dd'};
   billingInfo: FormGroup;
   opts = {
@@ -100,24 +101,24 @@ export class BillingComponent implements OnInit {
       });
     }
     this.authService.currentUser().subscribe(str =>{
-      const user = JSON.parse(str.value);
-      console.log(user);
+      this.user = JSON.parse(str.value);
+      console.log(this.user);
       this.billingInfo.patchValue({
-        email: user.email,
-        phone_number: user.phone,
-        name: user.fullName,
-        address: user.address,
+        email: this.user.email,
+        phone_number: this.user.phone,
+        name: this.user.fullName,
+        address: this.user.address,
       });
     });
   }
   async getAllAddress(){
     const loading = await this.loadingController.create();
     await loading.present();
-    this.authService.allAddress().subscribe(res =>{
+    this.authService.currentUser$.subscribe(res =>{
       console.log(res);
       loading.dismiss();
-      if(res.address.length > 0){
-        this.allAddress = res.address;
+      if(res.address){
+        this.allAddress = [res.address];
       }else{
         this.presentAlertPrompt();
       }
@@ -157,7 +158,11 @@ export class BillingComponent implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
-            this.authService.newAddress(data).subscribe(e =>{
+            const obj = {
+              email: this.user.email,
+              address: data
+            };
+            this.authService.updateUser(this.user._id, obj).subscribe(e =>{
               this.getAllAddress();
             });
           }
@@ -168,16 +173,22 @@ export class BillingComponent implements OnInit {
     await alert.present();
   }
   async placeOrder() {
-    const records = this.items.map(e => ({
-        inventoryId: e._id,
-        itemName: e.title,
-        quantity: e.quantity,
-        cost: e.currentPrice
-      }));
+    const orderDetails = this.items.map(e => ({ product: e._id, quantity: e.quantity}));
+    const deliveryCost = locationList.filter(e => e.label === this.userLocation.value )[0].value;
+    const address = JSON.parse(this.address.value);
+    console.log(address);
     const body = {
-      records,
-      paymentType:'POD',
-      address: this.address.value
+      customerId: this.user._id,
+      shipping: {
+        city: address.localGov,
+        state: address.state,
+        address: address.address,
+        addressDeliveryCost: deliveryCost,
+      },
+      products: this.items,
+      orderDetails,
+      totalCost: this.grandTotal,
+      paymentMethod:'pod',
     };
     console.log(body);
     const loading = await this.loadingController.create();
@@ -209,9 +220,9 @@ export class BillingComponent implements OnInit {
     });
   }
   setAddress(value: any){
-    console.log(value);
+    console.log(JSON.stringify(value));
     this.billingInfo.patchValue({
-      address: value
+      address: JSON.stringify(value)
     });
   }
 
@@ -368,6 +379,9 @@ export class BillingComponent implements OnInit {
   }
   get address() {
     return this.billingInfo.get('address');
+  }
+  get userLocation() {
+    return this.billingInfo.get('location');
   }
   get paymentType() {
     return this.billingInfo.get('paymentType');

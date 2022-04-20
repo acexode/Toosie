@@ -1,6 +1,8 @@
+/* eslint-disable no-underscore-dangle */
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { PrescriptionService } from './../../core/service/prescription/prescription.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 export interface PrescriptionObject {
   prescriptionImage: string;
   description?: any;
@@ -16,11 +18,18 @@ export interface PrescriptionObject {
   styleUrls: ['./prescription-history.page.scss'],
 })
 export class PrescriptionHistoryPage implements OnInit {
-  prescriptionList$: Observable<[PrescriptionObject]> ;
-  constructor(private pres: PrescriptionService) { }
+  prescriptionList = [];
+  constructor(private pres: PrescriptionService, private authS: AuthService) { }
 
   ngOnInit() {
-    this.prescriptionList$ = this.pres.allPrescriptions();
+    this.authS.currentUser$.subscribe(str =>{
+
+      this.pres.userPrescriptions(str._id).subscribe(e =>{
+        console.log(e.data);
+        this.prescriptionList = e.data;
+      });
+
+    });
   }
 
 }

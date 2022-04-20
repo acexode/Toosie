@@ -13,15 +13,11 @@ export class ReceiptComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.item);
-    this.totalAmount();
   }
   dismiss(){
     this.modalController.dismiss();
   }
-  totalAmount(){
-    this.item.details.forEach(element => {
-      this.total += element.cost * element.quantity;
-    });
-    console.log(this.total);
+  calcDiscount(cost, discount){
+    return cost - (cost * (discount /100));
   }
 }

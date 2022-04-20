@@ -18,7 +18,7 @@ export class CategoriesPage implements OnInit {
       this.categories = res.map(cat =>({
         img: cat.categoryImage,
         title: cat.category,
-        id: cat.id
+        id: cat._id
       }));
     });
   }

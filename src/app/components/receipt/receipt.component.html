@@ -24,10 +24,10 @@
       <div class="info">
         <h2>Order Info</h2>
         <p>
-            Address : {{item.address}}<br>
+            Address : {{item.shipping.address}}<br>
             Ordered On   : {{item.createdAt | date}}<br>
-            Payment Type   : {{item.paymentType}}<br>
-            Payment Ref   : {{item.txRef}}<br>
+            Payment Type   : {{item?.paymentMethod === 'pod' ? 'Payment on delivery' : 'Card Payment' }}<br>
+            Payment Ref   : {{item.paymentId}}<br>
         </p>
       </div>
     </div><!--End Invoice Mid-->
@@ -42,15 +42,20 @@
 								<td class="Rate">Sub Total</td>
 							</tr>
  
-							<tr *ngFor="let ord of item.details" class="service">
-								<td class="tableitem"><p class="itemtext">{{ord.itemName}}</p></td>
-								<td class="tableitem"><p class="itemtext">{{ord.quantity}}</p></td>
-								<td class="tableitem"><p class="itemtext">₦{{ord.cost * ord.quantity}}.00</p></td>
+							<tr *ngFor="let ord of item.products; let i = index" class="service">
+								<td class="tableitem"><p class="itemtext">{{ord.title}}</p></td>
+								<td class="tableitem"><p class="itemtext">{{item.orderDetails[i].quantity}}</p></td>
+								<td class="tableitem"><p class="itemtext">₦{{calcDiscount(ord.actualPrice, ord.discountPercent ) * item.orderDetails[i].quantity}}.00</p></td>
+							</tr>
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate">Delivery Cost</td>
+								<td class="payment">₦ {{item.shipping.addressDeliveryCost}}</td>
 							</tr>
 							<tr class="tabletitle">
 								<td></td>
 								<td class="Rate">Total</td>
-								<td class="payment">₦ {{total}}</td>
+								<td class="payment">₦ {{item.totalCost}}</td>
 							</tr>
 
 						</table>

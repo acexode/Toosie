@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +13,7 @@ import { AuthService } from 'src/app/core/service/auth/auth.service';
 export class ContactUsPage implements OnInit {
 
   contactForm: FormGroup;
+  user: any;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
@@ -29,6 +31,7 @@ export class ContactUsPage implements OnInit {
   ngOnInit() {
     this.authService.currentUser().subscribe(str =>{
       const user = JSON.parse(str.value);
+      this.user = JSON.parse(str.value);
       console.log(user);
       this.contactForm.patchValue({
         email: user.email,
@@ -42,7 +45,7 @@ export class ContactUsPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.authService.updateUser(this.contactForm.value).subscribe(
+    this.authService.updateUser(this.user._id, this.contactForm.value).subscribe(
       async (res) => {
         await loading.dismiss();
         this.router.navigate(['menu/home']);

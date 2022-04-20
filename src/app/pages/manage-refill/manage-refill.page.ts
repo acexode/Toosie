@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+import { OrdersService } from './../../core/service/orders/orders.service';
 
 import { AddRefillComponent } from './../../components/add-refill/add-refill/add-refill.component';
 import { InventoryService } from './../../core/service/inventory/inventory.service';
@@ -11,30 +13,43 @@ import { AddRefillService } from 'src/app/core/service/add-refill/add-refill.ser
   styleUrls: ['./manage-refill.page.scss'],
 })
 export class ManageRefillPage implements OnInit {
-  orderList = [];
+  orderList = null;
   refillList = [];
-  constructor(private invS: InventoryService, private refillS: AddRefillService,
-     private modalController: ModalController) { }
+  constructor(
+    private invS: InventoryService,
+    private refillS: AddRefillService,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
-   this.loadRefill();
-    this.invS.myOrders().subscribe((e: any) =>{
-      console.log(e.receipts);
-      e.receipts.map( (det: any) => this.orderList.push(...det.details));
+    this.loadRefill();
+    this.invS.myOrders().subscribe((e: any) => {
+      console.log(e);
+      this.orderList =  e.data.map((det: any) => {
+        const {products, orderDetails} = det;
+        for (const [i, item] of products.entries()) {
+          return {
+            quantity: orderDetails[i].quantity,
+            ...item,
+            orderId: det._id
+          };
+        }
+      });
       console.log(this.orderList);
     });
   }
-  loadRefill(){
+  loadRefill() {
     this.refillS.refillListing().subscribe((obj: any) =>{
-      console.log(obj.refill);
-      this.refillList = obj.refill;
+      console.log(obj.data);
+      this.refillList = obj.data;
     });
   }
-  removeRefill(id){
+  removeRefill(id) {
+
     const obj = {
-      refillId: id
+      refillId: id,
     };
-    this.refillS.remove(obj).subscribe(e =>{
+    this.refillS.remove(id).subscribe(e =>{
       this.loadRefill();
     });
   }
@@ -44,11 +59,9 @@ export class ManageRefillPage implements OnInit {
       cssClass: 'fullscreen',
       componentProps: {
         itemName: list.itemName,
-        item: list
-      }
+        item: list,
+      },
     });
     await modal.present();
   }
 }
-
-

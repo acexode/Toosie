@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { ProfileComponentsComponent } from './../../components/profile-components/profile-components.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -75,7 +76,7 @@ async onUpload() {
         const update = {
           profileImage: event.images
         };
-        this.authService.updateUser(update).subscribe(async e =>{
+        this.authService.updateUser(this.user._id, update).subscribe(async e =>{
          // this.user = e.userInfo;
           console.log(e);
           this.authService.currentUser().subscribe(user => {
@@ -116,7 +117,7 @@ async reqFailed(res, msg){
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.authService.updateUser(this.credentials.value).subscribe(
+    this.authService.updateUser(this.user._id, this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
         this.router.navigate(['menu/home']);

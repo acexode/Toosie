@@ -1,4 +1,4 @@
-import { authEndpoints, miscEndpoint } from './../../config/endpoints';
+import { authEndpoints, baseEndpoints, miscEndpoint } from './../../config/endpoints';
 import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';
 import { map, tap, switchMap } from 'rxjs/operators';
@@ -42,11 +42,11 @@ export class AuthService {
   login(credentials: {email; password}): Observable<any> {
     return this.reqS.post(authEndpoints.login, credentials).pipe(
 
-      switchMap((data: any) => {
-        console.log(data.token);
-        this.currentUser$.next(data.user);
-        from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.user)}));
-        return from(Storage.set({key: TOKEN_KEY, value: data.token}));
+      switchMap((res: any) => {
+        console.log(res.token);
+        this.currentUser$.next(res.data);
+        from(Storage.set({key: CURRENT_USER, value: JSON.stringify(res.data)}));
+        return from(Storage.set({key: TOKEN_KEY, value: res.token}));
       }),
       tap(_ => {
         this.isAuthenticated.next(true);
@@ -56,7 +56,7 @@ export class AuthService {
   signup(credentials: {name; email; password}): Observable<any> {
     return this.reqS.post(authEndpoints.signup, credentials)
     .pipe(
-      switchMap((data: any) => from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.user)}))),
+      switchMap((res: any) => from(Storage.set({key: CURRENT_USER, value: JSON.stringify(res.data)}))),
       tap(_ => {
         console.log('authenticated');
       })
@@ -82,12 +82,12 @@ export class AuthService {
   changePassword(credentials: {oldPassword; newPassword}): Observable<any> {
     return this.reqS.post(authEndpoints.changePassword, credentials);
   }
-  updateUser(credentials): Observable<any> {
-    return this.reqS.patch(authEndpoints.updateProfile, credentials).pipe(
-      switchMap((data: any) => {
-        console.log(data);
-        this.currentUser$.next(data.userInfo);
-        return from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.userInfo)}));
+  updateUser(id, credentials): Observable<any> {
+    return this.reqS.put(baseEndpoints.user + '/' + id, credentials).pipe(
+      switchMap((res: any) => {
+        console.log(res);
+        this.currentUser$.next(res.data);
+        return from(Storage.set({key: CURRENT_USER, value: JSON.stringify(res.data)}));
       })
     );
   }

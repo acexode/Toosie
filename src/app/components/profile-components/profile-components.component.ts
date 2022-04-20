@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,6 +20,7 @@ export class ProfileComponentsComponent implements OnInit {
   loadingAddress = false;
   title = this.show === 'profile' ? 'Profile' : this.show === 'profile' ? 'address' : 'Change Password';
   allAddress: any;
+  user: any;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
@@ -46,13 +48,13 @@ export class ProfileComponentsComponent implements OnInit {
      console.log(this.show);
      if(this.show === 'profile'){
        this.authService.currentUser().subscribe(str =>{
-         const user = JSON.parse(str.value);
-         console.log(user);
+         this.user = JSON.parse(str.value);
+
          this.credentials.patchValue({
-           email: user.email,
-           phone: user.phone,
-           fullName: user.fullName,
-           address: user.address,
+           email: this.user.email,
+           phone: this.user.phone,
+           fullName: this.user.fullName,
+           address: this.user.address,
          });
        });
 
@@ -74,7 +76,7 @@ export class ProfileComponentsComponent implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.authService.updateUser(this.credentials.value).subscribe(
+    this.authService.updateUser(this.user._id, this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
         this.router.navigate(['menu/home']);

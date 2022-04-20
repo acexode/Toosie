@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+import { AuthService } from './../../../core/service/auth/auth.service';
 import { AddRefillService } from './../../../core/service/add-refill/add-refill.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -42,7 +44,7 @@ export class AddRefillComponent implements OnInit {
   ];
   refillForm: FormGroup;
   constructor(private fb: FormBuilder, public modalController: ModalController,
-    private alertCtrl: AlertController, private refillS: AddRefillService) { }
+    private alertCtrl: AlertController, private refillS: AddRefillService, private authS: AuthService) { }
 
   async ngOnInit() {
     console.log(this.item);
@@ -66,15 +68,14 @@ export class AddRefillComponent implements OnInit {
   saveRefill(){
     console.log(this.refillForm.value);
     const data = new FormData();
-    // eslint-disable-next-line no-underscore-dangle
-    const inventoryId = [this.item._id];
-    data.append('frequencyInterval', this.frequency.value);
-    data.append('prescriptionImage', this.prescriptionImage.value);
-    data.append('frequency', 'Day');
-    data.append('startDate', this.startDate.value);
-    data.append('otherInformation', this.otherInformation.value);
-    data.append('inventoryId', JSON.stringify(inventoryId));
-    this.refillS.refill(data).subscribe(ref =>{
+
+    const obj = {
+      ...this.refillForm.value,
+      orderId: this.item.orderId,
+      frequencyInterval: this.frequencyList.filter(e => e.value === this.frequency.value)[0].text
+    };
+    delete obj.inventoryId;
+    this.refillS.refill(obj).subscribe(ref =>{
       console.log(ref);
       this.refillS.refillListing();
       this.dismiss();

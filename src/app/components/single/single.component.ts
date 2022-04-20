@@ -35,11 +35,11 @@ export class SingleComponent implements OnInit  {
 
   ngOnInit() {
     console.log(this.item);
-    this.inventoryS.inventoryByCategory(this.item.category._id).subscribe((e: any) =>{
+    this.inventoryS.inventoryByCategory(this.item.category).subscribe((e: any) =>{
       console.log(e);
-      this.sameCategory$ = of(e.inventory);
-      this.inventoryS.similarStore.next(e.inventory);
-      console.log(e.inventory);
+      this.sameCategory$ = of(e.data);
+      this.inventoryS.similarStore.next(e.data);
+      console.log(e.data);
     });
     const acc = document.getElementsByClassName('accordion');
     let i;

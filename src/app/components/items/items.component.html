@@ -10,9 +10,9 @@
         <small class="discount pl-8 pt-5">
           {{p?.discountPercent}}%  OFF
         </small>
-        <small class="price pl-8 pt-5">
-          ₦ {{p?.currentPrice}}
-        </small>
+        <span class="price pl-8 pt-5">
+          ₦ {{p?.actualPrice - (p?.actualPrice * (p?.discountPercent /100) )}}
+        </span>
       </div>
       <ion-button (click)="addToCart(p)" class="addToCart">
         Add to Cart

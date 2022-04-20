@@ -15,7 +15,9 @@ export class ItemsComponent implements OnInit {
     private toastController: ToastController
     ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.items);
+  }
   addToCart(id){
     this.orderS.addItemToCart(id).then(e =>{
       if(e){

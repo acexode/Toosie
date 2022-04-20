@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { PrescriptionService } from './../../core/service/prescription/prescription.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.page.html',
@@ -13,12 +15,19 @@ export class UploadPage implements OnInit {
   uploadForm: FormGroup;
   file_text = 'Upload a photo of your prescription or product';
   file;
+  user: any;
   constructor(private formBuilder: FormBuilder,
     private pService: PrescriptionService,
     private loadingController: LoadingController,
     private alertController: AlertController,
     private router: Router,
-    ) { }
+    private authS: AuthService
+    ) {
+      this.authS.currentUser$.subscribe(user =>{
+        this.user = user;
+        console.log(this.user);
+      });
+    }
 
   ngOnInit() {
     this.uploadForm = this.formBuilder.group({
@@ -41,11 +50,12 @@ export class UploadPage implements OnInit {
     await loading.present();
     try {
       if(this.file){
-        formData.append('images', this.file);
+        formData.append('upload', this.file);
         const upload = await this.pService.uploadMedia(formData).toPromise();
         const data = {
           description: this.uploadForm.get('description').value,
-          prescriptionImage: upload.images,
+          prescriptionImage: upload.images[0],
+          customerId: this.user?._id
         };
         this.pService.uploadPrescription(data).subscribe(async d =>{
           await loading.dismiss();
@@ -55,6 +65,7 @@ export class UploadPage implements OnInit {
       }else{
         const data = {
           description: this.uploadForm.get('description').value,
+          customerId: this.user?._id
         };
         this.pService.uploadPrescription(data).subscribe(async d =>{
           await loading.dismiss();

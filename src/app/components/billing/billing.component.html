@@ -29,12 +29,12 @@
             </ion-item>
           </ion-col>
     </ion-row>
-    <ion-radio-group allow-empty-selection formControlName="address" value="">
+    <ion-radio-group allow-empty-selection  value="">
       <ion-list-header *ngIf="allAddress.length > 0">
         <ion-text><b class="ion-text-dark">Select Delivery Addresss</b></ion-text>
       </ion-list-header>
         <ion-row>
-          <ion-col size="12" (click)="setAddress(item.id)" *ngFor="let item of allAddress; let i = index">
+          <ion-col size="12" (click)="setAddress(item)" *ngFor="let item of allAddress; let i = index">
                  <ion-row [ngStyle]="{'border': (item.id === address.value) ? '1.6px solid #0281B2' : '' }"  class="slide card mr-8">
                    <ion-radio mode="md"   [value]="item.id"></ion-radio>
                    <ion-col size="3">

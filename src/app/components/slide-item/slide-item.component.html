@@ -25,16 +25,16 @@
                   {{item?.actualPrice}}
                 </span>
                 <span  class="s16-h22 bg-green color-white ml-2 p-3">
-                  -{{item?.actualPrice - item?.currentPrice}}
+                  ₦ {{item?.actualPrice - (item?.actualPrice * (item?.discountPercent /100) )}}
                 </span>
 
               </span>
   
             </div>
            
-            <small class="s16-h22 text-weight-bold">
+            <!-- <small class="s16-h22 text-weight-bold">
               ₦ {{item.discountPercent > 0 ? item?.currentPrice: item.actualPrice}}
-            </small>
+            </small> -->
             <ion-button (click)="addToCart(item)" class="knowMore">
               Add to Cart
             </ion-button>

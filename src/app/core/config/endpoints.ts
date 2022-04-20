@@ -1,9 +1,15 @@
-export const serverBaseUrl = 'https://pharmacy-ecommerce.herokuapp.com/api';
+export const serverBaseUrl = 'https://toosie.herokuapp.com/api/v1';
 
 export const baseEndpoints = {
-    auth: serverBaseUrl + '/users',
-    inventory: serverBaseUrl + '/inventory',
-
+    auth: serverBaseUrl + '/auth',
+    user: serverBaseUrl + '/users',
+    inventory: serverBaseUrl + '/product',
+    searchProduct: serverBaseUrl + '/searchProduct',
+    category: serverBaseUrl + '/category',
+    prescription: serverBaseUrl + '/prescription',
+    order: serverBaseUrl + '/order',
+    blog: serverBaseUrl + '/blog',
+    refill: serverBaseUrl + '/refill',
   };
 export const authEndpoints = {
     login: baseEndpoints.auth + '/login',
@@ -46,18 +52,9 @@ export const wishListEndpoints = {
     allWish: baseEndpoints.auth + '/wishlist/mine/all'
 };
 export const miscEndpoint = {
-    mediaUpload: baseEndpoints.inventory + '/media/upload',
+    mediaUpload: baseEndpoints.inventory + '/uploadMedia',
 };
-export const inventoryEndpoints = {
-    allCategories: baseEndpoints.inventory + '/category/all',
-    allTags: baseEndpoints.inventory + '/tags/all',
-    brands: baseEndpoints.inventory + '/brands/all',
-    inventoryByCategory: baseEndpoints.inventory + '/product/all/',
-    searchInventory: baseEndpoints.inventory + '/product/search',
-    popular: baseEndpoints.inventory + '/product/popular',
-    latest: baseEndpoints.inventory + '/product/latest',
-    savePODOrder: baseEndpoints.inventory + '/order/save',
-    saveCardOrder: baseEndpoints.inventory + '/order/card/save',
-    saveTokenOrder: baseEndpoints.inventory + '/order/token/card/save',
-    myOrders: baseEndpoints.inventory + '/order/mine/'
+export const categoryEndpoint = {
+    mediaUpload: baseEndpoints.inventory + '/uploadMedia',
 };
+

@@ -40,8 +40,8 @@ export class SearchComponent implements AfterViewInit {
       this.searchTerm$.next($event.target.value);
       this.invS.search(this.searchTerm$).subscribe((e: any) =>{
         console.log(e);
-        this.items = e.searchResult;
-        this.searchResult = e.searchResult;
+        this.items = e.data;
+        this.searchResult = e.data;
         this.invS.loading.next(false);
         this.showSpinner = false;
       });
