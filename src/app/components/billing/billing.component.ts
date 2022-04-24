@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, Params } from '@angular/router';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
-import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from 'flutterwave-angular-v3';
+// import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from 'flutterwave-angular-v3';
 import { Storage } from '@capacitor/storage';
 const SAVED_CARD = 'saved_card';
 declare const getpaidSetup: any;
@@ -75,7 +75,7 @@ export class BillingComponent implements OnInit {
     private modal: ModalController,
     private alertController: AlertController,
     private router: Router,
-    private flutterwave: Flutterwave,
+    // private flutterwave: Flutterwave,
     private loadingController: LoadingController) {
       this.billingInfo = this.fb.group({
         name: [''],
@@ -255,21 +255,21 @@ export class BillingComponent implements OnInit {
       metaname: it.title,
       metavalue: it._id
     }));
-    const paymentData: InlinePaymentOptions = {
-      public_key: this.publicKey,
-      tx_ref: this.generateReference(),
-      amount: 10,
-      currency: 'NGN',
-      payment_options: 'card,ussd',
-      redirect_url: '',
-      meta: this.meta,
-      customer: customerDetails,
-      customizations: this.customizations,
-      callback: this.makePaymentCallback,
-      onclose: this.closedPaymentModal,
-      callbackContext: this
-    };
-    this.flutterwave.inlinePay(paymentData);
+    // const paymentData: InlinePaymentOptions = {
+    //   public_key: this.publicKey,
+    //   tx_ref: this.generateReference(),
+    //   amount: 10,
+    //   currency: 'NGN',
+    //   payment_options: 'card,ussd',
+    //   redirect_url: '',
+    //   meta: this.meta,
+    //   customer: customerDetails,
+    //   customizations: this.customizations,
+    //   callback: this.makePaymentCallback,
+    //   onclose: this.closedPaymentModal,
+    //   callbackContext: this
+    // };
+    // this.flutterwave.inlinePay(paymentData);
 
   }
 
@@ -315,7 +315,7 @@ export class BillingComponent implements OnInit {
     }
   );
   }
-  async makePaymentCallback(response: PaymentSuccessResponse): Promise<void> {
+  async makePaymentCallback(response): Promise<void> {
     const records = this.items.map(e => ({
       inventoryId: e._id,
       itemName: e.title,

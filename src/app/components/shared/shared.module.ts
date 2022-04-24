@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { BrandsComponent } from '../brands/brands.component';
 import { HeaderComponent } from '../header/header.component';
-import { FlutterwaveModule } from 'flutterwave-angular-v3';
+// import { FlutterwaveModule } from 'flutterwave-angular-v3';
 import { SwiperModule } from 'swiper/angular';
 import { PasscodeComponent } from '../passcode/passcode.component';
 
@@ -28,7 +28,7 @@ import { PasscodeComponent } from '../passcode/passcode.component';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    FlutterwaveModule,
+    // FlutterwaveModule,
     SwiperModule
   ],
   exports:[

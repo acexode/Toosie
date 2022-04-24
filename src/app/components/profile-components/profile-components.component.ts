@@ -95,8 +95,8 @@ export class ProfileComponentsComponent implements OnInit {
       address: {
         localGov,
         state,
-        address
-      }
+        address,
+      },
     };
     console.log(fValue);
     this.authService.updateUser(this.user._id, fValue).subscribe(
@@ -125,29 +125,40 @@ export class ProfileComponentsComponent implements OnInit {
   async updatePassword() {
     const loading = await this.loadingController.create();
     await loading.present();
+    this.authService.currentUser().subscribe((str) => {
+      this.user = JSON.parse(str.value);
+      console.log(this.user);
 
-    this.authService.changePassword(this.credentials.value).subscribe(
-      async (res) => {
-        await loading.dismiss();
-        const alert = await this.alertController.create({
-          header: 'Success',
-          message: 'Password changed successfully',
-          buttons: ['OK'],
-        });
-        this.router.navigate(['menu/home']);
-      },
-      async (res) => {
-        console.log(res);
-        await loading.dismiss();
-        const alert = await this.alertController.create({
-          header: res.error.message,
-          message: res.error.error,
-          buttons: ['OK'],
-        });
+      const update = {
+        ...this.changePasswordForm.value,
+        email: this.user?.email,
+      };
+      this.authService.changePassword(update).subscribe(
+        async (res) => {
+          await loading.dismiss();
+          const alert = await this.alertController.create({
+            header: 'Success',
+            message: 'Password changed successfully',
+            buttons: ['OK'],
+          });
+          this.changePasswordForm.reset();
+          alert.present();
+          this.router.navigate(['menu/home']);
+        },
+        async (res) => {
+          console.log(res?.error);
+          await loading.dismiss();
+          this.changePasswordForm.reset();
+          const alert = await this.alertController.create({
+            header: 'Failed',
+            message: res?.error.message,
+            buttons: ['OK'],
+          });
 
-        await alert.present();
-      }
-    );
+          await alert.present();
+        }
+      );
+    });
   }
   submitAddress() {
     const value = this.addressForm.value;

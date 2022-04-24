@@ -11,14 +11,15 @@ import { SharedModule } from './components/shared/shared.module';
 import { ShopPipe } from './pages/shop.pipe';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/JWTInterceptor';
-import { FlutterwaveModule } from 'flutterwave-angular-v3';
+// import { FlutterwaveModule } from 'flutterwave-angular-v3';
 
 
 @NgModule({
   declarations: [AppComponent, ShopPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
-    FlutterwaveModule],
+    // FlutterwaveModule
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
