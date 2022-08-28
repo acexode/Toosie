@@ -21,7 +21,7 @@ export class CartPage implements OnInit {
   ngOnInit() {
     this.orderS.cartStore.subscribe(e =>{
       console.log(e);
-      if(e !== null || e.length === 0){
+      if(e?.length === 0){
         this.presentToast('No item in cart');
       }
       this.lists = isEmpty(e) ? [] : e;

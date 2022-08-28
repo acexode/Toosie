@@ -15,18 +15,20 @@ export class LoginPage implements OnInit {
   hide = true;
   showForgotPasswordPage = false;
   showForgotPasswordPageComplete = false;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
     private router: Router,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController
+  ) {}
 
   ngOnInit() {
-    this.authService.isAuthenticated.subscribe(isAuth =>{
+    this.authService.isAuthenticated.subscribe((isAuth) => {
       console.log(isAuth);
       if (isAuth) {
         // Directly open inside area
-        this.router.navigate(['menu/home']);;
+        this.router.navigate(['menu/home']);
       }
     });
     this.credentials = this.fb.group({
@@ -65,39 +67,43 @@ export class LoginPage implements OnInit {
   async submitForgotPassword() {
     const loading = await this.loadingController.create();
     await loading.present();
-    if(!this.showForgotPasswordPageComplete){
-      this.authService.forgotPasswordInitiate({email: this.femail.value}).subscribe(
-        async (res) => {
-          await loading.dismiss();
-          this.showForgotPasswordPageComplete = true;
-          this.reqFailed('Success', 'A verification token has been sent to your email');
-        },
-        async (res) => {
-          console.log(res);
-          await loading.dismiss();
-          this.reqFailed(res?.error?.error, 'Request failed');
-        }
-      );
-
-    }else{
-
-      this.authService.forgotPasswordComplete(this.forgotPassword.value).subscribe(
-        async (res) => {
-          await loading.dismiss();
-          this.reqFailed('Success', 'Password changed successfully');
-          this.showForgotPasswordPage = false;
-          
-        },
-        async (res) => {
-          console.log(res);
-          await loading.dismiss();
-          this.reqFailed(res?.error?.error, 'Request failed');
-        }
-      );
+    if (!this.showForgotPasswordPageComplete) {
+      this.authService
+        .forgotPasswordInitiate({ email: this.femail.value })
+        .subscribe(
+          async (res) => {
+            await loading.dismiss();
+            this.showForgotPasswordPageComplete = true;
+            this.reqFailed(
+              'Success',
+              'A verification token has been sent to your email'
+            );
+          },
+          async (res) => {
+            console.log(res);
+            await loading.dismiss();
+            this.reqFailed(res?.error?.error, 'Request failed');
+          }
+        );
+    } else {
+      this.authService
+        .forgotPasswordComplete(this.forgotPassword.value)
+        .subscribe(
+          async (res) => {
+            await loading.dismiss();
+            this.reqFailed('Success', 'Password changed successfully');
+            this.showForgotPasswordPage = false;
+          },
+          async (res) => {
+            console.log(res);
+            await loading.dismiss();
+            this.reqFailed(res?.error?.error, 'Request failed');
+          }
+        );
     }
   }
 
-  async reqFailed(res, msg){
+  async reqFailed(res, msg) {
     const alert = await this.alertController.create({
       header: msg,
       message: res,
@@ -105,7 +111,6 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
-
   }
   // Easy access for form fields
   get email() {
@@ -121,5 +126,4 @@ export class LoginPage implements OnInit {
   get password() {
     return this.credentials.get('password');
   }
-
 }

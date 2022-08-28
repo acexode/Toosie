@@ -62,8 +62,8 @@ export class AuthService {
       })
     );
   }
-  activateAccount(credentials: {email; verificationCode}): Observable<any> {
-    return this.reqS.post(authEndpoints.activate, credentials).pipe(
+  activateAccount(credentials: {email; otp}, id): Observable<any> {
+    return this.reqS.post(authEndpoints.activate + '/'+ id, credentials).pipe(
       switchMap((data: any) => {
         from(Storage.set({key: CURRENT_USER, value: JSON.stringify(data.user)}));
         return from(Storage.set({key: TOKEN_KEY, value: data.token}));

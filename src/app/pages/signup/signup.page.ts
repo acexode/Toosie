@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { ChangeDetectionStrategy } from '@angular/compiler/src/compiler_facade_interface';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -15,24 +16,42 @@ export class SignupPage implements OnInit {
   hide = true;
   hideConfirm = true;
   showVerify = false;
-  errorLogin= false;
+  errorLogin = false;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   InvalidCode = false;
   confirmP = 'password';
   credentials: FormGroup;
-  constructor(private fb: FormBuilder,
+  signupResponse = null;
+  constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
     private router: Router,
     private cdref: ChangeDetectorRef,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController
+  ) {}
 
   ngOnInit() {
     this.credentials = this.fb.group({
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.min(11),Validators.maxLength(11) ]],
+      phone: [
+        '',
+        [Validators.required, Validators.min(11), Validators.maxLength(11)],
+      ],
       password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  ionViewDidEnter() {
+    console.log('first');
+    this.authService.currentUser().subscribe((val) => {
+      console.log(val);
+      this.signupResponse = JSON.parse(val.value);
+      if (!this.signupResponse.isActivated) {
+        this.showVerify = true;
+      }
+      console.log(this.signupResponse);
     });
   }
 
@@ -43,8 +62,8 @@ export class SignupPage implements OnInit {
     this.authService.signup(this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
-        // this.showVerify = true;
-        this.router.navigate(['menu/home']);
+        this.showVerify = true;
+        // this.router.navigate(['menu/home']);
       },
       async (res) => {
         console.log(res);
@@ -79,11 +98,11 @@ export class SignupPage implements OnInit {
     await loading.present();
     const value = passForm.get('passcode').value;
     const obj = {
-      verificationCode: value,
-      email: this.email.value
+      otp: value,
+      email: this.signupResponse.email,
     };
     console.log(value);
-    this.authService.activateAccount(obj).subscribe(
+    this.authService.activateAccount(obj, this.signupResponse?._id).subscribe(
       async (res) => {
         await loading.dismiss();
         this.router.navigate(['menu/home']);
@@ -91,6 +110,12 @@ export class SignupPage implements OnInit {
       async (res) => {
         console.log(res);
         await loading.dismiss();
+        this.errorLogin = res.error.message;
+        this.InvalidCode = true;
+        console.log(passForm);
+        setTimeout(() => {
+          this.InvalidCode = false;
+        }, 3000);
         const alert = await this.alertController.create({
           header: res.error.message,
           message: res.error.error,
@@ -101,5 +126,4 @@ export class SignupPage implements OnInit {
       }
     );
   }
-
 }

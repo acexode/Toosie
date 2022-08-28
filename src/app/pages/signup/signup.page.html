@@ -80,7 +80,7 @@
             <app-passcode [errorLogin]="InvalidCode" (doPassForm)="continue($event)"></app-passcode>
         </div>
         <div class="ion-text-center">
-            <ion-text *ngIf="errorLogin" class="text-small color-red">
+            <ion-text *ngIf="InvalidCode" class="text-small color-red">
                 {{ errorLogin }}
             </ion-text>
         </div>
