@@ -17,10 +17,15 @@
       <h4 class="product-title">
         {{item.title}}
       </h4>      
-      <h5 class="price p-0">
-        ₦ {{item.currentPrice}}
+      <h5 *ngIf="item.discountPercent > 0; else noDiscount" class="price p-0">
+        ₦ {{item?.actualPrice - (item?.actualPrice * (item?.discountPercent /100) )}}
       </h5>
-      <div class=" p-0 ">
+      <ng-template #noDiscount>
+        <h5 class="price p-0">
+          ₦ {{item?.actualPrice}}
+        </h5>
+      </ng-template>
+      <div *ngIf="item.discountPercent > 0" class=" p-0 ">
         <span dir="ltr" class="strike">₦ {{item.actualPrice}}</span>
         <span class="discount">
           {{item.discountPercent}}%  OFF

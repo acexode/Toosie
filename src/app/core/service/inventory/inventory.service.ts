@@ -36,7 +36,7 @@ export class InventoryService {
     const categories = this.reqS.get(baseEndpoints.category);
     forkJoin([popular, latest, categories]).subscribe((results: any) =>{
       console.log(results);
-      console.log(results[2].data);
+      console.log(results[0].data);
       this.popularStore.next(results[0].data);
       this.latestStore.next(results[1].data);
       this.categoryStore.next(results[2].data);

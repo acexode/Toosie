@@ -1,69 +1,64 @@
-<ion-grid   scroll-y="false">
-  <div  *ngIf="items?.length; else empty"   >
+<ion-grid scroll-y="false">
+  <div *ngIf="items?.length; else empty">
 
     <ion-col>
-      <swiper
-      (swiper)="onSwiper($event)"
-      (slideChange)="onSlideChange()"
-      [config]="config"
+      <swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange()" [config]="config">
+        <ng-template *ngFor="let item of items" swiperSlide>
+          <div class="card" (click)="productModal(item)">
+            <div class="w-100 image ion-color-white-page">
+              <img [src]="item.resourceImages ? item?.resourceImages[0] : 'assets/icon/not-available.png'" />
 
-    >
-      <ng-template *ngFor="let item of items"  swiperSlide>
-        <div class="card" (click)="productModal(item)">
-          <div class="w-100 image ion-color-white-page">
-            <img [src]="item.resourceImages ? item?.resourceImages[0] : 'assets/icon/not-available.png'" />
-
-          </div>
-          <ion-card-header>
-            <ion-card-subtitle class="s16-h22">{{item.category?.category}}</ion-card-subtitle>
-            <ion-card-title class="h3 text-weight-bold">{{ (item?.title.length > 20)? (item?.title | slice:0:20)+'..':(item?.title) }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <div class="discount-container" >
-              <span *ngIf="item.discountPercent > 0">
-                <span class="s16-h22 actual-price pt-5">
-                  {{item?.actualPrice}}
-                </span>
-                <span  class="s16-h22 bg-green color-white ml-2 p-3">
-                  ₦ {{item?.actualPrice - (item?.actualPrice * (item?.discountPercent /100) )}}
-                </span>
-
-              </span>
-  
             </div>
-           
-            <!-- <small class="s16-h22 text-weight-bold">
+            <ion-card-header>
+              <ion-card-subtitle class="s16-h22">{{item.category?.category}}</ion-card-subtitle>
+              <ion-card-title class="h3 text-weight-bold">
+                {{ (item?.title.length > 20)? (item?.title | slice:0:20)+'..':(item?.title) }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="discount-container">
+                <span *ngIf="item.discountPercent > 0; else noDiscount">
+                  <span class="s16-h22 actual-price line-through pt-5">
+                    {{item?.actualPrice}}
+                  </span>
+                  <span class="s16-h22 bg-green color-white ml-2 p-3">
+                    ₦ {{item?.actualPrice - (item?.actualPrice * (item?.discountPercent /100) )}}
+                  </span>
+
+                </span>
+                <ng-template #noDiscount>
+                  <span class="s16-h22 actual-price">₦ {{item?.actualPrice}}</span>
+                </ng-template>
+
+              </div>
+
+              <!-- <small class="s16-h22 text-weight-bold">
               ₦ {{item.discountPercent > 0 ? item?.currentPrice: item.actualPrice}}
             </small> -->
-            <ion-button (click)="addToCart(item)" class="knowMore">
-              Add to Cart
-            </ion-button>
-          </ion-card-content>
-       </div>
-      
-      </ng-template>
+              <ion-button (click)="addToCart(item)" class="knowMore">
+                Add to Cart
+              </ion-button>
+            </ion-card-content>
+          </div>
 
-    </swiper>
+        </ng-template>
 
-  </ion-col>
+      </swiper>
+
+    </ion-col>
   </div>
   <ng-template #empty>
     <ion-row>
       <ion-col>
-        <swiper
-        [slidesPerView]="3"
-        [spaceBetween]="50"
-        [config]="config"
-      >
+        <swiper [slidesPerView]="3" [spaceBetween]="50" [config]="config">
 
-        <ng-template *ngFor="let item of fakeitems" swiperSlide>
-          
-            <div  class="slide mr-8">
+          <ng-template *ngFor="let item of fakeitems" swiperSlide>
+
+            <div class="slide mr-8">
               <div class="img-container text-center">
                 <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
-      
+
               </div>
-              <div  style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
+              <div style="height: 80px;" class="flex flex-column pt-8 ion-text-left">
                 <ion-text class="product-title">
                   <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
                 </ion-text>
@@ -74,12 +69,12 @@
                   <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
                 </small>
               </div>
-                <ion-skeleton-text animated style="width: 90%; height: 30px"></ion-skeleton-text>
-              
-                </div>
-          
-        </ng-template>
-      </swiper>
+              <ion-skeleton-text animated style="width: 90%; height: 30px"></ion-skeleton-text>
+
+            </div>
+
+          </ng-template>
+        </swiper>
 
 
       </ion-col>
@@ -89,5 +84,3 @@
 
 
 </ion-grid>
-
-

@@ -28,7 +28,11 @@ ion-card-header{
 
 .actual-price {
   color: #666;
+  font-weight: 600;
+}
+.line-through{
   text-decoration: line-through;
+  font-weight: normal;
 }
 .discount {
   margin-left: 8px;
