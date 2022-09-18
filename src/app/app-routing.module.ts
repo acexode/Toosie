@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule),
-    canLoad: [AuthGuard] // Secure all child pages
+    // canLoad: [AuthGuard] // Secure all child pages
   },
   {
     path: 'intro',
@@ -27,7 +27,8 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
-  },  {
+  },
+  {
     path: 'payment',
     loadChildren: () => import('./pages/payment/payment.module').then( m => m.PaymentPageModule)
   },

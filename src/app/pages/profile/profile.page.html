@@ -1,13 +1,11 @@
 <ion-header  no-border>
   
   <div  class="flex p-board flex-column">
-    <div class="flex">
-      <ion-button  (click)="back()" fill="clear"  slot="start">
-        <ion-icon  color="light" name="arrow-left"></ion-icon>
-      </ion-button>
-      <ion-title class="text-center" >
+    <div class="flex ">
+      
+      <span class="text-center profile py-10" >
         Profile
-       </ion-title>
+       </span>
 
     </div>
     <div class="flex flex-column desc">
@@ -26,7 +24,7 @@
           
         </div>
       </div>
-      <div class="pb-5 flex ion-justify-content-end float-right" > <ion-button (click)="presentModal('profile')" class="edit" fill="clear">edit</ion-button></div>
+      <div class="mb-3 flex ion-justify-content-end float-right" > <ion-button (click)="presentModal('profile')" class="edit" fill="clear">edit</ion-button></div>
       
 
     </div>

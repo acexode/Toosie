@@ -20,8 +20,11 @@ export class InventoryService {
 
   constructor(private reqS: RequestService, private authS: AuthService ) {
     this.authS.currentUser$.subscribe(user =>{
-      console.log(user._id);
-      this.user = user;
+      if(user){
+        console.log(user._id);
+        this.user = user;
+
+      }
     });
     this.multipleRequest();
    }

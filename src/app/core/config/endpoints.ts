@@ -14,6 +14,7 @@ export const baseEndpoints = {
 export const authEndpoints = {
     login: baseEndpoints.auth + '/login',
     signup: baseEndpoints.auth + '/signup',
+    resendOTP: baseEndpoints.auth + '/resend-otp',
     activate: baseEndpoints.auth + '/register/activate',
     forgotPasswordInitiate: baseEndpoints.auth + '/forgot-password/initiate',
     forgotPasswordComplete: baseEndpoints.auth + '/forgot-password/complete',

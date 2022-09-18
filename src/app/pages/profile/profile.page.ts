@@ -51,13 +51,18 @@ export class ProfilePage implements OnInit {
     this.authService.currentUser().subscribe(str =>{
       const user = JSON.parse(str.value);
       console.log(user);
-      this.user = user;
-      this.credentials.patchValue({
-        email: user.email,
-        phone: user.phone,
-        fullName: user.fullName,
-        address: user.address,
-      });
+      if(user){
+        this.user = user;
+        this.credentials.patchValue({
+          email: user.email,
+          phone: user.phone,
+          fullName: user.fullName,
+          address: user.address,
+        });
+
+      }else{
+        this.router.navigate(['/login']);
+      }
     });
   }
   onChange(event) {

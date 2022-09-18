@@ -24,6 +24,6 @@ export class IntroPage implements OnInit {
   }
   async start() {
     await Storage.set({key: INTRO_KEY, value: 'true'});
-    this.router.navigateByUrl('/login', { replaceUrl:true });
+    this.router.navigateByUrl('/menu/home', { replaceUrl:true });
   }
 }

@@ -1,18 +1,10 @@
-<ion-header  no-border>
-  
-  <div  class="flex p-board flex-column">
-    <div class="flex">
-      <ion-button  (click)="back()" fill="clear"  slot="start">
-        <ion-icon  color="dark" name="arrow-left"></ion-icon>
-      </ion-button>
-      <ion-title class="text-center" >
-         <ion-text color="dark">{{title}}</ion-text>
-       </ion-title>
-
-    </div>
-    
-
-  </div>
+<ion-header  class="ion-no-border">
+  <ion-toolbar>
+    <ion-button  (click)="back()" fill="clear"  slot="start">
+      <ion-icon  color="dark" name="arrow-left"></ion-icon>
+    </ion-button>
+    <ion-title color="dark">{{title}}</ion-title>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-row *ngIf="show === 'profile'" class="mt-16">

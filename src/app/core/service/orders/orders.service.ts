@@ -15,8 +15,11 @@ export class OrdersService {
   user: any;
   constructor(private reqS: RequestService, private authS: AuthService) {
     this.authS.currentUser$.subscribe(user =>{
-      console.log(user._id);
-      this.user = user;
+      if(user){
+        console.log(user._id);
+        this.user = user;
+
+      }
     });
     Storage.get({ key: MY_CART }).then(cart =>{
       this.cartStore.next(JSON.parse(cart.value));

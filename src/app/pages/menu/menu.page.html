@@ -17,7 +17,16 @@
     <ion-content class="ion-no-padding">
       <div class="menu-header-bg">
       </div>
-      <div class="header-content">
+      <div *ngIf="!user" class="header-content">
+        <img src="/assets/icon/anonymous.png" alt="" srcset="">
+        <ion-label>
+          
+          <p><ion-text>Anonymous User</ion-text></p>
+          <p> <ion-text>You are not logged in</ion-text></p>
+  
+        </ion-label>
+      </div>
+      <div *ngIf="user" class="header-content">
         <img src="/assets/icon/man.png" alt="" srcset="">
         <ion-label>
           <h2>{{user?.fullName}}</h2>

@@ -71,10 +71,15 @@
               Verification code
             </ion-text>
         </div>
-        <div class="ion-text-center pb-42">
+        <div class="ion-text-center pb-12">
             <ion-text class="text-small">
                Enter the 6 digit code sent to your phone.
             </ion-text>
+        </div>
+        <div *ngIf="showResend" class="ion-text-center pb-30">
+            <ion-button (click)="resendOTP()" fill="clear" color="success" class="text-small">
+               Resend OTP
+            </ion-button>
         </div>
         <div class="ion-text-center pt-40">
             <app-passcode [errorLogin]="InvalidCode" (doPassForm)="continue($event)"></app-passcode>

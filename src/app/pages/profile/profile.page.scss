@@ -9,7 +9,7 @@ ion-toolbar {
     background: linear-gradient(
 90deg, #0281b2 0%, #0281b2 88%, #00d4ff 100%);
     --ion-color-base: transparent !important;
-    height: 170px;
+    height: 175px;
  }
  .header-md::after {
      background: none !important;
@@ -20,7 +20,9 @@ ion-toolbar {
  .primary-text{
 	 color: #0281B2;
  }
-
+.profile{
+    flex: 1;
+}
 .edit{
     background: rgb(75, 69, 69);
     color: #fff;
