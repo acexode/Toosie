@@ -4,7 +4,7 @@ import { BehaviorSubject, from, Observable } from 'rxjs';
 import { baseEndpoints, wishListEndpoints } from './../../config/endpoints';
 import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 
 const MY_CART = 'my_cart';
 @Injectable({

@@ -1,96 +1,134 @@
 <app-header [dismiss]="true" title="Billing & Payment"></app-header>
 
-<ion-content class="ion-padding">
-  
-  <ion-grid class="container">
-   <ion-row>
-     <ion-col>
-      <ion-text> {{items.length}} item in your Cart</ion-text>
-     </ion-col>
-     <ion-col class="flex flex-column ion-text-end">
-      <ion-text>Total</ion-text>
-      <b class="ion-text-dark">₦ {{savedTotal}}</b>
-     </ion-col>
-   </ion-row>
+
+<ion-content class="ion-padding pt-0">
+
+  <ion-grid>
+
 
     <form (ngSubmit)="placeOrder()" [formGroup]="billingInfo" class="form-container pt-4">
-      <!-- [ngStyle]="{'border': ('savedCard' === paymentType.value) ? '1.6px solid #0281B2' : '' }" -->
-       
-        <ion-list-header>
-          <ion-text><b class="ion-text-dark">Select Delivery Location</b></ion-text>
-        </ion-list-header>
-        <ion-row class="mt-8">
-          <ion-col size="12">
-            <ion-item>
-              <ion-label>Location <span class="required">*</span></ion-label>
-              <ion-select id="customAlertSelect" formControlName="location" (ionChange)="locationChange($event)" interface="alert"  placeholder="Select One">
-                <ion-select-option *ngFor="let opt of allLocations" >{{opt.label}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-    </ion-row>
-    <ion-radio-group allow-empty-selection  value="">
-      <ion-list-header *ngIf="allAddress.length > 0">
-        <ion-text><b class="ion-text-dark">Select Delivery Addresss</b></ion-text>
+
+      <ion-list-header>
+        <ion-text><b class="ion-text-dark">Select Delivery Location</b></ion-text>
       </ion-list-header>
+      <ion-row class="mt-8">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Location <span class="required">*</span></ion-label>
+            <ion-select id="customAlertSelect" formControlName="location" (ionChange)="locationChange($event)"
+              interface="alert" placeholder="Select One">
+              <ion-select-option *ngFor="let opt of allLocations">{{opt.label}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-radio-group allow-empty-selection value="">
+        <ion-list-header *ngIf="allAddress.length > 0">
+          <ion-text><b class="ion-text-dark">Select Delivery Addresss</b></ion-text>
+        </ion-list-header>
         <ion-row>
           <ion-col size="12" (click)="setAddress(item)" *ngFor="let item of allAddress; let i = index">
-                 <ion-row [ngStyle]="{'border': (item.id === address.value) ? '1.6px solid #0281B2' : '' }"  class="slide card mr-8">
-                   <ion-radio mode="md"   [value]="item.id"></ion-radio>
-                   <ion-col size="3">
-                     <ion-icon name="locate-outline"></ion-icon>
-                   </ion-col>
-                   <ion-col>
-                     <h6>Address {{i + 1 }}</h6>
-                     <ion-text class="card-text">{{item.state}} </ion-text>
-                     <ion-text class="card-text"> {{item.localGov}} </ion-text>
-                     <ion-text class="card-text"> {{item.address}} </ion-text>
-                     
+            <ion-row [ngStyle]="{'border': (item.id === address.value) ? '1.6px solid #0281B2' : '' }"
+              class="slide card mr-8">
+              <ion-radio mode="md" [value]="item.id"></ion-radio>
+              <ion-col size="3">
+                <ion-icon name="locate-outline"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <h6>Address {{i + 1 }}</h6>
+                <ion-text class="card-text">{{item.state}} </ion-text>
+                <ion-text class="card-text"> {{item.localGov}} </ion-text>
+                <ion-text class="card-text"> {{item.address}} </ion-text>
 
-                   </ion-col>
-                   </ion-row>
-               </ion-col>
+
+              </ion-col>
+            </ion-row>
+          </ion-col>
         </ion-row>
-       
-      </ion-radio-group> 
-      
-       <ion-radio-group allow-empty-selection formControlName="paymentType" value="card"> 
+
+      </ion-radio-group>
+
+      <ion-radio-group allow-empty-selection formControlName="paymentType" value="card">
         <ion-list-header>
           <h6><b>Payment Method</b></h6>
         </ion-list-header>
-        <ion-row> 
-          <!--  -->
-          <ion-col  size="12" (click)="setPayment(item.value)" *ngFor="let item of paymentMethods">
-                 <ion-row [ngStyle]="{'border': (item.value === paymentType.value) ? '1.6px solid #0281B2' : '' }" class="slide card mr-8">
-                   <ion-radio mode="md"  [value]="item.value"></ion-radio>
-                   <ion-col size="3">
-                     <ion-icon [name]="item.icon"></ion-icon>
-                   </ion-col >
-                   <ion-col>
-                     <h5>{{item.text}}</h5>
-                     
-                   </ion-col>
-                   <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
-                       <!-- <h6 class="card-text">**** ****  {{cardObj.last4digits}}</h6> -->
-                   </div>
-                   </ion-row>
-               </ion-col>
-        </ion-row> 
-       
-       </ion-radio-group> 
-         
-        </form>
+        <ion-row>
+
+          <ion-col size="12" (click)="setPayment(item.value)" *ngFor="let item of paymentMethods">
+            <ion-row [ngStyle]="{'border': (item.value === paymentType.value) ? '1.6px solid #0281B2' : '' }"
+              class="slide card mr-8">
+              <ion-radio mode="md" [value]="item.value"></ion-radio>
+              <ion-col size="3">
+                <ion-icon [name]="item.icon"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <h5>{{item.text}}</h5>
+
+              </ion-col>
+              <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
+
+              </div>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+      </ion-radio-group>
+
+    </form>
+
+
 
   </ion-grid>
 </ion-content>
+
 <ion-footer>
-  <ion-row>
+  <ion-row  class="my-16">
+    <ion-col size="9">
+      <ion-text>Total</ion-text>
+    </ion-col>
+    <ion-col size="3">
+      <ion-text>₦ {{total}}</ion-text>
+    </ion-col>
+    <ion-col size="9">
+      <ion-text>Discount</ion-text>
+    </ion-col>
+    <ion-col size="3">
+      <ion-text>₦ {{discount}}</ion-text>
+    </ion-col>
+    <ion-col size="9">
+      <ion-text>Delivery</ion-text>
+    </ion-col>
+    <ion-col size="3">
+      <ion-text>₦ {{discount}}</ion-text>
+    </ion-col>
+    <ion-col class="border-t" size="9">
+      <ion-text><b>Grand Total</b></ion-text>
+    </ion-col>
+    <ion-col class="border-t" size="3">
+      <ion-text><b>₦ {{total - discount}}</b></ion-text>
+    </ion-col>
     <ion-col size="12">
-      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order  ₦{{grandTotal}}</ion-button>
-      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
-      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()" type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
-      
- 
-</ion-col>
+      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit"
+        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit"
+        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()"
+        type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+
+
+    </ion-col>
+
   </ion-row>
+  <!-- <ion-row>
+    <ion-col size="12">
+      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit"
+        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit"
+        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()"
+        type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
+
+
+    </ion-col>
+  </ion-row> -->
 </ion-footer>

@@ -1,11 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import { ChangeDetectionStrategy } from '@angular/compiler/src/compiler_facade_interface';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',

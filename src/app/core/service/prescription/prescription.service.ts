@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Observable, from } from 'rxjs';
 const REMINDER_KEY = 'pill-reminder';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 @Injectable({
   providedIn: 'root'
 })

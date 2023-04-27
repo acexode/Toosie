@@ -3,7 +3,7 @@ import { PrescriptionService } from './../../core/service/prescription/prescript
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 import { AddRefillService } from 'src/app/core/service/add-refill/add-refill.service';
 const PILL_REMINDER = 'pill-reminder';
 @Component({

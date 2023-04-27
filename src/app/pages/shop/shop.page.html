@@ -9,7 +9,7 @@
 
     <ion-slides [options]="opts" #slides>
       <ion-slide *ngFor="let cat of categories; let i = index;">
-        <ion-button fill="clear" class="text-dark" [class.active-category]="tab === cat._id" (click)="segmentChanged(cat.id)">
+        <ion-button fill="clear" class="text-dark" [class.active-category]="tab === cat._id" (click)="segmentChanged(cat._id)">
           {{ cat.category }}
         </ion-button>
       </ion-slide>

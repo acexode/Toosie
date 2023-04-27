@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 import { CanLoad, Router } from '@angular/router';
 // import { BehaviorSubject, from, Observable } from 'rxjs';
 // import { filter, switchMap, take } from 'rxjs/operators';

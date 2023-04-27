@@ -83,39 +83,53 @@ export class CartPage implements OnInit {
     await modal.present();
   }
   async checkoutModal() {
-    this.authS.currentUser$.subscribe(async (user) => {
-      console.log(user && user?.isActivated, user, user?.isActivated);
-      if (user?.isActivated) {
-        const modal = await this.modalController.create({
-          component: BillingComponent,
-          cssClass: 'fullscreen',
-          componentProps: {
-            grandTotal: this.total - this.discount,
-            items: this.lists,
-          },
-        });
-        await modal.present();
-      } else {
-        this.presentAlert();
-      }
-    });
+    if (this.total - this.discount > 1000) {
+      this.authS.currentUser$.subscribe(async (user) => {
+        console.log(user && user?.isActivated, user, user?.isActivated);
+        if (user?.isActivated) {
+          const modal = await this.modalController.create({
+            component: BillingComponent,
+            cssClass: 'fullscreen',
+            componentProps: {
+              grandTotal: this.total - this.discount,
+              total: this.total,
+              discount: this.discount,
+              items: this.lists,
+            },
+          });
+          await modal.present();
+        } else {
+          this.presentAlert(
+            'You have to signup/login to proceed',
+            'Login / Signup',
+            'login'
+          );
+        }
+      });
+    } else {
+      this.presentAlert(
+        'Minimum order for delivery is ₦1000',
+        'Go to Shop',
+        'menu/home/categories'
+      );
+    }
   }
-  async presentAlert() {
+  async presentAlert(msg, okText, navigate) {
     const alert = await this.alertController.create({
       header: 'Alert !!',
-      message: 'You have to signup/login to proceed',
+      message: msg,
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
         },
         {
-          text: 'Login / Signup',
+          text: okText,
           role: 'confirm',
           handler: () => {
             console.log(this.alertController.dismiss());
             this.alertController.dismiss();
-            this.router.navigate(['login']);
+            this.router.navigate([navigate]);
           },
         },
       ],

@@ -10,7 +10,7 @@ import { Router, Params } from '@angular/router';
 import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 // import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from 'flutterwave-angular-v3';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 const SAVED_CARD = 'saved_card';
 declare const getpaidSetup: any;
 @Component({
@@ -20,6 +20,8 @@ declare const getpaidSetup: any;
 })
 export class BillingComponent implements OnInit {
   @Input() grandTotal: any;
+  @Input() total: any;
+  @Input() discount: any;
   @Input() items: any;
   savedTotal = 0;
   allLocations = locationList;

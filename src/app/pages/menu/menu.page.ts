@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AuthService } from './../../core/service/auth/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 import { SearchComponent } from 'src/app/components/search/search.component';
 const MY_CART = 'my_cart';
 @Component({

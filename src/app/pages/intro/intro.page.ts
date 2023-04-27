@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 import { Router } from '@angular/router';
 import { INTRO_KEY } from 'src/app/core/guards/intro.guard';
 @Component({

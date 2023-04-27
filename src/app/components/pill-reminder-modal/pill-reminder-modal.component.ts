@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LocalNotification, LocalNotificationActionPerformed, LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 import { AddRefillService } from 'src/app/core/service/add-refill/add-refill.service';
 const PILL_REMINDER = 'pill-reminder';
 @Component({

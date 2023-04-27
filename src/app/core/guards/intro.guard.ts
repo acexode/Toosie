@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Router } from '@angular/router';
-import { Storage } from '@capacitor/storage';
+import {  Preferences as Storage } from '@capacitor/preferences';
 
 export const INTRO_KEY = 'intro-seen';
 
