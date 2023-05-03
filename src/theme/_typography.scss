@@ -235,6 +235,9 @@ ion-label.input-label,
 .text-nowrap {
   word-wrap: nowrap;
 }
+.text-break {
+  white-space: break-spaces !important;
+}
 
 .overflow-ellipsis {
   overflow: hidden;

@@ -1,0 +1,29 @@
+<ion-grid>
+  <ion-list-header class="pl-8 pb-4">
+    <ion-text><b class="ion-text-dark">Select Payment Method</b></ion-text>
+  </ion-list-header>
+  <ion-row>
+
+    <ion-col class="mb-10" size="12" (click)="setPayment(item.value)" *ngFor="let item of paymentMethods">
+      <ion-row [ngStyle]="{'border': (item.value === paymentType) ? '1.6px solid #0281B2' : '' }"
+        class="slide card px-12">
+        <ion-col size="3">
+          <ion-icon [name]="item.icon"></ion-icon>
+        </ion-col>
+        <ion-col class="pt-20">
+          <h5>{{item.text}}</h5>
+
+        </ion-col>
+        <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
+
+        </div>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="footer">
+    <ion-col size="12">
+      <ion-button class="success-btn" (click)="proceed()" expand="block">Proceed</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

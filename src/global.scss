@@ -69,4 +69,17 @@ ion-content, ion-tabs, ion-segment, ion-header{
     --border-color: #0281B2;
     text-align: center;
 }
+.btn-primary-outline{
+    --border-color: #0281b2 !important;
+    --color: #0281b2;
+}
 
+.swiper-wrapper{
+    max-height: 400px;
+}
+
+.swiper-slide img {
+    object-fit: cover;
+    height: 150px;
+    width: 100%;
+}

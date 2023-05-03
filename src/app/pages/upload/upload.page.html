@@ -45,11 +45,11 @@
         </ion-text>
       </ion-col>
       <ion-col size="11" class=" ion-justify-content-center mx-52 mt-8" >       
-          <ion-textarea rows="4" formControlName="description"  placeholder="Ex: Paracetamol"></ion-textarea>
-       
+          <ion-textarea minlength="10" class="p-8" rows="4" formControlName="description"  placeholder="Ex: Paracetamol"></ion-textarea>
+        <small>Required (10 characters minimum)</small>
       </ion-col>
       <ion-col size="11" class=" mt-8" >       
-          <ion-button type="submit" expand="block" class="success-btn">Submit</ion-button>
+          <ion-button [disabled]="!uploadForm.valid" type="submit" expand="block" class="success-btn">Submit</ion-button>
        
       </ion-col>
      

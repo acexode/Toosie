@@ -33,7 +33,7 @@
           <span *ngIf="phone.errors?.required">phone is required</span>
           <span *ngIf="phone.errors?.minlength">phone needs to be 8 characters</span>
         </div>
-        <ion-item>
+        <!-- <ion-item>
           <ion-label position="floating">State</ion-label>
           <ion-input type="text" formControlName="state"></ion-input>
         </ion-item>
@@ -56,8 +56,8 @@
         <div *ngIf="(addressF.dirty || addressF.touched) && addressF.errors" class="errors">
           <span *ngIf="addressF.errors?.required">address is required</span>
         </div>
-        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Update</ion-button>
-  
+      -->
+      <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Update</ion-button>
        
       </form>
   
@@ -84,7 +84,7 @@
     </ion-col>
   
   </ion-row>
-  <!-- <ion-row *ngIf="showAddressForm" class="mt-16">
+   <ion-row *ngIf="showAddressForm" class="mt-16">
     <ion-col size="12">
       <form (ngSubmit)="submitAddress()" [formGroup]="addressForm" class="form-container pt-16">
         <ion-item>
@@ -117,7 +117,7 @@
   
     </ion-col>
   
-  </ion-row> -->
+  </ion-row> 
   <ion-row *ngIf="show === 'address'" class="mt-16">
   
     <ion-col size="12">

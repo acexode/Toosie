@@ -1,0 +1,90 @@
+<ion-grid>
+
+  <ion-radio-group [value]="deliveryType">
+    <ion-row>
+      <ion-list-header class="pl-24" >
+        <ion-text><b class="ion-text-dark">Select Mode of Delivery</b></ion-text>
+      </ion-list-header>
+
+
+      <ion-col size="6">
+        <ion-card (click)="deliveryType = 'pickup'" [color]="deliveryType === 'pickup' ? 'secondary' : ''">
+          <ion-card-content>
+            <!-- <ion-item lines="none"> -->
+              <ion-label>Store Pickup </ion-label>
+              <ion-radio mode="md" color="light" value="pickup"></ion-radio>
+            <!-- </ion-item> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card (click)="deliveryType = 'delivery'" [color]="deliveryType === 'delivery' ? 'secondary' : ''">
+
+
+          <ion-card-content>
+            <!-- <ion-item lines="none"> -->
+              <ion-label>Local Delivery </ion-label>
+              <ion-radio mode="md" color="light" value="delivery"></ion-radio>
+            <!-- </ion-item> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-radio-group>
+  <ion-row>
+    <ion-item lines="none">
+      <ion-checkbox [value]="priorityDelivery" (onChange)="!priorityDelivery" color="secondary" slot="start" mode="md"></ion-checkbox>
+      <ion-label>Priority Delivery</ion-label>
+    </ion-item>
+  </ion-row>
+  <ion-row *ngIf="deliveryType === 'delivery'">
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Location <span class="required">*</span></ion-label>
+        <ion-select id="customAlertSelect" (ionChange)="locationChange($event)"
+          interface="alert" placeholder="Select One">
+          <ion-select-option *ngFor="let opt of allLocations">{{opt.label}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-radio-group *ngIf="deliveryType === 'delivery'" allow-empty-selection [value]="address.address">
+    <ion-list-header class="pl-8 pb-4" *ngIf="allAddress.length > 0">
+      <ion-text><b class="ion-text-dark">Select Delivery Addresss</b></ion-text>
+    </ion-list-header>
+    
+    <ion-row class="addresses">
+      <ion-col size="12" (click)="setAddress(item)" *ngFor="let item of allAddress; let i = index">
+        <ion-row [ngStyle]="{'border': (item.address === address.address) ? '1.6px solid #0281B2' : '' }"
+          class="slide card mr-8">
+          <ion-radio mode="md" [value]="item.address" ></ion-radio>
+          <ion-col size="3">
+            <ion-icon name="locate-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <h6>Address {{i + 1 }}</h6>
+            <ion-text class="card-text">{{item.state}} </ion-text>
+            <ion-text class="card-text"> {{item.localGov}} </ion-text>
+            <ion-text class="card-text"> {{item.address}} </ion-text>
+
+
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+  </ion-radio-group>
+  
+
+
+
+  <ion-row class="footer">
+    <ion-col size="12">
+      <ion-button *ngIf="deliveryType === 'delivery'" class="btn-primary-outline" (click)="presentAlertPrompt('Add new delivery address')" expand="block"
+        fill="outline">Add Address</ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button [disabled]="deliveryCost === 0 || address === null" class="success-btn" (click)="proceed()" expand="block">Proceed</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

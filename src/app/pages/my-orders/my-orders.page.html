@@ -1,35 +1,49 @@
 <app-header [search]="true" [cart]="false" title="My Orders"></app-header>
 
-<ion-content>
-  <ion-list class="card" *ngFor="let list of orderHistory">  
-    <ion-item class="d-flex ion-justify-content-between" >
-      <ion-label>ORD{{list._id | slice:0:4}}</ion-label>
-      <ion-label class="ion-text-right" >{{list.createdAt | date}}</ion-label>
-    </ion-item>
-    <ion-item class="d-flex ion-justify-content-between">
-      <ion-label>Payment Mode </ion-label>
-      <ion-label class="ion-text-right" >{{list?.paymentMethod === 'pod' ? 'Payment on delivery' : 'Card Payment' }}</ion-label>
-    </ion-item>
-    <ion-item class="d-flex ion-justify-content-between">
-      <ion-label >
-        <small>Product Order</small> <br>
-        Amount
-      </ion-label>
-      <ion-label class="ion-text-right pt-15"> ₦ {{list.totalCost}}</ion-label>
-      
-    </ion-item>   
-   
-   <ion-col size="12" class="flex ion-justify-content-end pl-10 border-top">
-    
-    <div class="right">
-        <ion-button (click)="presentModal(list)" class="ps" fill="clear">
-          View Receipt
-        </ion-button>
-    </div>
-   </ion-col>
-  </ion-list>
+<ion-content class="pt-64">
+  <ion-row>
+    <ion-col>
+      <ion-segment (ionChange)="segmentChanged($event)" value="unpaid">
+        <ion-segment-button value="unpaid">
+          <ion-label>UnPaid Orders</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="paid">
+          <ion-label>Paid Orders</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-col>
+  </ion-row>
+  <ion-card *ngFor="let list of orderHistory">
+    <ion-card-header>
+      <ion-label class="h3" color="dark">Order No: {{list._id | slice:0:6}}</ion-label>
+      <ion-card-subtitle>{{list.createdAt | date}}</ion-card-subtitle>
+    </ion-card-header>
 
-  
+    <ion-card-content class="pl-0">
+      <ion-item lines="none" class="">
+        <ion-label>
+          <small>Order Summary</small> <br>
+          Total cost
+        </ion-label>
+        <ion-label class="ion-text-right pt-15"> ₦ {{list.totalCost}}</ion-label>
+
+      </ion-item>
+      <ion-item lines="none" class="d-flex ion-justify-content-between">
+        <ion-label>Payment Mode </ion-label>
+        <ion-label class="ion-text-right text-break">
+          {{list?.paymentMethod === 'pod' ? 'Payment on delivery' : 'Card Payment' }}
+        </ion-label>
+      </ion-item>
+
+    </ion-card-content>
+
+    <ion-button *ngIf="list.paymentStatus === 'paid'" (click)="presentModal(list)" class="ps" fill="clear">
+      View Receipt
+    </ion-button>
+  </ion-card>
+
+
+
   <ion-row style="min-height: 100%;" *ngIf="orderHistory.length === 0" class="flex ion-align-items-center">
     <ion-col class="text-center" size="12">
       <h1>OOPS !!</h1>
@@ -38,5 +52,3 @@
 
   </ion-row>
 </ion-content>
-
-

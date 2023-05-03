@@ -8,16 +8,16 @@ const routes: Routes = [
     path: '',
     component: PrescriptionPage
   },
-  {
-    path: '/prescription',
-    component: PrescriptionPage,
-    children: [
-      {
-        path: 'history',
-        loadChildren: () => import('../prescription-history/prescription-history.module').then(m => m.PrescriptionHistoryPageModule)
-      },
-    ]
-  }
+  // {
+  //   path: '/prescription',
+  //   component: PrescriptionPage,
+  //   children: [
+  //     {
+  //       path: 'history',
+  //       loadChildren: () => import('../prescription-history/prescription-history.module').then(m => m.PrescriptionHistoryPageModule)
+  //     },
+  //   ]
+  // }
 ];
 
 @NgModule({

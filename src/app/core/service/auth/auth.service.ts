@@ -112,8 +112,16 @@ export class AuthService {
       })
     );
   }
-  newAddress(credentials): Observable<any> {
-    return this.reqS.post(authEndpoints.addAddress, credentials);
+  newAddress(data): Observable<any> {
+    return this.reqS.post(authEndpoints.addAddress, data).pipe(
+      switchMap((res: any) => {
+        console.log(res);
+        this.currentUser$.next(res.data);
+        return from(
+          Storage.set({ key: CURRENT_USER, value: JSON.stringify(res.data) })
+        );
+      })
+    );
   }
   deleteAddress(id): Observable<any> {
     return this.reqS.delete(authEndpoints.deleteAddress + '/' + id);

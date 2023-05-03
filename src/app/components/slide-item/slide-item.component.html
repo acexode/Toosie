@@ -1,17 +1,17 @@
 <ion-grid scroll-y="false">
-  <div *ngIf="items?.length; else empty">
+  <div *ngIf="items?.length > 0; else empty">
 
-    <ion-col>
+    <div>
       <swiper (swiper)="onSwiper($event)" (slideChange)="onSlideChange()" [config]="config">
         <ng-template *ngFor="let item of items" swiperSlide>
           <div class="card" (click)="productModal(item)">
             <div class="w-100 image ion-color-white-page">
-              <img [src]="item.resourceImages ? item?.resourceImages[0] : 'assets/icon/not-available.png'" />
+              <img width="104" height="104" [src]="item.resourceImages ? item?.resourceImages[0] : 'assets/icon/not-available.png'" />
 
             </div>
-            <ion-card-header>
+            <ion-card-header class="py-2">
               <ion-card-subtitle class="s16-h22">{{item.category?.category}}</ion-card-subtitle>
-              <ion-card-title class="h3 text-weight-bold">
+              <ion-card-title class="s16-h22 text-weight-bold">
                 {{ (item?.title.length > 20)? (item?.title | slice:0:20)+'..':(item?.title) }}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
@@ -44,7 +44,7 @@
 
       </swiper>
 
-    </ion-col>
+    </div>
   </div>
   <ng-template #empty>
     <ion-row>

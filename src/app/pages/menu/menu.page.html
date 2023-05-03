@@ -112,9 +112,13 @@
         </ion-menu-toggle>
       </ion-list>
       <ion-list> 
-        <ion-item class="item" button lines="none" (click)="logout()" routerDirection="root">
+        <ion-item *ngIf="user" class="item" button lines="none" (click)="logout()" routerDirection="root">
           <ion-icon name="log-out-f" slot="start"></ion-icon>
           Logout
+        </ion-item>
+        <ion-item *ngIf="!user" class="item" button lines="none" (click)="logout()" routerDirection="root">
+          <ion-icon name="log-in-f" slot="start"></ion-icon>
+          Login
         </ion-item>
  
       </ion-list>

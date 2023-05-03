@@ -1,139 +1,143 @@
 export const locationList = [
   {
-    label: 'Asokoro',
+    label: 'Asokoro - Abuja',
     value: 700,
   },
   {
-    label: 'Apo District',
+    label: 'Apo District - Abuja',
     value: 700,
   },
   {
-    label: 'Durumi',
+    label: 'Durumi - Abuja',
     value: 700,
   },
   {
-    label: 'Dei Dei',
+    label: 'Dei Dei - Abuja',
     value: 1000,
   },
   {
-    label: 'Dutse Alhaji',
+    label: 'Dutse Alhaji - Abuja',
     value: 800,
   },
   {
-    label: 'Garki I',
+    label: 'Garki I - Abuja',
     value: 500,
   },
   {
-    label: 'Garki II',
+    label: 'Garki II - Abuja',
     value: 700,
   },
   {
-    label: 'Gudu',
+    label: 'Gudu - Abuja',
     value: 700,
   },
   {
-    label: 'Guzape',
+    label: 'Guzape - Abuja',
     value: 700,
   },
   {
-    label: 'Jabi',
+    label: 'Jabi - Abuja',
     value: 500,
   },
   {
-    label: 'Jahi',
+    label: 'Jahi - Abuja',
     value: 500,
   },
   {
-    label: 'Kado',
+    label: 'Kado - Abuja',
     value: 500,
   },
   {
-    label: 'Karu',
+    label: 'Karu - Abuja',
     value: 1000,
   },
   {
-    label: 'Lokogoma',
+    label: 'Lokogoma - Abuja',
     value: 700,
   },
   {
-    label: 'Lugbe',
+    label: 'Lugbe - Abuja',
     value: 1000,
   },
   {
-    label: 'Lugbe',
+    label: 'Lugbe - Abuja',
     value: 500,
   },
   {
-    label: 'Lifecamp',
+    label: 'Lifecamp - Abuja',
     value: 500,
   },
   {
-    label: 'Kubwa',
+    label: 'Kubwa - Abuja',
     value: 800,
   },
   {
-    label: 'Galadima',
+    label: 'Galadima - Abuja',
     value: 1000,
   },
   {
-    label: 'Gwagwa',
+    label: 'Gwagwa - Abuja',
     value: 1000,
   },
   {
-    label: 'Gwarimpa',
+    label: 'Gwarimpa - Abuja',
     value: 700,
   },
   {
-    label: 'Gwagwalada',
+    label: 'Gwagwalada - Abuja',
     value: 1000,
   },
   {
-    label: 'Idu',
+    label: 'Idu - Abuja',
     value: 700,
   },
   {
-    label: 'Jabi',
+    label: 'Jabi - Abuja',
     value: 500,
   },
   {
-    label: 'Masaka',
+    label: 'Masaka - Abuja',
     value: 1000,
   },
   {
-    label: 'Mararaba',
+    label: 'Mararaba - Abuja',
     value: 1000,
   },
   {
-    label: 'Maitama',
+    label: 'Maitama - Abuja',
     value: 700,
   },
   {
-    label: 'Mabushi',
+    label: 'Mabushi - Abuja',
     value: 700,
   },
   {
-    label: 'Mpape',
+    label: 'Mpape - Abuja',
     value: 1000,
   },
   {
-    label: 'Mbora',
+    label: 'Mbora - Abuja',
     value: 1000,
   },
 
   {
-    label: 'Wuse',
+    label: 'Wuse - Abuja',
     value: 500,
   },
   {
-    label: 'Wuse II',
+    label: 'Wuse II - Abuja',
     value: 500,
   },
   {
-    label: 'Others (Abuja)',
+    label: 'Others (Abuja) - Abuja',
     value: 2500,
   },
   {
-    label: 'Others (Nigeria)',
-    value: 4000,
+    label: 'Lagos',
+    value: 700,
+  },
+  {
+    label: 'Kano',
+    value: 300,
   },
 ];

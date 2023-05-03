@@ -1,4 +1,4 @@
-package io.toosie.com;
+package io.toosie.cpm;
 
 import com.getcapacitor.BridgeActivity;
 

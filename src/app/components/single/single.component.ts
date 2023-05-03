@@ -16,7 +16,7 @@ export class SingleComponent implements OnInit  {
   @ViewChild('expandWrapper', { read: ElementRef }) expandWrapper: ElementRef;
   @Input('expanded') expanded = false;
   @Input('expandHeight') expandHeight = '150px';
-  sameCategory$: Observable<any>;
+  sameCategory = [];
   showButton = false;
   config: SwiperOptions = {
     slidesPerView: 1,
@@ -37,7 +37,7 @@ export class SingleComponent implements OnInit  {
     console.log(this.item);
     this.inventoryS.inventoryByCategory(this.item.category).subscribe((e: any) =>{
       console.log(e);
-      this.sameCategory$ = of(e.data);
+      this.sameCategory = e.data;
       this.inventoryS.similarStore.next(e.data);
       console.log(e.data);
     });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 import { ProfileComponentsComponent } from './../../components/profile-components/profile-components.component';
 import { Component, OnInit } from '@angular/core';

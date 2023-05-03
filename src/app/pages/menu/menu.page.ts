@@ -12,7 +12,7 @@ const MY_CART = 'my_cart';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-  user;
+  user = null;
   pages = [
     {
       title: 'Upload Prescription',
@@ -70,6 +70,7 @@ export class MenuPage implements OnInit {
 
   async ngOnInit() {
     this.authS.currentUser$.subscribe(user =>{
+      console.log(user);
       this.user = user;
 
     });

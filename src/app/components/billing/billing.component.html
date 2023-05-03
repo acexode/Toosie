@@ -2,87 +2,44 @@
 
 
 <ion-content class="ion-padding pt-0">
+  <form (ngSubmit)="placeOrder()" [formGroup]="billingInfo" class="form-container pt-4">
 
-  <ion-grid>
+    <app-address *ngIf="step === 'address'" (next)="nextStep($event)"></app-address>
+    <app-select-payment *ngIf="step === 'paymentMethod'" (next)="nextStep($event)"></app-select-payment>
+    <ion-grid *ngIf="step === 'preview'">
 
-
-    <form (ngSubmit)="placeOrder()" [formGroup]="billingInfo" class="form-container pt-4">
-
+      <ion-card class="address my-0">
+        <ion-card-content>
+          <address>
+            {{selectedAddress?.address}},<br />
+            {{selectedAddress?.localGov}},<br />
+            {{selectedAddress.state}}
+          </address>
+        </ion-card-content>
+      </ion-card>
       <ion-list-header>
-        <ion-text><b class="ion-text-dark">Select Delivery Location</b></ion-text>
+        <ion-text><b class="ion-text-dark">Payment Methods</b></ion-text>
       </ion-list-header>
-      <ion-row class="mt-8">
-        <ion-col size="12">
-          <ion-item>
-            <ion-label>Location <span class="required">*</span></ion-label>
-            <ion-select id="customAlertSelect" formControlName="location" (ionChange)="locationChange($event)"
-              interface="alert" placeholder="Select One">
-              <ion-select-option *ngFor="let opt of allLocations">{{opt.label}}</ion-select-option>
-            </ion-select>
+      <ion-card class="p-0 mt-8">
+
+        <ion-list>
+          <ion-item lines="none">
+            <ion-thumbnail class="pt-13" slot="start">
+              <ion-icon [name]="selectedPaymentType === 'card' ? 'card-payment' : 'cash-payment'"></ion-icon>
+            </ion-thumbnail>
+            <ion-label>{{selectedPaymentType | titlecase}}</ion-label>
           </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-radio-group allow-empty-selection value="">
-        <ion-list-header *ngIf="allAddress.length > 0">
-          <ion-text><b class="ion-text-dark">Select Delivery Addresss</b></ion-text>
-        </ion-list-header>
-        <ion-row>
-          <ion-col size="12" (click)="setAddress(item)" *ngFor="let item of allAddress; let i = index">
-            <ion-row [ngStyle]="{'border': (item.id === address.value) ? '1.6px solid #0281B2' : '' }"
-              class="slide card mr-8">
-              <ion-radio mode="md" [value]="item.id"></ion-radio>
-              <ion-col size="3">
-                <ion-icon name="locate-outline"></ion-icon>
-              </ion-col>
-              <ion-col>
-                <h6>Address {{i + 1 }}</h6>
-                <ion-text class="card-text">{{item.state}} </ion-text>
-                <ion-text class="card-text"> {{item.localGov}} </ion-text>
-                <ion-text class="card-text"> {{item.address}} </ion-text>
+        </ion-list>
 
+      </ion-card>
 
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
+    </ion-grid>
+  </form>
 
-      </ion-radio-group>
-
-      <ion-radio-group allow-empty-selection formControlName="paymentType" value="card">
-        <ion-list-header>
-          <h6><b>Payment Method</b></h6>
-        </ion-list-header>
-        <ion-row>
-
-          <ion-col size="12" (click)="setPayment(item.value)" *ngFor="let item of paymentMethods">
-            <ion-row [ngStyle]="{'border': (item.value === paymentType.value) ? '1.6px solid #0281B2' : '' }"
-              class="slide card mr-8">
-              <ion-radio mode="md" [value]="item.value"></ion-radio>
-              <ion-col size="3">
-                <ion-icon [name]="item.icon"></ion-icon>
-              </ion-col>
-              <ion-col>
-                <h5>{{item.text}}</h5>
-
-              </ion-col>
-              <div style="height: 50px;" class="flex flex-column pt-8 ion-text-left">
-
-              </div>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-
-      </ion-radio-group>
-
-    </form>
-
-
-
-  </ion-grid>
 </ion-content>
 
-<ion-footer>
-  <ion-row  class="my-16">
+<ion-footer *ngIf="step === 'preview'">
+  <ion-row class="my-16">
     <ion-col size="9">
       <ion-text>Total</ion-text>
     </ion-col>
@@ -99,7 +56,7 @@
       <ion-text>Delivery</ion-text>
     </ion-col>
     <ion-col size="3">
-      <ion-text>₦ {{discount}}</ion-text>
+      <ion-text>₦ {{deliveryCost}}</ion-text>
     </ion-col>
     <ion-col class="border-t" size="9">
       <ion-text><b>Grand Total</b></ion-text>
@@ -119,16 +76,5 @@
     </ion-col>
 
   </ion-row>
-  <!-- <ion-row>
-    <ion-col size="12">
-      <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit"
-        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
-      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit"
-        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
-      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()"
-        type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
 
-
-    </ion-col>
-  </ion-row> -->
 </ion-footer>

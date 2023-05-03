@@ -1,5 +1,5 @@
 ion-toolbar {
-    --background: #fff;
+    // --background: #fff;
     --ion-color-base: transparent !important;
     margin-bottom: 15px;
  }
@@ -74,7 +74,7 @@ ion-row{
 ion-content, ion-footer {
     --padding-top: 16px;
     --padding-bottom: 16px;
-    --background: #f2f2f2;
+    // --background: #f2f2f2;
     
 }
 ion-footer{
@@ -87,3 +87,6 @@ ion-footer{
 }
 
 
+ion-label{
+    margin-top: 0;
+}

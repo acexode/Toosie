@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -36,9 +37,6 @@ export class ProfileComponentsComponent implements OnInit {
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
-      state: ['', [Validators.required]],
-      localGov: ['', [Validators.required]],
-      address: ['', [Validators.required]],
     });
     this.changePasswordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
@@ -62,9 +60,6 @@ export class ProfileComponentsComponent implements OnInit {
           email: this.user.email,
           phone: this.user.phone,
           fullName: this.user.fullName,
-          state: this.user.address.state,
-          localGov: this.user.address.localGov,
-          address: this.user.address.address,
         });
       });
     } else {
@@ -87,18 +82,7 @@ export class ProfileComponentsComponent implements OnInit {
   async updateUser() {
     const loading = await this.loadingController.create();
     await loading.present();
-    const { localGov, state, address, ...slice } = this.credentials.value;
-    console.log(slice);
-    const fValue = {
-      ...slice,
-      address: {
-        localGov,
-        state,
-        address,
-      },
-    };
-    console.log(fValue);
-    this.authService.updateUser(this.user._id, fValue).subscribe(
+    this.authService.updateUser(this.user._id, this.credentials.value).subscribe(
       async (res) => {
         await loading.dismiss();
         this.displayAlert('Success', 'Your profile has been updated');

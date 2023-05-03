@@ -59,8 +59,9 @@
   </ion-col>
 
 </ion-row>
-<ion-row class="mt-16 mx-16">
+<ion-row *ngIf="sameCategory.length !== 0"  class="mt-16 mx-16">
   <h1>Similar items</h1>
-  <app-slide-item [items]="sameCategory$ | async" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item>
+  <app-items [items]="sameCategory"></app-items>
+  <!-- <app-slide-item [items]="sameCategory" [pager]="showButton" preview="2" [button]="!showButton"></app-slide-item> -->
 </ion-row>
 </ion-content>
