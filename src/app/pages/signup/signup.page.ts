@@ -15,7 +15,7 @@ import { BehaviorSubject, Subscription, timer } from 'rxjs';
 export class SignupPage implements OnInit {
   pwd = 'password';
   countDown: Subscription;
-  counter = 10;
+  counter = 60;
   showVerifySubject: BehaviorSubject<any> = new BehaviorSubject(false);
   tick = 1000;
   hide = true;
@@ -72,6 +72,8 @@ export class SignupPage implements OnInit {
         this.signupResponse = JSON.parse(val.value);
         if (!this.signupResponse.isActivated) {
           this.showVerify = true;
+          //this.showVerifySubject.next(true);
+          this.resendOTP();
         }
         console.log(this.signupResponse);
       }
@@ -114,10 +116,10 @@ export class SignupPage implements OnInit {
         this.displayAlert('New OTP Code Sent', 'check your inbox');
         await loading.dismiss();
         this.showResend = false;
-        this.counter = 10;
+        this.showVerifySubject.next(true);
+        this.counter = 60;
       },
       async (err) => {
-
         this.displayAlert('Failed to send otp', err.message);
         // await loading.dismiss();
       }
@@ -132,7 +134,7 @@ export class SignupPage implements OnInit {
           text: 'Dismiss',
           role: 'cancel',
           handler: () => {
-            this.signup({ referrerToken: '' });
+            this.signup({ referrerToken: null });
           },
         },
         {
