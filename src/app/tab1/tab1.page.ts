@@ -21,6 +21,7 @@ export class Tab1Page implements OnInit {
   latest$: Observable<any>;
   blogs$: Observable<any>;
   categories = [];
+  user;
   config: SwiperOptions = {
     slidesPerView: 3,
     spaceBetween: 50,
@@ -38,10 +39,10 @@ export class Tab1Page implements OnInit {
     private authS: AuthService
   ) {
     this.authS.currentUser().subscribe((val) => {
-      const user = JSON.parse(val.value);
-      console.log(user);
-      if (user && !user.isActivated) {
-        this.presentActivation(user);
+      this.user = JSON.parse(val.value);
+      console.log(this.user);
+      if (this.user && !this.user.isActivated) {
+        this.presentActivation(this.user);
       }
     });
   }

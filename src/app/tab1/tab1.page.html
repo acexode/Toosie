@@ -104,17 +104,17 @@
       </ion-col>
  
     </ion-row>  
-    <ion-row class="shadow mt-32" >
-      <ion-col size="8" class="   pb-16">
+    <ion-row class="shadow mt-32 py-15" >
+      <ion-col size="6" class="   pb-16">
         <h6 class="earn">
           Refer & Earn
         </h6>
-        <small>
+        <ion-label class="invite">
           Invite friends to increase wallet balance.
-        </small>
+        </ion-label>
       </ion-col>
-      <ion-col class="flex ion-align-items-center" size="4">
-        <ion-button class="knowMore mt-8">
+      <ion-col class="flex ion-align-items-center" size="6">
+        <ion-button id="open-modal" class="knowMore mt-8">
           Know More
          
         </ion-button>
@@ -138,7 +138,7 @@
  
     </ion-row> 
 
-    <ion-row >
+    <!-- <ion-row >
       <ion-col class="pl-16" size="12" >
         <ion-text color="dark" class="cat-span dark">
           Brands
@@ -147,7 +147,7 @@
       <ion-col >
         <app-brands [brands]="brand$" preview="2" [pager]="showButton" [button]="showButton"></app-brands>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row class="mb-32">
       <ion-col class="pl-16" size="12" >
         <ion-text color="dark" class="cat-span dark">
@@ -156,18 +156,43 @@
         
       </ion-col>
       <ion-col (click)="navigate('blog')" *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
-        <ion-card>
+        <ion-card class="ml-0">
           <ion-row class="h-100">
             <img [src]="blog.blogImage" />
           </ion-row>
-          <ion-card-content>
-            <ion-card-title> {{ (blog.blogTitle.length>15)? (blog.blogTitle | slice:0:13)+'..':(blog.blogTitle) }} </ion-card-title>
+          <ion-card-content class="blogContent">
+            <ion-card-subtitle> {{ (blog.blogTitle.length>50)? (blog.blogTitle | slice:0:50)+'..':(blog.blogTitle) }} </ion-card-subtitle>
           </ion-card-content>
          
         </ion-card>
       </ion-col>
      
     </ion-row>
+    <ion-modal
+    trigger="open-modal"
+    [initialBreakpoint]="0.5"
+    [breakpoints]="[0, 0.25, 0.5, 0.75]"
+    handleBehavior="cycle"
+  >
+    <ng-template>
+      <ion-content class="ion-padding">
+        <ion-row>
+          <ion-col class="text-center">
+            <h4><ion-label color="dark">Refer and Earn</ion-label></h4>
+          </ion-col>
+        </ion-row>
+        <div class="ion-margin-top">
+          <ion-label color="dark">Earn loyalty points every time you refer a friend or family member to Toosie, we pay you points which if accumulated to more than a thousand can be used to purchase items</ion-label>
+          <p>
+            <ion-label color="dark">All you have to do is share your unique referral code and make sure the person you’re referring add your referal code when signing up to Toosie</ion-label>
+          </p>
+          <p>
+           Copy your referer token <b class="color-secondary-blue"> {{user.referrerToken}}</b> 
+          </p>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
     
   </ion-grid>
 </ion-content>

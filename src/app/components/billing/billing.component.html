@@ -2,7 +2,7 @@
 
 
 <ion-content class="ion-padding pt-0">
-  <form (ngSubmit)="placeOrder()" [formGroup]="billingInfo" class="form-container pt-4">
+  <form (ngSubmit)="placeOrder()" [formGroup]="billingInfo" class="form-container">
 
     <app-address *ngIf="step === 'address'" (next)="nextStep($event)"></app-address>
     <app-select-payment *ngIf="step === 'paymentMethod'" (next)="nextStep($event)"></app-select-payment>
@@ -33,6 +33,24 @@
 
       </ion-card>
 
+      <ion-card *ngIf="user?.loyaltyPoint >= 1000">
+        <ion-card-header class="pb-0">
+          <ion-label color="danger" class="flex  s18-h24"> ₦ {{user.loyaltyPoint}}</ion-label>
+
+        </ion-card-header>
+        <ion-card-content class="pl-0">
+
+          <ion-item lines="none">
+            <ion-checkbox [value]="useLoyaltyPoint" (ionChange)="loyaltyDiscount($event)" color="secondary" slot="start"
+              mode="md"></ion-checkbox>
+            <ion-label class="text-break">Use loyalty point</ion-label>
+          </ion-item>
+          <small class="flex pl-20">Get discount on your purchase by using your loyalty point</small>
+        </ion-card-content>
+      </ion-card>
+      <ion-row>
+      </ion-row>
+
     </ion-grid>
   </form>
 
@@ -58,20 +76,27 @@
     <ion-col size="3">
       <ion-text>₦ {{deliveryCost}}</ion-text>
     </ion-col>
+    <ion-col *ngIf="useLoyaltyPoint" size="9">
+      <ion-text>Loyalty point</ion-text>
+    </ion-col>
+    <ion-col *ngIf="useLoyaltyPoint" size="3">
+      <ion-text color="danger">₦ {{user.loyaltyPoint}}</ion-text>
+    </ion-col>
     <ion-col class="border-t" size="9">
       <ion-text><b>Grand Total</b></ion-text>
     </ion-col>
     <ion-col class="border-t" size="3">
-      <ion-text><b>₦ {{total - discount}}</b></ion-text>
+      <ion-text><b>₦ {{grandTotal - discount}}</b></ion-text>
     </ion-col>
     <ion-col size="12">
       <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit"
         expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
-      <ion-button *ngIf="paymentType.value === 'card'" class="success-btn mt-32" (click)="payWithRave()" type="submit"
-        expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
-      <ion-button *ngIf="paymentType.value === 'savedCard'" class="success-btn mt-32" (click)="savedCardPayment()"
-        type="submit" expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
 
+      <angular4-paystack *ngIf="paymentType.value === 'card'" [email]="user?.email" [amount]="grandTotal * 100"
+        [ref]="reference" [channels]="['card', 'bank']" [style]="paystackBtn" (onClose)="paymentCancel()"
+        (callback)="paymentDone($event)">
+        Place Order ₦{{grandTotal}}
+      </angular4-paystack>
 
     </ion-col>
 

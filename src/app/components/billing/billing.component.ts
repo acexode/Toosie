@@ -30,6 +30,14 @@ export class BillingComponent implements OnInit {
   @Input() discount: any;
   @Input() items: any;
   savedTotal = 0;
+  paystackBtn = {
+    padding: '14px',
+    background: '#0281b2',
+    width: '100%',
+    ['border-radius']: '8px',
+    ['font-weight']: 'bold',
+    ['font-size']: '16px',
+  };
   allLocations = locationList;
   cardSaved = false;
   cardObj: any;
@@ -70,8 +78,11 @@ export class BillingComponent implements OnInit {
     },
   ];
   step = 'address';
+  useLoyaltyPoint = false;
   priorityDelivery: any;
   deliveryType: any;
+  reference: string;
+  title: string;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -94,17 +105,16 @@ export class BillingComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.savedTotal = this.grandTotal;
-    console.log(this.savedTotal, this.items);
-    const card = await Storage.get({ key: SAVED_CARD });
-    this.cardObj = JSON.parse(card.value);
-    if (this.cardObj !== null) {
-      console.log(this.cardObj);
-      this.cardSaved = true;
-      this.billingInfo.patchValue({
-        paymentType: 'savedCard',
-      });
-    }
+    console.log(
+      this.savedTotal,
+      this.total,
+      this.grandTotal,
+      this.discount,
+      'amounts'
+    );
+
     this.authService.currentUser().subscribe((str) => {
       this.user = JSON.parse(str.value);
       console.log(this.user);
@@ -115,17 +125,16 @@ export class BillingComponent implements OnInit {
         address: this.user.address,
       });
     });
-    console.log(this.billingInfo.value);
   }
 
-  async placeOrder() {
+  async placeOrder(paymentMethod = 'pod', paymentId = null) {
     const orderDetails = this.items.map((e) => ({
       product: e._id,
       quantity: e.quantity,
     }));
     const address = JSON.parse(this.address.value);
     console.log(address);
-    const body = {
+    const body: any = {
       customerId: this.user._id,
       shipping: {
         city: address.localGov,
@@ -136,10 +145,14 @@ export class BillingComponent implements OnInit {
       products: this.items,
       orderDetails,
       totalCost: this.grandTotal,
-      paymentMethod: 'pod',
+      paymentMethod,
       deliveryType: this.deliveryType,
       priorityDelivery: this.priorityDelivery,
     };
+    if (paymentMethod === 'card') {
+      // body.paymentStatus = 'paid';
+      body.paymentId = paymentId;
+    }
     console.log(body);
     const loading = await this.loadingController.create();
     await loading.present();
@@ -178,6 +191,18 @@ export class BillingComponent implements OnInit {
       paymentType: value,
     });
   }
+
+  loyaltyDiscount(ev) {
+    if (ev.detail.checked) {
+      this.useLoyaltyPoint = true;
+      this.grandTotal =
+        this.savedTotal + this.deliveryCost - this.user.loyaltyPoint;
+    } else {
+      this.useLoyaltyPoint = false;
+      this.grandTotal = this.savedTotal + this.deliveryCost;
+    }
+    console.log(ev);
+  }
   setAddress(value: any) {
     this.selectedAddress = value;
     console.log(value);
@@ -206,116 +231,8 @@ export class BillingComponent implements OnInit {
     const date = new Date();
     return 'TPHREC' + date.getTime().toString();
   }
-  payWithRave() {
-    //flw-t1nf-df84793838bb8a62267a8ce63b204e5e-k3n
-    const customerDetails = {
-      name: this.name.value,
-      email: this.email.value,
-      phone_number_number: this.phone_number.value,
-    };
-    const metas = this.items.map((it) => ({
-      metaname: it.title,
-      metavalue: it._id,
-    }));
-    // const paymentData: InlinePaymentOptions = {
-    //   public_key: this.publicKey,
-    //   tx_ref: this.generateReference(),
-    //   amount: 10,
-    //   currency: 'NGN',
-    //   payment_options: 'card,ussd',
-    //   redirect_url: '',
-    //   meta: this.meta,
-    //   customer: customerDetails,
-    //   customizations: this.customizations,
-    //   callback: this.makePaymentCallback,
-    //   onclose: this.closedPaymentModal,
-    //   callbackContext: this
-    // };
-    // this.flutterwave.inlinePay(paymentData);
-  }
 
-  async savedCardPayment(): Promise<void> {
-    const records = this.items.map((e) => ({
-      inventoryId: e._id,
-      itemName: e.title,
-      quantity: e.quantity,
-      cost: e.currentPrice,
-    }));
-    const body = {
-      address: this.address.value,
-      paymentType: 'Card',
-      records,
-      txref: this.generateReference(),
-      token: this.cardObj.life_time_token,
-      grandTotal: 10,
-    };
-    console.log(body);
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Saving and verifying...',
-    });
-    await loading.present();
 
-    this.invS.saveTokenOrder(body).subscribe(
-      async (res: any) => {
-        //Storage.set({key: SAVED_CARD,value: JSON.stringify(res.card)});
-        await loading.dismiss();
-        this.successAlert();
-        this.orderS.removeCart();
-      },
-      async (res) => {
-        console.log(res);
-        await loading.dismiss();
-        const alert = await this.alertController.create({
-          header: res.error.message,
-          message: res.error.error,
-          buttons: ['OK'],
-        });
-
-        await alert.present();
-      }
-    );
-  }
-  async makePaymentCallback(response): Promise<void> {
-    const records = this.items.map((e) => ({
-      inventoryId: e._id,
-      itemName: e.title,
-      quantity: e.quantity,
-      cost: e.currentPrice,
-    }));
-    const body = {
-      address: this.address.value,
-      paymentType: 'Card',
-      records,
-      txref: response.tx_ref,
-    };
-    console.log(body);
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Saving and verifying...',
-    });
-    await loading.present();
-
-    this.invS.saveCardOrder(body).subscribe(
-      async (res: any) => {
-        Storage.set({ key: SAVED_CARD, value: JSON.stringify(res.card) });
-        await loading.dismiss();
-        this.successAlert();
-        this.orderS.removeCart();
-      },
-      async (res) => {
-        console.log(res);
-        await loading.dismiss();
-        const alert = await this.alertController.create({
-          header: res.error.message,
-          message: res.error.error,
-          buttons: ['OK'],
-        });
-
-        await alert.present();
-      }
-    );
-  }
   closedPaymentModal(): void {
     console.log('payment is closed');
   }
@@ -358,5 +275,18 @@ export class BillingComponent implements OnInit {
 
   get paymentType() {
     return this.billingInfo.get('paymentType');
+  }
+  paymentInit() {
+    console.log('Payment initialized');
+  }
+
+  paymentDone(ref: any) {
+    this.title = 'Payment successfull';
+    console.log(this.title, ref);
+    this.placeOrder('card', ref.reference);
+  }
+
+  paymentCancel() {
+    console.log('payment failed');
   }
 }

@@ -6,16 +6,16 @@
         <ng-template *ngFor="let item of items" swiperSlide>
           <div class="card" (click)="productModal(item)">
             <div class="w-100 image ion-color-white-page">
-              <img width="104" height="104" [src]="item.resourceImages ? item?.resourceImages[0] : 'assets/icon/not-available.png'" />
+              <img style="width: 100%;" [src]="item.resourceImages ? item?.resourceImages[0] : 'assets/icon/not-available.png'" />
 
             </div>
             <ion-card-header class="py-2">
-              <ion-card-subtitle class="s16-h22">{{item.category?.category}}</ion-card-subtitle>
-              <ion-card-title class="s16-h22 text-weight-bold">
-                {{ (item?.title.length > 20)? (item?.title | slice:0:20)+'..':(item?.title) }}</ion-card-title>
+              <h6 class="s16-h22">{{item.category?.category}}</h6>
+              <h5 class="product-title">
+                {{ (item?.title.length > 20)? (item?.title | slice:0:20)+'..':(item?.title) }}</h5>
             </ion-card-header>
             <ion-card-content>
-              <div class="discount-container">
+              <div  class="discount-container">
                 <span *ngIf="item.discountPercent > 0; else noDiscount">
                   <span class="s16-h22 actual-price line-through pt-5">
                     {{item?.actualPrice}}
@@ -31,10 +31,10 @@
 
               </div>
 
-              <!-- <small class="s16-h22 text-weight-bold">
-              ₦ {{item.discountPercent > 0 ? item?.currentPrice: item.actualPrice}}
-            </small> -->
-              <ion-button (click)="addToCart(item)" class="knowMore">
+              <ion-button *ngIf="item.stock === 0" expand="block" color="danger"  class="text-small color-white">
+              Out of stock
+            </ion-button>
+              <ion-button expand="block" *ngIf="item.stock > 0" (click)="addToCart(item)" class="knowMore">
                 Add to Cart
               </ion-button>
             </ion-card-content>

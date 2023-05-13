@@ -8,6 +8,7 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
 import { SharedModule } from 'src/app/components/shared/shared.module';
+import { FormatTimePipe } from 'src/app/core/pipes/format-time.pipe';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [SignupPage]
+  declarations: [SignupPage, FormatTimePipe]
 })
 export class SignupPageModule {}

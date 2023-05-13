@@ -105,6 +105,12 @@ ion-segment{
 .padding-left0 {
     padding-left: 0 !important;
 }
+.swiper-slide img {
+    object-fit: cover;
+    height: 150px !important;
+    width: 100% !important;
+}
+
 
 // .padding-right0 {
 //     padding-right: 0 !important;

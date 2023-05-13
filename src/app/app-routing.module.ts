@@ -12,13 +12,14 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    redirectTo: 'menu/home',
+    pathMatch: 'full',
+
   },
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule),
-    // canLoad: [AuthGuard] // Secure all child pages
+    canLoad: [IntroGuard] // Secure all child pages
   },
   {
     path: 'intro',

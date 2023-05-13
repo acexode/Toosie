@@ -1,4 +1,4 @@
-<ion-row *ngIf="items.length" class="favorite-items flex ion-justify-content-between">
+<ion-row *ngIf="items.length" class="favorite-items flex ion-justify-content-between p-0">
   <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let p of items" class="ion-text-left">
     <div class="c-card">
       <img (click)="productModal(p)"  [src]="p?.resourceImages ? p?.resourceImages[0] : 'assets/icon/not-available.png'" />

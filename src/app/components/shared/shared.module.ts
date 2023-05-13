@@ -19,7 +19,7 @@ import { SwiperModule } from 'swiper/angular';
 import { PasscodeComponent } from '../passcode/passcode.component';
 import { AddressComponent } from '../address/address.component';
 import { SelectPaymentComponent } from '../select-payment/select-payment.component';
-
+import { Angular4PaystackModule } from 'angular4-paystack';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -43,7 +43,8 @@ import { SelectPaymentComponent } from '../select-payment/select-payment.compone
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    // FlutterwaveModule,
+    Angular4PaystackModule.forRoot('pk_live_8fa45918feaa0925713ae746c8ae810b67462b3a'),
+    // Angular4PaystackModule.forRoot('pk_test_09622c99e0e1e03ccf95ba94643ec7da2569e8bc'), // test key
     SwiperModule,
   ],
   exports: [

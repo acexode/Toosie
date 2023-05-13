@@ -9,6 +9,7 @@ import {
   ModalController,
 } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
+import { deliveryLocation } from 'src/app/core/service/global-service/deliveryLocation';
 
 @Component({
   selector: 'app-profile-components',
@@ -23,6 +24,7 @@ export class ProfileComponentsComponent implements OnInit {
   showAddressForm = false;
   loadingAddress = false;
   title = 'Edit Profile';
+  allLocations = deliveryLocation;
   allAddress: any;
   user: any;
   constructor(
@@ -48,52 +50,66 @@ export class ProfileComponentsComponent implements OnInit {
       address: ['', [Validators.required]],
     });
   }
+  ionViewWillEnter() {
+    this.authService.currentUser().subscribe((str) => {
+      this.user = JSON.parse(str.value);
+    });
+  }
 
   ngOnInit() {
-    this.title = this.show === 'profile' ? 'Edit Profile' : 'Change Password';
+    if (this.show === 'profile') {
+      this.title = 'Edit Profile';
+    } else if (this.show === 'address' || this.show === 'checkout-address') {
+      this.title = 'Add Delivery Address';
+    } else {
+      this.title = 'Change Password';
+    }
     console.log(this.show);
     if (this.show === 'profile') {
-      this.authService.currentUser().subscribe((str) => {
-        this.user = JSON.parse(str.value);
-
-        this.credentials.patchValue({
-          email: this.user.email,
-          phone: this.user.phone,
-          fullName: this.user.fullName,
-        });
+      this.credentials.patchValue({
+        email: this.user.email,
+        phone: this.user.phone,
+        fullName: this.user.fullName,
       });
-    } else {
+    } else if (this.show === 'address') {
       //  this.getAllAddress();
+      this.showAddressForm = true;
     }
+    this.addressForm.get('state').valueChanges.subscribe((v) => {
+      console.log(v);
+      this.allLocations = deliveryLocation.filter((e) => e.state === v);
+    });
   }
   async getAllAddress() {
     const loading = await this.loadingController.create();
     await loading.present();
-    // this.authService.allAddress().subscribe(res =>{
-    //   console.log(res);
-    //   loading.dismiss();
-    //   this.allAddress = res.address;
-    // }, err => {
-    //   console.log(err);
-    //   loading.dismiss();
-    // });
+    this.authService.allAddress().subscribe(res =>{
+      console.log(res);
+      loading.dismiss();
+      this.allAddress = res.address;
+    }, err => {
+      console.log(err);
+      loading.dismiss();
+    });
   }
 
   async updateUser() {
     const loading = await this.loadingController.create();
     await loading.present();
-    this.authService.updateUser(this.user._id, this.credentials.value).subscribe(
-      async (res) => {
-        await loading.dismiss();
-        this.displayAlert('Success', 'Your profile has been updated');
-        this.router.navigate(['menu/home']);
-      },
-      async (res) => {
-        console.log(res);
-        await loading.dismiss();
-        this.displayAlert('Updated Failed', res.error.message);
-      }
-    );
+    this.authService
+      .updateUser(this.user._id, this.credentials.value)
+      .subscribe(
+        async (res) => {
+          await loading.dismiss();
+          this.displayAlert('Success', 'Your profile has been updated');
+          this.router.navigate(['menu/home']);
+        },
+        async (res) => {
+          console.log(res);
+          await loading.dismiss();
+          this.displayAlert('Updated Failed', res.error.message);
+        }
+      );
   }
 
   async displayAlert(title, msg) {
@@ -143,13 +159,26 @@ export class ProfileComponentsComponent implements OnInit {
       );
     });
   }
-  submitAddress() {
-    const value = this.addressForm.value;
+  async submitAddress() {
+    const value = {
+      ...this.addressForm.value,
+      user: this.user.email,
+    };
     console.log(value);
-    this.authService.newAddress(value).subscribe((e) => {
-      this.getAllAddress();
-      this.showAddressForm = false;
-    });
+    if (this.show === 'address') {
+      this.authService.newAddress(value).subscribe((e) => {
+        this.getAllAddress();
+        this.showAddressForm = false;
+      });
+    }else{
+      const loading = await this.loadingController.create();
+      await loading.present();
+      this.authService.newAddress(value).subscribe((e) => {
+        loading.dismiss();
+        this.modalC.dismiss();
+        this.showAddressForm = false;
+      });
+    }
   }
   deleteAddress(id) {
     this.authService.deleteAddress(id).subscribe((e) => {
@@ -168,13 +197,13 @@ export class ProfileComponentsComponent implements OnInit {
     return this.credentials.get('fullName');
   }
   get state() {
-    return this.credentials.get('state');
+    return this.addressForm.get('state');
   }
   get localGov() {
-    return this.credentials.get('localGov');
+    return this.addressForm.get('localGov');
   }
   get addressF() {
-    return this.credentials.get('address');
+    return this.addressForm.get('address');
   }
   get email() {
     return this.credentials.get('email');

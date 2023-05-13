@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,24 +19,29 @@ export class HeaderComponent implements OnInit {
   @Input() cart;
   @Input() dismiss = false;
   cartTotal;
-  constructor(private _location: Location,
+  user = null;
+  constructor(
+    private _location: Location,
     private modalController: ModalController,
     private router: Router,
-    private orderS: OrdersService) { }
+    private orderS: OrdersService,
+    private authS: AuthService
+  ) {}
 
   ngOnInit() {
-    this.orderS.cartStore.subscribe(e =>{
+    this.authS.currentUser$.subscribe((e) => (this.user = e));
+    this.orderS.cartStore.subscribe((e) => {
       this.cartTotal = isEmpty(e) ? 0 : e.length;
     });
   }
-  back(){
-    if(this.dismiss){
+  back() {
+    if (this.dismiss) {
       this.modalController.dismiss();
-    }else{
+    } else {
       this._location.back();
     }
   }
-  goToCart(){
+  goToCart() {
     this.router.navigate(['menu/home/cart-orders']);
   }
   async presentModal() {

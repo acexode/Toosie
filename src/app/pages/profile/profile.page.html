@@ -1,34 +1,39 @@
-<ion-header  no-border>
-  
-  <div  class="flex p-board flex-column">
+<ion-header no-border>
+
+  <div class="flex p-board flex-column">
     <div class="flex ">
-      
-      <span class="text-center profile py-10" >
+
+      <span class="text-center profile py-10">
         Profile
-       </span>
+      </span>
 
     </div>
     <div class="flex flex-column desc">
       <div class="flex desc">
-        <ion-avatar  slot="start">
+        <ion-avatar slot="start">
           <img [src]="user?.avater">
           <label for="profile-image" class="camera">
-           <ion-icon name="camera"></ion-icon>
-           <input  (change)="onChange($event)" type="file" id="profile-image" hidden/>
+            <ion-icon name="camera"></ion-icon>
+            <input (change)="onChange($event)" type="file" id="profile-image" hidden />
           </label>
         </ion-avatar>
-        <div  class="flex user-label flex-column ">
+        <div class="flex user-label flex-column ">
           <ion-text class="pb-5">{{user?.fullName}}</ion-text>
-          <ion-text class="pb-5" ><ion-text>{{user?.phone}}</ion-text></ion-text>
-          <ion-text class="pb-5" > <ion-text>{{user?.email}}</ion-text></ion-text>
-          
+          <ion-text class="pb-5">
+            <ion-text>{{user?.phone}}</ion-text>
+          </ion-text>
+          <ion-text class="pb-5">
+            <ion-text>{{user?.email}}</ion-text>
+          </ion-text>
+
         </div>
       </div>
-      <div class="mb-3 flex ion-justify-content-end float-right" > 
+      <div class="mb-3 flex ion-justify-content-end float-right">
         <ion-button (click)="presentModal('profile')" class="edit" fill="clear">
           <ion-icon name="edit-2"></ion-icon>
-        </ion-button></div>
-      
+        </ion-button>
+      </div>
+
 
     </div>
 
@@ -38,29 +43,40 @@
     <ion-button class="login w-100 mt-8"  expand="block">Login</ion-button>
   </ion-toolbar> -->
 </ion-header>
-<ion-content >
+<ion-content>
   <ion-grid class=" ">
     <ion-list *ngFor="let p of items" class="border-b list-items">
-      <ion-item class="item"  [routerLink]="p.url" routerDirection="root" routerLinkActive="active-item">
-        <ion-icon [name]="p.icon" ></ion-icon>
+      <ion-item class="item" [routerLink]="p.url" routerDirection="root" routerLinkActive="active-item">
+        <ion-icon [name]="p.icon"></ion-icon>
         <ion-label>
           {{ p.title }}
         </ion-label>
       </ion-item>
     </ion-list>
-    <ion-list  class="border-b list-items">
-      <ion-item (click)="presentModal('password')" class="item"  >
-        <ion-icon name="key" ></ion-icon>
+    <ion-list class="border-b list-items">
+      <ion-item (click)="presentModal('password')" class="item">
+        <ion-icon name="key-f"></ion-icon>
         <ion-label>
           Change Password
         </ion-label>
       </ion-item>
-      <!-- <ion-item (click)="presentModal('address')" class="item"  >
-        <ion-icon name="planet-outline" ></ion-icon>
+      <ion-item (click)="presentModal('address')" class="item">
+        <ion-icon name="map-pin"></ion-icon>
         <ion-label>
-          Addresses
+         Add Delivery Address
         </ion-label>
-      </ion-item> -->
+      </ion-item>
+      <ion-item class="item mt-20" lines="none">
+        <ion-icon class="naira" name="naira"></ion-icon>
+        <ion-label>
+          Loyalty Point
+        </ion-label>
+        <ion-button *ngIf="user?.loyaltyPoint" class="login" slot="end">
+         
+          {{user?.loyaltyPoint}}
+        </ion-button>
+
+      </ion-item>
 
     </ion-list>
 

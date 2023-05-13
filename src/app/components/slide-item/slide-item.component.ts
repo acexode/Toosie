@@ -19,7 +19,7 @@ export class SlideItemComponent implements OnInit {
 
   fakeitems = [1,2,3,4,5,6];
   config: SwiperOptions = {
-    slidesPerView: 2,
+    slidesPerView: 1.9,
     spaceBetween: 4,
     navigation: false,
     pagination: { clickable: true },

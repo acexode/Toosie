@@ -25,10 +25,19 @@ export class UploadPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private authS: AuthService
-  ) {
+  ) {}
+  ionViewDidEnter() {
     this.authS.currentUser$.subscribe((user) => {
-      this.user = user;
-      console.log(this.user);
+      if (user) {
+        this.user = user;
+        console.log(this.user);
+      } else {
+        this.presentAlert(
+          'You have to signup/login to proceed',
+          'Login / Signup',
+          'login'
+        );
+      }
     });
   }
 
@@ -51,12 +60,13 @@ export class UploadPage implements OnInit {
     const formData = new FormData();
     const loading = await this.loadingController.create();
     await loading.present();
+    const desc = this.uploadForm.get('description').value;
     try {
       if (this.file) {
         formData.append('upload', this.file);
         const upload = await this.pService.uploadMedia(formData).toPromise();
         const data = {
-          description: this.uploadForm.get('description').value,
+          description: desc.length > 0 ? desc : 'description not provided',
           prescriptionImage: upload.images[0],
           customerId: this.user?._id,
         };
@@ -74,6 +84,7 @@ export class UploadPage implements OnInit {
         const data = {
           description: this.uploadForm.get('description').value,
           customerId: this.user?._id,
+          prescriptionImage: 'Not provided by user',
         };
         this.pService.uploadPrescription(data).subscribe(async (d) => {
           await loading.dismiss();
@@ -95,7 +106,33 @@ export class UploadPage implements OnInit {
       );
     }
   }
+  async presentAlert(msg, okText, navigate) {
+    const alert = await this.alertController.create({
+      header: 'Alert !!',
+      message: msg,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            this.alertController.dismiss().then((v) => {
+              this.router.navigate(['menu/home']);
+            });
+          },
+        },
+        {
+          text: okText,
+          role: 'confirm',
+          handler: () => {
+            this.alertController.dismiss();
+            this.router.navigate([navigate]);
+          },
+        },
+      ],
+    });
 
+    await alert.present();
+  }
   async displayAlert(header, msg, uploaded) {
     console.log(header);
     const alert = await this.alertController.create({

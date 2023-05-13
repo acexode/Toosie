@@ -16,10 +16,17 @@
      {{title}}
     </ion-title>
     <ion-buttons slot="primary">
+      <ion-button *ngIf="user?.loyaltyPoint > 100"   (click)="goToCart()" style="width: 80px;">
+        <ion-badge color="secondary">
+          ₦ {{user?.loyaltyPoint}}
+
+        </ion-badge>
+    </ion-button>
       <ion-button *ngIf="cart"  (click)="goToCart()" style="width: 40px;">
         <ion-badge class="badge-one" *ngIf="cartTotal > 0" >{{ cartTotal }}</ion-badge>
         <ion-icon name="cart-outline"></ion-icon>
       </ion-button>
+      
       <ion-button *ngIf="search" (click)="presentModal()">
         <ion-icon name="search-f"></ion-icon>
       </ion-button>

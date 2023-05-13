@@ -1,7 +1,7 @@
-<ion-header  class="ion-no-border">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-button  (click)="back()" fill="clear"  slot="start">
-      <ion-icon  color="dark" name="arrow-left"></ion-icon>
+    <ion-button (click)="back()" fill="clear" slot="start">
+      <ion-icon color="dark" name="arrow-left"></ion-icon>
     </ion-button>
     <ion-title color="dark">{{title}}</ion-title>
   </ion-toolbar>
@@ -57,12 +57,13 @@
           <span *ngIf="addressF.errors?.required">address is required</span>
         </div>
       -->
-      <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Update</ion-button>
-       
+        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Update
+        </ion-button>
+
       </form>
-  
+
     </ion-col>
-  
+
   </ion-row>
   <ion-row *ngIf="show === 'password'" class="mt-16">
     <ion-col size="12">
@@ -71,59 +72,69 @@
           <ion-label position="floating">Old Password</ion-label>
           <ion-input type="password" formControlName="oldPassword"></ion-input>
         </ion-item>
-        
+
         <ion-item>
           <ion-label position="floating">New Password</ion-label>
           <ion-input type="password" formControlName="newPassword"></ion-input>
         </ion-item>
-        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!changePasswordForm.valid">Update</ion-button>
-  
-       
+        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!changePasswordForm.valid">Update
+        </ion-button>
+
+
       </form>
-  
+
     </ion-col>
-  
+
   </ion-row>
-   <ion-row *ngIf="showAddressForm" class="mt-16">
+  <ion-row *ngIf="show === 'address' || show === 'checkout-address'" class="mt-16">
     <ion-col size="12">
       <form (ngSubmit)="submitAddress()" [formGroup]="addressForm" class="form-container pt-16">
         <ion-item>
           <ion-label position="floating">State</ion-label>
-          <ion-input type="text" formControlName="state"></ion-input>
+          <ion-select id="customAlertSelect" interface="alert" formControlName="state" placeholder="Select One">
+            <ion-select-option value="Abuja">Abuja</ion-select-option>
+            <ion-select-option value="Lagos">Lagos</ion-select-option>
+            <ion-select-option value="Kano">Kano</ion-select-option>
+          </ion-select>
+
         </ion-item>
-        <div *ngIf="(state.dirty || state.touched) && state.errors" class="errors">
-          <span *ngIf="state.errors?.required">State is required</span>
+        <div *ngIf="(state.dirty || state.touched) && state.errors" class="errors ml-20">
+          <ion-label color="danger" *ngIf="state.errors?.required">State is required</ion-label>
         </div>
         <ion-item>
           <ion-label position="floating">City /Town</ion-label>
-          <ion-input type="text" formControlName="localGov"></ion-input>
+
+          <ion-select formControlName="localGov" id="customAlertSelect" interface="alert" placeholder="Select One">
+            <ion-select-option *ngFor="let opt of allLocations">{{opt.label}}</ion-select-option>
+          </ion-select>
         </ion-item>
-        <div *ngIf="(localGov.dirty || localGov.touched) && localGov.errors" class="errors">
-          <span *ngIf="localGov.errors?.required">City /Town is required</span>
+        <div *ngIf="(localGov.dirty || localGov.touched) && localGov.errors" class="errors ml-20">
+          <ion-label color="danger" *ngIf="localGov.errors?.required">City /Town is required</ion-label>
           <span *ngIf="localGov.errors?.localGov">City /Town is invalid</span>
         </div>
-        
+
         <ion-item>
           <ion-label position="floating">Full Address</ion-label>
           <ion-input type="text" formControlName="address"></ion-input>
         </ion-item>
-        <div *ngIf="(addressF.dirty || addressF.touched) && addressF.errors" class="errors">
-          <span *ngIf="addressF.errors?.required">address is required</span>
+        <div *ngIf="(addressF.dirty || addressF.touched) && addressF.errors" class="errors ml-20">
+          <ion-label color="danger" *ngIf="addressF.errors?.required">Address is required</ion-label>
         </div>
-        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!addressForm.valid">Add Address</ion-button>
-  
-       
+        <ion-button class="success-btn mt-32" type="submit" expand="block" [disabled]="!addressForm.valid">Add Address
+        </ion-button>
+
+
       </form>
-  
+
     </ion-col>
-  
-  </ion-row> 
+
+  </ion-row>
   <ion-row *ngIf="show === 'address'" class="mt-16">
-  
+
     <ion-col size="12">
       <ion-list class="px-5" size="12">
         <ion-item class="item" *ngFor="let item of allAddress">
-          
+
           <!-- <ion-icon  name="location-outline"></ion-icon> -->
           <ion-label class="item-label">
             <h5>{{item.state}}</h5>
@@ -132,15 +143,16 @@
           </ion-label>
           <ion-icon (click)="deleteAddress(item._id)" slot="end" name="trash-bin-outline"></ion-icon>
         </ion-item>
-    
+
       </ion-list>
 
     </ion-col>
     <ion-col *ngIf="!showAddressForm">
-      <ion-button class="success-btn mt-32" (click)="showAddressForm = !showAddressForm " expand="block" >Add Address</ion-button>
-  
+      <ion-button class="success-btn mt-32" (click)="showAddressForm = !showAddressForm " expand="block">Add Address
+      </ion-button>
+
     </ion-col>
-  
+
   </ion-row>
 
 </ion-content>

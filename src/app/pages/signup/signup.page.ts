@@ -5,7 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
-import {  Preferences as Storage } from '@capacitor/preferences';
+import { Preferences as Storage } from '@capacitor/preferences';
+import { BehaviorSubject, Subscription, timer } from 'rxjs';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -13,6 +14,10 @@ import {  Preferences as Storage } from '@capacitor/preferences';
 })
 export class SignupPage implements OnInit {
   pwd = 'password';
+  countDown: Subscription;
+  counter = 10;
+  showVerifySubject: BehaviorSubject<any> = new BehaviorSubject(false);
+  tick = 1000;
   hide = true;
   hideConfirm = true;
   showVerify = false;
@@ -33,6 +38,16 @@ export class SignupPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showVerifySubject.subscribe((v) => {
+      if (this.showVerify) {
+        this.countDown = timer(0, this.tick).subscribe(() => {
+          if (this.counter > 0) {
+            --this.counter;
+            this.showResend = true;
+          }
+        });
+      }
+    });
     this.credentials = this.fb.group({
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -63,15 +78,19 @@ export class SignupPage implements OnInit {
     });
   }
 
-  async signup() {
+  async signup(code) {
     const loading = await this.loadingController.create();
     await loading.present();
-
-    this.authService.signup(this.credentials.value).subscribe(
+    const value = {
+      ...this.credentials.value,
+      ...code,
+    };
+    this.authService.signup(value).subscribe(
       async (res) => {
         console.log(res);
         await loading.dismiss();
         this.showVerify = true;
+        this.showVerifySubject.next(true);
       },
       async (res) => {
         console.log(res);
@@ -94,12 +113,47 @@ export class SignupPage implements OnInit {
       async (e) => {
         this.displayAlert('New OTP Code Sent', 'check your inbox');
         await loading.dismiss();
+        this.showResend = false;
+        this.counter = 10;
       },
       async (err) => {
+
         this.displayAlert('Failed to send otp', err.message);
-        await loading.dismiss();
+        // await loading.dismiss();
       }
     );
+  }
+  async addReferalCode() {
+    const alert = await this.alertController.create({
+      subHeader: 'Referal Code',
+      message: 'Enter Referrer code if any or dismiss if none',
+      buttons: [
+        {
+          text: 'Dismiss',
+          role: 'cancel',
+          handler: () => {
+            this.signup({ referrerToken: '' });
+          },
+        },
+        {
+          text: 'Continue',
+          handler: (data) => {
+            console.log(data);
+            this.signup(data);
+            // this.modal.dismiss();
+            // this.router.navigateByUrl('menu/home/tab1');
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'Referrer Code',
+          name: 'referrerToken',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async displayAlert(header, msg) {
@@ -160,5 +214,9 @@ export class SignupPage implements OnInit {
         await alert.present();
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.countDown = null;
   }
 }

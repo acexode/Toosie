@@ -13,7 +13,7 @@
 
   </ion-col>
   <ion-col size="12">
-    <div style="height: 120px;" class="flex flex-column py-8 pl-30 ion-text-left">
+    <div style="height: auto;" class="flex flex-column py-8 pl-30 ion-text-left">
       <h4 class="product-title">
         {{item.title}}
       </h4>      
@@ -52,9 +52,9 @@
 </ion-card>
 
   <ion-col size="12" class="px-8 mt-32">
-   <ion-button (click)="addToCart(item)" class="knowMore">
+   <ion-button [disabled]="item.stock === 0" (click)="addToCart(item)" class="knowMore">
     <ion-icon slot="start" name="cart"></ion-icon>
-     Add to Cart
+     {{item.stock === 0 ? 'Out of stock' : 'Add to Cart'}}
    </ion-button>
   </ion-col>
 

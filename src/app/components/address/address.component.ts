@@ -1,9 +1,16 @@
 import { Output, EventEmitter } from '@angular/core';
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ModalController,
+} from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
-import { locationList } from './locations';
+
+import { ProfileComponentsComponent } from '../profile-components/profile-components.component';
+import { IUserAddress } from 'src/app/core/model/inteface';
+import { deliveryLocation } from 'src/app/core/service/global-service/deliveryLocation';
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
@@ -11,7 +18,7 @@ import { locationList } from './locations';
 })
 export class AddressComponent implements OnInit {
   allAddress = [];
-  allLocations = locationList;
+  allLocations = deliveryLocation;
   address = null;
   user = null;
   deliveryType = 'pickup';
@@ -22,7 +29,8 @@ export class AddressComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -38,70 +46,39 @@ export class AddressComponent implements OnInit {
       this.user = res;
       if (res.addresses) {
         this.allAddress.push(...res.addresses);
-        this.address = res.addresses;
+        // this.address = res.addresses;
         console.log(this.allAddress);
       } else {
-        this.presentAlertPrompt('Add delivery address to proceed!');
+        this.presentAlertPrompt();
       }
     });
   }
 
-  async presentAlertPrompt(msg) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      subHeader: msg,
-      inputs: [
-        {
-          name: 'state',
-          type: 'text',
-          placeholder: 'State',
-        },
-        {
-          name: 'localGov',
-          type: 'text',
-          placeholder: 'City / Town',
-        },
-        // multiline input.
-        {
-          name: 'address',
-          id: 'paragraph',
-          type: 'textarea',
-          placeholder: 'Full Address',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          },
-        },
-        {
-          text: 'Ok',
-          handler: (data) => {
-            const obj = {
-              ...data,
-              user: this.user.email,
-            };
-            this.allAddress.push(obj.address);
-            console.log(obj);
-            this.authService.newAddress(obj).subscribe((e) => {
-              console.log(e, 'from alert');
-              this.getAllAddress();
-              alert.dismiss();
-            });
-          },
-        },
-      ],
+  async presentAlertPrompt() {
+    this.deliveryType = 'delivery';
+    const modal = await this.modalController.create({
+      component: ProfileComponentsComponent,
+      cssClass: 'fullscreen',
+      componentProps: {
+        show: 'checkout-address',
+      },
     });
-
-    await alert.present();
+    modal.onDidDismiss().then((v) => {
+      this.deliveryType = 'delivery';
+      this.getAllAddress();
+    });
+    await modal.present();
   }
 
-  setAddress(value: any) {
+  setAddress(value: IUserAddress) {
+    console.log(value);
     this.address = value;
+    const loc = this.allLocations.filter(
+      (obj) => obj.label === value.localGov
+    )[0];
+    console.log(loc);
+    this.deliveryCost = loc.value;
+    this.deliveryState = loc.state;
   }
   proceed() {
     if (this.priorityDelivery) {

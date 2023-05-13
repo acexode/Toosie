@@ -15,7 +15,7 @@ export class BrandsComponent implements OnInit {
   slideOpts = {};
   constructor() { }
   ngOnInit() {
-    // this.brands.subscribe(e => console.log(e));
+    this.brands.subscribe(e => console.log(e));
     this.slideOpts = {
       initialSlide: 0,
       speed: 400,
