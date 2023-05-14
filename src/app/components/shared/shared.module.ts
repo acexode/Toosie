@@ -20,6 +20,7 @@ import { PasscodeComponent } from '../passcode/passcode.component';
 import { AddressComponent } from '../address/address.component';
 import { SelectPaymentComponent } from '../select-payment/select-payment.component';
 import { Angular4PaystackModule } from 'angular4-paystack';
+import { TermsAndConditionComponent } from '../terms-and-condition/terms-and-condition.component';
 @NgModule({
   declarations: [
     BannerComponent,
@@ -36,7 +37,8 @@ import { Angular4PaystackModule } from 'angular4-paystack';
     SingleComponent,
     ProfileComponentsComponent,
     AddressComponent,
-    SelectPaymentComponent
+    SelectPaymentComponent,
+    TermsAndConditionComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { Angular4PaystackModule } from 'angular4-paystack';
     SingleComponent,
     PasscodeComponent,
     AddressComponent,
-    SelectPaymentComponent
+    SelectPaymentComponent,
+    TermsAndConditionComponent
   ],
 })
 export class SharedModule {}

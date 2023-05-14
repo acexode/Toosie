@@ -3,10 +3,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { Preferences as Storage } from '@capacitor/preferences';
 import { BehaviorSubject, Subscription, timer } from 'rxjs';
+import { TermsAndConditionComponent } from 'src/app/components/terms-and-condition/terms-and-condition.component';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -32,6 +33,7 @@ export class SignupPage implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
+    private modalController: ModalController,
     private router: Router,
     private cdref: ChangeDetectorRef,
     private loadingController: LoadingController
@@ -53,9 +55,17 @@ export class SignupPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: [
         '',
-        [Validators.required, Validators.min(11), Validators.maxLength(11)],
+        [Validators.required,Validators.minLength(11), Validators.maxLength(11)],
       ],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      agree: [false, [Validators.required]],
+    });
+    this.credentials.valueChanges.subscribe((v) => {
+      if (!v.agree) {
+        this.agree.setErrors({ valid: false });
+      } else {
+        this.agree.setErrors(null);
+      }
     });
     if (this.showVerify) {
       setTimeout(() => {
@@ -83,8 +93,9 @@ export class SignupPage implements OnInit {
   async signup(code) {
     const loading = await this.loadingController.create();
     await loading.present();
+    const { agree, ...mainValues } = this.credentials.value;
     const value = {
-      ...this.credentials.value,
+      ...mainValues,
       ...code,
     };
     this.authService.signup(value).subscribe(
@@ -177,6 +188,9 @@ export class SignupPage implements OnInit {
   get phone() {
     return this.credentials.get('phone');
   }
+  get agree() {
+    return this.credentials.get('agree');
+  }
 
   get password() {
     return this.credentials.get('password');
@@ -216,6 +230,14 @@ export class SignupPage implements OnInit {
         await alert.present();
       }
     );
+  }
+
+  async showTermsAndCondtion() {
+    const modal = await this.modalController.create({
+      component: TermsAndConditionComponent,
+      cssClass: '',
+    });
+    await modal.present();
   }
 
   ngOnDestroy() {

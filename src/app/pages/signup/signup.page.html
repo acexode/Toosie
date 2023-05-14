@@ -10,10 +10,11 @@
 
 <ion-content class="ion-padding">
 
-  <div *ngIf="!showVerify" class="ion-padding container pb-32">
+  <div *ngIf="!showVerify" class="ion-padding container pb-22">
     <img src="assets/icon/logo-big.png" alt="" class="logo">
-    <h6 >Fill the following instructions to Sign Up</h6>
-    <form (ngSubmit)="addReferalCode()" [formGroup]="credentials" class="form-container pt-16">
+    <!-- <ion-card-subtitle class="ion-text-center" color="dark" >Fill the following instructions to Sign Up</ion-card-subtitle> -->
+    <form (ngSubmit)="addReferalCode()" [formGroup]="credentials" class="form-container">
+      <h1 class="ion-text-center primary-text">Sign up</h1>
       <ion-item>
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text" formControlName="fullName"></ion-input>
@@ -37,6 +38,8 @@
       <div *ngIf="(phone.dirty || phone.touched) && phone.errors" class="errors">
         <span *ngIf="phone.errors?.required">Phone is required</span>
         <span *ngIf="phone.errors?.phone">Phone is invalid</span>
+        <span *ngIf="phone.errors?.minlength">Phone number length should be minimum 11 characters</span>
+        <span *ngIf="phone.errors?.maxlength">Phone number shouldnt exceed 11 characters </span>
       </div>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
@@ -53,8 +56,12 @@
         <ion-input [type]="hideConfirm ? 'password' : 'text'"></ion-input>
         <ion-icon class="mt-32" (click)="hideConfirm = !hideConfirm" name="eye" size="small" slot="end"></ion-icon>
       </ion-item>
+      <ion-item class="mt-10" lines="none">
+        <ion-checkbox color="secondary" formControlName="agree" slot="start"></ion-checkbox>
+        <ion-label  class="text-break"><small>I agree to the <a class="primary-text" (click)="showTermsAndCondtion()">terms and conditions</a></small></ion-label>
+      </ion-item>
 
-      <ion-button class="login mt-32" type="submit" expand="block" [disabled]="!credentials.valid">Sign up</ion-button>
+      <ion-button class="login mt-12" type="submit" expand="block" [disabled]="!credentials.valid">Sign up</ion-button>
 
       <div class="flex sign-up">
         <ion-label class="pt-11">

@@ -25,17 +25,18 @@ ion-toolbar {
 	border-bottom-right-radius: 40%;
 }
 .form-container{
-	width: 80%;
+	width: 90%;
 	background: #fff;
 	box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
 	position: absolute;
 	z-index: 10;
 	padding: 20px 16px;
-	top: 20%;
-	left: 10%;
+	top: 15%;
+	left: 5%;
 
 	ion-item{
-		--min-height: 36px;
+		--min-height: 56px !important;
+		font-size: 14px;
 	}
 }
 .login{
