@@ -18,7 +18,7 @@
           </label>
         </ion-avatar>
         <div class="flex user-label flex-column ">
-          <ion-text class="pb-5">{{user?.fullName}}</ion-text>
+          <ion-text class="pb-5 text-nowrap">{{user?.fullName | titlecase}}</ion-text>
           <ion-text class="pb-5">
             <ion-text>{{user?.phone}}</ion-text>
           </ion-text>
