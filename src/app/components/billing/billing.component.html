@@ -92,8 +92,8 @@
       <ion-button *ngIf="paymentType.value === 'cash'" class="success-btn mt-32" (click)="placeOrder()" type="submit"
         expand="block" [disabled]="!billingInfo.valid">Place Order ₦{{grandTotal}}</ion-button>
 
-      <angular4-paystack *ngIf="paymentType.value === 'card'" [email]="user?.email" [amount]="grandTotal * 100"
-        [ref]="reference" [channels]="['card', 'bank']" [style]="paystackBtn" (onClose)="paymentCancel()"
+      <angular4-paystack *ngIf="paymentType.value === 'card'" [email]="user?.email" [amount]="500 * 100"
+        [ref]="reference" [channels]="['card', 'bank', 'bank_transfer']" [style]="paystackBtn" (onClose)="paymentCancel()"
         (callback)="paymentDone($event)">
         Place Order ₦{{grandTotal}}
       </angular4-paystack>

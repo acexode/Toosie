@@ -2,7 +2,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.toosie.cpm',
+  appId: 'io.toosie.com',
   appName: 'Toosie',
   webDir: 'www',
   bundledWebRuntime: false,
