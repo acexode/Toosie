@@ -107,17 +107,8 @@ export class BillingComponent implements OnInit {
   async ngOnInit() {
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
     this.savedTotal = this.grandTotal;
-    console.log(
-      this.savedTotal,
-      this.total,
-      this.grandTotal,
-      this.discount,
-      'amounts'
-    );
-
     this.authService.currentUser().subscribe((str) => {
       this.user = JSON.parse(str.value);
-      console.log(this.user);
       this.billingInfo.patchValue({
         email: this.user.email,
         phone_number: this.user.phone,
@@ -133,7 +124,6 @@ export class BillingComponent implements OnInit {
       quantity: e.quantity,
     }));
     const address = JSON.parse(this.address.value);
-    console.log(address);
     const body: any = {
       customerId: this.user._id,
       shipping: {
@@ -153,7 +143,6 @@ export class BillingComponent implements OnInit {
       // body.paymentStatus = 'paid';
       body.paymentId = paymentId;
     }
-    console.log(body);
     const loading = await this.loadingController.create();
     await loading.present();
 
@@ -162,6 +151,7 @@ export class BillingComponent implements OnInit {
         await loading.dismiss();
         this.successAlert();
         this.orderS.removeCart();
+        this.authService.refetchUser$.next(true);
         const t = new Date();
         t.setSeconds(t.getSeconds() + 10);
         this.globalS.triggerNotification(
@@ -172,7 +162,6 @@ export class BillingComponent implements OnInit {
         );
       },
       async (res) => {
-        console.log(res);
         await loading.dismiss();
         const alert = await this.alertController.create({
           header: res.error.message,
@@ -186,7 +175,6 @@ export class BillingComponent implements OnInit {
   }
   setPayment(value: any) {
     this.selectedPaymentType = value;
-    console.log(value);
     this.billingInfo.patchValue({
       paymentType: value,
     });
@@ -201,11 +189,9 @@ export class BillingComponent implements OnInit {
       this.useLoyaltyPoint = false;
       this.grandTotal = this.savedTotal + this.deliveryCost;
     }
-    console.log(ev);
   }
   setAddress(value: any) {
     this.selectedAddress = value;
-    console.log(value);
     this.billingInfo.patchValue({
       address: JSON.stringify(value),
     });
@@ -239,11 +225,9 @@ export class BillingComponent implements OnInit {
   locationChange(value) {
     this.deliveryCost = value;
     this.grandTotal = value + this.savedTotal;
-    console.log(this.grandTotal);
   }
 
   nextStep(ev) {
-    console.log(ev);
     const { field, value, next } = ev;
     this.step = next;
     if (field === 'address') {
@@ -255,7 +239,6 @@ export class BillingComponent implements OnInit {
     } else if (field === 'paymentType') {
       this.setPayment(value);
     }
-    console.log(this.billingInfo.value);
     this.step = next;
   }
   // Easy access for form fields
@@ -282,7 +265,6 @@ export class BillingComponent implements OnInit {
 
   paymentDone(ref: any) {
     this.title = 'Payment successfull';
-    console.log(this.title, ref);
     this.placeOrder('card', ref.reference);
   }
 

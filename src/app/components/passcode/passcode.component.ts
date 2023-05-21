@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -27,7 +28,6 @@ export class PasscodeComponent implements OnInit {
         this.emitForm();
       }
     });
-    console.log(this.errorLogin);
     if (this.errorLogin) {
       console.log('error');
       this.passForm.reset();

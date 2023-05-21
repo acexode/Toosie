@@ -1,6 +1,6 @@
 {
 	"appId": "io.toosie.com",
-	"appName": "Toosie",
+	"appName": "Toosie Pharmacy",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {

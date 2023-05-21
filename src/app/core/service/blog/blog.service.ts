@@ -15,7 +15,6 @@ export class BlogService {
 
   blogListing(){
     this.reqS.get(baseEndpoints.blog).subscribe((e: any) =>{
-      console.log(e);
       this.blogStore.next(e.data);
     });
   }

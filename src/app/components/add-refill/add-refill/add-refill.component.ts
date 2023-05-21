@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-underscore-dangle */
 import { AuthService } from './../../../core/service/auth/auth.service';
 import { AddRefillService } from './../../../core/service/add-refill/add-refill.service';
@@ -47,7 +48,6 @@ export class AddRefillComponent implements OnInit {
     private alertCtrl: AlertController, private refillS: AddRefillService, private authS: AuthService) { }
 
   async ngOnInit() {
-    console.log(this.item);
     this.refillForm = this.fb.group({
       frequency: ['', [Validators.required]],
       prescriptionImage: [''],
@@ -60,13 +60,11 @@ export class AddRefillComponent implements OnInit {
   onFileSelect(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file);
       this.fileText = file.name;
       this.refillForm.get('prescriptionImage').setValue(file);
     }
   }
   saveRefill(){
-    console.log(this.refillForm.value);
     const data = new FormData();
 
     const obj = {
@@ -76,7 +74,6 @@ export class AddRefillComponent implements OnInit {
     };
     delete obj.inventoryId;
     this.refillS.refill(obj).subscribe(ref =>{
-      console.log(ref);
       this.refillS.refillListing();
       this.dismiss();
     });

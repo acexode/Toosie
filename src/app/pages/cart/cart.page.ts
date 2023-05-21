@@ -87,17 +87,20 @@ export class CartPage implements OnInit {
       this.authS.currentUser$.subscribe(async (user) => {
         console.log(user && user?.isActivated, user, user?.isActivated);
         if (user?.isActivated) {
-          const modal = await this.modalController.create({
-            component: BillingComponent,
-            cssClass: 'fullscreen',
-            componentProps: {
-              grandTotal: this.total - this.discount,
-              total: this.total,
-              discount: this.discount,
-              items: this.lists,
-            },
-          });
-          await modal.present();
+          if(this.lists.length > 0){
+            const modal = await this.modalController.create({
+              component: BillingComponent,
+              cssClass: 'fullscreen',
+              componentProps: {
+                grandTotal: this.total - this.discount,
+                total: this.total,
+                discount: this.discount,
+                items: this.lists,
+              },
+            });
+            await modal.present();
+
+          }
         } else {
           this.presentAlert(
             'You have to signup/login to proceed',

@@ -41,13 +41,11 @@ export class AddressComponent implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
     this.authService.currentUser$.subscribe((res) => {
-      console.log(res.address);
       loading.dismiss();
       this.user = res;
       if (res.addresses) {
         this.allAddress.push(...res.addresses);
         // this.address = res.addresses;
-        console.log(this.allAddress);
       } else {
         this.presentAlertPrompt();
       }
@@ -71,12 +69,10 @@ export class AddressComponent implements OnInit {
   }
 
   setAddress(value: IUserAddress) {
-    console.log(value);
     this.address = value;
     const loc = this.allLocations.filter(
       (obj) => obj.label === value.localGov
     )[0];
-    console.log(loc);
     this.deliveryCost = loc.value;
     this.deliveryState = loc.state;
   }
@@ -101,12 +97,10 @@ export class AddressComponent implements OnInit {
     });
   }
   locationChange(e) {
-    console.log(e.detail.value);
-    console.log(e);
+
     const loc = this.allLocations.filter(
       (obj) => obj.label === e.detail.value
     )[0];
-    console.log(loc);
     this.deliveryCost = loc.value;
     this.deliveryState = loc.state;
   }

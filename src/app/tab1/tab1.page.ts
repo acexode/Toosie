@@ -46,6 +46,7 @@ export class Tab1Page implements OnInit {
       }
     });
   }
+
   async presentActivation(user) {
     const alert = await this.alertController.create({
       header: 'Alert!',
@@ -70,7 +71,25 @@ export class Tab1Page implements OnInit {
 
     await alert.present();
   }
+  ionViewWillEnter() {
+    console.log('entered', this.user);
+    this.authS.refetchUser$.subscribe((bool) => {
+      if (bool) {
+        this.authS.getUser(this.user._id).subscribe((v) => {
+          this.authS.currentUser$.next(v.data);
+          this.authS.refetchUser$.next(false);
+        });
+      }
+    });
+
+    this.loadData();
+  }
+
   ngOnInit() {
+    console.log('init');
+  }
+
+  loadData() {
     this.brand$ = this.invS.allBrands();
     this.popular$ = this.invS.popularStore;
     this.latest$ = this.invS.latestStore;

@@ -33,7 +33,7 @@
   </ion-radio-group>
   <ion-row>
     <ion-item lines="none">
-      <ion-checkbox [value]="priorityDelivery" (onChange)="!priorityDelivery" color="secondary" slot="start" mode="md">
+      <ion-checkbox  [(ngModel)]="priorityDelivery" color="secondary" slot="start" mode="md">
       </ion-checkbox>
       <ion-label>Priority Delivery</ion-label>
     </ion-item>

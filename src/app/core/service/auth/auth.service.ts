@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   authEndpoints,
   baseEndpoints,
@@ -7,7 +8,7 @@ import { RequestService } from './../../request/request.service';
 import { Injectable } from '@angular/core';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
-import {  Preferences as Storage } from '@capacitor/preferences';
+import { Preferences as Storage } from '@capacitor/preferences';
 import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'my-token';
@@ -20,13 +21,13 @@ export class AuthService {
     null
   );
   currentUser$: BehaviorSubject<any> = new BehaviorSubject<boolean>(null);
+  refetchUser$: BehaviorSubject<any> = new BehaviorSubject<boolean>(false);
   token = '';
 
   constructor(private reqS: RequestService) {
     this.loadToken();
     this.currentUser().subscribe((e) => {
-      console.log(e);
-      this.currentUser$.next(JSON.parse(e.value));
+        this.currentUser$.next(JSON.parse(e.value));
     });
   }
 
@@ -69,6 +70,17 @@ export class AuthService {
       )
     );
   }
+  getUser(id): Observable<any> {
+    console.log('USER ID');
+    return this.reqS.get(baseEndpoints.user + '/' + id);
+    // .pipe(
+    //   switchMap((res: any) => {
+    //     // this.currentUser$.next(res.data);
+    //     console.log(res, 'USER INFO');
+    //     return from(Storage.set({ key: 'RANDOM', value: JSON.stringify(res.data) }));
+    //   })
+    // );
+  }
   resendOTP(obj): Observable<any> {
     return this.reqS.post(authEndpoints.resendOTP, obj);
   }
@@ -78,13 +90,17 @@ export class AuthService {
         console.log(res.data.user, res.data.token, res);
         this.currentUser$.next(res.data.user);
         from(
-          Storage.set({ key: CURRENT_USER, value: JSON.stringify(res.data.user) })
+          Storage.set({
+            key: CURRENT_USER,
+            value: JSON.stringify(res.data.user),
+          })
         );
-        return from(Storage.set({ key: TOKEN_KEY, value: res.data.token.token }));
+        return from(
+          Storage.set({ key: TOKEN_KEY, value: res.data.token.token })
+        );
       }),
       tap((_) => {
         this.isAuthenticated.next(true);
-
       })
     );
   }

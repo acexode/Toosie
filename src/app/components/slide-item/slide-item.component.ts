@@ -31,10 +31,10 @@ export class SlideItemComponent implements OnInit {
     private toastController: ToastController) { }
 
   ngOnInit() {
-    console.log(this.items);
+
   }
   onSwiper(swiper) {
-    console.log(swiper);
+
   }
   onSlideChange() {
     console.log('slide change');

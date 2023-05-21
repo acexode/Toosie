@@ -54,7 +54,7 @@
   <ion-col size="12" class="px-8 mt-32">
    <ion-button [disabled]="item.stock === 0" (click)="addToCart(item)" class="knowMore">
     <ion-icon slot="start" name="cart"></ion-icon>
-     {{item.stock === 0 ? 'Out of stock' : 'Add to Cart'}}
+     {{item.stock === 0 ? 'Out of stock' : buttonTitle}}
    </ion-button>
   </ion-col>
 
