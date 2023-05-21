@@ -1,5 +1,5 @@
 import { OrdersService } from './../../core/service/orders/orders.service';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { AuthService } from './../../core/service/auth/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -66,7 +66,8 @@ export class MenuPage implements OnInit {
   ];
   constructor(private router: Router, private authS: AuthService,
     private orderS: OrdersService,
-     private modalController: ModalController) { }
+     private modalController: ModalController, private menu: MenuController) { }
+
 
   async ngOnInit() {
     this.authS.currentUser$.subscribe(user =>{

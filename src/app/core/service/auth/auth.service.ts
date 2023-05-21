@@ -10,6 +10,8 @@ import { map, tap, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable, Subject } from 'rxjs';
 import { Preferences as Storage } from '@capacitor/preferences';
 import { Router } from '@angular/router';
+import { OrdersService } from '../orders/orders.service';
+import { MenuController } from '@ionic/angular';
 
 const TOKEN_KEY = 'my-token';
 const CURRENT_USER = 'current-user';
@@ -24,10 +26,10 @@ export class AuthService {
   refetchUser$: BehaviorSubject<any> = new BehaviorSubject<boolean>(false);
   token = '';
 
-  constructor(private reqS: RequestService) {
+  constructor(private reqS: RequestService, private menu: MenuController) {
     this.loadToken();
     this.currentUser().subscribe((e) => {
-        this.currentUser$.next(JSON.parse(e.value));
+      this.currentUser$.next(JSON.parse(e.value));
     });
   }
 
@@ -49,7 +51,11 @@ export class AuthService {
     return this.reqS.post(authEndpoints.login, credentials).pipe(
       switchMap((res: any) => {
         console.log(res.token);
+        if (this.menu.isOpen) {
+          this.menu.close();
+        }
         this.currentUser$.next(res.data);
+
         from(
           Storage.set({ key: CURRENT_USER, value: JSON.stringify(res.data) })
         );
@@ -153,9 +159,10 @@ export class AuthService {
   }
 
   logout(): Promise<void> {
-    this.isAuthenticated.next(false);
     Storage.remove({ key: CURRENT_USER });
     Storage.remove({ key: 'my_cart' });
+    // this.orderS.cartStore.next([]);
+    this.isAuthenticated.next(false);
     return Storage.remove({ key: TOKEN_KEY });
   }
 }

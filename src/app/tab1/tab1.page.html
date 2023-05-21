@@ -160,8 +160,8 @@
           <ion-row class="h-100">
             <img [src]="blog.blogImage" />
           </ion-row>
-          <ion-card-content class="blogContent">
-            <ion-card-subtitle> {{ (blog.blogTitle.length>50)? (blog.blogTitle | slice:0:50)+'..':(blog.blogTitle) }} </ion-card-subtitle>
+          <ion-card-content class="blogContent pl-10">
+            <ion-card-subtitle> {{ (blog.blogTitle.length>50)? (blog.blogTitle | slice:0:30)+'..':(blog.blogTitle) }} </ion-card-subtitle>
           </ion-card-content>
          
         </ion-card>
