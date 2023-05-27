@@ -7,18 +7,25 @@
     <app-address *ngIf="step === 'address'" (next)="nextStep($event)"></app-address>
     <app-select-payment *ngIf="step === 'paymentMethod'" (next)="nextStep($event)"></app-select-payment>
     <ion-grid *ngIf="step === 'preview'">
-
+      <ion-list-header>
+        <ion-text><b class="ion-text-dark">Selected mode of delivery</b></ion-text>
+      </ion-list-header>
       <ion-card class="address my-0">
-        <ion-card-content>
+        <ion-card-content *ngIf="deliveryType === 'delivery'">
           <address>
             {{selectedAddress?.address}},<br />
             {{selectedAddress?.localGov}},<br />
             {{selectedAddress.state}}
           </address>
         </ion-card-content>
+        <ion-card-content *ngIf="deliveryType === 'pickup'">
+          <address>
+            Store Pickup
+          </address>
+        </ion-card-content>
       </ion-card>
       <ion-list-header>
-        <ion-text><b class="ion-text-dark">Payment Methods</b></ion-text>
+        <ion-text><b class="ion-text-dark">Selected payment method</b></ion-text>
       </ion-list-header>
       <ion-card class="p-0 mt-8">
 
@@ -27,7 +34,7 @@
             <ion-thumbnail class="pt-13" slot="start">
               <ion-icon [name]="selectedPaymentType === 'card' ? 'card-payment' : 'cash-payment'"></ion-icon>
             </ion-thumbnail>
-            <ion-label>{{selectedPaymentType | titlecase}}</ion-label>
+            <ion-label>{{selectedPaymentType | titlecase}} Payment</ion-label>
           </ion-item>
         </ion-list>
 

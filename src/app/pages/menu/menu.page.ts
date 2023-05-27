@@ -81,6 +81,7 @@ export class MenuPage implements OnInit {
     });
   }
   logout(){
+    this.orderS.cartStore.next([]);
     this.authS.logout().then(e =>{
       this.router.navigateByUrl('login');
 

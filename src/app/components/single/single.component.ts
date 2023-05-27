@@ -46,11 +46,11 @@ export class SingleComponent implements OnInit {
   ) {}
 
   ionViewWillEnter() {
-    this.orderS.addItemToCart(this.item).then((e) => {
-      if (!e) {
-        this.buttonTitle = 'Checkout';
-      }
-    });
+    // this.orderS.addItemToCart(this.item).then((e) => {
+    //   if (!e) {
+    //     this.buttonTitle = 'Checkout';
+    //   }
+    // });
   }
   ngOnInit() {
     console.log(this.item);
@@ -96,7 +96,7 @@ export class SingleComponent implements OnInit {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 2000,
+      duration: 800,
       cssClass: 'toastCss',
       position: 'top',
     });

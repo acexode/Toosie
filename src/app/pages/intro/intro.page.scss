@@ -1,7 +1,7 @@
 ion-slides {
-    height: 100%;
+    height: 80%;
   }
-
+  
   .swiper-slide {
     display: block;
   }
@@ -34,4 +34,11 @@ ion-slides {
 
   p b {
     color: #777777;
+  }
+
+
+  .next-btn{
+
+    position: absolute;
+    bottom: 5vh;
   }

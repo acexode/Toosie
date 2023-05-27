@@ -1,6 +1,6 @@
 
 <ion-content fullscreen class="ion-padding" scroll-y="false">
-  <ion-slides pager="true" [options]="slideOpts">
+  <ion-slides pager="false" [options]="slideOpts" #introSlides>
 
     <ion-slide>
       <div class="slide flex flex-column ion-justify-content-center">
@@ -8,6 +8,7 @@
         <h2 color="dark">Upload Prescription</h2>
         <p>Have a problem with searching medical products ? Upload medical precription and relax, We will get you medical products at home</p>
       </div>
+      
     </ion-slide>
 
     <ion-slide>
@@ -29,9 +30,14 @@
 
     <ion-slide>
       <img src="assets/icon/moving-truck.png"/>
-      <h2>Get you medical products delivered to your doorstep sss</h2>
-      <ion-button (click)="start()" fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      <h2>The Fastest Delivery for Your Medicine</h2>
+      <p>Just order your medicine & you get it delivered to you</p>
+      <!-- <ion-button  fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button> -->
     </ion-slide>
-
   </ion-slides>
+
+  <ion-footer>
+    <ion-button (click)="swipeNext()" expand="block" color="secondary">Next</ion-button>
+
+  </ion-footer>
 </ion-content>

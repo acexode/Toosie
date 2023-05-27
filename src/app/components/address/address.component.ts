@@ -85,6 +85,12 @@ export class AddressComponent implements OnInit {
           ? 1500
           : 500;
     }
+    console.log( {
+      address: this.address,
+      deliveryType: this.deliveryType,
+      deliveryCost: this.deliveryCost,
+      priorityDelivery: this.priorityDelivery,
+    },);
     this.next.emit({
       value: {
         address: this.address,

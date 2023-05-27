@@ -52,7 +52,7 @@ export class BillingComponent implements OnInit {
   meta = { counsumer_id: '7898', consumer_mac: 'kjs9s8ss7dd' };
   billingInfo: FormGroup;
   selectedAddress: any = {};
-  selectedPaymentType = '';
+  selectedPaymentType = 'cash';
   deliveryCost = 0;
 
   paymentMethods = [
@@ -127,9 +127,9 @@ export class BillingComponent implements OnInit {
     const body: any = {
       customerId: this.user._id,
       shipping: {
-        city: address.localGov,
-        state: address.state,
-        address: address.address,
+        city: address?.localGov || 'Store pickup',
+        state: address?.state || 'Store pickup',
+        address: address?.address || 'Store pickup',
         addressDeliveryCost: this.deliveryCost,
       },
       products: this.items,

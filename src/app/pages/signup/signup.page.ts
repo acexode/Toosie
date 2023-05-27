@@ -124,7 +124,7 @@ export class SignupPage implements OnInit {
     await loading.present();
     this.authService.resendOTP({ email: this.signupResponse.email }).subscribe(
       async (e) => {
-        this.displayAlert('New OTP Code Sent', 'check your inbox');
+        this.displayAlert('New OTP Code Sent', 'check your Email');
         await loading.dismiss();
         this.showResend = false;
         this.showVerifySubject.next(true);

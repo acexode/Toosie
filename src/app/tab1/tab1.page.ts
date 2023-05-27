@@ -73,13 +73,13 @@ export class Tab1Page implements OnInit {
   }
   ionViewWillEnter() {
     console.log('entered', this.user);
-    this.authS.refetchUser$.subscribe((bool) => {
-      if (bool) {
-        this.authS.getUser(this.user._id).subscribe((v) => {
-          this.authS.currentUser$.next(v.data);
-          this.authS.refetchUser$.next(false);
-        });
-      }
+    this.authS.currentUser().subscribe((val) => {
+      this.user = JSON.parse(val.value);
+      this.authS.getUser(this.user._id).subscribe((v) => {
+        this.authS.currentUser$.next(v.data);
+        this.authS.refetchUser$.next(false);
+      });
+      //   }
     });
 
     this.loadData();

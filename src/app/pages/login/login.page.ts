@@ -1,3 +1,4 @@
+import { OrdersService } from './../../core/service/orders/orders.service';
 import { AuthService } from './../../core/service/auth/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -19,11 +20,13 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private alertController: AlertController,
+    private orderS: OrdersService,
     private router: Router,
     private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
+    this.orderS.cartStore.next([]);
     this.authService.isAuthenticated.subscribe((isAuth) => {
       console.log(isAuth);
       if (isAuth) {

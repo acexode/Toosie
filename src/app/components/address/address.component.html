@@ -76,7 +76,9 @@
     </ion-col>
     <ion-col size="12">
 
-      <ion-button [disabled]="deliveryCost === 0 || address === null" class="success-btn" (click)="proceed()"
+      <ion-button *ngIf="deliveryType === 'delivery'" [disabled]="deliveryCost === 0 || address === null" class="success-btn" (click)="proceed()"
+        expand="block">Proceed</ion-button>
+      <ion-button *ngIf="deliveryType === 'pickup'"  class="success-btn" (click)="proceed()"
         expand="block">Proceed</ion-button>
     </ion-col>
   </ion-row>

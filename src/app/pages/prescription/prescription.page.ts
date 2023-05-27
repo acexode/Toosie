@@ -69,7 +69,7 @@ export class PrescriptionPage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: 'Your prescription have been sent.',
-      duration: 2000,
+      duration: 800,
       position: 'top',
       cssClass: 'toastCss',
       animated: true,
