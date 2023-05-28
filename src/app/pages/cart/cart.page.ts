@@ -84,7 +84,8 @@ export class CartPage implements OnInit {
   }
   async checkoutModal() {
     if (this.total - this.discount > 1000) {
-      this.authS.currentUser$.subscribe(async (user) => {
+      this.authS.currentUser().subscribe(async (val) => {
+        const user = JSON.parse(val.value);
         console.log(user && user?.isActivated, user, user?.isActivated);
         if (user?.isActivated) {
           if(this.lists.length > 0){
