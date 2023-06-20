@@ -14,7 +14,6 @@ import {
   ModalController,
 } from '@ionic/angular';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
-// import {Flutterwave, InlinePaymentOptions, PaymentSuccessResponse} from 'flutterwave-angular-v3';
 import { Preferences as Storage } from '@capacitor/preferences';
 import { GlobalServiceService } from 'src/app/core/service/global-service/global-service.service';
 const SAVED_CARD = 'saved_card';
@@ -92,7 +91,6 @@ export class BillingComponent implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private globalS: GlobalServiceService,
-    // private flutterwave: Flutterwave,
     private loadingController: LoadingController
   ) {
     this.billingInfo = this.fb.group({

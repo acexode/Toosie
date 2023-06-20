@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { OrdersService } from './../../core/service/orders/orders.service';
 import { AuthService } from './../../core/service/auth/auth.service';
 import { Router } from '@angular/router';

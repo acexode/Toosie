@@ -35,7 +35,6 @@
     "@types/lodash": "^4.14.170",
     "angular4-paystack": "^3.1.1",
     "animate.css": "^4.1.1",
-    "flutterwave-angular-v3": "^1.2.1",
     "lodash": "^4.17.21",
     "ngx-tawk": "^1.0.1",
     "rxjs": "^7.5.0",
