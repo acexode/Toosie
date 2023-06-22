@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { BlogPageRoutingModule } from './blog-routing.module';
 
 import { BlogPage } from './blog.page';
+import { BlogDetailsComponent } from './blog-details/blog-details.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { BlogPage } from './blog.page';
     BlogPageRoutingModule,
     SharedModule
   ],
-  declarations: [BlogPage]
+  declarations: [BlogPage, BlogDetailsComponent]
 })
 export class BlogPageModule {}

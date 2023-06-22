@@ -160,14 +160,14 @@ export const deliveryLocation = [
     state: 'Abuja',
     value: 500,
   },
-  {
-    label: 'Lagos',
-    state: 'Lagos',
-    value: 700,
-  },
-  {
-    label: 'Kano',
-    state: 'Kano',
-    value: 300,
-  },
+  // {
+  //   label: 'Lagos',
+  //   state: 'Lagos',
+  //   value: 700,
+  // },
+  // {
+  //   label: 'Kano',
+  //   state: 'Kano',
+  //   value: 300,
+  // },
 ];

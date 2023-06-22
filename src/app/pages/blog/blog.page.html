@@ -8,11 +8,9 @@
           <img [src]="blog.blogImage" style="width: 100%;" alt="">
           <ion-card-header class="ion-inherit-color ios hydrated">
             <ion-card-subtitle role="heading" aria-level="3" class="ion-inherit-color ios hydrated">Author: {{blog?.blogAuthor?.email }}</ion-card-subtitle>
-            <ion-card-title role="heading" aria-level="2" class="ion-inherit-color ios hydrated">{{blog?.blogTitle}}</ion-card-title>
+            <ion-card-title role="heading" aria-level="2" class="ion-inherit-color ios hydrated s18-h24">{{blog?.blogTitle}}</ion-card-title>
           </ion-card-header>
-          <ion-card-content [innerHTML]="blog.blogContent" class="ios card-content-ios hydrated">
-            <!-- {{blog.blogContent}} -->
-          </ion-card-content>
+         
         </ion-card>
       </ion-col>
     </ion-row>

@@ -149,13 +149,18 @@
       </ion-col>
     </ion-row> -->
     <ion-row class="mb-32">
-      <ion-col class="pl-16" size="12" >
+      <ion-col class="pl-16" size="8" >
         <ion-text color="dark" class="cat-span dark">
           Health Expert
         </ion-text>
         
       </ion-col>
-      <ion-col (click)="navigate('blog')" *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
+      <ion-col size="4" class="flex ion-justify-content-end">
+        <span (click)="navigate('blog')" class="see-all">
+          Blog posts
+        </span>
+      </ion-col>
+      <ion-col (click)="gotoBlog(blog._id)" *ngFor="let blog of blogs$ | async" class="ion-no-padding" size="6">
         <ion-card class="ml-0">
           <ion-row class="h-100">
             <img [src]="blog.blogImage" />

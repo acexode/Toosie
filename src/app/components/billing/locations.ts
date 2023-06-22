@@ -132,12 +132,12 @@ export const locationList = [
     label: 'Others (Abuja) - Abuja',
     value: 2500,
   },
-  {
-    label: 'Lagos',
-    value: 700,
-  },
-  {
-    label: 'Kano',
-    value: 300,
-  },
-];
+//   {
+//     label: 'Lagos',
+//     value: 700,
+//   },
+//   {
+//     label: 'Kano',
+//     value: 300,
+//   },
+ ];

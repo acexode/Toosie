@@ -122,6 +122,9 @@ export class Tab1Page implements OnInit {
   navigate(end) {
     this.router.navigate(['menu/home/' + end]);
   }
+  gotoBlog(id) {
+    this.router.navigate(['menu/home/blog/' + id]);
+  }
   seeAll(path, params) {
     this.router.navigate(['menu/home/' + path, params]);
   }
